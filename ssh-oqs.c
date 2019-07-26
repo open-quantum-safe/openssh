@@ -26,6 +26,16 @@ const char* get_oqs_alg_name(int openssh_type)
     case KEY_RSA3072_PICNIC_L1FS:
     case KEY_P256_PICNIC_L1FS:
       return OQS_SIG_alg_picnic_L1_FS;
+    case KEY_PICNIC2_L1FS:
+    case KEY_RSA3072_PICNIC2_L1FS:
+    case KEY_P256_PICNIC2_L1FS:
+      return OQS_SIG_alg_picnic2_L1_FS;
+    case KEY_PICNIC2_L3FS:
+    case KEY_P384_PICNIC2_L3FS:
+      return OQS_SIG_alg_picnic2_L3_FS;
+    case KEY_PICNIC2_L5FS:
+    case KEY_P521_PICNIC2_L5FS:
+      return OQS_SIG_alg_picnic2_L5_FS;
     case KEY_QTESLA_I:
     case KEY_RSA3072_QTESLA_I:
     case KEY_P256_QTESLA_I:

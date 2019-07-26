@@ -36,13 +36,13 @@ The following key exchange / key encapsulation methods from liboqs are supported
 The following signature methods from liboqs's master branch are supported (assuming they have been enabled in liboqs and that the `pq-auth` configuration option has been enabled; see below):
 
 - `qteslai`, `qteslaiiispeed`, `qteslaiiisize`
-- `picnicl1fs`
+- `picnicl1fs`, `picnic2l1fs`, `picnic2l3fs`, `picnic2l5fs`
 - `oqsdefault`
 
 In addition to the PQ-only signature methods, the following hybrid methods are supported combining a PQ scheme with either RSA3072 or ECDSA using NIST's P256 curve for L1 schemes, and with ECDSA using NIST's P384 curve for L3 schemes (assuming the PQ schemes have been enabled in liboqs and that the `hybrid-auth` configuration option has been enabled; see below):
 
 - `rsa3072-qteslai`, `p256-qteslai`, `p384-qteslaiiispeed`, `p384-qteslaiiisize`
-- `rsa3072-picnicl1fs`, `p256-picnicl1fs`
+- `rsa3072-picnicl1fs`, `p256-picnicl1fs`, `rsa3072-picnic2l1fs`, `p256-picnic2l1fs`, `p384-picnic2l3fs`, `p521-picnic2l5fs`
 - `rsa3072-oqsdefault`, `p256-oqsdefault`
 
 The liboqs's nist branch uses a different signature API that hasn't yet been integrated.

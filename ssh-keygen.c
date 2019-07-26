@@ -317,6 +317,15 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_PICNIC_L1FS:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L1FS;
 			break;
+		case KEY_PICNIC2_L1FS:
+			name = _PATH_SSH_CLIENT_ID_PICNIC2_L1FS;
+			break;
+		case KEY_PICNIC2_L3FS:
+			name = _PATH_SSH_CLIENT_ID_PICNIC2_L3FS;
+			break;
+		case KEY_PICNIC2_L5FS:
+			name = _PATH_SSH_CLIENT_ID_PICNIC2_L5FS;
+			break;
 		/* ADD_MORE_OQS_SIG_HERE */
 		default:
 			fatal("bad key type");
@@ -1056,6 +1065,9 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "qteslaIIIspeed", "QTESLAIIISPEED",_PATH_HOST_QTESLA_III_SPEED_KEY_FILE },
 		{ "qteslaIIIsize", "QTESLAIIISIZE",_PATH_HOST_QTESLA_III_SIZE_KEY_FILE },
 		{ "picnicL1FS", "PICNICL1FS",_PATH_HOST_PICNIC_L1FS_KEY_FILE },
+		{ "picnic2L1FS", "PICNIC2L1FS",_PATH_HOST_PICNIC2_L1FS_KEY_FILE },
+		{ "picnic2L3FS", "PICNIC2L3FS",_PATH_HOST_PICNIC2_L3FS_KEY_FILE },
+		{ "picnic2L5FS", "PICNIC2L5FS",_PATH_HOST_PICNIC2_L5FS_KEY_FILE },
 		/* ADD_MORE_OQS_SIG_HERE */
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -1067,6 +1079,10 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "p384_qteslaIIIsize", "P384_QTESLAIIISIZE",_PATH_HOST_P384_QTESLA_III_SIZE_KEY_FILE },
 		{ "rsa3072_picnicL1FS", "RSA3072_PICNICL1FS",_PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE },
 		{ "p256_picnicL1FS", "P256_PICNICL1FS",_PATH_HOST_P256_PICNIC_L1FS_KEY_FILE },
+		{ "rsa3072_picnic2L1FS", "RSA3072_PICNIC2L1FS",_PATH_HOST_RSA3072_PICNIC2_L1FS_KEY_FILE },
+		{ "p256_picnic2L1FS", "P256_PICNIC2L1FS",_PATH_HOST_P256_PICNIC2_L1FS_KEY_FILE },
+		{ "p384_picnic2L3FS", "P384_PICNIC2L3FS",_PATH_HOST_P384_PICNIC2_L3FS_KEY_FILE },
+		{ "p521_picnic2L5FS", "P521_PICNIC2L5FS",_PATH_HOST_P521_PICNIC2_L5FS_KEY_FILE },
 		/* ADD_MORE_OQS_SIG_HERE (hybrid) */
 #endif /* WITH_HYBRID_AUTH */
 		{ NULL, NULL, NULL }
@@ -2838,6 +2854,12 @@ main(int argc, char **argv)
 			    _PATH_HOST_QTESLA_III_SIZE_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_PICNIC_L1FS_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_PICNIC2_L1FS_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_PICNIC2_L3FS_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_PICNIC2_L5FS_KEY_FILE, rr_hostname);
 			/* ADD_MORE_OQS_SIG_HERE */
 
 			if (n == 0)

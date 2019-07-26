@@ -1387,7 +1387,7 @@ main(int ac, char **av)
 	sensitive_data.nkeys = 0;
 	sensitive_data.keys = NULL;
 	if (options.hostbased_authentication) {
-		sensitive_data.nkeys = 23;
+		sensitive_data.nkeys = 30; /* ADD_MORE_OQS_SIG_HERE: update this value */
 		sensitive_data.keys = xcalloc(sensitive_data.nkeys,
 		    sizeof(struct sshkey));
 
@@ -1428,6 +1428,13 @@ main(int ac, char **av)
 			L_PUBKEY( _PATH_HOST_P384_QTESLA_III_SIZE_KEY_FILE, 20);
 			L_PUBKEY( _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE, 21);
 			L_PUBKEY( _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE, 22);
+			L_PUBKEY( _PATH_HOST_PICNIC2_L1FS_KEY_FILE, 23);
+			L_PUBKEY( _PATH_HOST_PICNIC2_L3FS_KEY_FILE, 24);
+			L_PUBKEY( _PATH_HOST_PICNIC2_L5FS_KEY_FILE, 25);
+			L_PUBKEY( _PATH_HOST_RSA3072_PICNIC2_L1FS_KEY_FILE, 26);
+			L_PUBKEY( _PATH_HOST_P256_PICNIC2_L1FS_KEY_FILE, 27);
+			L_PUBKEY( _PATH_HOST_P384_PICNIC2_L3FS_KEY_FILE, 28);
+			L_PUBKEY( _PATH_HOST_P521_PICNIC2_L5FS_KEY_FILE, 29);
 			/* ADD_MORE_OQS_SIG_HERE */
 		}
 	}

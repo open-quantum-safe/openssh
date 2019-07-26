@@ -6,9 +6,9 @@ import time
 sig_algs = ['ssh-ed25519']
 if 'WITH_PQAUTH' in os.environ and os.environ['WITH_PQAUTH'] == 'true':
     # post-quantum
-    sig_algs += ['ssh-qteslai', 'ssh-qteslaiiispeed', 'ssh-qteslaiiisize', 'ssh-picnicl1fs', 'ssh-oqsdefault']
+    sig_algs += ['ssh-qteslai', 'ssh-qteslaiiispeed', 'ssh-qteslaiiisize', 'ssh-picnicl1fs', 'ssh-picnic2l1fs', 'ssh-picnic2l3fs', 'ssh-picnic2l5fs', 'ssh-oqsdefault']
     # hybrid
-    sig_algs += ['ssh-p256-qteslai', 'ssh-rsa3072-qteslai', 'ssh-p384-qteslaiiispeed', 'ssh-p384-qteslaiiisize', 'ssh-p256-picnicl1fs', 'ssh-rsa3072-picnicl1fs', 'ssh-p256-oqsdefault', 'ssh-rsa3072-oqsdefault']
+    sig_algs += ['ssh-p256-qteslai', 'ssh-rsa3072-qteslai', 'ssh-p384-qteslaiiispeed', 'ssh-p384-qteslaiiisize', 'ssh-p256-picnicl1fs', 'ssh-rsa3072-picnicl1fs', 'ssh-p256-picnic2l1fs', 'ssh-rsa3072-picnic2l1fs', 'ssh-p384-picnic2l3fs', 'ssh-p521-picnic2l5fs', 'ssh-p256-oqsdefault', 'ssh-rsa3072-oqsdefault']
 
 # post-quantum only KEX
 kex_algs = ['bike1-L1-sha384@openquantumsafe.org', 'bike1-L3-sha384@openquantumsafe.org', 'bike1-L5-sha384@openquantumsafe.org', 'frodo-640-aes-sha384@openquantumsafe.org', 'frodo-976-aes-sha384@openquantumsafe.org', 'sike-503-sha384@openquantumsafe.org', 'sike-751-sha384@openquantumsafe.org', 'oqsdefault-sha384@openquantumsafe.org']

@@ -2032,6 +2032,9 @@ fill_default_options(Options * options)
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_QTESLA_III_SIZE, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_QTESLA_III_SPEED, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC2_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC2_L3FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC2_L5FS, 0);
 		/* ADD_MORE_OQS_SIG_HERE */
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -2043,6 +2046,10 @@ fill_default_options(Options * options)
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_QTESLA_III_SPEED, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC_L1FS, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC2_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC2_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_PICNIC2_L3FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P521_PICNIC2_L5FS, 0);
 		/* ADD_MORE_OQS_SIG_HERE (hybrid) */
 #endif /* WITH_HYBRID_AUTH */
 	}

@@ -290,6 +290,12 @@ fill_default_server_options(ServerOptions *options)
 		    _PATH_HOST_QTESLA_III_SIZE_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_PICNIC_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_PICNIC2_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_PICNIC2_L3FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_PICNIC2_L5FS_KEY_FILE);
 		/* ADD_MORE_OQS_SIG_HERE */
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -309,6 +315,14 @@ fill_default_server_options(ServerOptions *options)
 		    _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_PICNIC2_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_PICNIC2_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P384_PICNIC2_L3FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P521_PICNIC2_L5FS_KEY_FILE);
 		/* ADD_MORE_OQS_SIG_HERE (hybrid) */
 #endif /* WITH_HYBRID_AUTH */
 	}

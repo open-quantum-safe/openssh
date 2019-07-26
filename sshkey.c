@@ -131,6 +131,9 @@ static const struct keytype keytypes[] = {
 	{ "ssh-qteslaiiispeed", "QTESLAIIISPEED", NULL, KEY_QTESLA_III_SPEED, 0, 0, 0 },
 	{ "ssh-qteslaiiisize", "QTESLAIIISIZE", NULL, KEY_QTESLA_III_SIZE, 0, 0, 0 },
 	{ "ssh-picnicl1fs", "PICNICL1FS", NULL, KEY_PICNIC_L1FS, 0, 0, 0 },
+	{ "ssh-picnic2l1fs", "PICNIC2L1FS", NULL, KEY_PICNIC2_L1FS, 0, 0, 0 },
+	{ "ssh-picnic2l3fs", "PICNIC2L3FS", NULL, KEY_PICNIC2_L3FS, 0, 0, 0 },
+	{ "ssh-picnic2l5fs", "PICNIC2L5FS", NULL, KEY_PICNIC2_L5FS, 0, 0, 0 },
 	/* ADD_MORE_OQS_SIG_HERE */
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -142,6 +145,10 @@ static const struct keytype keytypes[] = {
 	{ "ssh-p384-qteslaiiisize", "P384_QTESLAIIISIZE", NULL, KEY_P384_QTESLA_III_SIZE, NID_secp384r1, 0, 0 },
 	{ "ssh-rsa3072-picnicl1fs", "RSA3072_PICNICL1FS", NULL, KEY_RSA3072_PICNIC_L1FS, 0, 0, 0 },
 	{ "ssh-p256-picnicl1fs", "P256_PICNICL1FS", NULL, KEY_P256_PICNIC_L1FS, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-picnic2l1fs", "RSA3072_PICNIC2L1FS", NULL, KEY_RSA3072_PICNIC2_L1FS, 0, 0, 0 },
+	{ "ssh-p256-picnic2l1fs", "P256_PICNIC2L1FS", NULL, KEY_P256_PICNIC2_L1FS, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-p384-picnic2l3fs", "P384_PICNIC2L3FS", NULL, KEY_P384_PICNIC2_L3FS, NID_secp384r1, 0, 0 },
+	{ "ssh-p521-picnic2l5fs", "P521_PICNICL5FS", NULL, KEY_P521_PICNIC2_L5FS, NID_secp521r1, 0, 0 },
 	/* ADD_MORE_OQS_SIG_HERE (hybrid) */
 #endif /* WITH_HYBRID_AUTH */
 #ifdef WITH_OPENSSL
