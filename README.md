@@ -98,12 +98,6 @@ On **Ubuntu**, you need to install the following packages:
 
 	sudo apt install autoconf automake gcc libtool libssl-dev make unzip xsltproc zlib1g-dev
 
-On **Ubuntu 18.04**, you need to downgrade the version of OpenSSL.  (Ubuntu 18.04 bundles OpenSSL 1.1.0 by default,  but OpenSSH only supports building against OpenSSL 1.0.2 at present.)
-
-	sudo apt install openssl1.0 libssl1.0-dev
-
-Warning: this removes the existing libssl 1.1 development package.
-
 On **Linux**, you also may need to do the following:
 
 - You may need to create the privilege separation directory:
@@ -145,23 +139,13 @@ Then, build and install our fork of OpenSSH; First, run:
 	export OPENSSH_INSTALL=<path-to-install-openssh>
 	autoreconf
 
-Then, on **Ubuntu 16.04** and **macOS**, run the following:
+Then, run the following:
 
 	./configure --with-ssl-dir=<path-to-openssl>/include \
 	            --with-ldflags=-L<path-to-openssl>/lib   \
 	            --with-libs=-lm                          \
 	            --prefix=$OPENSSH_INSTALL                \
 	            --sysconfdir=$OPENSSH_INSTALL            \
-	            --with-liboqs-dir=$LIBOQS_INSTALL
-	make -j
-	make install
-
-On **Ubuntu 18.04**, the steps are slightly different due to the default OpenSSL version:
-
-	./configure --with-ldflags=-L/usr/lib/ssl1.0      \
-	            --with-libs=-lm                       \
-	            --prefix=$OPENSSH_INSTALL             \
-	            --sysconfdir=$OPENSSH_INSTALL         \
 	            --with-liboqs-dir=$LIBOQS_INSTALL
 	make -j
 	make install
@@ -219,12 +203,12 @@ The server automatically supports all available hybrid and PQ-only key exchange 
 
 In another terminal, run a client(the arguments between `[...]` can be omitted if only classical authentication is required):
 
-	<path-to-openssh>/bin/ssh -l                         \
-	    -p 2222 localhost                                \
+	<path-to-openssh>/bin/ssh                             \
+	    -p 2222 localhost                                 \
 	    -o KexAlgorithms=<OPENSSH_KEX_ALGORITHM>          \
 	   [-o HostKeyAlgorithms=<OPENSSH_SIG_ALGORITHM>      \
 	    -o PubkeyAcceptedKeyTypes=<OPENSSH_SIG_ALGORITHM> \
-	    -o StrictHostKeyChecking=no                      \
+	    -o StrictHostKeyChecking=no                       \
 	    -i ~/ssh_client/id_<SIG>]
 
 The `StrictHostKeyChecking` option is used to allow trusting the newly generated server key; alternatively, the key could be added manually to the client's trusted keys.
