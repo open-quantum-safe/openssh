@@ -31,6 +31,7 @@ else
 fi
 if [ "x${CIRCLECI}" == "xtrue" ] || [ "x${TRAVIS}" == "xtrue" ]; then
     make -j2
+    make tests
 else
     make -j
 fi
