@@ -53,21 +53,21 @@ jobs:
   ubuntu-bionic-x86_64-with-openssl-with-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: true
   ubuntu-bionic-x86_64-with-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: false
   ubuntu-bionic-x86_64-no-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false
