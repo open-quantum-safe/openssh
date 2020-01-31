@@ -11,7 +11,7 @@
 set -exo pipefail
 
 case "$OSTYPE" in
-    darwin*)  OPENSSL_SYS_DIR=${OPENSSL_SYS_DIR:-"/usr/local/opt/openssl"} ;;
+    darwin*)  OPENSSL_SYS_DIR=${OPENSSL_SYS_DIR:-"/usr/local/opt/openssl@1.1"} ;;
     linux*)   OPENSSL_SYS_DIR=${OPENSSL_SYS_DIR:-"/usr"} ;;
     *)        echo "Unknown operating system: $OSTYPE" ; exit 1 ;;
 esac
