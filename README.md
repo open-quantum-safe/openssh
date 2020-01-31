@@ -88,7 +88,7 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 
 ## Quickstart
 
-The steps below have been confirmed to work on macOS 10.14 (clang 10.0.0), Ubuntu 14.04 (gcc-5), Ubuntu 16.04 (gcc-5), and Ubuntu 18.04.1 (gcc-7).
+The steps below have been confirmed to work on macOS 10.14 (clang 10.0.0) and Ubuntu 18.04.1 Bionic (gcc-7).
 
 ### Building OQS-OpenSSH
 

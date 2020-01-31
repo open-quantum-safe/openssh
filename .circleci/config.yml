@@ -49,25 +49,25 @@ jobs:
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false
-  # x86_64-xenial (Ubuntu 16.04)
-  ubuntu-xenial-x86_64-with-openssl-with-pqauth:
+  # x86_64-bionic (Ubuntu 18.04)
+  ubuntu-bionic-x86_64-with-openssl-with-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:ubuntu-xenial-x86_64-0.1.0
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: true
-  ubuntu-xenial-x86_64-with-openssl-no-pqauth:
+  ubuntu-bionic-x86_64-with-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:ubuntu-xenial-x86_64-0.1.0
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: false
-  ubuntu-xenial-x86_64-no-openssl-no-pqauth:
+  ubuntu-bionic-x86_64-no-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:ubuntu-xenial-x86_64-0.1.0
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false
@@ -79,9 +79,9 @@ workflows:
       - debian-buster-amd64-with-openssl-with-pqauth
       - debian-buster-amd64-with-openssl-no-pqauth
       - debian-buster-amd64-no-openssl-no-pqauth
-      - ubuntu-xenial-x86_64-with-openssl-with-pqauth
-      - ubuntu-xenial-x86_64-with-openssl-no-pqauth
-      - ubuntu-xenial-x86_64-no-openssl-no-pqauth
+      - ubuntu-bionic-x86_64-with-openssl-with-pqauth
+      - ubuntu-bionic-x86_64-with-openssl-no-pqauth
+      - ubuntu-bionic-x86_64-no-openssl-no-pqauth
   nightly:
     triggers:
       - schedule:
@@ -94,6 +94,6 @@ workflows:
       - debian-buster-amd64-with-openssl-with-pqauth
       - debian-buster-amd64-with-openssl-no-pqauth
       - debian-buster-amd64-no-openssl-no-pqauth
-      - ubuntu-xenial-x86_64-with-openssl-with-pqauth
-      - ubuntu-xenial-x86_64-with-openssl-no-pqauth
-      - ubuntu-xenial-x86_64-no-openssl-no-pqauth
+      - ubuntu-bionic-x86_64-with-openssl-with-pqauth
+      - ubuntu-bionic-x86_64-with-openssl-no-pqauth
+      - ubuntu-bionic-x86_64-no-openssl-no-pqauth

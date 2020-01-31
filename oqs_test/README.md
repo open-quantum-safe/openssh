@@ -12,7 +12,7 @@ First make sure you have **installed the dependencies** for the target OS as ind
 Testing on Linux and macOS
 --------------------------
 
-The scripts have been tested on macOS 10.14, Debian 10 (Buster), Ubuntu 14.04, Ubuntu 16.04, and Ubuntu 18.04.
+The scripts have been tested on macOS 10.14, Debian 10 (Buster), and Ubuntu 18.04 (Bionic).
 
 ### Running directly
 
@@ -47,9 +47,9 @@ where `<jobname>` is one of the following:
 - `ssh-amd64-buster-liboqs-master-with-openssl-with-pqauth`
 - `ssh-amd64-buster-liboqs-master-with-openssl-no-pqauth`
 - `ssh-amd64-buster-liboqs-master-no-openssl-no-pqauth`
-- `ssh-x86_64-xenial-liboqs-master-with-openssl-with-pqauth`
-- `ssh-x86_64-xenial-liboqs-master-with-openssl-no-pqauth`
-- `ssh-x86_64-xenial-liboqs-master-no-openssl-no-pqauth`
+- `ssh-x86_64-bionic-liboqs-master-with-openssl-with-pqauth`
+- `ssh-x86_64-bionic-liboqs-master-with-openssl-no-pqauth`
+- `ssh-x86_64-bionic-liboqs-master-no-openssl-no-pqauth`
 
 By default, these jobs will use the current Github versions of liboqs and OQS-OpenSSH.  You can override these by passing environment variables to CircleCI:
 
