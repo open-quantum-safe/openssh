@@ -13,16 +13,16 @@ version: 2
           useradd -g sshd -c 'sshd privsep' -d /var/empty -s /bin/false sshd
     - run:
         name: Clone liboqs
-        command: cd oqs_test && scripts/clone_liboqs.sh
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/clone_liboqs.sh)
     - run:
         name: Build liboqs
-        command: cd oqs_test && scripts/build_liboqs.sh
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/build_liboqs.sh)
     - run:
         name: Build OpenSSH
-        command: cd oqs_test && scripts/build_openssh.sh
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/build_openssh.sh)
     - run:
         name: Run unit tests
-        command: cd oqs_test && mkdir -p test-results && python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml
+        command: cd oqs_test && mkdir -p test-results && .circleci/git_no_checkin_in_last_day.sh || (python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml)
     - store_test_results: # Note that this command will fail when running CircleCI locally, that is expected behaviour
         path: oqs_test/test-results
 
@@ -31,21 +31,21 @@ jobs:
   debian-buster-amd64-with-openssl-with-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:debian-buster-amd64-0.1.0
+      IMAGE: openquantumsafe/ci-debian-buster-amd64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: true
   debian-buster-amd64-with-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:debian-buster-amd64-0.1.0
+      IMAGE: openquantumsafe/ci-debian-buster-amd64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: false
   debian-buster-amd64-no-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: dstebila/liboqs:debian-buster-amd64-0.1.0
+      IMAGE: openquantumsafe/ci-debian-buster-amd64:latest
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false
@@ -53,21 +53,21 @@ jobs:
   ubuntu-bionic-x86_64-with-openssl-with-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: true
   ubuntu-bionic-x86_64-with-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: true
       WITH_PQAUTH: false
   ubuntu-bionic-x86_64-no-openssl-no-pqauth:
     <<: *opensshjob
     environment:
-      IMAGE: openquantumsafe/ci-ubuntu-bionic-amd64:2
+      IMAGE: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false

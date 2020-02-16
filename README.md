@@ -96,7 +96,7 @@ The steps below have been confirmed to work on macOS 10.14 (clang 10.0.0) and Ub
 
 On **Ubuntu**, you need to install the following packages:
 
-	sudo apt install autoconf automake gcc libtool libssl-dev make unzip xsltproc zlib1g-dev
+	sudo apt install autoconf automake cmake gcc libtool libssl-dev make ninja-build unzip xsltproc zlib1g-dev
 
 On **Linux**, you also may need to do the following:
 
@@ -111,7 +111,7 @@ On **Linux**, you also may need to do the following:
 
 On **macOS**, you need to install the following packages using brew (or a package manager of your choice):
 
-	brew install autoconf automake libtool openssl@1.1 wget
+	brew install autoconf automake cmake libtool ninja openssl@1.1 wget
 
 ### Step 1: Build and install liboqs
 
@@ -119,12 +119,12 @@ You will need to specify a path to install liboqs in during configure time; we r
 
 	git clone --branch master --single-branch https://github.com/open-quantum-safe/liboqs.git
 	cd liboqs
-	autoreconf -i
-	./configure --prefix=<path-to-openssh-dir>/oqs --with-pic=yes --enable-shared=no
-	make -j
-	make install
+	mkdir build && cd build
+	cmake -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=yes -DCMAKE_INSTALL_PREFIX=<path-to-openssh-dir>/oqs ..
+	ninja
+	ninja install
 
-Building liboqs requires your system to have OpenSSL 1.1 or higher already installed. `configure` will detect it if it is located in a standard location, such as `/usr` or `/usr/local/opt/openssl@1.1` (for brew on macOS).  Otherwise, you may need to specify it with `--with-openssl=<path-to-system-openssl-dir>`.
+Building liboqs requires your system to have OpenSSL 1.1.1 or higher already installed. `configure` will detect it if it is located in a standard location, such as `/usr` or `/usr/local/opt/openssl@1.1` (for brew on macOS).  Otherwise, you may need to specify it with `-DOPENSSL_ROOT_DIR=<path-to-system-openssl-dir>` added to the `cmake` command.
 
 ### Step 2: Build the fork
 
