@@ -3746,7 +3746,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS))
+					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L5_FS))
 					#else
 					#error "PICNIC is not supported"
 					#endif
@@ -3770,11 +3770,25 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
+	AC_MSG_CHECKING([for libOQS RAINBOW support])
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+				#include <oqs/oqs.h>
+			]], [[
+					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_Ia_classic))
+					#else
+					#error "RAINBOW is not supported"
+					#endif
+			]])],
+			[ AC_MSG_RESULT([yes])
+				AC_DEFINE([HAVE_RAINBOW], [1], [Define to 1 if LibOQS library is compiled with support for RAINBOW])
+			], [AC_MSG_RESULT([no])
+	])
+
 	AC_MSG_CHECKING([for libOQS SPHINCS support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_simple))
+					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_robust))
 					#else
 					#error "SPHINCS is not supported"
 					#endif

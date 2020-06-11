@@ -133,8 +133,10 @@ static const struct keytype keytypes[] = {
 	{ "ssh-falcon1024", "FALCON1024", NULL, KEY_FALCON_1024, 0, 0, 0 },
 	{ "ssh-mqdss3148", "MQDSS3148", NULL, KEY_MQDSS_31_48, 0, 0, 0 },
 	{ "ssh-picnicl1fs", "PICNICL1FS", NULL, KEY_PICNIC_L1FS, 0, 0, 0 },
+	{ "ssh-picnic2l5fs", "PICNIC2L5FS", NULL, KEY_PICNIC2_L5FS, 0, 0, 0 },
 	{ "ssh-qteslapi", "QTESLAPI", NULL, KEY_QTESLA_P_I, 0, 0, 0 },
-	{ "ssh-sphincsharaka128fsimple", "SPHINCSHARAKA128FSIMPLE", NULL, KEY_SPHINCS_HARAKA_128F_SIMPLE, 0, 0, 0 },
+	{ "ssh-rainbowiaclassic", "RAINBOWIACLASSIC", NULL, KEY_RAINBOW_IA_CLASSIC, 0, 0, 0 },
+	{ "ssh-sphincsharaka128frobust", "SPHINCSHARAKA128FROBUST", NULL, KEY_SPHINCS_HARAKA_128F_ROBUST, 0, 0, 0 },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -150,10 +152,13 @@ static const struct keytype keytypes[] = {
 	{ "ssh-p256-mqdss3148", "P256_MQDSS3148", NULL, KEY_P256_MQDSS_31_48, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-rsa3072-picnicl1fs", "RSA3072_PICNICL1FS", NULL, KEY_RSA3072_PICNIC_L1FS, 0, 0, 0 },
 	{ "ssh-p256-picnicl1fs", "P256_PICNICL1FS", NULL, KEY_P256_PICNIC_L1FS, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-p521-picnic2l5fs", "P521_PICNIC2L5FS", NULL, KEY_P521_PICNIC2_L5FS, NID_secp521r1, 0, 0 },
 	{ "ssh-rsa3072-qteslapi", "RSA3072_QTESLAPI", NULL, KEY_RSA3072_QTESLA_P_I, 0, 0, 0 },
 	{ "ssh-p256-qteslapi", "P256_QTESLAPI", NULL, KEY_P256_QTESLA_P_I, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-rsa3072-sphincsharaka128fsimple", "RSA3072_SPHINCSHARAKA128FSIMPLE", NULL, KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE, 0, 0, 0 },
-	{ "ssh-p256-sphincsharaka128fsimple", "P256_SPHINCSHARAKA128FSIMPLE", NULL, KEY_P256_SPHINCS_HARAKA_128F_SIMPLE, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-rainbowiaclassic", "RSA3072_RAINBOWIACLASSIC", NULL, KEY_RSA3072_RAINBOW_IA_CLASSIC, 0, 0, 0 },
+	{ "ssh-p256-rainbowiaclassic", "P256_RAINBOWIACLASSIC", NULL, KEY_P256_RAINBOW_IA_CLASSIC, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-sphincsharaka128frobust", "RSA3072_SPHINCSHARAKA128FROBUST", NULL, KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST, 0, 0, 0 },
+	{ "ssh-p256-sphincsharaka128frobust", "P256_SPHINCSHARAKA128FROBUST", NULL, KEY_P256_SPHINCS_HARAKA_128F_ROBUST, NID_X9_62_prime256v1, 0, 0 },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_END
 #endif /* WITH_HYBRID_AUTH */
 #ifdef WITH_OPENSSL

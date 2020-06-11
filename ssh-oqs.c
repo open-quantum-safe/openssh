@@ -42,14 +42,21 @@ const char* get_oqs_alg_name(int openssh_type)
 		case KEY_RSA3072_PICNIC_L1FS:
 		case KEY_P256_PICNIC_L1FS:
 			return OQS_SIG_alg_picnic_L1_FS;
+		case KEY_PICNIC2_L5FS:
+		case KEY_P521_PICNIC2_L5FS:
+			return OQS_SIG_alg_picnic2_L5_FS;
 		case KEY_QTESLA_P_I:
 		case KEY_RSA3072_QTESLA_P_I:
 		case KEY_P256_QTESLA_P_I:
 			return OQS_SIG_alg_qTesla_p_I;
-		case KEY_SPHINCS_HARAKA_128F_SIMPLE:
-		case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
-		case KEY_P256_SPHINCS_HARAKA_128F_SIMPLE:
-			return OQS_SIG_alg_sphincs_haraka_128f_simple;
+		case KEY_RAINBOW_IA_CLASSIC:
+		case KEY_RSA3072_RAINBOW_IA_CLASSIC:
+		case KEY_P256_RAINBOW_IA_CLASSIC:
+			return OQS_SIG_alg_rainbow_Ia_classic;
+		case KEY_SPHINCS_HARAKA_128F_ROBUST:
+		case KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST:
+		case KEY_P256_SPHINCS_HARAKA_128F_ROBUST:
+			return OQS_SIG_alg_sphincs_haraka_128f_robust;
 ///// OQS_TEMPLATE_FRAGMENT_OSSH_KT_TO_OQS_METH_END
 		default:
 			return NULL;

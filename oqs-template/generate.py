@@ -76,4 +76,4 @@ populate('sshkey.c', config, '/////')
 populate('sshkey.h', config, '/////')
 
 # update test suite and README
-populate('oqs-test/tests/test_openssh.py', config, '#####')
+populate('oqs-test/test_openssh.py', config, '#####')

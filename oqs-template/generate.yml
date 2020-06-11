@@ -122,6 +122,15 @@ sigs:
         oqs_meth: "OQS_SIG_alg_qTesla_p_III"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
+    family: "RAINBOW"
+    variants:
+      -
+        enable: true
+        name: "RAINBOW_IA_CLASSIC"
+        oqs_meth: "OQS_SIG_alg_rainbow_Ia_classic"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+  -
     family: "SPHINCS"
     variants:
       -

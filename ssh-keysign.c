@@ -167,7 +167,7 @@ main(int argc, char **argv)
 	struct sshbuf *b;
 	Options options;
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_START
-#define NUM_KEYTYPES 28
+#define NUM_KEYTYPES 33
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_END
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
@@ -199,8 +199,10 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_FALCON_1024_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FS_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_PICNIC2_L5FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_QTESLA_P_I_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, O_RDONLY);
@@ -212,10 +214,13 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_P256_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC_L1FS_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P521_PICNIC2_L5FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_QTESLA_P_I_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P256_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P256_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P256_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
 ///// OQS_TEMPLATE_FRAGMENT_OPEN_KEYFILES_END
 
 	if ((pw = getpwuid(getuid())) == NULL)
