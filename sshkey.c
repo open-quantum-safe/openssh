@@ -129,6 +129,8 @@ static const struct keytype keytypes[] = {
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_START
 	{ "ssh-oqsdefault", "OQSDEFAULT", NULL, KEY_OQSDEFAULT, 0, 0, 0 },
 	{ "ssh-dilithium2", "DILITHIUM2", NULL, KEY_DILITHIUM_2, 0, 0, 0 },
+	{ "ssh-falcon512", "FALCON512", NULL, KEY_FALCON_512, 0, 0, 0 },
+	{ "ssh-falcon1024", "FALCON1024", NULL, KEY_FALCON_1024, 0, 0, 0 },
 	{ "ssh-mqdss3148", "MQDSS3148", NULL, KEY_MQDSS_31_48, 0, 0, 0 },
 	{ "ssh-picnicl1fs", "PICNICL1FS", NULL, KEY_PICNIC_L1FS, 0, 0, 0 },
 	{ "ssh-qteslapi", "QTESLAPI", NULL, KEY_QTESLA_P_I, 0, 0, 0 },
@@ -141,6 +143,9 @@ static const struct keytype keytypes[] = {
 	{ "ssh-p256-oqsdefault", "P256_OQSDEFAULT", NULL, KEY_P256_OQSDEFAULT, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL, KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
 	{ "ssh-p256-dilithium2", "P256_DILITHIUM2", NULL, KEY_P256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-falcon512", "RSA3072_FALCON512", NULL, KEY_RSA3072_FALCON_512, 0, 0, 0 },
+	{ "ssh-p256-falcon512", "P256_FALCON512", NULL, KEY_P256_FALCON_512, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-p521-falcon1024", "P521_FALCON1024", NULL, KEY_P521_FALCON_1024, NID_secp521r1, 0, 0 },
 	{ "ssh-rsa3072-mqdss3148", "RSA3072_MQDSS3148", NULL, KEY_RSA3072_MQDSS_31_48, 0, 0, 0 },
 	{ "ssh-p256-mqdss3148", "P256_MQDSS3148", NULL, KEY_P256_MQDSS_31_48, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-rsa3072-picnicl1fs", "RSA3072_PICNICL1FS", NULL, KEY_RSA3072_PICNIC_L1FS, 0, 0, 0 },

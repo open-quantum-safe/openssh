@@ -27,6 +27,13 @@ const char* get_oqs_alg_name(int openssh_type)
 		case KEY_RSA3072_DILITHIUM_2:
 		case KEY_P256_DILITHIUM_2:
 			return OQS_SIG_alg_dilithium_2;
+		case KEY_FALCON_512:
+		case KEY_RSA3072_FALCON_512:
+		case KEY_P256_FALCON_512:
+			return OQS_SIG_alg_falcon_512;
+		case KEY_FALCON_1024:
+		case KEY_P521_FALCON_1024:
+			return OQS_SIG_alg_falcon_1024;
 		case KEY_MQDSS_31_48:
 		case KEY_RSA3072_MQDSS_31_48:
 		case KEY_P256_MQDSS_31_48:

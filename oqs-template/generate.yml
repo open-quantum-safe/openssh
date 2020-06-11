@@ -29,6 +29,20 @@ sigs:
         oqs_meth: "OQS_SIG_alg_dilithium_4"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
+    family: "FALCON"
+    variants:
+      -
+        enable: true
+        name: "FALCON_512"
+        oqs_meth: "OQS_SIG_alg_falcon_512"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: true
+        name: "FALCON_1024"
+        oqs_meth: "OQS_SIG_alg_falcon_1024"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+  -
     family: "MQDSS"
     variants:
       -
@@ -88,6 +102,11 @@ sigs:
         name: "PICNIC2_L3FS"
         oqs_meth: "OQS_SIG_alg_picnic2_L3_FS"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: true
+        name: "PICNIC2_L5FS"
+        oqs_meth: "OQS_SIG_alg_picnic2_L5_FS"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
   -
     family: "QTESLA"
     variants:
@@ -107,8 +126,20 @@ sigs:
     variants:
       -
         enable: true
+        name: "SPHINCS_HARAKA_128F_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_robust"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: false
         name: "SPHINCS_HARAKA_128F_SIMPLE"
         oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_simple"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_128S_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128s_robust"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
@@ -119,16 +150,46 @@ sigs:
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_128F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128f_simple"
-        mix_with: [{'name':'rsa3072'},
-                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+        name: "SPHINCS_HARAKA_192F_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192f_robust"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+
       -
         enable: false
-        name: "SPHINCS_SHA256_128S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128s_simple"
-        mix_with: [{'name':'rsa3072'},
-                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+        name: "SPHINCS_HARAKA_192F_SIMPLE"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192f_simple"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_192S_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192s_robust"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_192S_SIMPLE"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192s_simple"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_256F_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256f_robust"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_256F_SIMPLE"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256f_simple"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_256S_ROBUST"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256s_robust"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+      -
+        enable: false
+        name: "SPHINCS_HARAKA_256S_SIMPLE"
+        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256s_simple"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+
 kems:
   -
     family: "BIKE"

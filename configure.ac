@@ -3714,6 +3714,20 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
+	AC_MSG_CHECKING([for libOQS FALCON support])
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+				#include <oqs/oqs.h>
+			]], [[
+					#if defined(OQS_ENABLE_SIG_FALCON) || (defined(OQS_ENABLE_SIG_falcon_512) && defined(OQS_ENABLE_SIG_falcon_1024))
+					#else
+					#error "FALCON is not supported"
+					#endif
+			]])],
+			[ AC_MSG_RESULT([yes])
+				AC_DEFINE([HAVE_FALCON], [1], [Define to 1 if LibOQS library is compiled with support for FALCON])
+			], [AC_MSG_RESULT([no])
+	])
+
 	AC_MSG_CHECKING([for libOQS MQDSS support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>

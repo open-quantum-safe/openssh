@@ -167,7 +167,7 @@ main(int argc, char **argv)
 	struct sshbuf *b;
 	Options options;
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_START
-#define NUM_KEYTYPES 23
+#define NUM_KEYTYPES 28
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_END
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
@@ -195,6 +195,8 @@ main(int argc, char **argv)
 ///// OQS_TEMPLATE_FRAGMENT_OPEN_KEYFILES_START
 	key_fd[i++] = open(_PATH_HOST_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_DILITHIUM_2_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_FALCON_512_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_FALCON_1024_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_QTESLA_P_I_KEY_FILE, O_RDONLY);
@@ -203,6 +205,9 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_P256_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_DILITHIUM_2_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_FALCON_512_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P256_FALCON_512_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P521_FALCON_1024_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE, O_RDONLY);
