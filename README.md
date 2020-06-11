@@ -116,29 +116,28 @@ On **macOS**, you need to install the following packages using brew (or a packag
 
 ### Step 1: Build and install liboqs
 
-You will need to specify a path to install liboqs in during configure time; we recommend that you install in a special-purpose directory, rather than the global `/usr` or `/usr/local` directories. The following instructions install it into a subdirectory inside the OpenSSH source.
+The following instructions install liboqs into a subdirectory inside the OpenSSH source. If `<OPENSSH_DIR>` is the root of the OpenSSH source:
 
-	git clone --branch master --single-branch https://github.com/open-quantum-safe/liboqs.git
-	cd liboqs
-	mkdir build && cd build
-	cmake -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=yes -DCMAKE_INSTALL_PREFIX=<path-to-openssh-dir>/oqs ..
-	ninja
-	ninja install
+```
+git clone --branch master --single-branch https://github.com/open-quantum-safe/liboqs.git
+cd liboqs
+mkdir build && cd build
+cmake .. -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=yes -DCMAKE_INSTALL_PREFIX=<OPENSSH_DIR>/oqs
+ninja
+ninja install
+```
 
-Building liboqs requires your system to have OpenSSL 1.1.1 or higher already installed. `configure` will detect it if it is located in a standard location, such as `/usr` or `/usr/local/opt/openssl@1.1` (for brew on macOS).  Otherwise, you may need to specify it with `-DOPENSSL_ROOT_DIR=<path-to-system-openssl-dir>` added to the `cmake` command.
+Building liboqs requires your system to have OpenSSL 1.1.1 or higher already installed. It will automatically be detected if it in a standard location, such as `/usr` or `/usr/local/opt/openssl@1.1` (for brew on macOS).  Otherwise, you may need to specify it with `-DOPENSSL_ROOT_DIR=<path-to-system-openssl-dir>` added to the `cmake` command.
 
 ### Step 2: Build the fork
 
-Get the source from Github:
+In `<OPENSSH_ROOT>`, first run:
 
-	git clone --branch OQS-master https://github.com/open-quantum-safe/openssh-portable.git
-
-Then, build and install our fork of OpenSSH; First, run:
-
-	cd <path-to-openssh-src>
-	export LIBOQS_INSTALL=<path-to-liboqs>
-	export OPENSSH_INSTALL=<path-to-install-openssh>
-	autoreconf
+```
+export LIBOQS_INSTALL=<path-to-liboqs>
+export OPENSSH_INSTALL=<path-to-install-openssh>
+autoreconf
+```
 
 Then, run the following:
 
@@ -154,6 +153,12 @@ Then, run the following:
 To test the build, run:
 
 	make tests
+
+To run OQS-specific tests:
+
+```
+python3 -m nose --rednose --verbose
+```
 
 ### Running OQS-OpenSSH
 

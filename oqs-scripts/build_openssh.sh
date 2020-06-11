@@ -8,7 +8,7 @@
 
 set -exo pipefail
 
-PREFIX=${PREFIX:-"`pwd`/tmp/install"}
+PREFIX=${PREFIX:-"`pwd`/oqs-test/tmp"}
 WITH_OPENSSL=${WITH_OPENSSL:-"true"}
 
 case "$OSTYPE" in
@@ -17,7 +17,6 @@ case "$OSTYPE" in
     *)        echo "Unknown operating system: $OSTYPE" ; exit 1 ;;
 esac
 
-cd ..
 if [ -f Makefile ]; then
     make clean
 else
@@ -25,7 +24,7 @@ else
 fi
 
 if [ "x${WITH_OPENSSL}" == "xtrue" ]; then
-    ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --with-ssl-dir="${OPENSSL_SYS_DIR}" --with-liboqs-dir="${PREFIX}" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
+    ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --with-ssl-dir="${OPENSSL_SYS_DIR}" --with-liboqs-dir="`pwd`/oqs" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
 else
     ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --without-openssl --with-liboqs-dir="${PREFIX}" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
 fi

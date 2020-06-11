@@ -13,5 +13,5 @@ set -exo pipefail
 LIBOQS_REPO=${LIBOQS_REPO:-"https://github.com/open-quantum-safe/liboqs.git"}
 LIBOQS_BRANCH=${LIBOQS_BRANCH:-"master"}
 
-rm -rf tmp/liboqs
-git clone --branch ${LIBOQS_BRANCH} --single-branch ${LIBOQS_REPO} tmp/liboqs
+rm -rf oqs-scripts/tmp && mkdir oqs-scripts/tmp
+git clone --branch ${LIBOQS_BRANCH} --single-branch ${LIBOQS_REPO} oqs-scripts/tmp/liboqs

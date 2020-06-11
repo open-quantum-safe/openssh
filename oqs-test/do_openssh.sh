@@ -14,6 +14,8 @@ set -x
 
 OKAY=1
 
+PREFIX=${PREFIX:-"`pwd`/oqs-test/tmp"}
+
 rm -f ${PREFIX}/server_log.txt
 rm -f ${PREFIX}/client_log.txt
 

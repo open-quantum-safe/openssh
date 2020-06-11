@@ -29,14 +29,14 @@ def test_gen_keys():
     global sig_algs
     helpers.run_subprocess(
         ['rm', '-rf', 'ssh_client'],
-        os.path.join('tmp', 'install')
+        working_dir=os.path.join('oqs-test', 'tmp')
     )
     helpers.run_subprocess(
         ['rm', '-rf', 'ssh_server'],
-        os.path.join('tmp', 'install')
+        working_dir=os.path.join('oqs-test', 'tmp')
     )
-    os.mkdir(os.path.join('tmp', 'install', 'ssh_client'), mode=0o700)
-    os.mkdir(os.path.join('tmp', 'install', 'ssh_server'), mode=0o700)
+    os.mkdir(os.path.join('oqs-test', 'tmp', 'ssh_client'), mode=0o700)
+    os.mkdir(os.path.join('oqs-test', 'tmp', 'ssh_server'), mode=0o700)
     for party in ['client', 'server']:
         for sig_alg in sig_algs:
             yield (gen_keys, sig_alg, party)
@@ -49,7 +49,7 @@ def gen_keys(sig_alg, party):
             '-N', '',
             '-f', os.path.join('ssh_{}'.format(party), 'id_{}'.format(sig_alg))
         ],
-        os.path.join('tmp', 'install')
+        os.path.join('oqs-test', 'tmp')
     )
 
 def test_connection():
@@ -65,12 +65,11 @@ def test_connection():
 
 def run_connection(sig_alg, kex_alg, port):
     helpers.run_subprocess(
-        [os.path.join('scripts', 'do_openssh.sh')],
+        [os.path.join('oqs-test', 'do_openssh.sh')],
         env={
             'SIGALG': sig_alg,
             'KEXALG': kex_alg,
             'PORT': str(port),
-            'PREFIX': os.path.join(os.getcwd(), 'tmp', 'install')
         }
     )
 

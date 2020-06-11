@@ -29,6 +29,8 @@ sshd
 !regress/misc/fuzz-harness/Makefile
 
 oqs-test/tmp
+oqs-scripts/tmp
+oqs/
 __pycache__
 tags
 *.swp
