@@ -3,7 +3,7 @@
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_{{ kem['family'] }}) || ({%- for variant in kem['variants'] -%}defined({{ variant['oqs_meth']|replace("KEM_alg","ENABLE_KEM") }}){% if not loop.last -%}{{ " && " }}{%- endif -%}{%- endfor -%})
+					#if defined(OQS_ENABLE_KEM_{{ kem['family'] }}) || ({%- for variant in kem['variants'] -%}defined({{ variant['oqs_meth']|replace("KEM_alg","ENABLE_KEM") }}){% if not loop.last -%}{{ " && " }}{%- endif -%}{%- endfor -%})
 					#else
 					#error "{{ kem['family'] }} is not supported"
 					#endif
@@ -19,7 +19,7 @@
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_{{ sig['family'] }}) || ({%- for variant in sig['variants'] -%}defined({{ variant['oqs_meth']|replace("SIG_alg","ENABLE_SIG") }}){% if not loop.last -%}{{ " && " }}{%- endif -%}{%- endfor -%})
+					#if defined(OQS_ENABLE_SIG_{{ sig['family'] }}) || ({%- for variant in sig['variants'] -%}defined({{ variant['oqs_meth']|replace("SIG_alg","ENABLE_SIG") }}){% if not loop.last -%}{{ " && " }}{%- endif -%}{%- endfor -%})
 					#else
 					#error "{{ sig['family'] }} is not supported"
 					#endif

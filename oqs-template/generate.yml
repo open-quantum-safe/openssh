@@ -132,8 +132,20 @@ kems:
         name: "FRODO_640_AES"
         oqs_meth: "OQS_KEM_alg_frodokem_640_aes"
       -
+        name: "FRODO_640_SHAKE"
+        oqs_meth: "OQS_KEM_alg_frodokem_640_shake"
+      -
         name: "FRODO_976_AES"
         oqs_meth: "OQS_KEM_alg_frodokem_976_aes"
+      -
+        name: "FRODO_976_SHAKE"
+        oqs_meth: "OQS_KEM_alg_frodokem_976_shake"
+      -
+        name: "FRODO_1344_AES"
+        oqs_meth: "OQS_KEM_alg_frodokem_1344_aes"
+      -
+        name: "FRODO_976_SHAKE"
+        oqs_meth: "OQS_KEM_alg_frodokem_1344_shake"
   -
     family: "KYBER"
     variants:
@@ -173,6 +185,12 @@ kems:
       -
         name: "NTRU_HPS_2048_677"
         oqs_meth: "OQS_KEM_alg_ntru_hps2048677"
+      -
+        name: "NTRU_HRSS_701"
+        oqs_meth: "OQS_KEM_alg_ntru_hrss701"
+      -
+        name: "NTRU_HPS_4096_821"
+        oqs_meth: "OQS_KEM_alg_ntru_hps4096821"
   -
     family: "SABER"
     variants:

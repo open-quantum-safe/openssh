@@ -3577,7 +3577,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_BIKE) || (defined(OQS_ENABLE_KEM_bike1_l1_cpa) && defined(OQS_ENABLE_KEM_bike1_l3_cpa) && defined(OQS_ENABLE_KEM_bike1_l1_fo) && defined(OQS_ENABLE_KEM_bike1_l3_fo))
+					#if defined(OQS_ENABLE_KEM_BIKE) || (defined(OQS_ENABLE_KEM_bike1_l1_cpa) && defined(OQS_ENABLE_KEM_bike1_l3_cpa) && defined(OQS_ENABLE_KEM_bike1_l1_fo) && defined(OQS_ENABLE_KEM_bike1_l3_fo))
 					#else
 					#error "BIKE is not supported"
 					#endif
@@ -3591,7 +3591,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_FRODO) || (defined(OQS_ENABLE_KEM_frodokem_640_aes) && defined(OQS_ENABLE_KEM_frodokem_976_aes))
+					#if defined(OQS_ENABLE_KEM_FRODO) || (defined(OQS_ENABLE_KEM_frodokem_640_aes) && defined(OQS_ENABLE_KEM_frodokem_640_shake) && defined(OQS_ENABLE_KEM_frodokem_976_aes) && defined(OQS_ENABLE_KEM_frodokem_976_shake) && defined(OQS_ENABLE_KEM_frodokem_1344_aes) && defined(OQS_ENABLE_KEM_frodokem_1344_shake))
 					#else
 					#error "FRODO is not supported"
 					#endif
@@ -3605,7 +3605,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_KYBER) || (defined(OQS_ENABLE_KEM_kyber_512) && defined(OQS_ENABLE_KEM_kyber_768) && defined(OQS_ENABLE_KEM_kyber_1024) && defined(OQS_ENABLE_KEM_kyber_512_90s) && defined(OQS_ENABLE_KEM_kyber_768_90s) && defined(OQS_ENABLE_KEM_kyber_1024_90s))
+					#if defined(OQS_ENABLE_KEM_KYBER) || (defined(OQS_ENABLE_KEM_kyber_512) && defined(OQS_ENABLE_KEM_kyber_768) && defined(OQS_ENABLE_KEM_kyber_1024) && defined(OQS_ENABLE_KEM_kyber_512_90s) && defined(OQS_ENABLE_KEM_kyber_768_90s) && defined(OQS_ENABLE_KEM_kyber_1024_90s))
 					#else
 					#error "KYBER is not supported"
 					#endif
@@ -3619,7 +3619,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_NEWHOPE) || (defined(OQS_ENABLE_KEM_newhope_512cca) && defined(OQS_ENABLE_KEM_newhope_1024cca))
+					#if defined(OQS_ENABLE_KEM_NEWHOPE) || (defined(OQS_ENABLE_KEM_newhope_512cca) && defined(OQS_ENABLE_KEM_newhope_1024cca))
 					#else
 					#error "NEWHOPE is not supported"
 					#endif
@@ -3633,7 +3633,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_NTRU) || (defined(OQS_ENABLE_KEM_ntru_hps2048509) && defined(OQS_ENABLE_KEM_ntru_hps2048677))
+					#if defined(OQS_ENABLE_KEM_NTRU) || (defined(OQS_ENABLE_KEM_ntru_hps2048509) && defined(OQS_ENABLE_KEM_ntru_hps2048677) && defined(OQS_ENABLE_KEM_ntru_hrss701) && defined(OQS_ENABLE_KEM_ntru_hps4096821))
 					#else
 					#error "NTRU is not supported"
 					#endif
@@ -3647,7 +3647,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_SABER) || (defined(OQS_ENABLE_KEM_saber_lightsaber) && defined(OQS_ENABLE_KEM_saber_saber) && defined(OQS_ENABLE_KEM_saber_firesaber))
+					#if defined(OQS_ENABLE_KEM_SABER) || (defined(OQS_ENABLE_KEM_saber_lightsaber) && defined(OQS_ENABLE_KEM_saber_saber) && defined(OQS_ENABLE_KEM_saber_firesaber))
 					#else
 					#error "SABER is not supported"
 					#endif
@@ -3661,7 +3661,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_SIDH) || (defined(OQS_ENABLE_KEM_sidh_p434) && defined(OQS_ENABLE_KEM_sidh_p503) && defined(OQS_ENABLE_KEM_sidh_p610) && defined(OQS_ENABLE_KEM_sidh_p751) && defined(OQS_ENABLE_KEM_sidh_p434_compressed) && defined(OQS_ENABLE_KEM_sidh_p503_compressed) && defined(OQS_ENABLE_KEM_sidh_p610_compressed) && defined(OQS_ENABLE_KEM_sidh_p751_compressed))
+					#if defined(OQS_ENABLE_KEM_SIDH) || (defined(OQS_ENABLE_KEM_sidh_p434) && defined(OQS_ENABLE_KEM_sidh_p503) && defined(OQS_ENABLE_KEM_sidh_p610) && defined(OQS_ENABLE_KEM_sidh_p751) && defined(OQS_ENABLE_KEM_sidh_p434_compressed) && defined(OQS_ENABLE_KEM_sidh_p503_compressed) && defined(OQS_ENABLE_KEM_sidh_p610_compressed) && defined(OQS_ENABLE_KEM_sidh_p751_compressed))
 					#else
 					#error "SIDH is not supported"
 					#endif
@@ -3675,7 +3675,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_SIKE) || (defined(OQS_ENABLE_KEM_sike_p434) && defined(OQS_ENABLE_KEM_sike_p503) && defined(OQS_ENABLE_KEM_sike_p610) && defined(OQS_ENABLE_KEM_sike_p751) && defined(OQS_ENABLE_KEM_sike_p434_compressed) && defined(OQS_ENABLE_KEM_sike_p503_compressed) && defined(OQS_ENABLE_KEM_sike_p610_compressed) && defined(OQS_ENABLE_KEM_sike_p751_compressed))
+					#if defined(OQS_ENABLE_KEM_SIKE) || (defined(OQS_ENABLE_KEM_sike_p434) && defined(OQS_ENABLE_KEM_sike_p503) && defined(OQS_ENABLE_KEM_sike_p610) && defined(OQS_ENABLE_KEM_sike_p751) && defined(OQS_ENABLE_KEM_sike_p434_compressed) && defined(OQS_ENABLE_KEM_sike_p503_compressed) && defined(OQS_ENABLE_KEM_sike_p610_compressed) && defined(OQS_ENABLE_KEM_sike_p751_compressed))
 					#else
 					#error "SIKE is not supported"
 					#endif
@@ -3689,7 +3689,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_KEM_THREEBEARS) || (defined(OQS_ENABLE_KEM_threebears_babybear) && defined(OQS_ENABLE_KEM_threebears_babybear_ephem) && defined(OQS_ENABLE_KEM_threebears_mamabear) && defined(OQS_ENABLE_KEM_threebears_mamabear_ephem) && defined(OQS_ENABLE_KEM_threebears_papabear) && defined(OQS_ENABLE_KEM_threebears_papabear_ephem))
+					#if defined(OQS_ENABLE_KEM_THREEBEARS) || (defined(OQS_ENABLE_KEM_threebears_babybear) && defined(OQS_ENABLE_KEM_threebears_babybear_ephem) && defined(OQS_ENABLE_KEM_threebears_mamabear) && defined(OQS_ENABLE_KEM_threebears_mamabear_ephem) && defined(OQS_ENABLE_KEM_threebears_papabear) && defined(OQS_ENABLE_KEM_threebears_papabear_ephem))
 					#else
 					#error "THREEBEARS is not supported"
 					#endif
@@ -3704,7 +3704,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_DILITHIUM) || (defined(OQS_ENABLE_SIG_dilithium_2) && defined(OQS_ENABLE_SIG_dilithium_3) && defined(OQS_ENABLE_SIG_dilithium_4))
+					#if defined(OQS_ENABLE_SIG_DILITHIUM) || (defined(OQS_ENABLE_SIG_dilithium_2) && defined(OQS_ENABLE_SIG_dilithium_3) && defined(OQS_ENABLE_SIG_dilithium_4))
 					#else
 					#error "DILITHIUM is not supported"
 					#endif
@@ -3718,7 +3718,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48) && defined(OQS_ENABLE_SIG_mqdss_31_64))
+					#if defined(OQS_ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48) && defined(OQS_ENABLE_SIG_mqdss_31_64))
 					#else
 					#error "MQDSS is not supported"
 					#endif
@@ -3732,7 +3732,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic_L1_UR) && defined(OQS_ENABLE_SIG_picnic_L3_FS) && defined(OQS_ENABLE_SIG_picnic_L3_UR) && defined(OQS_ENABLE_SIG_picnic_L5_FS) && defined(OQS_ENABLE_SIG_picnic_L5_UR) && defined(OQS_ENABLE_SIG_picnic2_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L3_FS))
+					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic_L1_UR) && defined(OQS_ENABLE_SIG_picnic_L3_FS) && defined(OQS_ENABLE_SIG_picnic_L3_UR) && defined(OQS_ENABLE_SIG_picnic_L5_FS) && defined(OQS_ENABLE_SIG_picnic_L5_UR) && defined(OQS_ENABLE_SIG_picnic2_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L3_FS))
 					#else
 					#error "PICNIC is not supported"
 					#endif
@@ -3746,7 +3746,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I) && defined(OQS_ENABLE_SIG_qTesla_p_III))
+					#if defined(OQS_ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I) && defined(OQS_ENABLE_SIG_qTesla_p_III))
 					#else
 					#error "QTESLA is not supported"
 					#endif
@@ -3760,7 +3760,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_haraka_128s_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128s_simple))
+					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_haraka_128s_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128s_simple))
 					#else
 					#error "SPHINCS is not supported"
 					#endif

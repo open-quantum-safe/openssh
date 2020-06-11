@@ -43,7 +43,11 @@
 #ifdef HAVE_FRODO
 #define KEX_PQ_METHOD_FRODO \
     PQ_OQS_KEX_METHOD("frodo-640-aes-sha384") \
-    PQ_OQS_KEX_METHOD("frodo-976-aes-sha384")
+    PQ_OQS_KEX_METHOD("frodo-640-shake-sha384") \
+    PQ_OQS_KEX_METHOD("frodo-976-aes-sha384") \
+    PQ_OQS_KEX_METHOD("frodo-976-shake-sha384") \
+    PQ_OQS_KEX_METHOD("frodo-1344-aes-sha384") \
+    PQ_OQS_KEX_METHOD("frodo-1344-shake-sha384")
 #else
 #define KEX_PQ_METHOD_FRODO ""
 #endif /* HAVE_FRODO */
@@ -68,7 +72,9 @@
 #ifdef HAVE_NTRU
 #define KEX_PQ_METHOD_NTRU \
     PQ_OQS_KEX_METHOD("ntru-hps-2048-509-sha384") \
-    PQ_OQS_KEX_METHOD("ntru-hps-2048-677-sha384")
+    PQ_OQS_KEX_METHOD("ntru-hps-2048-677-sha384") \
+    PQ_OQS_KEX_METHOD("ntru-hrss-701-sha384") \
+    PQ_OQS_KEX_METHOD("ntru-hps-4096-821-sha384")
 #else
 #define KEX_PQ_METHOD_NTRU ""
 #endif /* HAVE_NTRU */
@@ -162,7 +168,11 @@
 #ifdef HAVE_FRODO
 #define KEX_HYBRID_METHOD_FRODO \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-640-aes-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-976-aes-sha384")
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-640-shake-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-976-aes-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-976-shake-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-1344-aes-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-frodo-1344-shake-sha384")
 #else
 #define KEX_HYBRID_METHOD_FRODO ""
 #endif /* HAVE_FRODO */
@@ -187,7 +197,9 @@
 #ifdef HAVE_NTRU
 #define KEX_HYBRID_METHOD_NTRU \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hps-2048-509-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hps-2048-677-sha384")
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hps-2048-677-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hrss-701-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hps-4096-821-sha384")
 #else
 #define KEX_HYBRID_METHOD_NTRU ""
 #endif /* HAVE_NTRU */
