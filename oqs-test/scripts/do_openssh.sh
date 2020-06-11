@@ -28,6 +28,7 @@ ${PREFIX}/sbin/sshd -q -p ${PORT} -d \
   -o "AuthorizedKeysFile=${PREFIX}/ssh_server/authorized_keys" \
   -o "HostKeyAlgorithms=${SIGALG}" \
   -o "PubkeyAcceptedKeyTypes=${SIGALG}" \
+  -o "StrictModes=no" \
   -h "${PREFIX}/ssh_server/id_${SIGALG}" \
   >> ${PREFIX}/server_log.txt 2>&1 &
 

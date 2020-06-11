@@ -3704,7 +3704,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_DILITHIUM) || (defined(OQS_ENABLE_SIG_dilithium_2) && defined(OQS_ENABLE_SIG_dilithium_3) && defined(OQS_ENABLE_SIG_dilithium_4))
+					#if defined(OQS_ENABLE_SIG_DILITHIUM) || (defined(OQS_ENABLE_SIG_dilithium_2))
 					#else
 					#error "DILITHIUM is not supported"
 					#endif
@@ -3718,7 +3718,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48) && defined(OQS_ENABLE_SIG_mqdss_31_64))
+					#if defined(OQS_ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48))
 					#else
 					#error "MQDSS is not supported"
 					#endif
@@ -3732,7 +3732,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic_L1_UR) && defined(OQS_ENABLE_SIG_picnic_L3_FS) && defined(OQS_ENABLE_SIG_picnic_L3_UR) && defined(OQS_ENABLE_SIG_picnic_L5_FS) && defined(OQS_ENABLE_SIG_picnic_L5_UR) && defined(OQS_ENABLE_SIG_picnic2_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L3_FS))
+					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS))
 					#else
 					#error "PICNIC is not supported"
 					#endif
@@ -3746,7 +3746,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I) && defined(OQS_ENABLE_SIG_qTesla_p_III))
+					#if defined(OQS_ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I))
 					#else
 					#error "QTESLA is not supported"
 					#endif
@@ -3760,7 +3760,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_haraka_128s_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128f_simple) && defined(OQS_ENABLE_SIG_sphincs_sha256_128s_simple))
+					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_simple))
 					#else
 					#error "SPHINCS is not supported"
 					#endif

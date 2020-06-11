@@ -239,16 +239,8 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 	if (name == NULL && IS_ECDSA_HYBRID(type)) {
 		switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_START
-		case KEY_P384_DILITHIUM_4:
-		case KEY_P384_MQDSS_31_64:
-		case KEY_P384_PICNIC_L3FS:
-		case KEY_P384_PICNIC_L3UR:
-		case KEY_P384_PICNIC2_L3FS:
-		case KEY_P384_QTESLA_P_III:
 			*bitsp = 384;
 			break;
-		case KEY_P521_PICNIC_L5FS:
-		case KEY_P521_PICNIC_L5UR:
 			*bitsp = 521;
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
 		}
@@ -319,59 +311,17 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_DILITHIUM_2:
 			name = _PATH_SSH_CLIENT_ID_DILITHIUM_2;
 			break;
-		case KEY_DILITHIUM_3:
-			name = _PATH_SSH_CLIENT_ID_DILITHIUM_3;
-			break;
-		case KEY_DILITHIUM_4:
-			name = _PATH_SSH_CLIENT_ID_DILITHIUM_4;
-			break;
 		case KEY_MQDSS_31_48:
 			name = _PATH_SSH_CLIENT_ID_MQDSS_31_48;
-			break;
-		case KEY_MQDSS_31_64:
-			name = _PATH_SSH_CLIENT_ID_MQDSS_31_64;
 			break;
 		case KEY_PICNIC_L1FS:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L1FS;
 			break;
-		case KEY_PICNIC_L1UR:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L1UR;
-			break;
-		case KEY_PICNIC_L3FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L3FS;
-			break;
-		case KEY_PICNIC_L3UR:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L3UR;
-			break;
-		case KEY_PICNIC_L5FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L5FS;
-			break;
-		case KEY_PICNIC_L5UR:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L5UR;
-			break;
-		case KEY_PICNIC2_L1FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC2_L1FS;
-			break;
-		case KEY_PICNIC2_L3FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC2_L3FS;
-			break;
 		case KEY_QTESLA_P_I:
 			name = _PATH_SSH_CLIENT_ID_QTESLA_P_I;
 			break;
-		case KEY_QTESLA_P_III:
-			name = _PATH_SSH_CLIENT_ID_QTESLA_P_III;
-			break;
 		case KEY_SPHINCS_HARAKA_128F_SIMPLE:
 			name = _PATH_SSH_CLIENT_ID_SPHINCS_HARAKA_128F_SIMPLE;
-			break;
-		case KEY_SPHINCS_HARAKA_128S_SIMPLE:
-			name = _PATH_SSH_CLIENT_ID_SPHINCS_HARAKA_128S_SIMPLE;
-			break;
-		case KEY_SPHINCS_SHA256_128F_SIMPLE:
-			name = _PATH_SSH_CLIENT_ID_SPHINCS_SHA256_128F_SIMPLE;
-			break;
-		case KEY_SPHINCS_SHA256_128S_SIMPLE:
-			name = _PATH_SSH_CLIENT_ID_SPHINCS_SHA256_128S_SIMPLE;
 			break;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_PQ_ID_PATHS_END
 		default:
@@ -1110,24 +1060,10 @@ do_gen_all_hostkeys(struct passwd *pw)
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_START
 		{ "oqsdefault", "OQSDEFAULT", _PATH_HOST_OQSDEFAULT_KEY_FILE },
 		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
-		{ "dilithium3", "DILITHIUM_3", _PATH_HOST_DILITHIUM_3_KEY_FILE },
-		{ "dilithium4", "DILITHIUM_4", _PATH_HOST_DILITHIUM_4_KEY_FILE },
 		{ "mqdss3148", "MQDSS_31_48", _PATH_HOST_MQDSS_31_48_KEY_FILE },
-		{ "mqdss3164", "MQDSS_31_64", _PATH_HOST_MQDSS_31_64_KEY_FILE },
 		{ "picnicl1fs", "PICNIC_L1FS", _PATH_HOST_PICNIC_L1FS_KEY_FILE },
-		{ "picnicl1ur", "PICNIC_L1UR", _PATH_HOST_PICNIC_L1UR_KEY_FILE },
-		{ "picnicl3fs", "PICNIC_L3FS", _PATH_HOST_PICNIC_L3FS_KEY_FILE },
-		{ "picnicl3ur", "PICNIC_L3UR", _PATH_HOST_PICNIC_L3UR_KEY_FILE },
-		{ "picnicl5fs", "PICNIC_L5FS", _PATH_HOST_PICNIC_L5FS_KEY_FILE },
-		{ "picnicl5ur", "PICNIC_L5UR", _PATH_HOST_PICNIC_L5UR_KEY_FILE },
-		{ "picnic2l1fs", "PICNIC2_L1FS", _PATH_HOST_PICNIC2_L1FS_KEY_FILE },
-		{ "picnic2l3fs", "PICNIC2_L3FS", _PATH_HOST_PICNIC2_L3FS_KEY_FILE },
 		{ "qteslapi", "QTESLA_P_I", _PATH_HOST_QTESLA_P_I_KEY_FILE },
-		{ "qteslapiii", "QTESLA_P_III", _PATH_HOST_QTESLA_P_III_KEY_FILE },
 		{ "sphincsharaka128fsimple", "SPHINCS_HARAKA_128F_SIMPLE", _PATH_HOST_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE },
-		{ "sphincsharaka128ssimple", "SPHINCS_HARAKA_128S_SIMPLE", _PATH_HOST_SPHINCS_HARAKA_128S_SIMPLE_KEY_FILE },
-		{ "sphincssha256128fsimple", "SPHINCS_SHA256_128F_SIMPLE", _PATH_HOST_SPHINCS_SHA256_128F_SIMPLE_KEY_FILE },
-		{ "sphincssha256128ssimple", "SPHINCS_SHA256_128S_SIMPLE", _PATH_HOST_SPHINCS_SHA256_128S_SIMPLE_KEY_FILE },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -1135,37 +1071,17 @@ do_gen_all_hostkeys(struct passwd *pw)
 #ifdef WITH_OPENSSL
 		{ "rsa3072_oqsdefault", "RSA3072_OQSDEFAULT", _PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE },
 		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
-		{ "rsa3072_dilithium3", "RSA3072_DILITHIUM_3", _PATH_HOST_RSA3072_DILITHIUM_3_KEY_FILE },
 		{ "rsa3072_mqdss3148", "RSA3072_MQDSS_31_48", _PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE },
 		{ "rsa3072_picnicl1fs", "RSA3072_PICNIC_L1FS", _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE },
-		{ "rsa3072_picnicl1ur", "RSA3072_PICNIC_L1UR", _PATH_HOST_RSA3072_PICNIC_L1UR_KEY_FILE },
-		{ "rsa3072_picnic2l1fs", "RSA3072_PICNIC2_L1FS", _PATH_HOST_RSA3072_PICNIC2_L1FS_KEY_FILE },
 		{ "rsa3072_qteslapi", "RSA3072_QTESLA_P_I", _PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE },
 		{ "rsa3072_sphincsharaka128fsimple", "RSA3072_SPHINCS_HARAKA_128F_SIMPLE", _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE },
-		{ "rsa3072_sphincsharaka128ssimple", "RSA3072_SPHINCS_HARAKA_128S_SIMPLE", _PATH_HOST_RSA3072_SPHINCS_HARAKA_128S_SIMPLE_KEY_FILE },
-		{ "rsa3072_sphincssha256128fsimple", "RSA3072_SPHINCS_SHA256_128F_SIMPLE", _PATH_HOST_RSA3072_SPHINCS_SHA256_128F_SIMPLE_KEY_FILE },
-		{ "rsa3072_sphincssha256128ssimple", "RSA3072_SPHINCS_SHA256_128S_SIMPLE", _PATH_HOST_RSA3072_SPHINCS_SHA256_128S_SIMPLE_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
 		{ "p256_oqsdefault", "P256_OQSDEFAULT", _PATH_HOST_P256_OQSDEFAULT_KEY_FILE },
 		{ "p256_dilithium2", "P256_DILITHIUM_2", _PATH_HOST_P256_DILITHIUM_2_KEY_FILE },
-		{ "p256_dilithium3", "P256_DILITHIUM_3", _PATH_HOST_P256_DILITHIUM_3_KEY_FILE },
-		{ "p384_dilithium4", "P384_DILITHIUM_4", _PATH_HOST_P384_DILITHIUM_4_KEY_FILE },
 		{ "p256_mqdss3148", "P256_MQDSS_31_48", _PATH_HOST_P256_MQDSS_31_48_KEY_FILE },
-		{ "p384_mqdss3164", "P384_MQDSS_31_64", _PATH_HOST_P384_MQDSS_31_64_KEY_FILE },
 		{ "p256_picnicl1fs", "P256_PICNIC_L1FS", _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE },
-		{ "p256_picnicl1ur", "P256_PICNIC_L1UR", _PATH_HOST_P256_PICNIC_L1UR_KEY_FILE },
-		{ "p384_picnicl3fs", "P384_PICNIC_L3FS", _PATH_HOST_P384_PICNIC_L3FS_KEY_FILE },
-		{ "p384_picnicl3ur", "P384_PICNIC_L3UR", _PATH_HOST_P384_PICNIC_L3UR_KEY_FILE },
-		{ "p521_picnicl5fs", "P521_PICNIC_L5FS", _PATH_HOST_P521_PICNIC_L5FS_KEY_FILE },
-		{ "p521_picnicl5ur", "P521_PICNIC_L5UR", _PATH_HOST_P521_PICNIC_L5UR_KEY_FILE },
-		{ "p256_picnic2l1fs", "P256_PICNIC2_L1FS", _PATH_HOST_P256_PICNIC2_L1FS_KEY_FILE },
-		{ "p384_picnic2l3fs", "P384_PICNIC2_L3FS", _PATH_HOST_P384_PICNIC2_L3FS_KEY_FILE },
 		{ "p256_qteslapi", "P256_QTESLA_P_I", _PATH_HOST_P256_QTESLA_P_I_KEY_FILE },
-		{ "p384_qteslapiii", "P384_QTESLA_P_III", _PATH_HOST_P384_QTESLA_P_III_KEY_FILE },
 		{ "p256_sphincsharaka128fsimple", "P256_SPHINCS_HARAKA_128F_SIMPLE", _PATH_HOST_P256_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE },
-		{ "p256_sphincsharaka128ssimple", "P256_SPHINCS_HARAKA_128S_SIMPLE", _PATH_HOST_P256_SPHINCS_HARAKA_128S_SIMPLE_KEY_FILE },
-		{ "p256_sphincssha256128fsimple", "P256_SPHINCS_SHA256_128F_SIMPLE", _PATH_HOST_P256_SPHINCS_SHA256_128F_SIMPLE_KEY_FILE },
-		{ "p256_sphincssha256128ssimple", "P256_SPHINCS_SHA256_128S_SIMPLE", _PATH_HOST_P256_SPHINCS_SHA256_128S_SIMPLE_KEY_FILE },
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_END
@@ -2934,41 +2850,13 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
                  _PATH_HOST_DILITHIUM_2_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_DILITHIUM_3_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_DILITHIUM_4_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
                  _PATH_HOST_MQDSS_31_48_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_MQDSS_31_64_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L1FS_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L1UR_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L3FS_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L3UR_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L5FS_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L5UR_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC2_L1FS_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC2_L3FS_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
                  _PATH_HOST_QTESLA_P_I_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_QTESLA_P_III_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
                  _PATH_HOST_SPHINCS_HARAKA_128F_SIMPLE_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_SPHINCS_HARAKA_128S_SIMPLE_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_SPHINCS_SHA256_128F_SIMPLE_KEY_FILE, rr_hostname);
-			n += do_print_resource_record(pw,
-                 _PATH_HOST_SPHINCS_SHA256_128S_SIMPLE_KEY_FILE, rr_hostname);
 ///// OQS_TEMPLATE_FRAGMENT_PRINT_PQ_RR_END
 
 			if (n == 0)

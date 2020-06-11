@@ -3,6 +3,7 @@ sigs:
     family: "OQSDEFAULT"
     variants:
       -
+        enable: true
         name: "OQSDEFAULT"
         oqs_meth: "OQS_SIG_alg_default"
         mix_with: [{'name':'rsa3072'},
@@ -11,16 +12,19 @@ sigs:
     family: "DILITHIUM"
     variants:
       -
+        enable: true
         name: "DILITHIUM_2"
         oqs_meth: "OQS_SIG_alg_dilithium_2"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "DILITHIUM_3"
         oqs_meth: "OQS_SIG_alg_dilithium_3"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "DILITHIUM_4"
         oqs_meth: "OQS_SIG_alg_dilithium_4"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
@@ -28,11 +32,13 @@ sigs:
     family: "MQDSS"
     variants:
       -
+        enable: true
         name: "MQDSS_31_48"
         oqs_meth: "OQS_SIG_alg_mqdss_31_48"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "MQDSS_31_64"
         oqs_meth: "OQS_SIG_alg_mqdss_31_64"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
@@ -40,37 +46,45 @@ sigs:
     family: "PICNIC"
     variants:
       -
+        enable: true
         name: "PICNIC_L1FS"
         oqs_meth: "OQS_SIG_alg_picnic_L1_FS"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "PICNIC_L1UR"
         oqs_meth: "OQS_SIG_alg_picnic_L1_UR"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "PICNIC_L3FS"
         oqs_meth: "OQS_SIG_alg_picnic_L3_FS"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
+        enable: false
         name: "PICNIC_L3UR"
         oqs_meth: "OQS_SIG_alg_picnic_L3_UR"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
+        enable: false
         name: "PICNIC_L5FS"
         oqs_meth: "OQS_SIG_alg_picnic_L5_FS"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
+        enable: false
         name: "PICNIC_L5UR"
         oqs_meth: "OQS_SIG_alg_picnic_L5_UR"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
+        enable: false
         name: "PICNIC2_L1FS"
         oqs_meth: "OQS_SIG_alg_picnic2_L1_FS"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "PICNIC2_L3FS"
         oqs_meth: "OQS_SIG_alg_picnic2_L3_FS"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
@@ -78,11 +92,13 @@ sigs:
     family: "QTESLA"
     variants:
       -
+        enable: true
         name: "QTESLA_P_I"
         oqs_meth: "OQS_SIG_alg_qTesla_p_I"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "QTESLA_P_III"
         oqs_meth: "OQS_SIG_alg_qTesla_p_III"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
@@ -90,21 +106,25 @@ sigs:
     family: "SPHINCS"
     variants:
       -
+        enable: true
         name: "SPHINCS_HARAKA_128F_SIMPLE"
         oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_simple"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "SPHINCS_HARAKA_128S_SIMPLE"
         oqs_meth: "OQS_SIG_alg_sphincs_haraka_128s_simple"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "SPHINCS_SHA256_128F_SIMPLE"
         oqs_meth: "OQS_SIG_alg_sphincs_sha256_128f_simple"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        enable: false
         name: "SPHINCS_SHA256_128S_SIMPLE"
         oqs_meth: "OQS_SIG_alg_sphincs_sha256_128s_simple"
         mix_with: [{'name':'rsa3072'},
@@ -144,7 +164,7 @@ kems:
         name: "FRODO_1344_AES"
         oqs_meth: "OQS_KEM_alg_frodokem_1344_aes"
       -
-        name: "FRODO_976_SHAKE"
+        name: "FRODO_1344_SHAKE"
         oqs_meth: "OQS_KEM_alg_frodokem_1344_shake"
   -
     family: "KYBER"
