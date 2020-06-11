@@ -13,18 +13,18 @@ version: 2
           useradd -g sshd -c 'sshd privsep' -d /var/empty -s /bin/false sshd
     - run:
         name: Clone liboqs
-        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/clone_liboqs.sh)
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs-test && scripts/clone_liboqs.sh)
     - run:
         name: Build liboqs
-        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/build_liboqs.sh)
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs-test && scripts/build_liboqs.sh)
     - run:
         name: Build OpenSSH
-        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && scripts/build_openssh.sh)
+        command: .circleci/git_no_checkin_in_last_day.sh || (cd oqs-test && scripts/build_openssh.sh)
     - run:
         name: Run unit tests
-        command: mkdir -p oqs_test/test-results && .circleci/git_no_checkin_in_last_day.sh || (cd oqs_test && python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml)
+        command: mkdir -p oqs-test/test-results && .circleci/git_no_checkin_in_last_day.sh || (cd oqs-test && python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml)
     - store_test_results: # Note that this command will fail when running CircleCI locally, that is expected behaviour
-        path: oqs_test/test-results
+        path: oqs-test/test-results
 
 jobs:
   # amd64-buster (Debian 10)
@@ -71,7 +71,7 @@ jobs:
       ARCH: x64
       WITH_OPENSSL: false
       WITH_PQAUTH: false
-      
+
 workflows:
   version: 2
   build:
@@ -88,7 +88,7 @@ workflows:
           cron: "0 2 * * *"
           filters:
             branches:
-              only: 
+              only:
                 - OQS-master
     jobs:
       - debian-buster-amd64-with-openssl-with-pqauth

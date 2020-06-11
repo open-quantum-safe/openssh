@@ -28,7 +28,7 @@ ssh-pkcs11-helper
 sshd
 !regress/misc/fuzz-harness/Makefile
 
-oqs_test/tmp
+oqs-test/tmp
 __pycache__
 tags
 *.swp
