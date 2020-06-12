@@ -77,7 +77,7 @@ ssh_msg_recv(int fd, struct sshbuf *m)
 		return (-1);
 	}
 	msg_len = get_u32(buf);
-	if (msg_len > 256 * 1024) {
+	if (msg_len > 1024 * 1024) { /* OQS note */
 		error("ssh_msg_recv: read: bad msg_len %u", msg_len);
 		return (-1);
 	}

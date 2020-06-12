@@ -22,9 +22,9 @@ version: 2
         command: .circleci/git_no_checkin_in_last_day.sh || (./oqs-scripts/build_openssh.sh)
     - run:
         name: Run unit tests
-        command: mkdir -p oqs-test/test-results && .circleci/git_no_checkin_in_last_day.sh || (python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml)
+        command: mkdir -p test-results && .circleci/git_no_checkin_in_last_day.sh || (python3 -m nose --rednose --verbose --with-xunit --xunit-file=test-results/nosetests.xml)
     - store_test_results: # Note that this command will fail when running CircleCI locally, that is expected behaviour
-        path: oqs-test/test-results
+        path: test-results
 
 jobs:
   # amd64-buster (Debian 10)

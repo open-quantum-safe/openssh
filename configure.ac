@@ -3700,101 +3700,17 @@ if test "x$with_liboqs" = "xyes" ; then
 	])
 
 
-	AC_MSG_CHECKING([for libOQS DILITHIUM support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_DILITHIUM) || (defined(OQS_ENABLE_SIG_dilithium_2))
-					#else
-					#error "DILITHIUM is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_DILITHIUM], [1], [Define to 1 if LibOQS library is compiled with support for DILITHIUM])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS FALCON support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_FALCON) || (defined(OQS_ENABLE_SIG_falcon_512) && defined(OQS_ENABLE_SIG_falcon_1024))
-					#else
-					#error "FALCON is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_FALCON], [1], [Define to 1 if LibOQS library is compiled with support for FALCON])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS MQDSS support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48))
-					#else
-					#error "MQDSS is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_MQDSS], [1], [Define to 1 if LibOQS library is compiled with support for MQDSS])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS PICNIC support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L5_FS))
-					#else
-					#error "PICNIC is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_PICNIC], [1], [Define to 1 if LibOQS library is compiled with support for PICNIC])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS QTESLA support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I))
-					#else
-					#error "QTESLA is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_QTESLA], [1], [Define to 1 if LibOQS library is compiled with support for QTESLA])
-			], [AC_MSG_RESULT([no])
-	])
-
 	AC_MSG_CHECKING([for libOQS RAINBOW support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_Ia_classic))
+					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_Ia_classic) && defined(OQS_ENABLE_SIG_rainbow_Ia_cyclic) && defined(OQS_ENABLE_SIG_rainbow_Ia_cyclic_compressed))
 					#else
 					#error "RAINBOW is not supported"
 					#endif
 			]])],
 			[ AC_MSG_RESULT([yes])
 				AC_DEFINE([HAVE_RAINBOW], [1], [Define to 1 if LibOQS library is compiled with support for RAINBOW])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS SPHINCS support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_SPHINCS) || (defined(OQS_ENABLE_SIG_sphincs_haraka_128f_robust))
-					#else
-					#error "SPHINCS is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_SPHINCS], [1], [Define to 1 if LibOQS library is compiled with support for SPHINCS])
 			], [AC_MSG_RESULT([no])
 	])
 ##### OQS_TEMPLATE_FRAGMENT_TEST_PQ_ALG_SUPPORT_END

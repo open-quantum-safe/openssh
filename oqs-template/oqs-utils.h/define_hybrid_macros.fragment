@@ -29,10 +29,10 @@
 
 #define IS_ECDSA_HYBRID(alg) ( \
 {%- for pq_alg in with_p256 %}
-				alg == KEY_P256_{{ pq_alg['name'] }} || \
+				alg == KEY_P256_{{ pq_alg['name'] }}{%- if not loop.last or with_p384 or with_p521 %} || \{% else %}){% endif %}
 {%- endfor -%}
 {%- for pq_alg in with_p384 %}
-				alg == KEY_P384_{{ pq_alg['name'] }} || \
+				alg == KEY_P384_{{ pq_alg['name'] }}{%- if not loop.last or with_p521 %} || \{% else %}){% endif %}
 {%- endfor %}
 {%- for pq_alg in with_p521 %}
 				alg == KEY_P521_{{ pq_alg['name'] }}{%- if not loop.last %} || \{% else %}){% endif %}

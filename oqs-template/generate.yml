@@ -1,5 +1,7 @@
 sigs:
   -
+    # TODO: At the moment this should
+    # always be enabled to avoid build errors.
     family: "OQSDEFAULT"
     variants:
       -
@@ -12,7 +14,7 @@ sigs:
     family: "DILITHIUM"
     variants:
       -
-        enable: true
+        enable: false
         name: "DILITHIUM_2"
         oqs_meth: "OQS_SIG_alg_dilithium_2"
         mix_with: [{'name':'rsa3072'},
@@ -32,13 +34,13 @@ sigs:
     family: "FALCON"
     variants:
       -
-        enable: true
+        enable: false
         name: "FALCON_512"
         oqs_meth: "OQS_SIG_alg_falcon_512"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        enable: true
+        enable: false
         name: "FALCON_1024"
         oqs_meth: "OQS_SIG_alg_falcon_1024"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
@@ -46,7 +48,7 @@ sigs:
     family: "MQDSS"
     variants:
       -
-        enable: true
+        enable: false
         name: "MQDSS_31_48"
         oqs_meth: "OQS_SIG_alg_mqdss_31_48"
         mix_with: [{'name':'rsa3072'},
@@ -60,7 +62,7 @@ sigs:
     family: "PICNIC"
     variants:
       -
-        enable: true
+        enable: false
         name: "PICNIC_L1FS"
         oqs_meth: "OQS_SIG_alg_picnic_L1_FS"
         mix_with: [{'name':'rsa3072'},
@@ -103,7 +105,7 @@ sigs:
         oqs_meth: "OQS_SIG_alg_picnic2_L3_FS"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
-        enable: true
+        enable: false
         name: "PICNIC2_L5FS"
         oqs_meth: "OQS_SIG_alg_picnic2_L5_FS"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
@@ -111,7 +113,7 @@ sigs:
     family: "QTESLA"
     variants:
       -
-        enable: true
+        enable: false
         name: "QTESLA_P_I"
         oqs_meth: "OQS_SIG_alg_qTesla_p_I"
         mix_with: [{'name':'rsa3072'},
@@ -130,11 +132,38 @@ sigs:
         oqs_meth: "OQS_SIG_alg_rainbow_Ia_classic"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: true
+        name: "RAINBOW_IA_CYCLIC"
+        oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: true
+        name: "RAINBOW_IA_CYCLIC_COMPRESSED"
+        oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic_compressed"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
+        enable: false
+        name: "RAINBOW_IIIC_CLASSIC"
+        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_classic"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: false
+        name: "RAINBOW_IIIC_CYCLIC"
+        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        enable: false
+        name: "RAINBOW_IIIC_CYCLIC_COMPRESSED"
+        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic_compressed"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
     family: "SPHINCS"
     variants:
       -
-        enable: true
+        enable: false
         name: "SPHINCS_HARAKA_128F_ROBUST"
         oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_robust"
         mix_with: [{'name':'rsa3072'},

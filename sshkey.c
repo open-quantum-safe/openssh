@@ -128,37 +128,21 @@ static const struct keytype keytypes[] = {
 #ifdef WITH_PQ_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_START
 	{ "ssh-oqsdefault", "OQSDEFAULT", NULL, KEY_OQSDEFAULT, 0, 0, 0 },
-	{ "ssh-dilithium2", "DILITHIUM2", NULL, KEY_DILITHIUM_2, 0, 0, 0 },
-	{ "ssh-falcon512", "FALCON512", NULL, KEY_FALCON_512, 0, 0, 0 },
-	{ "ssh-falcon1024", "FALCON1024", NULL, KEY_FALCON_1024, 0, 0, 0 },
-	{ "ssh-mqdss3148", "MQDSS3148", NULL, KEY_MQDSS_31_48, 0, 0, 0 },
-	{ "ssh-picnicl1fs", "PICNICL1FS", NULL, KEY_PICNIC_L1FS, 0, 0, 0 },
-	{ "ssh-picnic2l5fs", "PICNIC2L5FS", NULL, KEY_PICNIC2_L5FS, 0, 0, 0 },
-	{ "ssh-qteslapi", "QTESLAPI", NULL, KEY_QTESLA_P_I, 0, 0, 0 },
 	{ "ssh-rainbowiaclassic", "RAINBOWIACLASSIC", NULL, KEY_RAINBOW_IA_CLASSIC, 0, 0, 0 },
-	{ "ssh-sphincsharaka128frobust", "SPHINCSHARAKA128FROBUST", NULL, KEY_SPHINCS_HARAKA_128F_ROBUST, 0, 0, 0 },
+	{ "ssh-rainbowiacyclic", "RAINBOWIACYCLIC", NULL, KEY_RAINBOW_IA_CYCLIC, 0, 0, 0 },
+	{ "ssh-rainbowiacycliccompressed", "RAINBOWIACYCLICCOMPRESSED", NULL, KEY_RAINBOW_IA_CYCLIC_COMPRESSED, 0, 0, 0 },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_START
 	{ "ssh-rsa3072-oqsdefault", "RSA3072_OQSDEFAULT", NULL, KEY_RSA3072_OQSDEFAULT, 0, 0, 0 },
 	{ "ssh-p256-oqsdefault", "P256_OQSDEFAULT", NULL, KEY_P256_OQSDEFAULT, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL, KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
-	{ "ssh-p256-dilithium2", "P256_DILITHIUM2", NULL, KEY_P256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-rsa3072-falcon512", "RSA3072_FALCON512", NULL, KEY_RSA3072_FALCON_512, 0, 0, 0 },
-	{ "ssh-p256-falcon512", "P256_FALCON512", NULL, KEY_P256_FALCON_512, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-p521-falcon1024", "P521_FALCON1024", NULL, KEY_P521_FALCON_1024, NID_secp521r1, 0, 0 },
-	{ "ssh-rsa3072-mqdss3148", "RSA3072_MQDSS3148", NULL, KEY_RSA3072_MQDSS_31_48, 0, 0, 0 },
-	{ "ssh-p256-mqdss3148", "P256_MQDSS3148", NULL, KEY_P256_MQDSS_31_48, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-rsa3072-picnicl1fs", "RSA3072_PICNICL1FS", NULL, KEY_RSA3072_PICNIC_L1FS, 0, 0, 0 },
-	{ "ssh-p256-picnicl1fs", "P256_PICNICL1FS", NULL, KEY_P256_PICNIC_L1FS, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-p521-picnic2l5fs", "P521_PICNIC2L5FS", NULL, KEY_P521_PICNIC2_L5FS, NID_secp521r1, 0, 0 },
-	{ "ssh-rsa3072-qteslapi", "RSA3072_QTESLAPI", NULL, KEY_RSA3072_QTESLA_P_I, 0, 0, 0 },
-	{ "ssh-p256-qteslapi", "P256_QTESLAPI", NULL, KEY_P256_QTESLA_P_I, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-rsa3072-rainbowiaclassic", "RSA3072_RAINBOWIACLASSIC", NULL, KEY_RSA3072_RAINBOW_IA_CLASSIC, 0, 0, 0 },
 	{ "ssh-p256-rainbowiaclassic", "P256_RAINBOWIACLASSIC", NULL, KEY_P256_RAINBOW_IA_CLASSIC, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-rsa3072-sphincsharaka128frobust", "RSA3072_SPHINCSHARAKA128FROBUST", NULL, KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST, 0, 0, 0 },
-	{ "ssh-p256-sphincsharaka128frobust", "P256_SPHINCSHARAKA128FROBUST", NULL, KEY_P256_SPHINCS_HARAKA_128F_ROBUST, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-rainbowiacyclic", "RSA3072_RAINBOWIACYCLIC", NULL, KEY_RSA3072_RAINBOW_IA_CYCLIC, 0, 0, 0 },
+	{ "ssh-p256-rainbowiacyclic", "P256_RAINBOWIACYCLIC", NULL, KEY_P256_RAINBOW_IA_CYCLIC, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-rsa3072-rainbowiacycliccompressed", "RSA3072_RAINBOWIACYCLICCOMPRESSED", NULL, KEY_RSA3072_RAINBOW_IA_CYCLIC_COMPRESSED, 0, 0, 0 },
+	{ "ssh-p256-rainbowiacycliccompressed", "P256_RAINBOWIACYCLICCOMPRESSED", NULL, KEY_P256_RAINBOW_IA_CYCLIC_COMPRESSED, NID_X9_62_prime256v1, 0, 0 },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_END
 #endif /* WITH_HYBRID_AUTH */
 #ifdef WITH_OPENSSL
@@ -4062,15 +4046,31 @@ sshkey_private_to_blob2(const struct sshkey *prv, struct sshbuf *blob,
 	sshbuf_reset(blob);
 	if ((r = sshbuf_put(blob, MARK_BEGIN, MARK_BEGIN_LEN)) != 0)
 		goto out;
-	for (i = 0; i < strlen(b64); i++) {
+	size_t b64_len = strlen(b64);
+	char *b64_ptr = b64;
+
+    while(b64_len >= 70) {
+		if ((r = sshbuf_put(blob, b64_ptr, 70)) != 0)
+			goto out;
+		b64_ptr += 70;
+        b64_len -= 70;
+		if ((r = sshbuf_put_u8(blob, '\n')) != 0)
+			goto out;
+    }
+	/* OQS note */
+	if (b64_len > 0 && (r = sshbuf_put(blob, b64_ptr, b64_len)) != 0) {
+		goto out;
+	}
+	if (b64_len > 0 && (r = sshbuf_put_u8(blob, '\n')) != 0)
+		goto out;
+/*	for (i = 0; i < strlen(b64); i++) {
 		if ((r = sshbuf_put_u8(blob, b64[i])) != 0)
 			goto out;
-		/* insert line breaks */
 		if (i % 70 == 69 && (r = sshbuf_put_u8(blob, '\n')) != 0)
 			goto out;
 	}
 	if (i % 70 != 69 && (r = sshbuf_put_u8(blob, '\n')) != 0)
-		goto out;
+		goto out;*/
 	if ((r = sshbuf_put(blob, MARK_END, MARK_END_LEN)) != 0)
 		goto out;
 

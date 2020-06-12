@@ -24,10 +24,10 @@
 
 #define CASE_KEY_ECDSA_HYBRID \
 {%- for pq_alg in with_p256 %}
-	case KEY_P256_{{ pq_alg['name'] }}: \
+	case KEY_P256_{{ pq_alg['name'] }}{%- if not loop.last or with_p384 or with_p521 %}: \ {%-endif %}
 {%- endfor %}
 {%- for pq_alg in with_p384 %}
-	case KEY_P384_{{ pq_alg['name'] }}: \
+	case KEY_P384_{{ pq_alg['name'] }}{%- if not loop.last or with_p521 %}: \{% endif %}
 {%- endfor %}
 {%- for pq_alg in with_p521 %}
 	case KEY_P521_{{ pq_alg['name'] }}{%- if not loop.last %}: \{% endif %}

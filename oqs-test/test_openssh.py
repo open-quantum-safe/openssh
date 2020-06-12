@@ -9,9 +9,9 @@ if 'WITH_PQAUTH' in os.environ and os.environ['WITH_PQAUTH'] == 'true':
     sig_algs += [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START
     # post-quantum only sigs
-    'ssh-oqsdefault','ssh-dilithium2','ssh-falcon512','ssh-falcon1024','ssh-mqdss3148','ssh-picnicl1fs','ssh-qteslapi','ssh-sphincsharaka128fsimple',
+    'ssh-oqsdefault','ssh-rainbowiaclassic','ssh-rainbowiacyclic','ssh-rainbowiacycliccompressed',
     # hybrid sigs
-    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-rsa3072-dilithium2','ssh-p256-dilithium2','ssh-rsa3072-falcon512','ssh-p256-falcon512','ssh-p521-falcon1024','ssh-rsa3072-mqdss3148','ssh-p256-mqdss3148','ssh-rsa3072-picnicl1fs','ssh-p256-picnicl1fs','ssh-rsa3072-qteslapi','ssh-p256-qteslapi','ssh-rsa3072-sphincsharaka128fsimple','ssh-p256-sphincsharaka128fsimple',
+    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-rsa3072-rainbowiaclassic','ssh-p256-rainbowiaclassic','ssh-rsa3072-rainbowiacyclic','ssh-p256-rainbowiacyclic','ssh-rsa3072-rainbowiacycliccompressed','ssh-p256-rainbowiacycliccompressed',
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END
 ]
 

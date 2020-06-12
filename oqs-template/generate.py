@@ -45,6 +45,7 @@ def load_config():
     config = yaml.safe_load(config)
     for sig in config['sigs']:
         sig['variants'] = [variant for variant in sig['variants'] if variant['enable']]
+    config['sigs'] = [sig for sig in config['sigs'] if sig['variants']]
     return config
 
 config = load_config()
@@ -75,5 +76,5 @@ populate('sshconnect.c', config, '/////')
 populate('sshkey.c', config, '/////')
 populate('sshkey.h', config, '/////')
 
-# update test suite and README
+# update test suite
 populate('oqs-test/test_openssh.py', config, '#####')
