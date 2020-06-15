@@ -151,7 +151,7 @@ mm_request_receive(int sock, struct sshbuf *m)
 		fatal("%s: read: %s", __func__, strerror(errno));
 	}
 	msg_len = PEEK_U32(buf);
-	if (msg_len > 1024 * 1024) /* OQS note */
+	if (msg_len > 65536 * 1024) /* OQS note */
 		fatal("%s: read: bad msg_len %d", __func__, msg_len);
 	sshbuf_reset(m);
 	if ((r = sshbuf_reserve(m, msg_len, &p)) != 0)

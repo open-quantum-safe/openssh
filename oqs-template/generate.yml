@@ -127,35 +127,35 @@ sigs:
     family: "RAINBOW"
     variants:
       -
-        enable: true
+        enable: false
         name: "RAINBOW_IA_CLASSIC"
         oqs_meth: "OQS_SIG_alg_rainbow_Ia_classic"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        enable: true
+        enable: false
         name: "RAINBOW_IA_CYCLIC"
         oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        enable: true
+        enable: false
         name: "RAINBOW_IA_CYCLIC_COMPRESSED"
         oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic_compressed"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        enable: false
+        enable: true
         name: "RAINBOW_IIIC_CLASSIC"
         oqs_meth: "OQS_SIG_alg_rainbow_IIIc_classic"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
-        enable: false
+        enable: true
         name: "RAINBOW_IIIC_CYCLIC"
         oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
-        enable: false
+        enable: true
         name: "RAINBOW_IIIC_CYCLIC_COMPRESSED"
         oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic_compressed"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]

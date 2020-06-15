@@ -34,13 +34,14 @@ ${PREFIX}/sbin/sshd -q -p ${PORT} -d \
   -h "${PREFIX}/ssh_server/id_${SIGALG}" \
   >> ${PREFIX}/server_log.txt 2>&1 &
 
-sleep 1
+sleep 5
 
 SERVER_PID=$!
 
 ${PREFIX}/bin/ssh \
   -p ${PORT} 127.0.0.1 \
   -F ${PREFIX}/ssh_config \
+  -o "UserKnownHostsFile /dev/null" \
   -o "KexAlgorithms=${KEXALG}" \
   -o "HostKeyAlgorithms=${SIGALG}" \
   -o "PubkeyAcceptedKeyTypes=${SIGALG}" \

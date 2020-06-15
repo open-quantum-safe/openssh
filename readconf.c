@@ -2029,21 +2029,18 @@ fill_default_options(Options * options)
 #ifdef WITH_PQ_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_ID_FILES_START
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_OQSDEFAULT, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IA_CLASSIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IA_CYCLIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IA_CYCLIC_COMPRESSED, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC_COMPRESSED, 0);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_ID_FILES_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_ID_FILES_START
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_OQSDEFAULT, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_OQSDEFAULT, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_RAINBOW_IA_CLASSIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_RAINBOW_IA_CLASSIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_RAINBOW_IA_CYCLIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_RAINBOW_IA_CYCLIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_RAINBOW_IA_CYCLIC_COMPRESSED, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_RAINBOW_IA_CYCLIC_COMPRESSED, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CLASSIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CYCLIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED, 0);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_ID_FILES_END
 #endif /* WITH_HYBRID_AUTH */
 	}

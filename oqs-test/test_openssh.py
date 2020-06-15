@@ -3,15 +3,15 @@ import os
 import sys
 import time
 
-sig_algs = ['ssh-ed25519']
+sig_algs = []
 if 'WITH_PQAUTH' in os.environ and os.environ['WITH_PQAUTH'] == 'true':
     # post-quantum
     sig_algs += [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START
     # post-quantum only sigs
-    'ssh-oqsdefault','ssh-rainbowiaclassic','ssh-rainbowiacyclic','ssh-rainbowiacycliccompressed',
+    'ssh-rainbowiiicclassic','ssh-rainbowiiiccyclic','ssh-rainbowiiiccycliccompressed',
     # hybrid sigs
-    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-rsa3072-rainbowiaclassic','ssh-p256-rainbowiaclassic','ssh-rsa3072-rainbowiacyclic','ssh-p256-rainbowiacyclic','ssh-rsa3072-rainbowiacycliccompressed','ssh-p256-rainbowiacycliccompressed',
+    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-p384-rainbowiiicclassic','ssh-p384-rainbowiiiccyclic','ssh-p384-rainbowiiiccycliccompressed',
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END
 ]
 

@@ -23,18 +23,15 @@ const char* get_oqs_alg_name(int openssh_type)
 		case KEY_RSA3072_OQSDEFAULT:
 		case KEY_P256_OQSDEFAULT:
 			return OQS_SIG_alg_default;
-		case KEY_RAINBOW_IA_CLASSIC:
-		case KEY_RSA3072_RAINBOW_IA_CLASSIC:
-		case KEY_P256_RAINBOW_IA_CLASSIC:
-			return OQS_SIG_alg_rainbow_Ia_classic;
-		case KEY_RAINBOW_IA_CYCLIC:
-		case KEY_RSA3072_RAINBOW_IA_CYCLIC:
-		case KEY_P256_RAINBOW_IA_CYCLIC:
-			return OQS_SIG_alg_rainbow_Ia_cyclic;
-		case KEY_RAINBOW_IA_CYCLIC_COMPRESSED:
-		case KEY_RSA3072_RAINBOW_IA_CYCLIC_COMPRESSED:
-		case KEY_P256_RAINBOW_IA_CYCLIC_COMPRESSED:
-			return OQS_SIG_alg_rainbow_Ia_cyclic_compressed;
+		case KEY_RAINBOW_IIIC_CLASSIC:
+		case KEY_P384_RAINBOW_IIIC_CLASSIC:
+			return OQS_SIG_alg_rainbow_IIIc_classic;
+		case KEY_RAINBOW_IIIC_CYCLIC:
+		case KEY_P384_RAINBOW_IIIC_CYCLIC:
+			return OQS_SIG_alg_rainbow_IIIc_cyclic;
+		case KEY_RAINBOW_IIIC_CYCLIC_COMPRESSED:
+		case KEY_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED:
+			return OQS_SIG_alg_rainbow_IIIc_cyclic_compressed;
 ///// OQS_TEMPLATE_FRAGMENT_OSSH_KT_TO_OQS_METH_END
 		default:
 			return NULL;
