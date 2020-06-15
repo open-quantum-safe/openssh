@@ -2029,18 +2029,43 @@ fill_default_options(Options * options)
 #ifdef WITH_PQ_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_ID_FILES_START
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_OQSDEFAULT, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_FALCON_512, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_MQDSS_31_48, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC_L1UR, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_QTESLA_P_I, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IA_CLASSIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_VC_CLASSIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC_COMPRESSED, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_SPHINCS_HARAKA_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_SPHINCS_SHA256_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_SPHINCS_SHAKE256_128F_ROBUST, 0);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_ID_FILES_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_ID_FILES_START
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_OQSDEFAULT, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_OQSDEFAULT, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_DILITHIUM_2, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_FALCON_512, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_FALCON_512, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_MQDSS_31_48, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_MQDSS_31_48, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC_L1UR, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC_L1UR, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_QTESLA_P_I, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_QTESLA_P_I, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_RAINBOW_IA_CLASSIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_RAINBOW_IA_CLASSIC, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CLASSIC, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CLASSIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CYCLIC, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CYCLIC_COMPRESSED, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_SPHINCS_HARAKA_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_SPHINCS_HARAKA_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_SPHINCS_SHA256_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_SPHINCS_SHA256_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_SPHINCS_SHAKE256_128F_ROBUST, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_SPHINCS_SHAKE256_128F_ROBUST, 0);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_ID_FILES_END
 #endif /* WITH_HYBRID_AUTH */
 	}

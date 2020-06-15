@@ -239,11 +239,10 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 	if (name == NULL && IS_ECDSA_HYBRID(type)) {
 		switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_START
+		case KEY_P384_RAINBOW_IIIC_CLASSIC:
 			*bitsp = 384;
 			break;
 		case KEY_P521_RAINBOW_VC_CLASSIC:
-		case KEY_P521_RAINBOW_VC_CYCLIC:
-		case KEY_P521_RAINBOW_VC_CYCLIC_COMPRESSED:
 			*bitsp = 521;
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
 		}
@@ -311,14 +310,38 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_OQSDEFAULT:
 			name = _PATH_SSH_CLIENT_ID_OQSDEFAULT;
 			break;
+		case KEY_DILITHIUM_2:
+			name = _PATH_SSH_CLIENT_ID_DILITHIUM_2;
+			break;
+		case KEY_FALCON_512:
+			name = _PATH_SSH_CLIENT_ID_FALCON_512;
+			break;
+		case KEY_MQDSS_31_48:
+			name = _PATH_SSH_CLIENT_ID_MQDSS_31_48;
+			break;
+		case KEY_PICNIC_L1UR:
+			name = _PATH_SSH_CLIENT_ID_PICNIC_L1UR;
+			break;
+		case KEY_QTESLA_P_I:
+			name = _PATH_SSH_CLIENT_ID_QTESLA_P_I;
+			break;
+		case KEY_RAINBOW_IA_CLASSIC:
+			name = _PATH_SSH_CLIENT_ID_RAINBOW_IA_CLASSIC;
+			break;
+		case KEY_RAINBOW_IIIC_CLASSIC:
+			name = _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC;
+			break;
 		case KEY_RAINBOW_VC_CLASSIC:
 			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CLASSIC;
 			break;
-		case KEY_RAINBOW_VC_CYCLIC:
-			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC;
+		case KEY_SPHINCS_HARAKA_128F_ROBUST:
+			name = _PATH_SSH_CLIENT_ID_SPHINCS_HARAKA_128F_ROBUST;
 			break;
-		case KEY_RAINBOW_VC_CYCLIC_COMPRESSED:
-			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC_COMPRESSED;
+		case KEY_SPHINCS_SHA256_128F_ROBUST:
+			name = _PATH_SSH_CLIENT_ID_SPHINCS_SHA256_128F_ROBUST;
+			break;
+		case KEY_SPHINCS_SHAKE256_128F_ROBUST:
+			name = _PATH_SSH_CLIENT_ID_SPHINCS_SHAKE256_128F_ROBUST;
 			break;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_PQ_ID_PATHS_END
 		default:
@@ -1056,20 +1079,45 @@ do_gen_all_hostkeys(struct passwd *pw)
 #ifdef WITH_PQ_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_START
 		{ "oqsdefault", "OQSDEFAULT", _PATH_HOST_OQSDEFAULT_KEY_FILE },
+		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
+		{ "falcon512", "FALCON_512", _PATH_HOST_FALCON_512_KEY_FILE },
+		{ "mqdss3148", "MQDSS_31_48", _PATH_HOST_MQDSS_31_48_KEY_FILE },
+		{ "picnicl1ur", "PICNIC_L1UR", _PATH_HOST_PICNIC_L1UR_KEY_FILE },
+		{ "qteslapi", "QTESLA_P_I", _PATH_HOST_QTESLA_P_I_KEY_FILE },
+		{ "rainbowiaclassic", "RAINBOW_IA_CLASSIC", _PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE },
+		{ "rainbowiiicclassic", "RAINBOW_IIIC_CLASSIC", _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE },
 		{ "rainbowvcclassic", "RAINBOW_VC_CLASSIC", _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE },
-		{ "rainbowvccyclic", "RAINBOW_VC_CYCLIC", _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE },
-		{ "rainbowvccycliccompressed", "RAINBOW_VC_CYCLIC_COMPRESSED", _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE },
+		{ "sphincsharaka128frobust", "SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
+		{ "sphincssha256128frobust", "SPHINCS_SHA256_128F_ROBUST", _PATH_HOST_SPHINCS_SHA256_128F_ROBUST_KEY_FILE },
+		{ "sphincsshake256128frobust", "SPHINCS_SHAKE256_128F_ROBUST", _PATH_HOST_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_START
 #ifdef WITH_OPENSSL
 		{ "rsa3072_oqsdefault", "RSA3072_OQSDEFAULT", _PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE },
+		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
+		{ "rsa3072_falcon512", "RSA3072_FALCON_512", _PATH_HOST_RSA3072_FALCON_512_KEY_FILE },
+		{ "rsa3072_mqdss3148", "RSA3072_MQDSS_31_48", _PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE },
+		{ "rsa3072_picnicl1ur", "RSA3072_PICNIC_L1UR", _PATH_HOST_RSA3072_PICNIC_L1UR_KEY_FILE },
+		{ "rsa3072_qteslapi", "RSA3072_QTESLA_P_I", _PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE },
+		{ "rsa3072_rainbowiaclassic", "RSA3072_RAINBOW_IA_CLASSIC", _PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE },
+		{ "rsa3072_sphincsharaka128frobust", "RSA3072_SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
+		{ "rsa3072_sphincssha256128frobust", "RSA3072_SPHINCS_SHA256_128F_ROBUST", _PATH_HOST_RSA3072_SPHINCS_SHA256_128F_ROBUST_KEY_FILE },
+		{ "rsa3072_sphincsshake256128frobust", "RSA3072_SPHINCS_SHAKE256_128F_ROBUST", _PATH_HOST_RSA3072_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
 		{ "p256_oqsdefault", "P256_OQSDEFAULT", _PATH_HOST_P256_OQSDEFAULT_KEY_FILE },
+		{ "p256_dilithium2", "P256_DILITHIUM_2", _PATH_HOST_P256_DILITHIUM_2_KEY_FILE },
+		{ "p256_falcon512", "P256_FALCON_512", _PATH_HOST_P256_FALCON_512_KEY_FILE },
+		{ "p256_mqdss3148", "P256_MQDSS_31_48", _PATH_HOST_P256_MQDSS_31_48_KEY_FILE },
+		{ "p256_picnicl1ur", "P256_PICNIC_L1UR", _PATH_HOST_P256_PICNIC_L1UR_KEY_FILE },
+		{ "p256_qteslapi", "P256_QTESLA_P_I", _PATH_HOST_P256_QTESLA_P_I_KEY_FILE },
+		{ "p256_rainbowiaclassic", "P256_RAINBOW_IA_CLASSIC", _PATH_HOST_P256_RAINBOW_IA_CLASSIC_KEY_FILE },
+		{ "p384_rainbowiiicclassic", "P384_RAINBOW_IIIC_CLASSIC", _PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE },
 		{ "p521_rainbowvcclassic", "P521_RAINBOW_VC_CLASSIC", _PATH_HOST_P521_RAINBOW_VC_CLASSIC_KEY_FILE },
-		{ "p521_rainbowvccyclic", "P521_RAINBOW_VC_CYCLIC", _PATH_HOST_P521_RAINBOW_VC_CYCLIC_KEY_FILE },
-		{ "p521_rainbowvccycliccompressed", "P521_RAINBOW_VC_CYCLIC_COMPRESSED", _PATH_HOST_P521_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE },
+		{ "p256_sphincsharaka128frobust", "P256_SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_P256_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
+		{ "p256_sphincssha256128frobust", "P256_SPHINCS_SHA256_128F_ROBUST", _PATH_HOST_P256_SPHINCS_SHA256_128F_ROBUST_KEY_FILE },
+		{ "p256_sphincsshake256128frobust", "P256_SPHINCS_SHAKE256_128F_ROBUST", _PATH_HOST_P256_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE },
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_END
@@ -2836,11 +2884,27 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
                  _PATH_HOST_OQSDEFAULT_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
+                 _PATH_HOST_DILITHIUM_2_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_FALCON_512_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_MQDSS_31_48_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_PICNIC_L1UR_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_QTESLA_P_I_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
                  _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE, rr_hostname);
+                 _PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE, rr_hostname);
+                 _PATH_HOST_SPHINCS_SHA256_128F_ROBUST_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE, rr_hostname);
 ///// OQS_TEMPLATE_FRAGMENT_PRINT_PQ_RR_END
 
 			if (n == 0)

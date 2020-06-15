@@ -284,11 +284,27 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_OQSDEFAULT_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_DILITHIUM_2_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_FALCON_512_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_MQDSS_31_48_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_PICNIC_L1UR_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_QTESLA_P_I_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE);
+		    _PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE);
+		    _PATH_HOST_SPHINCS_SHA256_128F_ROBUST_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_HOSTKEYS_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -298,11 +314,45 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P256_OQSDEFAULT_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_DILITHIUM_2_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_FALCON_512_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_FALCON_512_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_MQDSS_31_48_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_PICNIC_L1UR_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_PICNIC_L1UR_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_QTESLA_P_I_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_RAINBOW_IA_CLASSIC_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P521_RAINBOW_VC_CLASSIC_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P521_RAINBOW_VC_CYCLIC_KEY_FILE);
+		    _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P521_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE);
+		    _PATH_HOST_P256_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_SPHINCS_SHA256_128F_ROBUST_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_SPHINCS_SHA256_128F_ROBUST_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE);
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_HOSTKEYS_END
 #endif /* WITH_HYBRID_AUTH */
 	}
