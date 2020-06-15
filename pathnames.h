@@ -43,14 +43,14 @@
 #define _PATH_HOST_RSA_KEY_FILE		SSHDIR "/ssh_host_rsa_key"
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_KEY_FILES_START
 #define _PATH_HOST_OQSDEFAULT_KEY_FILE SSHDIR "/ssh_host_oqsdefault_key"
-#define _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE SSHDIR "/ssh_host_rainbowiiicclassic_key"
-#define _PATH_HOST_RAINBOW_IIIC_CYCLIC_KEY_FILE SSHDIR "/ssh_host_rainbowiiiccyclic_key"
-#define _PATH_HOST_RAINBOW_IIIC_CYCLIC_COMPRESSED_KEY_FILE SSHDIR "/ssh_host_rainbowiiiccycliccompressed_key"
+#define _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE SSHDIR "/ssh_host_rainbowvcclassic_key"
+#define _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE SSHDIR "/ssh_host_rainbowvccyclic_key"
+#define _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE SSHDIR "/ssh_host_rainbowvccycliccompressed_key"
 #define _PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE SSHDIR "/ssh_host_rsa3072_oqsdefault_key"
 #define _PATH_HOST_P256_OQSDEFAULT_KEY_FILE SSHDIR "/ssh_host_p256_oqsdefault_key"
-#define _PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE SSHDIR "/ssh_host_p384_rainbowiiicclassic_key"
-#define _PATH_HOST_P384_RAINBOW_IIIC_CYCLIC_KEY_FILE SSHDIR "/ssh_host_p384_rainbowiiiccyclic_key"
-#define _PATH_HOST_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED_KEY_FILE SSHDIR "/ssh_host_p384_rainbowiiiccycliccompressed_key"
+#define _PATH_HOST_P521_RAINBOW_VC_CLASSIC_KEY_FILE SSHDIR "/ssh_host_p521_rainbowvcclassic_key"
+#define _PATH_HOST_P521_RAINBOW_VC_CYCLIC_KEY_FILE SSHDIR "/ssh_host_p521_rainbowvccyclic_key"
+#define _PATH_HOST_P521_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE SSHDIR "/ssh_host_p521_rainbowvccycliccompressed_key"
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_KEY_FILES_END
 #define _PATH_DH_MODULI			SSHDIR "/moduli"
 
@@ -90,14 +90,14 @@
 #define _PATH_SSH_CLIENT_ID_XMSS	_PATH_SSH_USER_DIR "/id_xmss"
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_ID_FILES_START
 #define _PATH_SSH_CLIENT_ID_OQSDEFAULT _PATH_SSH_USER_DIR "/id_oqsdefault"
-#define _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC _PATH_SSH_USER_DIR "/id_rainbowiiicclassic"
-#define _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC _PATH_SSH_USER_DIR "/id_rainbowiiiccyclic"
-#define _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC_COMPRESSED _PATH_SSH_USER_DIR "/id_rainbowiiiccycliccompressed"
+#define _PATH_SSH_CLIENT_ID_RAINBOW_VC_CLASSIC _PATH_SSH_USER_DIR "/id_rainbowvcclassic"
+#define _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC _PATH_SSH_USER_DIR "/id_rainbowvccyclic"
+#define _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC_COMPRESSED _PATH_SSH_USER_DIR "/id_rainbowvccycliccompressed"
 #define _PATH_SSH_CLIENT_ID_RSA3072_OQSDEFAULT _PATH_SSH_USER_DIR "/id_rsa3072_oqsdefault"
 #define _PATH_SSH_CLIENT_ID_P256_OQSDEFAULT _PATH_SSH_USER_DIR "/id_p256_oqsdefault"
-#define _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CLASSIC _PATH_SSH_USER_DIR "/id_p384_rainbowiiicclassic"
-#define _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CYCLIC _PATH_SSH_USER_DIR "/id_p384_rainbowiiiccyclic"
-#define _PATH_SSH_CLIENT_ID_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED _PATH_SSH_USER_DIR "/id_p384_rainbowiiiccycliccompressed"
+#define _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CLASSIC _PATH_SSH_USER_DIR "/id_p521_rainbowvcclassic"
+#define _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CYCLIC _PATH_SSH_USER_DIR "/id_p521_rainbowvccyclic"
+#define _PATH_SSH_CLIENT_ID_P521_RAINBOW_VC_CYCLIC_COMPRESSED _PATH_SSH_USER_DIR "/id_p521_rainbowvccycliccompressed"
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_OQS_ID_FILES_END
 
 /*

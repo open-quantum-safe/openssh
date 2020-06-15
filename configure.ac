@@ -3704,7 +3704,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_IIIc_classic) && defined(OQS_ENABLE_SIG_rainbow_IIIc_cyclic) && defined(OQS_ENABLE_SIG_rainbow_IIIc_cyclic_compressed))
+					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_Vc_classic) && defined(OQS_ENABLE_SIG_rainbow_Vc_cyclic) && defined(OQS_ENABLE_SIG_rainbow_Vc_cyclic_compressed))
 					#else
 					#error "RAINBOW is not supported"
 					#endif

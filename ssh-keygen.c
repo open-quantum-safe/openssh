@@ -239,11 +239,11 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 	if (name == NULL && IS_ECDSA_HYBRID(type)) {
 		switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_START
-		case KEY_P384_RAINBOW_IIIC_CLASSIC:
-		case KEY_P384_RAINBOW_IIIC_CYCLIC:
-		case KEY_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED:
 			*bitsp = 384;
 			break;
+		case KEY_P521_RAINBOW_VC_CLASSIC:
+		case KEY_P521_RAINBOW_VC_CYCLIC:
+		case KEY_P521_RAINBOW_VC_CYCLIC_COMPRESSED:
 			*bitsp = 521;
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
 		}
@@ -311,14 +311,14 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_OQSDEFAULT:
 			name = _PATH_SSH_CLIENT_ID_OQSDEFAULT;
 			break;
-		case KEY_RAINBOW_IIIC_CLASSIC:
-			name = _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC;
+		case KEY_RAINBOW_VC_CLASSIC:
+			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CLASSIC;
 			break;
-		case KEY_RAINBOW_IIIC_CYCLIC:
-			name = _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC;
+		case KEY_RAINBOW_VC_CYCLIC:
+			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC;
 			break;
-		case KEY_RAINBOW_IIIC_CYCLIC_COMPRESSED:
-			name = _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CYCLIC_COMPRESSED;
+		case KEY_RAINBOW_VC_CYCLIC_COMPRESSED:
+			name = _PATH_SSH_CLIENT_ID_RAINBOW_VC_CYCLIC_COMPRESSED;
 			break;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_PQ_ID_PATHS_END
 		default:
@@ -1056,9 +1056,9 @@ do_gen_all_hostkeys(struct passwd *pw)
 #ifdef WITH_PQ_AUTH
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_START
 		{ "oqsdefault", "OQSDEFAULT", _PATH_HOST_OQSDEFAULT_KEY_FILE },
-		{ "rainbowiiicclassic", "RAINBOW_IIIC_CLASSIC", _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE },
-		{ "rainbowiiiccyclic", "RAINBOW_IIIC_CYCLIC", _PATH_HOST_RAINBOW_IIIC_CYCLIC_KEY_FILE },
-		{ "rainbowiiiccycliccompressed", "RAINBOW_IIIC_CYCLIC_COMPRESSED", _PATH_HOST_RAINBOW_IIIC_CYCLIC_COMPRESSED_KEY_FILE },
+		{ "rainbowvcclassic", "RAINBOW_VC_CLASSIC", _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE },
+		{ "rainbowvccyclic", "RAINBOW_VC_CYCLIC", _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE },
+		{ "rainbowvccycliccompressed", "RAINBOW_VC_CYCLIC_COMPRESSED", _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE },
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PQ_KT_END
 #endif /* WITH_PQ_AUTH */
 #ifdef WITH_HYBRID_AUTH
@@ -1067,9 +1067,9 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "rsa3072_oqsdefault", "RSA3072_OQSDEFAULT", _PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
 		{ "p256_oqsdefault", "P256_OQSDEFAULT", _PATH_HOST_P256_OQSDEFAULT_KEY_FILE },
-		{ "p384_rainbowiiicclassic", "P384_RAINBOW_IIIC_CLASSIC", _PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE },
-		{ "p384_rainbowiiiccyclic", "P384_RAINBOW_IIIC_CYCLIC", _PATH_HOST_P384_RAINBOW_IIIC_CYCLIC_KEY_FILE },
-		{ "p384_rainbowiiiccycliccompressed", "P384_RAINBOW_IIIC_CYCLIC_COMPRESSED", _PATH_HOST_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED_KEY_FILE },
+		{ "p521_rainbowvcclassic", "P521_RAINBOW_VC_CLASSIC", _PATH_HOST_P521_RAINBOW_VC_CLASSIC_KEY_FILE },
+		{ "p521_rainbowvccyclic", "P521_RAINBOW_VC_CYCLIC", _PATH_HOST_P521_RAINBOW_VC_CYCLIC_KEY_FILE },
+		{ "p521_rainbowvccycliccompressed", "P521_RAINBOW_VC_CYCLIC_COMPRESSED", _PATH_HOST_P521_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE },
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_HYBRID_KT_END
@@ -2836,11 +2836,11 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
                  _PATH_HOST_OQSDEFAULT_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE, rr_hostname);
+                 _PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_RAINBOW_IIIC_CYCLIC_KEY_FILE, rr_hostname);
+                 _PATH_HOST_RAINBOW_VC_CYCLIC_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_RAINBOW_IIIC_CYCLIC_COMPRESSED_KEY_FILE, rr_hostname);
+                 _PATH_HOST_RAINBOW_VC_CYCLIC_COMPRESSED_KEY_FILE, rr_hostname);
 ///// OQS_TEMPLATE_FRAGMENT_PRINT_PQ_RR_END
 
 			if (n == 0)

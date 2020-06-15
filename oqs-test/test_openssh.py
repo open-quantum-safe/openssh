@@ -9,9 +9,9 @@ if 'WITH_PQAUTH' in os.environ and os.environ['WITH_PQAUTH'] == 'true':
     sig_algs += [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START
     # post-quantum only sigs
-    'ssh-rainbowiiicclassic','ssh-rainbowiiiccyclic','ssh-rainbowiiiccycliccompressed',
+    'ssh-oqsdefault','ssh-rainbowvcclassic','ssh-rainbowvccyclic','ssh-rainbowvccycliccompressed',
     # hybrid sigs
-    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-p384-rainbowiiicclassic','ssh-p384-rainbowiiiccyclic','ssh-p384-rainbowiiiccycliccompressed',
+    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-p521-rainbowvcclassic','ssh-p521-rainbowvccyclic','ssh-p521-rainbowvccycliccompressed',
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END
 ]
 

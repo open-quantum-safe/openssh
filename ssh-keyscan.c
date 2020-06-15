@@ -61,31 +61,31 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_XMSS			(1<<4)
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MARKERS_START
 #define KT_OQSDEFAULT ((uint64_t)1<<5)
-#define KT_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<6)
-#define KT_RAINBOW_IIIC_CYCLIC ((uint64_t)1<<7)
-#define KT_RAINBOW_IIIC_CYCLIC_COMPRESSED ((uint64_t)1<<8)
+#define KT_RAINBOW_VC_CLASSIC ((uint64_t)1<<6)
+#define KT_RAINBOW_VC_CYCLIC ((uint64_t)1<<7)
+#define KT_RAINBOW_VC_CYCLIC_COMPRESSED ((uint64_t)1<<8)
 #define KT_RSA3072_OQSDEFAULT ((uint64_t)1<<9)
 #define KT_P256_OQSDEFAULT ((uint64_t)1<<10)
-#define KT_P384_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<11)
-#define KT_P384_RAINBOW_IIIC_CYCLIC ((uint64_t)1<<12)
-#define KT_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED ((uint64_t)1<<13)
+#define KT_P521_RAINBOW_VC_CLASSIC ((uint64_t)1<<11)
+#define KT_P521_RAINBOW_VC_CYCLIC ((uint64_t)1<<12)
+#define KT_P521_RAINBOW_VC_CYCLIC_COMPRESSED ((uint64_t)1<<13)
 
 #define KT_MIN KT_DSA
-#define KT_MAX KT_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED
+#define KT_MAX KT_P521_RAINBOW_VC_CYCLIC_COMPRESSED
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MARKERS_END
 
 int get_cert = 0;
 uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519| \
 ///// OQS_TEMPLATE_FRAGMENT_GET_KT_START
                    KT_OQSDEFAULT| \
-                   KT_RAINBOW_IIIC_CLASSIC| \
-                   KT_RAINBOW_IIIC_CYCLIC| \
-                   KT_RAINBOW_IIIC_CYCLIC_COMPRESSED| \
+                   KT_RAINBOW_VC_CLASSIC| \
+                   KT_RAINBOW_VC_CYCLIC| \
+                   KT_RAINBOW_VC_CYCLIC_COMPRESSED| \
                    KT_RSA3072_OQSDEFAULT| \
                    KT_P256_OQSDEFAULT| \
-                   KT_P384_RAINBOW_IIIC_CLASSIC| \
-                   KT_P384_RAINBOW_IIIC_CYCLIC| \
-                   KT_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED;
+                   KT_P521_RAINBOW_VC_CLASSIC| \
+                   KT_P521_RAINBOW_VC_CYCLIC| \
+                   KT_P521_RAINBOW_VC_CYCLIC_COMPRESSED;
 ///// OQS_TEMPLATE_FRAGMENT_GET_KT_END
 
 int hash_hosts = 0;		/* Hash hostname on output */
@@ -754,14 +754,14 @@ main(int argc, char **argv)
 				case KEY_OQSDEFAULT:
 					get_keytypes |= KT_OQSDEFAULT;
 					break;
-				case KEY_RAINBOW_IIIC_CLASSIC:
-					get_keytypes |= KT_RAINBOW_IIIC_CLASSIC;
+				case KEY_RAINBOW_VC_CLASSIC:
+					get_keytypes |= KT_RAINBOW_VC_CLASSIC;
 					break;
-				case KEY_RAINBOW_IIIC_CYCLIC:
-					get_keytypes |= KT_RAINBOW_IIIC_CYCLIC;
+				case KEY_RAINBOW_VC_CYCLIC:
+					get_keytypes |= KT_RAINBOW_VC_CYCLIC;
 					break;
-				case KEY_RAINBOW_IIIC_CYCLIC_COMPRESSED:
-					get_keytypes |= KT_RAINBOW_IIIC_CYCLIC_COMPRESSED;
+				case KEY_RAINBOW_VC_CYCLIC_COMPRESSED:
+					get_keytypes |= KT_RAINBOW_VC_CYCLIC_COMPRESSED;
 					break;
 				case KEY_RSA3072_OQSDEFAULT:
 					get_keytypes |= KT_RSA3072_OQSDEFAULT;
@@ -769,14 +769,14 @@ main(int argc, char **argv)
 				case KEY_P256_OQSDEFAULT:
 					get_keytypes |= KT_P256_OQSDEFAULT;
 					break;
-				case KEY_P384_RAINBOW_IIIC_CLASSIC:
-					get_keytypes |= KT_P384_RAINBOW_IIIC_CLASSIC;
+				case KEY_P521_RAINBOW_VC_CLASSIC:
+					get_keytypes |= KT_P521_RAINBOW_VC_CLASSIC;
 					break;
-				case KEY_P384_RAINBOW_IIIC_CYCLIC:
-					get_keytypes |= KT_P384_RAINBOW_IIIC_CYCLIC;
+				case KEY_P521_RAINBOW_VC_CYCLIC:
+					get_keytypes |= KT_P521_RAINBOW_VC_CYCLIC;
 					break;
-				case KEY_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED:
-					get_keytypes |= KT_P384_RAINBOW_IIIC_CYCLIC_COMPRESSED;
+				case KEY_P521_RAINBOW_VC_CYCLIC_COMPRESSED:
+					get_keytypes |= KT_P521_RAINBOW_VC_CYCLIC_COMPRESSED;
 					break;
 ///// OQS_TEMPLATE_FRAGMENT_SWITCH_KT_END
 				case KEY_UNSPEC:

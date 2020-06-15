@@ -34,7 +34,7 @@ ${PREFIX}/sbin/sshd -q -p ${PORT} -d \
   -h "${PREFIX}/ssh_server/id_${SIGALG}" \
   >> ${PREFIX}/server_log.txt 2>&1 &
 
-sleep 5
+sleep 40
 
 SERVER_PID=$!
 

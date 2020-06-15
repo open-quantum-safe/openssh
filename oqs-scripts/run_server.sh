@@ -12,7 +12,7 @@
 
 PREFIX=${PREFIX:-"`pwd`/oqs-test/tmp"}
 KEXALG=${KEXALG:-"bike1-l1-cpa-sha384@openquantumsafe.org"}
-SIGALG=${SIGALG:-"ssh-rainbowiiicclassic"}
+SIGALG=${SIGALG:-"ssh-rainbowvcclassic"}
 PORT=${PORT:-4433}
 
 ${PREFIX}/sbin/sshd -q -p ${PORT} -d \

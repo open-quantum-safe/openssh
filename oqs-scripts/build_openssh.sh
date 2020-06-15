@@ -26,7 +26,7 @@ fi
 if [ "x${WITH_OPENSSL}" == "xtrue" ]; then
     ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --with-ssl-dir="${OPENSSL_SYS_DIR}" --with-liboqs-dir="`pwd`/oqs" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
 else
-    ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --without-openssl --with-liboqs-dir="${PREFIX}" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
+    ./configure --prefix="${PREFIX}" --with-ldflags="-Wl,-rpath -Wl,${PREFIX}/lib" --with-libs=-lm --without-openssl --with-liboqs-dir="`pwd`/oqs" --with-cflags="-I${PREFIX}/include" --sysconfdir="${PREFIX}"
 fi
 if [ "x${CIRCLECI}" == "xtrue" ] || [ "x${TRAVIS}" == "xtrue" ]; then
     make -j2
