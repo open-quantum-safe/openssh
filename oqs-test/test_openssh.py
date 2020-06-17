@@ -57,6 +57,7 @@ def test_connection():
     port = 22345
     for sig_alg in sig_algs:
         if 'rainbow' in sig_alg:
+            # TODO: Revisit this after round 3 candidates come out
             if 'classic-mceliece-8192128f-sha384@openquantumsafe.org' in kex_algs:
                 yield(run_connection, sig_alg, 'classic-mceliece-8192128f-sha384@openquantumsafe.org', port)
             else:
