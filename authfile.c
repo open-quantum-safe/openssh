@@ -50,7 +50,7 @@
 #include "krl.h"
 #include "oqs-utils.h"
 
-#define MAX_KEY_FILE_SIZE	(10240 * 10240) /* OQS note */
+#define MAX_KEY_FILE_SIZE	67108864 /* OQS note */
 
 /* Save a key blob to a file */
 static int

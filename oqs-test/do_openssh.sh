@@ -34,9 +34,12 @@ cat "${PREFIX}"/ssh_client/*.pub >> "${PREFIX}"/ssh_server/authorized_keys
   -h "${PREFIX}/ssh_server/id_${SIGALG}" \
   >> ${PREFIX}/server_log.txt 2>&1 &
 
-if [[ "${SIGALG}" =~ "rainbow" ]]
-then
-    sleep 30
+if [[ "${SIGALG}" =~ "rainbowi" ]]; then
+    sleep 10
+elif [[ "${SIGALG}" =~ "rainbowiii" ]]; then
+    sleep 20
+elif [[ "${SIGALG}" =~ "rainbowv" ]]; then
+    sleep 40
 else
     sleep 2
 fi
