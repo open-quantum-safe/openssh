@@ -77,7 +77,10 @@ ssh_msg_recv(int fd, struct sshbuf *m)
 		return (-1);
 	}
 	msg_len = get_u32(buf);
-	if (msg_len > 65536 * 1024) { /* OQS note */
+	/* OQS note: We have increased the limit below
+	 * from (256 * 1024) to (65536 * 1024), so as to
+	 * support algorithms such as Rainbow and McEliece */
+	if (msg_len > 65536 * 1024) {
 		error("ssh_msg_recv: read: bad msg_len %u", msg_len);
 		return (-1);
 	}

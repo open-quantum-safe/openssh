@@ -151,7 +151,10 @@ mm_request_receive(int sock, struct sshbuf *m)
 		fatal("%s: read: %s", __func__, strerror(errno));
 	}
 	msg_len = PEEK_U32(buf);
-	if (msg_len > 65536 * 1024) /* OQS note */
+	/* OQS note: We have increased the limit below
+	 * from (256 * 1024) to (65536 * 1024), so as to
+	 * support algorithms such as Rainbow and McEliece */
+	if (msg_len > 65536 * 1024)
 		fatal("%s: read: bad msg_len %d", __func__, msg_len);
 	sshbuf_reset(m);
 	if ((r = sshbuf_reserve(m, msg_len, &p)) != 0)

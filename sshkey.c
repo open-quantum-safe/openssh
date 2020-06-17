@@ -4065,6 +4065,10 @@ sshkey_private_to_blob2(const struct sshkey *prv, struct sshbuf *blob,
 		goto out;
 	}
 
+	/* OQS note: We have changed the logic below to write "b64" out
+	 * in bursts of 70 characters to "blob", as opposed to writing it out
+	 * character by character. This greatly speeds up key-generation for the
+	 * Rainbow variants, for which b64 can be many millions of bytes.*/
 	sshbuf_reset(blob);
 	if ((r = sshbuf_put(blob, MARK_BEGIN, MARK_BEGIN_LEN)) != 0)
 		goto out;
@@ -4079,20 +4083,11 @@ sshkey_private_to_blob2(const struct sshkey *prv, struct sshbuf *blob,
 		if ((r = sshbuf_put_u8(blob, '\n')) != 0)
 			goto out;
     }
-	/* OQS note */
 	if (b64_len > 0 && (r = sshbuf_put(blob, b64_ptr, b64_len)) != 0) {
 		goto out;
 	}
 	if (b64_len > 0 && (r = sshbuf_put_u8(blob, '\n')) != 0)
 		goto out;
-/*	for (i = 0; i < strlen(b64); i++) {
-		if ((r = sshbuf_put_u8(blob, b64[i])) != 0)
-			goto out;
-		if (i % 70 == 69 && (r = sshbuf_put_u8(blob, '\n')) != 0)
-			goto out;
-	}
-	if (i % 70 != 69 && (r = sshbuf_put_u8(blob, '\n')) != 0)
-		goto out;*/
 	if ((r = sshbuf_put(blob, MARK_END, MARK_END_LEN)) != 0)
 		goto out;
 

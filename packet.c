@@ -99,7 +99,10 @@
 #define DBG(x)
 #endif
 
-#define PACKET_MAX_SIZE (2048 * 1024) /* OQS note */
+/* OQS note: We have increased this from
+ * (256 * 1024) to (2048 * 1024).
+ */
+#define PACKET_MAX_SIZE (2048 * 1024)
 
 struct packet_state {
 	u_int32_t seqnr;

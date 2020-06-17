@@ -57,6 +57,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 - **BIKE**:`bike1-l1-cpa`, `bike1-l3-cpa`, `bike1-l1-fo`, `bike2-l3-fo`
+- **Classic McEliece**: `classic-mceliece-348864`, `classic-mceliece-348864f`, `classic-mceliece-460896`, `classic-mceliece-460896f`, `classic-mceliece-6688128`, `classic-mceliece-6688128f`, `classic-mceliece-6960119`, `classic-mceliece-6960119f`, `classic-mceliece-8192128`, `classic-mceliece-8192128f`
 - **FrodoKEM**:`frodo-640-aes`, `frodo-976-aes`
 - **Kyber**:`kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
 - **NewHope**:`newhope-512`, `newhope-1024`
@@ -79,13 +80,18 @@ The following digital signature algorithms from liboqs are supported (assuming t
 - **MQDSS**:`mqdss3148`, `mqdss3164`
 - **Picnic**:`picnicl1fs`, `picnicl1ur`, `picnicl3fs`, `picnicl3ur`, `picnicl5fs`, `picnicl5ur`, `picnic2l1fs`, `picnic2l3fs`
 - **qTesla**:`qteslapi`, `qteslapiii`
-- **SPHINCS+**:`sphincsharaka128fsimple`,`sphincsharaka128ssimple`,`sphincssha256128fsimple`,`sphincssha256128ssimple`
+- **Rainbow**: `rainbowiaclassic`, `rainbowiacyclic`, `rainbowiacycliccompressed`, `rainbowiiicclassic`, `rainbowiiiccyclic`, `rainbowiiiccycliccompressed`, `rainbowvcclassic`, `rainbowvccylic`, `rainbowvccycliccompressed`
+- **SPHINCS-Haraka**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincsharaka192frobust`, `sphincsharaka192fsimple`, `sphincsharaka192srobust`, `sphincsharaka192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256fsimple`, `sphincsharaka256srobust`, `sphincsharaka256ssimple`
+- **SPHINCS-SHA256**: `sphincssha256128frobust`, `sphincssha256128fsimple`, `sphincssha256128srobust`, `sphincssha256128ssimple`, `sphincssha256192frobust`, `sphincssha256192fsimple`, `sphincssha256192srobust`, `sphincssha256192ssimple`, `sphincssha256256frobust`, `sphincssha256256fsimple`, `sphincssha256256srobust`, `sphincssha256256ssimple`
+- **SPHINCS-SHAKE256**: `sphincsshake256128frobust`, `sphincsshake256128fsimple`, `sphincsshake256128srobust`, `sphincsshake256128ssimple`, `sphincsshake256192frobust`, `sphincsshake256192fsimple`, `sphincsshake256192srobust`, `sphincsshake256192ssimple`, `sphincsshake256256frobust`, `sphincsshake256256fsimple`, `sphincsshake256256srobust`, `sphincsshake256256ssimple`
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with a traditional digital signature algorithm (`<SIG>` is any one of the algorithms listed above):
 
 - if `<SIG>` has L1 security, then the fork provides the methods `rsa3072-<SIG>` and `p256-<SIG>`, which combine `<SIG>` with RSA3072 and with ECDSA using NIST's P256 curve respectively.
 - if `<SIG>` has L3 security, the fork provides the method `p384-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P384 curve.
 - if `<SIG>` has L5 security, the fork provides the method `p521-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P521 curve.
+
+**N.B.**: By default, only L1 signatures and all **Rainbow** variants are enabled. Should you wish to enable additional variants of the signatures, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-for://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 ## Quickstart
 
@@ -97,7 +103,7 @@ The steps below have been confirmed to work on macOS 10.14 (clang 10.0.0) and Ub
 
 On **Ubuntu**, you need to install the following packages:
 
-	sudo apt install autoconf automake cmake gcc libtool libssl-dev make ninja-build unzip xsltproc zlib1g-dev
+	sudo apt install autoconf automake cmake gcc libtool libssl-dev make ninja-build zlib1g-dev
 
 On **Linux**, you also may need to do the following:
 
@@ -154,10 +160,16 @@ To test the build, run:
 
 	make tests
 
-To run OQS-specific tests:
+To run OQS-specific tests of all the post-quantum key-exchanges:
 
 ```
 python3 -m nose --rednose --verbose
+```
+
+To run OQS-specific tests of all combinations of post-quantum key-exchange and authentication algorithms:
+
+```
+env WITH_PQAUTH=true python3 -m nose --rednose --verbose
 ```
 
 ### Running OQS-OpenSSH
@@ -248,7 +260,6 @@ Contributors to an earlier OQS fork of OpenSSH included:
 ## Acknowledgments
 
 Financial support for the development of Open Quantum Safe has been provided by Amazon Web Services and the Tutte Institute for Mathematics and Computing.
-
 We'd like to make a special acknowledgement to the companies who have dedicated programmer time to contribute source code to OQS, including Amazon Web Services, evolutionQ, and Microsoft Research.
 
 Research projects which developed specific components of OQS have been supported by various research grants, including funding from the Natural Sciences and Engineering Research Council of Canada (NSERC); see [here](https://openquantumsafe.org/papers/SAC-SteMos16.pdf) and [here](https://openquantumsafe.org/papers/NISTPQC-CroPaqSte19.pdf) for funding acknowledgments.

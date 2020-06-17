@@ -56,12 +56,18 @@ def test_connection():
     global sig_algs, kex_algs
     port = 22345
     for sig_alg in sig_algs:
-        for kex_alg in kex_algs:
-            if 'WITH_OPENSSL' in os.environ and os.environ['WITH_OPENSSL'] != 'true':
-                if 'ecdh' in kex_alg:
-                    continue
-            yield(run_connection, sig_alg, kex_alg, port)
+        if 'rainbow' in sig_alg:
+            if 'classic-mceliece-8192128f-sha384@openquantumsafe.org' in kex_algs:
+                yield(run_connection, sig_alg, 'classic-mceliece-8192128f-sha384@openquantumsafe.org', port)
+            else:
+                yield(run_connection, sig_alg, kex_algs[0], port)
             port = port + 1
+        else:
+            for kex_alg in kex_algs:
+                if ('WITH_OPENSSL' in os.environ and os.environ['WITH_OPENSSL'] != 'true') and ('ecdh' in kex_alg):
+                    continue
+                yield(run_connection, sig_alg, kex_alg, port)
+                port = port + 1
 
 def run_connection(sig_alg, kex_alg, port):
     helpers.run_subprocess(
