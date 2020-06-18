@@ -73,7 +73,7 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 
 #### Digital Signature
 
-The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs):
+The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs). Note that only L1 signature and all **Rainbow** variants are enabled by default, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-for://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 - **Dilithium**:`dilithium2`, `dilithium3`, `dilithium4`
@@ -90,8 +90,6 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 - if `<SIG>` has L1 security, then the fork provides the methods `rsa3072-<SIG>` and `p256-<SIG>`, which combine `<SIG>` with RSA3072 and with ECDSA using NIST's P256 curve respectively.
 - if `<SIG>` has L3 security, the fork provides the method `p384-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P384 curve.
 - if `<SIG>` has L5 security, the fork provides the method `p521-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P521 curve.
-
-**N.B.**: Only L1 signature and all **Rainbow** variants are enabled by default. Should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-for://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 ## Quickstart
 
@@ -122,13 +120,13 @@ On **macOS**, you need to install the following packages using brew (or a packag
 
 ### Step 1: Build and install liboqs
 
-The following instructions install liboqs into a subdirectory inside the OpenSSH source. If `<OPENSSH_DIR>` is the root of the OpenSSH source:
+The following instructions install liboqs into a subdirectory inside the OpenSSH source. If `<OPENSSH_ROOT>` is the root of the OpenSSH source:
 
 ```
 git clone --branch master --single-branch https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 mkdir build && cd build
-cmake .. -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=yes -DCMAKE_INSTALL_PREFIX=<OPENSSH_DIR>/oqs
+cmake .. -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_INSTALL_PREFIX=<OPENSSH_ROOT>/oqs
 ninja
 ninja install
 ```
@@ -260,6 +258,6 @@ Contributors to an earlier OQS fork of OpenSSH included:
 ## Acknowledgments
 
 Financial support for the development of Open Quantum Safe has been provided by Amazon Web Services and the Tutte Institute for Mathematics and Computing.
-We'd like to make a special acknowledgement to the companies who have dedicated programmer time to contribute source code to OQS, including Amazon Web Services, evolutionQ, and Microsoft Research.
+We'd like to make a special acknowledgement to the companies who have dedicated programmer time to contribute source code to OQS, including Amazon Web Services, evolutionQ, Microsoft Research, Cisco Systems, and IBM Research.
 
 Research projects which developed specific components of OQS have been supported by various research grants, including funding from the Natural Sciences and Engineering Research Council of Canada (NSERC); see [here](https://openquantumsafe.org/papers/SAC-SteMos16.pdf) and [here](https://openquantumsafe.org/papers/NISTPQC-CroPaqSte19.pdf) for funding acknowledgments.
