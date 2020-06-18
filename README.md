@@ -1,4 +1,4 @@
-[![Build status image](https://circleci.com/gh/open-quantum-safe/openssh-portable/tree/OQS-master.svg?style=svg)](https://circleci.com/gh/open-quantum-safe/openssh-portable)
+[![Build status image](https://circleci.com/gh/open-quantum-safe/openssh/tree/OQS-master.svg?style=svg)](https://circleci.com/gh/open-quantum-safe/openssh/tree/OQS-master)
 
 OQS-OpenSSH
 ==================================
