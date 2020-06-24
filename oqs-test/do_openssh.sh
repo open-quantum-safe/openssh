@@ -39,7 +39,7 @@ if [[ "${SIGALG}" =~ "rainbowi" ]]; then
 elif [[ "${SIGALG}" =~ "rainbowiii" ]]; then
     sleep 20
 elif [[ "${SIGALG}" =~ "rainbowv" ]]; then
-    sleep 45
+    sleep 60
 else
     sleep 2
 fi
