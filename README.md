@@ -123,7 +123,7 @@ On **macOS**, you need to install the following packages using brew (or a packag
 The following instructions install liboqs into a subdirectory inside the OpenSSH source. If `<OPENSSH_ROOT>` is the root of the OpenSSH source:
 
 ```
-git clone --branch master --single-branch https://github.com/open-quantum-safe/liboqs.git
+git clone --branch 0.3.0 --single-branch --depth 1 https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 mkdir build && cd build
 cmake .. -GNinja -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_INSTALL_PREFIX=<OPENSSH_ROOT>/oqs
