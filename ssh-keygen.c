@@ -242,12 +242,15 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 		case KEY_P384_DILITHIUM_4:
 		case KEY_P384_PICNIC_L3FS:
 		case KEY_P384_PICNIC_L3UR:
-		case KEY_P384_PICNIC2_L3FS:
+		case KEY_P384_PICNIC_L3FULL:
+		case KEY_P384_PICNIC3_L3:
+		case KEY_P384_PICNIC3_L5:
 		case KEY_P384_QTESLA_P_III:
 			*bitsp = 384;
 			break;
 		case KEY_P521_PICNIC_L5FS:
 		case KEY_P521_PICNIC_L5UR:
+		case KEY_P521_PICNIC_L5FULL:
 			*bitsp = 521;
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
 		}
@@ -330,11 +333,17 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_PICNIC_L1UR:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L1UR;
 			break;
+		case KEY_PICNIC_L1FULL:
+			name = _PATH_SSH_CLIENT_ID_PICNIC_L1FULL;
+			break;
 		case KEY_PICNIC_L3FS:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L3FS;
 			break;
 		case KEY_PICNIC_L3UR:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L3UR;
+			break;
+		case KEY_PICNIC_L3FULL:
+			name = _PATH_SSH_CLIENT_ID_PICNIC_L3FULL;
 			break;
 		case KEY_PICNIC_L5FS:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L5FS;
@@ -342,11 +351,17 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_PICNIC_L5UR:
 			name = _PATH_SSH_CLIENT_ID_PICNIC_L5UR;
 			break;
-		case KEY_PICNIC2_L1FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC2_L1FS;
+		case KEY_PICNIC_L5FULL:
+			name = _PATH_SSH_CLIENT_ID_PICNIC_L5FULL;
 			break;
-		case KEY_PICNIC2_L3FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC2_L3FS;
+		case KEY_PICNIC3_L1:
+			name = _PATH_SSH_CLIENT_ID_PICNIC3_L1;
+			break;
+		case KEY_PICNIC3_L3:
+			name = _PATH_SSH_CLIENT_ID_PICNIC3_L3;
+			break;
+		case KEY_PICNIC3_L5:
+			name = _PATH_SSH_CLIENT_ID_PICNIC3_L5;
 			break;
 		case KEY_QTESLA_P_I:
 			name = _PATH_SSH_CLIENT_ID_QTESLA_P_I;
@@ -1098,12 +1113,16 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "mqdss3148", "MQDSS_31_48", _PATH_HOST_MQDSS_31_48_KEY_FILE },
 		{ "picnicl1fs", "PICNIC_L1FS", _PATH_HOST_PICNIC_L1FS_KEY_FILE },
 		{ "picnicl1ur", "PICNIC_L1UR", _PATH_HOST_PICNIC_L1UR_KEY_FILE },
+		{ "picnicl1full", "PICNIC_L1FULL", _PATH_HOST_PICNIC_L1FULL_KEY_FILE },
 		{ "picnicl3fs", "PICNIC_L3FS", _PATH_HOST_PICNIC_L3FS_KEY_FILE },
 		{ "picnicl3ur", "PICNIC_L3UR", _PATH_HOST_PICNIC_L3UR_KEY_FILE },
+		{ "picnicl3full", "PICNIC_L3FULL", _PATH_HOST_PICNIC_L3FULL_KEY_FILE },
 		{ "picnicl5fs", "PICNIC_L5FS", _PATH_HOST_PICNIC_L5FS_KEY_FILE },
 		{ "picnicl5ur", "PICNIC_L5UR", _PATH_HOST_PICNIC_L5UR_KEY_FILE },
-		{ "picnic2l1fs", "PICNIC2_L1FS", _PATH_HOST_PICNIC2_L1FS_KEY_FILE },
-		{ "picnic2l3fs", "PICNIC2_L3FS", _PATH_HOST_PICNIC2_L3FS_KEY_FILE },
+		{ "picnicl5full", "PICNIC_L5FULL", _PATH_HOST_PICNIC_L5FULL_KEY_FILE },
+		{ "picnic3l1", "PICNIC3_L1", _PATH_HOST_PICNIC3_L1_KEY_FILE },
+		{ "picnic3l3", "PICNIC3_L3", _PATH_HOST_PICNIC3_L3_KEY_FILE },
+		{ "picnic3l5", "PICNIC3_L5", _PATH_HOST_PICNIC3_L5_KEY_FILE },
 		{ "qteslapi", "QTESLA_P_I", _PATH_HOST_QTESLA_P_I_KEY_FILE },
 		{ "qteslapiii", "QTESLA_P_III", _PATH_HOST_QTESLA_P_III_KEY_FILE },
 		{ "sphincsharaka128frobust", "SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
@@ -1117,7 +1136,8 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "rsa3072_mqdss3148", "RSA3072_MQDSS_31_48", _PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE },
 		{ "rsa3072_picnicl1fs", "RSA3072_PICNIC_L1FS", _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE },
 		{ "rsa3072_picnicl1ur", "RSA3072_PICNIC_L1UR", _PATH_HOST_RSA3072_PICNIC_L1UR_KEY_FILE },
-		{ "rsa3072_picnic2l1fs", "RSA3072_PICNIC2_L1FS", _PATH_HOST_RSA3072_PICNIC2_L1FS_KEY_FILE },
+		{ "rsa3072_picnicl1full", "RSA3072_PICNIC_L1FULL", _PATH_HOST_RSA3072_PICNIC_L1FULL_KEY_FILE },
+		{ "rsa3072_picnic3l1", "RSA3072_PICNIC3_L1", _PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE },
 		{ "rsa3072_qteslapi", "RSA3072_QTESLA_P_I", _PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE },
 		{ "rsa3072_sphincsharaka128frobust", "RSA3072_SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
@@ -1127,12 +1147,16 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "p256_mqdss3148", "P256_MQDSS_31_48", _PATH_HOST_P256_MQDSS_31_48_KEY_FILE },
 		{ "p256_picnicl1fs", "P256_PICNIC_L1FS", _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE },
 		{ "p256_picnicl1ur", "P256_PICNIC_L1UR", _PATH_HOST_P256_PICNIC_L1UR_KEY_FILE },
+		{ "p256_picnicl1full", "P256_PICNIC_L1FULL", _PATH_HOST_P256_PICNIC_L1FULL_KEY_FILE },
 		{ "p384_picnicl3fs", "P384_PICNIC_L3FS", _PATH_HOST_P384_PICNIC_L3FS_KEY_FILE },
 		{ "p384_picnicl3ur", "P384_PICNIC_L3UR", _PATH_HOST_P384_PICNIC_L3UR_KEY_FILE },
+		{ "p384_picnicl3full", "P384_PICNIC_L3FULL", _PATH_HOST_P384_PICNIC_L3FULL_KEY_FILE },
 		{ "p521_picnicl5fs", "P521_PICNIC_L5FS", _PATH_HOST_P521_PICNIC_L5FS_KEY_FILE },
 		{ "p521_picnicl5ur", "P521_PICNIC_L5UR", _PATH_HOST_P521_PICNIC_L5UR_KEY_FILE },
-		{ "p256_picnic2l1fs", "P256_PICNIC2_L1FS", _PATH_HOST_P256_PICNIC2_L1FS_KEY_FILE },
-		{ "p384_picnic2l3fs", "P384_PICNIC2_L3FS", _PATH_HOST_P384_PICNIC2_L3FS_KEY_FILE },
+		{ "p521_picnicl5full", "P521_PICNIC_L5FULL", _PATH_HOST_P521_PICNIC_L5FULL_KEY_FILE },
+		{ "p256_picnic3l1", "P256_PICNIC3_L1", _PATH_HOST_P256_PICNIC3_L1_KEY_FILE },
+		{ "p384_picnic3l3", "P384_PICNIC3_L3", _PATH_HOST_P384_PICNIC3_L3_KEY_FILE },
+		{ "p384_picnic3l5", "P384_PICNIC3_L5", _PATH_HOST_P384_PICNIC3_L5_KEY_FILE },
 		{ "p256_qteslapi", "P256_QTESLA_P_I", _PATH_HOST_P256_QTESLA_P_I_KEY_FILE },
 		{ "p384_qteslapiii", "P384_QTESLA_P_III", _PATH_HOST_P384_QTESLA_P_III_KEY_FILE },
 		{ "p256_sphincsharaka128frobust", "P256_SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_P256_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
@@ -2912,17 +2936,25 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L1UR_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
+                 _PATH_HOST_PICNIC_L1FULL_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L3FS_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L3UR_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_PICNIC_L3FULL_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L5FS_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC_L5UR_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC2_L1FS_KEY_FILE, rr_hostname);
+                 _PATH_HOST_PICNIC_L5FULL_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC2_L3FS_KEY_FILE, rr_hostname);
+                 _PATH_HOST_PICNIC3_L1_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_PICNIC3_L3_KEY_FILE, rr_hostname);
+			n += do_print_resource_record(pw,
+                 _PATH_HOST_PICNIC3_L5_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_QTESLA_P_I_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,

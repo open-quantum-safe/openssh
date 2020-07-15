@@ -3718,7 +3718,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic_L1_UR) && defined(OQS_ENABLE_SIG_picnic_L3_FS) && defined(OQS_ENABLE_SIG_picnic_L3_UR) && defined(OQS_ENABLE_SIG_picnic_L5_FS) && defined(OQS_ENABLE_SIG_picnic_L5_UR) && defined(OQS_ENABLE_SIG_picnic2_L1_FS) && defined(OQS_ENABLE_SIG_picnic2_L3_FS))
+					#if defined(ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic_L1_UR) && defined(OQS_ENABLE_SIG_picnic_L1_full) && defined(OQS_ENABLE_SIG_picnic_L3_FS) && defined(OQS_ENABLE_SIG_picnic_L3_UR) && defined(OQS_ENABLE_SIG_picnic_L3_full) && defined(OQS_ENABLE_SIG_picnic_L5_FS) && defined(OQS_ENABLE_SIG_picnic_L5_UR) && defined(OQS_ENABLE_SIG_picnic_L5_full) && defined(OQS_ENABLE_SIG_picnic3_L1) && defined(OQS_ENABLE_SIG_picnic3_L3) && defined(OQS_ENABLE_SIG_picnic3_L3))
 					#else
 					#error "PICNIC is not supported"
 					#endif

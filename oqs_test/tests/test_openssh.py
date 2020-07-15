@@ -9,9 +9,9 @@ if 'WITH_PQAUTH' in os.environ and os.environ['WITH_PQAUTH'] == 'true':
     sig_algs += [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START
     # post-quantum only sigs
-    'ssh-oqsdefault','ssh-dilithium2','ssh-dilithium4','ssh-mqdss3148','ssh-picnicl1fs','ssh-picnicl1ur','ssh-picnicl3fs','ssh-picnicl3ur','ssh-picnicl5fs','ssh-picnicl5ur','ssh-picnic2l1fs','ssh-picnic2l3fs','ssh-qteslapi','ssh-qteslapiii','ssh-sphincsharaka128frobust',
+    'ssh-oqsdefault','ssh-dilithium2','ssh-dilithium4','ssh-mqdss3148','ssh-picnicl1fs','ssh-picnicl1ur','ssh-picnicl1full','ssh-picnicl3fs','ssh-picnicl3ur','ssh-picnicl3full','ssh-picnicl5fs','ssh-picnicl5ur','ssh-picnicl5full','ssh-picnic3l1','ssh-picnic3l3','ssh-picnic3l5','ssh-qteslapi','ssh-qteslapiii','ssh-sphincsharaka128frobust',
     # hybrid sigs
-    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-rsa3072-dilithium2','ssh-p256-dilithium2','ssh-p384-dilithium4','ssh-rsa3072-mqdss3148','ssh-p256-mqdss3148','ssh-rsa3072-picnicl1fs','ssh-p256-picnicl1fs','ssh-rsa3072-picnicl1ur','ssh-p256-picnicl1ur','ssh-p384-picnicl3fs','ssh-p384-picnicl3ur','ssh-p521-picnicl5fs','ssh-p521-picnicl5ur','ssh-rsa3072-picnic2l1fs','ssh-p256-picnic2l1fs','ssh-p384-picnic2l3fs','ssh-rsa3072-qteslapi','ssh-p256-qteslapi','ssh-p384-qteslapiii','ssh-rsa3072-sphincsharaka128frobust','ssh-p256-sphincsharaka128frobust',
+    'ssh-rsa3072-oqsdefault','ssh-p256-oqsdefault','ssh-rsa3072-dilithium2','ssh-p256-dilithium2','ssh-p384-dilithium4','ssh-rsa3072-mqdss3148','ssh-p256-mqdss3148','ssh-rsa3072-picnicl1fs','ssh-p256-picnicl1fs','ssh-rsa3072-picnicl1ur','ssh-p256-picnicl1ur','ssh-rsa3072-picnicl1full','ssh-p256-picnicl1full','ssh-p384-picnicl3fs','ssh-p384-picnicl3ur','ssh-p384-picnicl3full','ssh-p521-picnicl5fs','ssh-p521-picnicl5ur','ssh-p521-picnicl5full','ssh-rsa3072-picnic3l1','ssh-p256-picnic3l1','ssh-p384-picnic3l3','ssh-p384-picnic3l5','ssh-rsa3072-qteslapi','ssh-p256-qteslapi','ssh-p384-qteslapiii','ssh-rsa3072-sphincsharaka128frobust','ssh-p256-sphincsharaka128frobust',
 ##### OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END
 ]
 

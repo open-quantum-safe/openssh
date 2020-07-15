@@ -41,12 +41,21 @@ sigs:
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
+        name: "PICNIC_L1FULL"
+        oqs_meth: "OQS_SIG_alg_picnic_L1_full"
+        mix_with: [{'name':'rsa3072'},
+                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
+      -
         name: "PICNIC_L3FS"
         oqs_meth: "OQS_SIG_alg_picnic_L3_FS"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         name: "PICNIC_L3UR"
         oqs_meth: "OQS_SIG_alg_picnic_L3_UR"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        name: "PICNIC_L3FULL"
+        oqs_meth: "OQS_SIG_alg_picnic_L3_full"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         name: "PICNIC_L5FS"
@@ -57,13 +66,21 @@ sigs:
         oqs_meth: "OQS_SIG_alg_picnic_L5_UR"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
-        name: "PICNIC2_L1FS"
-        oqs_meth: "OQS_SIG_alg_picnic2_L1_FS"
+        name: "PICNIC_L5FULL"
+        oqs_meth: "OQS_SIG_alg_picnic_L5_full"
+        mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
+      -
+        name: "PICNIC3_L1"
+        oqs_meth: "OQS_SIG_alg_picnic3_L1"
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        name: "PICNIC2_L3FS"
-        oqs_meth: "OQS_SIG_alg_picnic2_L3_FS"
+        name: "PICNIC3_L3"
+        oqs_meth: "OQS_SIG_alg_picnic3_L3"
+        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
+      -
+        name: "PICNIC3_L5"
+        oqs_meth: "OQS_SIG_alg_picnic3_L3"
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
     family: "QTESLA"
