@@ -3760,7 +3760,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_UR))
+					#if defined(OQS_ENABLE_SIG_PICNIC) || (defined(OQS_ENABLE_SIG_picnic_L1_FS) && defined(OQS_ENABLE_SIG_picnic3_L1))
 					#else
 					#error "PICNIC is not supported"
 					#endif

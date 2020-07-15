@@ -13,7 +13,7 @@ version: 2
           useradd -g sshd -c 'sshd privsep' -d /var/empty -s /bin/false sshd
     - run:
         name: Clone liboqs
-        command: .circleci/git_no_checkin_in_last_day.sh || (env LIBOQS_BRANCH=0.3.0 ./oqs-scripts/clone_liboqs.sh)
+        command: .circleci/git_no_checkin_in_last_day.sh || (./oqs-scripts/clone_liboqs.sh)
     - run:
         name: Build liboqs
         command: .circleci/git_no_checkin_in_last_day.sh || (./oqs-scripts/build_liboqs.sh)

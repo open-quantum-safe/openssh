@@ -290,7 +290,9 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_MQDSS_31_48_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_PICNIC_L1UR_KEY_FILE);
+		    _PATH_HOST_PICNIC_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_QTESLA_P_I_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
@@ -326,9 +328,13 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P256_MQDSS_31_48_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RSA3072_PICNIC_L1UR_KEY_FILE);
+		    _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P256_PICNIC_L1UR_KEY_FILE);
+		    _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_P256_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,

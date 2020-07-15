@@ -7,7 +7,8 @@
 				strcmp(alg, "ssh-rsa3072-dilithium2") == 0 || \
 				strcmp(alg, "ssh-rsa3072-falcon512") == 0 || \
 				strcmp(alg, "ssh-rsa3072-mqdss3148") == 0 || \
-				strcmp(alg, "ssh-rsa3072-picnicl1ur") == 0 || \
+				strcmp(alg, "ssh-rsa3072-picnicl1fs") == 0 || \
+				strcmp(alg, "ssh-rsa3072-picnic3l1") == 0 || \
 				strcmp(alg, "ssh-rsa3072-qteslapi") == 0 || \
 				strcmp(alg, "ssh-rsa3072-rainbowiaclassic") == 0 || \
 				strcmp(alg, "ssh-rsa3072-sphincsharaka128frobust") == 0 || \
@@ -19,7 +20,8 @@
 				alg == KEY_RSA3072_DILITHIUM_2 || \
 				alg == KEY_RSA3072_FALCON_512 || \
 				alg == KEY_RSA3072_MQDSS_31_48 || \
-				alg == KEY_RSA3072_PICNIC_L1UR || \
+				alg == KEY_RSA3072_PICNIC_L1FS || \
+				alg == KEY_RSA3072_PICNIC3_L1 || \
 				alg == KEY_RSA3072_QTESLA_P_I || \
 				alg == KEY_RSA3072_RAINBOW_IA_CLASSIC || \
 				alg == KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST || \
@@ -31,7 +33,8 @@
 				alg == KEY_P256_DILITHIUM_2 || \
 				alg == KEY_P256_FALCON_512 || \
 				alg == KEY_P256_MQDSS_31_48 || \
-				alg == KEY_P256_PICNIC_L1UR || \
+				alg == KEY_P256_PICNIC_L1FS || \
+				alg == KEY_P256_PICNIC3_L1 || \
 				alg == KEY_P256_QTESLA_P_I || \
 				alg == KEY_P256_RAINBOW_IA_CLASSIC || \
 				alg == KEY_P256_SPHINCS_HARAKA_128F_ROBUST || \
@@ -49,7 +52,8 @@
 				(type) == KEY_DILITHIUM_2 || \
 				(type) == KEY_FALCON_512 || \
 				(type) == KEY_MQDSS_31_48 || \
-				(type) == KEY_PICNIC_L1UR || \
+				(type) == KEY_PICNIC_L1FS || \
+				(type) == KEY_PICNIC3_L1 || \
 				(type) == KEY_QTESLA_P_I || \
 				(type) == KEY_RAINBOW_IA_CLASSIC || \
 				(type) == KEY_RAINBOW_IIIC_CLASSIC || \
@@ -66,7 +70,8 @@
 	case KEY_DILITHIUM_2: \
 	case KEY_FALCON_512: \
 	case KEY_MQDSS_31_48: \
-	case KEY_PICNIC_L1UR: \
+	case KEY_PICNIC_L1FS: \
+	case KEY_PICNIC3_L1: \
 	case KEY_QTESLA_P_I: \
 	case KEY_RAINBOW_IA_CLASSIC: \
 	case KEY_RAINBOW_IIIC_CLASSIC: \
@@ -82,7 +87,8 @@
 	case KEY_RSA3072_DILITHIUM_2: \
 	case KEY_RSA3072_FALCON_512: \
 	case KEY_RSA3072_MQDSS_31_48: \
-	case KEY_RSA3072_PICNIC_L1UR: \
+	case KEY_RSA3072_PICNIC_L1FS: \
+	case KEY_RSA3072_PICNIC3_L1: \
 	case KEY_RSA3072_QTESLA_P_I: \
 	case KEY_RSA3072_RAINBOW_IA_CLASSIC: \
 	case KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST: \
@@ -94,7 +100,8 @@
 	case KEY_P256_DILITHIUM_2: \
 	case KEY_P256_FALCON_512: \
 	case KEY_P256_MQDSS_31_48: \
-	case KEY_P256_PICNIC_L1UR: \
+	case KEY_P256_PICNIC_L1FS: \
+	case KEY_P256_PICNIC3_L1: \
 	case KEY_P256_QTESLA_P_I: \
 	case KEY_P256_RAINBOW_IA_CLASSIC: \
 	case KEY_P256_SPHINCS_HARAKA_128F_ROBUST: \
