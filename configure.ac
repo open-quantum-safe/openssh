@@ -3713,6 +3713,20 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
+	AC_MSG_CHECKING([for libOQS HQC support])
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+				#include <oqs/oqs.h>
+			]], [[
+					#if defined(OQS_ENABLE_KEM_HQC) || (defined(OQS_ENABLE_KEM_hqc_128_1_cca2) && defined(OQS_ENABLE_KEM_hqc_192_1_cca2) && defined(OQS_ENABLE_KEM_hqc_192_2_cca2) && defined(OQS_ENABLE_KEM_hqc_256_1_cca2) && defined(OQS_ENABLE_KEM_hqc_256_2_cca2) && defined(OQS_ENABLE_KEM_hqc_256_3_cca2))
+					#else
+					#error "HQC is not supported"
+					#endif
+			]])],
+			[ AC_MSG_RESULT([yes])
+				AC_DEFINE([HAVE_HQC], [1], [Define to 1 if LibOQS library is compiled with support for HQC])
+			], [AC_MSG_RESULT([no])
+	])
+
 
 	AC_MSG_CHECKING([for libOQS DILITHIUM support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
