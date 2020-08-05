@@ -58,18 +58,21 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 - **BIKE**:`bike1-l1-cpa`, `bike1-l3-cpa`, `bike1-l1-fo`, `bike2-l3-fo`
 - **Classic McEliece**: `classic-mceliece-348864`, `classic-mceliece-348864f`, `classic-mceliece-460896`, `classic-mceliece-460896f`, `classic-mceliece-6688128`, `classic-mceliece-6688128f`, `classic-mceliece-6960119`, `classic-mceliece-6960119f`, `classic-mceliece-8192128`, `classic-mceliece-8192128f`
-- **FrodoKEM**:`frodo-640-aes`, `frodo-976-aes`
+- **FrodoKEM**:`frodo-640-aes`, `frodo-640-shake`, `frodo-976-aes`, `frodo-976-shake`, `frodo-1344-aes`, `frodo-1344-shake`
+- **HQC**: `hqc-128-1-cca2`, `hqc-192-1-cca2`, `hqc-192-2-cca2`, `hqc-256-1-cca2`†, `hqc-256-2-cca2`†, `hqc-256-3-cca2`†
 - **Kyber**:`kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
 - **NewHope**:`newhope-512`, `newhope-1024`
 - **NTRU**:`ntru-hps-2048-509`, `ntru-hps-2048-677`
 - **Saber**:`saber-lightsaber`, `saber-saber`, `saber-firesaber`
 - **SIDH**:`sidh-p434`, `sidh-p503`, `sidh-p610`, `sidh-p751`, `sidh-p434-compressed`, `sidh-p503-compressed`, `sidh-p610-compressed`, `sidh-p751-compressed`
 - **SIKE**:`sike-p434`, `sike-p503`, `sike-p610`, `sike-p751`, `sike-p434-compressed`, `sike-p503-compressed`, `sike-p610-compressed`, `sike-p751-compressed`
-- **ThreeBears**:`babybear`, `mamabear`, `papabear`, `babybear_ephem`, `mamabear_ephem`, `papabear_ephem`
+- **ThreeBears**:`babybear`, `mamabear`, `papabear`, `babybear-ephem`, `mamabear-ephem`, `papabear-ephem`
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with ECDH that uses NIST's P384 curve:
 
 - `ecdh-nistp384-<KEX>`, where ``<KEX>`` is any one of the algorithms listed above.
+
+Note that algorithms marked with a dagger (†) have large stack usage and may cause failures when run on threads or in constrained environments.
 
 #### Digital Signature
 
