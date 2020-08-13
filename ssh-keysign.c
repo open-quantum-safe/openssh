@@ -167,7 +167,7 @@ main(int argc, char **argv)
 	struct sshbuf *b;
 	Options options;
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_START
-#define NUM_KEYTYPES 42
+#define NUM_KEYTYPES 36
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_END
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
@@ -196,10 +196,8 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC3_L1_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_QTESLA_P_I_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RAINBOW_VC_CLASSIC_KEY_FILE, O_RDONLY);
@@ -212,14 +210,10 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_P256_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_FALCON_512_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_MQDSS_31_48_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P256_MQDSS_31_48_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC_L1FS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC3_L1_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_QTESLA_P_I_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P256_QTESLA_P_I_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE, O_RDONLY);

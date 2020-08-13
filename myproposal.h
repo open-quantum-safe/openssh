@@ -77,13 +77,6 @@
 #else
 #define KEX_PQ_METHOD_KYBER ""
 #endif /* HAVE_KYBER */
-#ifdef HAVE_NEWHOPE
-#define KEX_PQ_METHOD_NEWHOPE \
-    PQ_OQS_KEX_METHOD("newhope-512-sha384") \
-    PQ_OQS_KEX_METHOD("newhope-1024-sha384")
-#else
-#define KEX_PQ_METHOD_NEWHOPE ""
-#endif /* HAVE_NEWHOPE */
 #ifdef HAVE_NTRU
 #define KEX_PQ_METHOD_NTRU \
     PQ_OQS_KEX_METHOD("ntru-hps-2048-509-sha384") \
@@ -127,17 +120,6 @@
 #else
 #define KEX_PQ_METHOD_SIKE ""
 #endif /* HAVE_SIKE */
-#ifdef HAVE_THREEBEARS
-#define KEX_PQ_METHOD_THREEBEARS \
-    PQ_OQS_KEX_METHOD("babybear-sha384") \
-    PQ_OQS_KEX_METHOD("babybear-ephem-sha384") \
-    PQ_OQS_KEX_METHOD("mamabear-sha384") \
-    PQ_OQS_KEX_METHOD("mamabear-ephem-sha384") \
-    PQ_OQS_KEX_METHOD("papabear-sha384") \
-    PQ_OQS_KEX_METHOD("papabear-ephem-sha384")
-#else
-#define KEX_PQ_METHOD_THREEBEARS ""
-#endif /* HAVE_THREEBEARS */
 #ifdef HAVE_HQC
 #define KEX_PQ_METHOD_HQC \
     PQ_OQS_KEX_METHOD("hqc-128-1-cca2-sha384") \
@@ -156,12 +138,10 @@
 #define KEX_PQ_METHOD_CLASSIC_MCELIECE ""
 #define KEX_PQ_METHOD_FRODO ""
 #define KEX_PQ_METHOD_KYBER ""
-#define KEX_PQ_METHOD_NEWHOPE ""
 #define KEX_PQ_METHOD_NTRU ""
 #define KEX_PQ_METHOD_SABER ""
 #define KEX_PQ_METHOD_SIDH ""
 #define KEX_PQ_METHOD_SIKE ""
-#define KEX_PQ_METHOD_THREEBEARS ""
 #define KEX_PQ_METHOD_HQC ""
 ///// OQS_TEMPLATE_FRAGMENT_UNDEFINE_PQ_KEXS_END
 #endif /* defined(WITH_OQS) && defined(WITH_PQ_KEX) */
@@ -173,12 +153,10 @@
     KEX_PQ_METHOD_CLASSIC_MCELIECE \
     KEX_PQ_METHOD_FRODO \
     KEX_PQ_METHOD_KYBER \
-    KEX_PQ_METHOD_NEWHOPE \
     KEX_PQ_METHOD_NTRU \
     KEX_PQ_METHOD_SABER \
     KEX_PQ_METHOD_SIDH \
     KEX_PQ_METHOD_SIKE \
-    KEX_PQ_METHOD_THREEBEARS \
     KEX_PQ_METHOD_HQC
 ///// OQS_TEMPLATE_FRAGMENT_LIST_PQ_KEXS_END
 
@@ -232,13 +210,6 @@
 #else
 #define KEX_HYBRID_METHOD_KYBER ""
 #endif /* HAVE_KYBER */
-#ifdef HAVE_NEWHOPE
-#define KEX_HYBRID_METHOD_NEWHOPE \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-newhope-512-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-newhope-1024-sha384")
-#else
-#define KEX_HYBRID_METHOD_NEWHOPE ""
-#endif /* HAVE_NEWHOPE */
 #ifdef HAVE_NTRU
 #define KEX_HYBRID_METHOD_NTRU \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-ntru-hps-2048-509-sha384") \
@@ -282,17 +253,6 @@
 #else
 #define KEX_HYBRID_METHOD_SIKE ""
 #endif /* HAVE_SIKE */
-#ifdef HAVE_THREEBEARS
-#define KEX_HYBRID_METHOD_THREEBEARS \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-babybear-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-babybear-ephem-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-mamabear-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-mamabear-ephem-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-papabear-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-papabear-ephem-sha384")
-#else
-#define KEX_HYBRID_METHOD_THREEBEARS ""
-#endif /* HAVE_THREEBEARS */
 #ifdef HAVE_HQC
 #define KEX_HYBRID_METHOD_HQC \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-128-1-cca2-sha384") \
@@ -311,12 +271,10 @@
 #define KEX_HYBRID_METHOD_CLASSIC_MCELIECE ""
 #define KEX_HYBRID_METHOD_FRODO ""
 #define KEX_HYBRID_METHOD_KYBER ""
-#define KEX_HYBRID_METHOD_NEWHOPE ""
 #define KEX_HYBRID_METHOD_NTRU ""
 #define KEX_HYBRID_METHOD_SABER ""
 #define KEX_HYBRID_METHOD_SIDH ""
 #define KEX_HYBRID_METHOD_SIKE ""
-#define KEX_HYBRID_METHOD_THREEBEARS ""
 #define KEX_HYBRID_METHOD_HQC ""
 ///// OQS_TEMPLATE_FRAGMENT_UNDEFINE_HYBRID_KEXS_END
 #endif /* defined(WITH_OQS) && defined(WITH_HYBRID_KEX) */
@@ -328,12 +286,10 @@
     KEX_HYBRID_METHOD_CLASSIC_MCELIECE \
     KEX_HYBRID_METHOD_FRODO \
     KEX_HYBRID_METHOD_KYBER \
-    KEX_HYBRID_METHOD_NEWHOPE \
     KEX_HYBRID_METHOD_NTRU \
     KEX_HYBRID_METHOD_SABER \
     KEX_HYBRID_METHOD_SIDH \
     KEX_HYBRID_METHOD_SIKE \
-    KEX_HYBRID_METHOD_THREEBEARS \
     KEX_HYBRID_METHOD_HQC
 ///// OQS_TEMPLATE_FRAGMENT_LIST_HYBRID_KEXS_END
 

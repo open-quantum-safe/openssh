@@ -45,20 +45,6 @@ sigs:
         oqs_meth: "OQS_SIG_alg_falcon_1024"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
   -
-    family: "MQDSS"
-    variants:
-      -
-        enable: true
-        name: "MQDSS_31_48"
-        oqs_meth: "OQS_SIG_alg_mqdss_31_48"
-        mix_with: [{'name':'rsa3072'},
-                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
-      -
-        enable: false
-        name: "MQDSS_31_64"
-        oqs_meth: "OQS_SIG_alg_mqdss_31_64"
-        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
-  -
     family: "PICNIC"
     variants:
       -
@@ -125,20 +111,6 @@ sigs:
         name: "PICNIC3_L5"
         oqs_meth: "OQS_SIG_alg_picnic3_L5"
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
-  -
-    family: "QTESLA"
-    variants:
-      -
-        enable: true
-        name: "QTESLA_P_I"
-        oqs_meth: "OQS_SIG_alg_qTesla_p_I"
-        mix_with: [{'name':'rsa3072'},
-                   {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
-      -
-        enable: false
-        name: "QTESLA_P_III"
-        oqs_meth: "OQS_SIG_alg_qTesla_p_III"
-        mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
     family: "RAINBOW"
     variants:
@@ -481,15 +453,6 @@ kems:
         name: "KYBER_1024_90S"
         oqs_meth: "OQS_KEM_alg_kyber_1024_90s"
   -
-    family: "NEWHOPE"
-    variants:
-      -
-        name: "NEWHOPE_512"
-        oqs_meth: "OQS_KEM_alg_newhope_512cca"
-      -
-        name: "NEWHOPE_1024"
-        oqs_meth: "OQS_KEM_alg_newhope_1024cca"
-  -
     family: "NTRU"
     variants:
       -
@@ -570,27 +533,6 @@ kems:
       -
         name: "SIKE_P751_COMPRESSED"
         oqs_meth: "OQS_KEM_alg_sike_p751_compressed"
-  -
-    family: "THREEBEARS"
-    variants:
-      -
-        name: "BABYBEAR"
-        oqs_meth: "OQS_KEM_alg_threebears_babybear"
-      -
-        name: "BABYBEAR_EPHEM"
-        oqs_meth: "OQS_KEM_alg_threebears_babybear_ephem"
-      -
-        name: "MAMABEAR"
-        oqs_meth: "OQS_KEM_alg_threebears_mamabear"
-      -
-        name: "MAMABEAR_EPHEM"
-        oqs_meth: "OQS_KEM_alg_threebears_mamabear_ephem"
-      -
-        name: "PAPABEAR"
-        oqs_meth: "OQS_KEM_alg_threebears_papabear"
-      -
-        name: "PAPABEAR_EPHEM"
-        oqs_meth: "OQS_KEM_alg_threebears_papabear_ephem"
   -
     family: "HQC"
     variants:

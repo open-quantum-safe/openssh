@@ -61,12 +61,10 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **FrodoKEM**:`frodo-640-aes`, `frodo-640-shake`, `frodo-976-aes`, `frodo-976-shake`, `frodo-1344-aes`, `frodo-1344-shake`
 - **HQC**: `hqc-128-1-cca2`, `hqc-192-1-cca2`, `hqc-192-2-cca2`, `hqc-256-1-cca2`†, `hqc-256-2-cca2`†, `hqc-256-3-cca2`†
 - **Kyber**:`kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
-- **NewHope**:`newhope-512`, `newhope-1024`
 - **NTRU**:`ntru-hps-2048-509`, `ntru-hps-2048-677`
 - **Saber**:`saber-lightsaber`, `saber-saber`, `saber-firesaber`
 - **SIDH**:`sidh-p434`, `sidh-p503`, `sidh-p610`, `sidh-p751`, `sidh-p434-compressed`, `sidh-p503-compressed`, `sidh-p610-compressed`, `sidh-p751-compressed`
 - **SIKE**:`sike-p434`, `sike-p503`, `sike-p610`, `sike-p751`, `sike-p434-compressed`, `sike-p503-compressed`, `sike-p610-compressed`, `sike-p751-compressed`
-- **ThreeBears**:`babybear`, `mamabear`, `papabear`, `babybear-ephem`, `mamabear-ephem`, `papabear-ephem`
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with ECDH that uses NIST's P384 curve:
 
@@ -80,9 +78,7 @@ The following digital signature algorithms from liboqs are supported (assuming t
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 - **Dilithium**:`dilithium2`, `dilithium3`, `dilithium4`
-- **MQDSS**:`mqdss3148`, `mqdss3164`
 - **Picnic**:`picnicl1fs`, `picnicl1ur`, `picnicl3fs`, `picnicl3ur`, `picnicl5fs`, `picnicl5ur`, `picnic2l1fs`, `picnic2l3fs`
-- **qTesla**:`qteslapi`, `qteslapiii`
 - **Rainbow**: `rainbowiaclassic`, `rainbowiacyclic`, `rainbowiacycliccompressed`, `rainbowiiicclassic`, `rainbowiiiccyclic`, `rainbowiiiccycliccompressed`, `rainbowvcclassic`, `rainbowvccylic`, `rainbowvccycliccompressed`
 - **SPHINCS-Haraka**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincsharaka192frobust`, `sphincsharaka192fsimple`, `sphincsharaka192srobust`, `sphincsharaka192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256fsimple`, `sphincsharaka256srobust`, `sphincsharaka256ssimple`
 - **SPHINCS-SHA256**: `sphincssha256128frobust`, `sphincssha256128fsimple`, `sphincssha256128srobust`, `sphincssha256128ssimple`, `sphincssha256192frobust`, `sphincssha256192fsimple`, `sphincssha256192srobust`, `sphincssha256192ssimple`, `sphincssha256256frobust`, `sphincssha256256fsimple`, `sphincssha256256srobust`, `sphincssha256256ssimple`

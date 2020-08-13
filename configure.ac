@@ -3629,20 +3629,6 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
-	AC_MSG_CHECKING([for libOQS NEWHOPE support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_KEM_NEWHOPE) || (defined(OQS_ENABLE_KEM_newhope_512cca) && defined(OQS_ENABLE_KEM_newhope_1024cca))
-					#else
-					#error "NEWHOPE is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_NEWHOPE], [1], [Define to 1 if LibOQS library is compiled with support for NEWHOPE])
-			], [AC_MSG_RESULT([no])
-	])
-
 	AC_MSG_CHECKING([for libOQS NTRU support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
@@ -3699,20 +3685,6 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
-	AC_MSG_CHECKING([for libOQS THREEBEARS support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_KEM_THREEBEARS) || (defined(OQS_ENABLE_KEM_threebears_babybear) && defined(OQS_ENABLE_KEM_threebears_babybear_ephem) && defined(OQS_ENABLE_KEM_threebears_mamabear) && defined(OQS_ENABLE_KEM_threebears_mamabear_ephem) && defined(OQS_ENABLE_KEM_threebears_papabear) && defined(OQS_ENABLE_KEM_threebears_papabear_ephem))
-					#else
-					#error "THREEBEARS is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_THREEBEARS], [1], [Define to 1 if LibOQS library is compiled with support for THREEBEARS])
-			], [AC_MSG_RESULT([no])
-	])
-
 	AC_MSG_CHECKING([for libOQS HQC support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
@@ -3756,20 +3728,6 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
-	AC_MSG_CHECKING([for libOQS MQDSS support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_MQDSS) || (defined(OQS_ENABLE_SIG_mqdss_31_48))
-					#else
-					#error "MQDSS is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_MQDSS], [1], [Define to 1 if LibOQS library is compiled with support for MQDSS])
-			], [AC_MSG_RESULT([no])
-	])
-
 	AC_MSG_CHECKING([for libOQS PICNIC support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
@@ -3781,20 +3739,6 @@ if test "x$with_liboqs" = "xyes" ; then
 			]])],
 			[ AC_MSG_RESULT([yes])
 				AC_DEFINE([HAVE_PICNIC], [1], [Define to 1 if LibOQS library is compiled with support for PICNIC])
-			], [AC_MSG_RESULT([no])
-	])
-
-	AC_MSG_CHECKING([for libOQS QTESLA support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_QTESLA) || (defined(OQS_ENABLE_SIG_qTesla_p_I))
-					#else
-					#error "QTESLA is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_QTESLA], [1], [Define to 1 if LibOQS library is compiled with support for QTESLA])
 			], [AC_MSG_RESULT([no])
 	])
 

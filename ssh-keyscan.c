@@ -63,40 +63,34 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_OQSDEFAULT ((uint64_t)1<<5)
 #define KT_DILITHIUM_2 ((uint64_t)1<<6)
 #define KT_FALCON_512 ((uint64_t)1<<7)
-#define KT_MQDSS_31_48 ((uint64_t)1<<8)
-#define KT_PICNIC_L1FS ((uint64_t)1<<9)
-#define KT_PICNIC3_L1 ((uint64_t)1<<10)
-#define KT_QTESLA_P_I ((uint64_t)1<<11)
-#define KT_RAINBOW_IA_CLASSIC ((uint64_t)1<<12)
-#define KT_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<13)
-#define KT_RAINBOW_VC_CLASSIC ((uint64_t)1<<14)
-#define KT_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<15)
-#define KT_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<16)
-#define KT_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<17)
-#define KT_RSA3072_OQSDEFAULT ((uint64_t)1<<18)
-#define KT_P256_OQSDEFAULT ((uint64_t)1<<19)
-#define KT_RSA3072_DILITHIUM_2 ((uint64_t)1<<20)
-#define KT_P256_DILITHIUM_2 ((uint64_t)1<<21)
-#define KT_RSA3072_FALCON_512 ((uint64_t)1<<22)
-#define KT_P256_FALCON_512 ((uint64_t)1<<23)
-#define KT_RSA3072_MQDSS_31_48 ((uint64_t)1<<24)
-#define KT_P256_MQDSS_31_48 ((uint64_t)1<<25)
-#define KT_RSA3072_PICNIC_L1FS ((uint64_t)1<<26)
-#define KT_P256_PICNIC_L1FS ((uint64_t)1<<27)
-#define KT_RSA3072_PICNIC3_L1 ((uint64_t)1<<28)
-#define KT_P256_PICNIC3_L1 ((uint64_t)1<<29)
-#define KT_RSA3072_QTESLA_P_I ((uint64_t)1<<30)
-#define KT_P256_QTESLA_P_I ((uint64_t)1<<31)
-#define KT_RSA3072_RAINBOW_IA_CLASSIC ((uint64_t)1<<32)
-#define KT_P256_RAINBOW_IA_CLASSIC ((uint64_t)1<<33)
-#define KT_P384_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<34)
-#define KT_P521_RAINBOW_VC_CLASSIC ((uint64_t)1<<35)
-#define KT_RSA3072_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<36)
-#define KT_P256_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<37)
-#define KT_RSA3072_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<38)
-#define KT_P256_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<39)
-#define KT_RSA3072_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<40)
-#define KT_P256_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<41)
+#define KT_PICNIC_L1FS ((uint64_t)1<<8)
+#define KT_PICNIC3_L1 ((uint64_t)1<<9)
+#define KT_RAINBOW_IA_CLASSIC ((uint64_t)1<<10)
+#define KT_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<11)
+#define KT_RAINBOW_VC_CLASSIC ((uint64_t)1<<12)
+#define KT_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<13)
+#define KT_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<14)
+#define KT_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<15)
+#define KT_RSA3072_OQSDEFAULT ((uint64_t)1<<16)
+#define KT_P256_OQSDEFAULT ((uint64_t)1<<17)
+#define KT_RSA3072_DILITHIUM_2 ((uint64_t)1<<18)
+#define KT_P256_DILITHIUM_2 ((uint64_t)1<<19)
+#define KT_RSA3072_FALCON_512 ((uint64_t)1<<20)
+#define KT_P256_FALCON_512 ((uint64_t)1<<21)
+#define KT_RSA3072_PICNIC_L1FS ((uint64_t)1<<22)
+#define KT_P256_PICNIC_L1FS ((uint64_t)1<<23)
+#define KT_RSA3072_PICNIC3_L1 ((uint64_t)1<<24)
+#define KT_P256_PICNIC3_L1 ((uint64_t)1<<25)
+#define KT_RSA3072_RAINBOW_IA_CLASSIC ((uint64_t)1<<26)
+#define KT_P256_RAINBOW_IA_CLASSIC ((uint64_t)1<<27)
+#define KT_P384_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<28)
+#define KT_P521_RAINBOW_VC_CLASSIC ((uint64_t)1<<29)
+#define KT_RSA3072_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<30)
+#define KT_P256_SPHINCS_HARAKA_128F_ROBUST ((uint64_t)1<<31)
+#define KT_RSA3072_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<32)
+#define KT_P256_SPHINCS_SHA256_128F_ROBUST ((uint64_t)1<<33)
+#define KT_RSA3072_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<34)
+#define KT_P256_SPHINCS_SHAKE256_128F_ROBUST ((uint64_t)1<<35)
 
 #define KT_MIN KT_DSA
 #define KT_MAX KT_P256_SPHINCS_SHAKE256_128F_ROBUST
@@ -108,10 +102,8 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519| \
                    KT_OQSDEFAULT| \
                    KT_DILITHIUM_2| \
                    KT_FALCON_512| \
-                   KT_MQDSS_31_48| \
                    KT_PICNIC_L1FS| \
                    KT_PICNIC3_L1| \
-                   KT_QTESLA_P_I| \
                    KT_RAINBOW_IA_CLASSIC| \
                    KT_RAINBOW_IIIC_CLASSIC| \
                    KT_RAINBOW_VC_CLASSIC| \
@@ -124,14 +116,10 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519| \
                    KT_P256_DILITHIUM_2| \
                    KT_RSA3072_FALCON_512| \
                    KT_P256_FALCON_512| \
-                   KT_RSA3072_MQDSS_31_48| \
-                   KT_P256_MQDSS_31_48| \
                    KT_RSA3072_PICNIC_L1FS| \
                    KT_P256_PICNIC_L1FS| \
                    KT_RSA3072_PICNIC3_L1| \
                    KT_P256_PICNIC3_L1| \
-                   KT_RSA3072_QTESLA_P_I| \
-                   KT_P256_QTESLA_P_I| \
                    KT_RSA3072_RAINBOW_IA_CLASSIC| \
                    KT_P256_RAINBOW_IA_CLASSIC| \
                    KT_P384_RAINBOW_IIIC_CLASSIC| \
@@ -816,17 +804,11 @@ main(int argc, char **argv)
 				case KEY_FALCON_512:
 					get_keytypes |= KT_FALCON_512;
 					break;
-				case KEY_MQDSS_31_48:
-					get_keytypes |= KT_MQDSS_31_48;
-					break;
 				case KEY_PICNIC_L1FS:
 					get_keytypes |= KT_PICNIC_L1FS;
 					break;
 				case KEY_PICNIC3_L1:
 					get_keytypes |= KT_PICNIC3_L1;
-					break;
-				case KEY_QTESLA_P_I:
-					get_keytypes |= KT_QTESLA_P_I;
 					break;
 				case KEY_RAINBOW_IA_CLASSIC:
 					get_keytypes |= KT_RAINBOW_IA_CLASSIC;
@@ -864,12 +846,6 @@ main(int argc, char **argv)
 				case KEY_P256_FALCON_512:
 					get_keytypes |= KT_P256_FALCON_512;
 					break;
-				case KEY_RSA3072_MQDSS_31_48:
-					get_keytypes |= KT_RSA3072_MQDSS_31_48;
-					break;
-				case KEY_P256_MQDSS_31_48:
-					get_keytypes |= KT_P256_MQDSS_31_48;
-					break;
 				case KEY_RSA3072_PICNIC_L1FS:
 					get_keytypes |= KT_RSA3072_PICNIC_L1FS;
 					break;
@@ -881,12 +857,6 @@ main(int argc, char **argv)
 					break;
 				case KEY_P256_PICNIC3_L1:
 					get_keytypes |= KT_P256_PICNIC3_L1;
-					break;
-				case KEY_RSA3072_QTESLA_P_I:
-					get_keytypes |= KT_RSA3072_QTESLA_P_I;
-					break;
-				case KEY_P256_QTESLA_P_I:
-					get_keytypes |= KT_P256_QTESLA_P_I;
 					break;
 				case KEY_RSA3072_RAINBOW_IA_CLASSIC:
 					get_keytypes |= KT_RSA3072_RAINBOW_IA_CLASSIC;
