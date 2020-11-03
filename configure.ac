@@ -3699,6 +3699,20 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
+	AC_MSG_CHECKING([for libOQS NTRU_PRIME support])
+	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+				#include <oqs/oqs.h>
+			]], [[
+					#if defined(OQS_ENABLE_KEM_NTRU_PRIME) || (defined(OQS_ENABLE_KEM_ntruprime_ntrulpr653) && defined(OQS_ENABLE_KEM_ntruprime_ntrulpr761) && defined(OQS_ENABLE_KEM_ntruprime_ntrulpr857) && defined(OQS_ENABLE_KEM_ntruprime_sntrup653) && defined(OQS_ENABLE_KEM_ntruprime_sntrup761) && defined(OQS_ENABLE_KEM_ntruprime_sntrup857))
+					#else
+					#error "NTRU_PRIME is not supported"
+					#endif
+			]])],
+			[ AC_MSG_RESULT([yes])
+				AC_DEFINE([HAVE_NTRU_PRIME], [1], [Define to 1 if LibOQS library is compiled with support for NTRU_PRIME])
+			], [AC_MSG_RESULT([no])
+	])
+
 
 	AC_MSG_CHECKING([for libOQS DILITHIUM support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[

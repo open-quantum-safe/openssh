@@ -554,3 +554,24 @@ kems:
       -
         name: "HQC_256_3_CCA2"
         oqs_meth: 'OQS_KEM_alg_hqc_256_3_cca2'
+  -
+    family: "NTRU_PRIME"
+    variants:
+      -
+        name: 'NTRULPR_653'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_ntrulpr653'
+      -
+        name: 'NTRULPR_761'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_ntrulpr761'
+      -
+        name: 'NTRULPR_857'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_ntrulpr857'
+      -
+        name: 'SNTRUP_653'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_sntrup653'
+      -
+        name: 'SNTRUP_761'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_sntrup761'
+      -
+        name: 'SNTRUP_857'
+        oqs_meth: 'OQS_KEM_alg_ntruprime_sntrup857'
