@@ -63,7 +63,7 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_OQSDEFAULT ((uint64_t)1<<5)
 #define KT_DILITHIUM_2 ((uint64_t)1<<6)
 #define KT_FALCON_512 ((uint64_t)1<<7)
-#define KT_PICNIC_L1FS ((uint64_t)1<<8)
+#define KT_PICNIC_L1FULL ((uint64_t)1<<8)
 #define KT_PICNIC3_L1 ((uint64_t)1<<9)
 #define KT_RAINBOW_IA_CLASSIC ((uint64_t)1<<10)
 #define KT_RAINBOW_IIIC_CLASSIC ((uint64_t)1<<11)
@@ -77,8 +77,8 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_P256_DILITHIUM_2 ((uint64_t)1<<19)
 #define KT_RSA3072_FALCON_512 ((uint64_t)1<<20)
 #define KT_P256_FALCON_512 ((uint64_t)1<<21)
-#define KT_RSA3072_PICNIC_L1FS ((uint64_t)1<<22)
-#define KT_P256_PICNIC_L1FS ((uint64_t)1<<23)
+#define KT_RSA3072_PICNIC_L1FULL ((uint64_t)1<<22)
+#define KT_P256_PICNIC_L1FULL ((uint64_t)1<<23)
 #define KT_RSA3072_PICNIC3_L1 ((uint64_t)1<<24)
 #define KT_P256_PICNIC3_L1 ((uint64_t)1<<25)
 #define KT_RSA3072_RAINBOW_IA_CLASSIC ((uint64_t)1<<26)
@@ -102,7 +102,7 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519| \
                    KT_OQSDEFAULT| \
                    KT_DILITHIUM_2| \
                    KT_FALCON_512| \
-                   KT_PICNIC_L1FS| \
+                   KT_PICNIC_L1FULL| \
                    KT_PICNIC3_L1| \
                    KT_RAINBOW_IA_CLASSIC| \
                    KT_RAINBOW_IIIC_CLASSIC| \
@@ -116,8 +116,8 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519| \
                    KT_P256_DILITHIUM_2| \
                    KT_RSA3072_FALCON_512| \
                    KT_P256_FALCON_512| \
-                   KT_RSA3072_PICNIC_L1FS| \
-                   KT_P256_PICNIC_L1FS| \
+                   KT_RSA3072_PICNIC_L1FULL| \
+                   KT_P256_PICNIC_L1FULL| \
                    KT_RSA3072_PICNIC3_L1| \
                    KT_P256_PICNIC3_L1| \
                    KT_RSA3072_RAINBOW_IA_CLASSIC| \
@@ -804,8 +804,8 @@ main(int argc, char **argv)
 				case KEY_FALCON_512:
 					get_keytypes |= KT_FALCON_512;
 					break;
-				case KEY_PICNIC_L1FS:
-					get_keytypes |= KT_PICNIC_L1FS;
+				case KEY_PICNIC_L1FULL:
+					get_keytypes |= KT_PICNIC_L1FULL;
 					break;
 				case KEY_PICNIC3_L1:
 					get_keytypes |= KT_PICNIC3_L1;
@@ -846,11 +846,11 @@ main(int argc, char **argv)
 				case KEY_P256_FALCON_512:
 					get_keytypes |= KT_P256_FALCON_512;
 					break;
-				case KEY_RSA3072_PICNIC_L1FS:
-					get_keytypes |= KT_RSA3072_PICNIC_L1FS;
+				case KEY_RSA3072_PICNIC_L1FULL:
+					get_keytypes |= KT_RSA3072_PICNIC_L1FULL;
 					break;
-				case KEY_P256_PICNIC_L1FS:
-					get_keytypes |= KT_P256_PICNIC_L1FS;
+				case KEY_P256_PICNIC_L1FULL:
+					get_keytypes |= KT_P256_PICNIC_L1FULL;
 					break;
 				case KEY_RSA3072_PICNIC3_L1:
 					get_keytypes |= KT_RSA3072_PICNIC3_L1;

@@ -2031,7 +2031,7 @@ fill_default_options(Options * options)
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_OQSDEFAULT, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_FALCON_512, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC_L1FULL, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_PICNIC3_L1, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IA_CLASSIC, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RAINBOW_IIIC_CLASSIC, 0);
@@ -2049,8 +2049,8 @@ fill_default_options(Options * options)
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_FALCON_512, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_FALCON_512, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC_L1FS, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC_L1FS, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC_L1FULL, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC_L1FULL, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_PICNIC3_L1, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_P256_PICNIC3_L1, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_RAINBOW_IA_CLASSIC, 0);

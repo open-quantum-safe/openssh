@@ -288,7 +288,7 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_FALCON_512_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_PICNIC_L1FS_KEY_FILE);
+		    _PATH_HOST_PICNIC_L1FULL_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
@@ -320,9 +320,9 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P256_FALCON_512_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE);
+		    _PATH_HOST_RSA3072_PICNIC_L1FULL_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE);
+		    _PATH_HOST_P256_PICNIC_L1FULL_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,

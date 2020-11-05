@@ -6,7 +6,7 @@
 				strcmp(alg, "ssh-rsa3072-oqsdefault") == 0 || \
 				strcmp(alg, "ssh-rsa3072-dilithium2") == 0 || \
 				strcmp(alg, "ssh-rsa3072-falcon512") == 0 || \
-				strcmp(alg, "ssh-rsa3072-picnicl1fs") == 0 || \
+				strcmp(alg, "ssh-rsa3072-picnicl1full") == 0 || \
 				strcmp(alg, "ssh-rsa3072-picnic3l1") == 0 || \
 				strcmp(alg, "ssh-rsa3072-rainbowiaclassic") == 0 || \
 				strcmp(alg, "ssh-rsa3072-sphincsharaka128frobust") == 0 || \
@@ -17,7 +17,7 @@
 				alg == KEY_RSA3072_OQSDEFAULT || \
 				alg == KEY_RSA3072_DILITHIUM_2 || \
 				alg == KEY_RSA3072_FALCON_512 || \
-				alg == KEY_RSA3072_PICNIC_L1FS || \
+				alg == KEY_RSA3072_PICNIC_L1FULL || \
 				alg == KEY_RSA3072_PICNIC3_L1 || \
 				alg == KEY_RSA3072_RAINBOW_IA_CLASSIC || \
 				alg == KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST || \
@@ -28,7 +28,7 @@
 				alg == KEY_P256_OQSDEFAULT || \
 				alg == KEY_P256_DILITHIUM_2 || \
 				alg == KEY_P256_FALCON_512 || \
-				alg == KEY_P256_PICNIC_L1FS || \
+				alg == KEY_P256_PICNIC_L1FULL || \
 				alg == KEY_P256_PICNIC3_L1 || \
 				alg == KEY_P256_RAINBOW_IA_CLASSIC || \
 				alg == KEY_P256_SPHINCS_HARAKA_128F_ROBUST || \
@@ -45,7 +45,7 @@
 				(type) == KEY_OQSDEFAULT || \
 				(type) == KEY_DILITHIUM_2 || \
 				(type) == KEY_FALCON_512 || \
-				(type) == KEY_PICNIC_L1FS || \
+				(type) == KEY_PICNIC_L1FULL || \
 				(type) == KEY_PICNIC3_L1 || \
 				(type) == KEY_RAINBOW_IA_CLASSIC || \
 				(type) == KEY_RAINBOW_IIIC_CLASSIC || \
@@ -61,7 +61,7 @@
 	case KEY_OQSDEFAULT: \
 	case KEY_DILITHIUM_2: \
 	case KEY_FALCON_512: \
-	case KEY_PICNIC_L1FS: \
+	case KEY_PICNIC_L1FULL: \
 	case KEY_PICNIC3_L1: \
 	case KEY_RAINBOW_IA_CLASSIC: \
 	case KEY_RAINBOW_IIIC_CLASSIC: \
@@ -76,7 +76,7 @@
 	case KEY_RSA3072_OQSDEFAULT: \
 	case KEY_RSA3072_DILITHIUM_2: \
 	case KEY_RSA3072_FALCON_512: \
-	case KEY_RSA3072_PICNIC_L1FS: \
+	case KEY_RSA3072_PICNIC_L1FULL: \
 	case KEY_RSA3072_PICNIC3_L1: \
 	case KEY_RSA3072_RAINBOW_IA_CLASSIC: \
 	case KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST: \
@@ -87,7 +87,7 @@
 	case KEY_P256_OQSDEFAULT: \
 	case KEY_P256_DILITHIUM_2: \
 	case KEY_P256_FALCON_512: \
-	case KEY_P256_PICNIC_L1FS: \
+	case KEY_P256_PICNIC_L1FULL: \
 	case KEY_P256_PICNIC3_L1: \
 	case KEY_P256_RAINBOW_IA_CLASSIC: \
 	case KEY_P256_SPHINCS_HARAKA_128F_ROBUST: \

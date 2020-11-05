@@ -78,7 +78,7 @@ The following digital signature algorithms from liboqs are supported (assuming t
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 - **Dilithium**:`dilithium2`, `dilithium3`, `dilithium4`
-- **Picnic**:`picnicl1fs`, `picnicl1ur`, `picnicl3fs`, `picnicl3ur`, `picnicl5fs`, `picnicl5ur`, `picnic2l1fs`, `picnic2l3fs`
+- **Picnic**:`picnicl1fs`, `picnicl1ur`, `picnicl1full`, `picnicl3fs`, `picnicl3ur`, `picnicl3full`, `picnicl5fs`, `picnicl5ur`, `picnicl5full`, `picnic3l1`, `picnic3l3`, `picnic3l5`
 - **Rainbow**: `rainbowiaclassic`, `rainbowiacyclic`, `rainbowiacycliccompressed`, `rainbowiiicclassic`, `rainbowiiiccyclic`, `rainbowiiiccycliccompressed`, `rainbowvcclassic`, `rainbowvccylic`, `rainbowvccycliccompressed`
 - **SPHINCS-Haraka**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincsharaka192frobust`, `sphincsharaka192fsimple`, `sphincsharaka192srobust`, `sphincsharaka192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256fsimple`, `sphincsharaka256srobust`, `sphincsharaka256ssimple`
 - **SPHINCS-SHA256**: `sphincssha256128frobust`, `sphincssha256128fsimple`, `sphincssha256128srobust`, `sphincssha256128ssimple`, `sphincssha256192frobust`, `sphincssha256192fsimple`, `sphincssha256192srobust`, `sphincssha256192ssimple`, `sphincssha256256frobust`, `sphincssha256256fsimple`, `sphincssha256256srobust`, `sphincssha256256ssimple`

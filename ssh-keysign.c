@@ -196,7 +196,7 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_OQSDEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FS_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FULL_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC3_L1_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE, O_RDONLY);
@@ -210,8 +210,8 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_P256_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_FALCON_512_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P256_PICNIC_L1FS_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC_L1FULL_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_P256_PICNIC_L1FULL_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC3_L1_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE, O_RDONLY);

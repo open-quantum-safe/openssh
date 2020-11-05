@@ -316,8 +316,8 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_FALCON_512:
 			name = _PATH_SSH_CLIENT_ID_FALCON_512;
 			break;
-		case KEY_PICNIC_L1FS:
-			name = _PATH_SSH_CLIENT_ID_PICNIC_L1FS;
+		case KEY_PICNIC_L1FULL:
+			name = _PATH_SSH_CLIENT_ID_PICNIC_L1FULL;
 			break;
 		case KEY_PICNIC3_L1:
 			name = _PATH_SSH_CLIENT_ID_PICNIC3_L1;
@@ -1078,7 +1078,7 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "oqsdefault", "OQSDEFAULT", _PATH_HOST_OQSDEFAULT_KEY_FILE },
 		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
 		{ "falcon512", "FALCON_512", _PATH_HOST_FALCON_512_KEY_FILE },
-		{ "picnicl1fs", "PICNIC_L1FS", _PATH_HOST_PICNIC_L1FS_KEY_FILE },
+		{ "picnicl1full", "PICNIC_L1FULL", _PATH_HOST_PICNIC_L1FULL_KEY_FILE },
 		{ "picnic3l1", "PICNIC3_L1", _PATH_HOST_PICNIC3_L1_KEY_FILE },
 		{ "rainbowiaclassic", "RAINBOW_IA_CLASSIC", _PATH_HOST_RAINBOW_IA_CLASSIC_KEY_FILE },
 		{ "rainbowiiicclassic", "RAINBOW_IIIC_CLASSIC", _PATH_HOST_RAINBOW_IIIC_CLASSIC_KEY_FILE },
@@ -1094,7 +1094,7 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "rsa3072_oqsdefault", "RSA3072_OQSDEFAULT", _PATH_HOST_RSA3072_OQSDEFAULT_KEY_FILE },
 		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
 		{ "rsa3072_falcon512", "RSA3072_FALCON_512", _PATH_HOST_RSA3072_FALCON_512_KEY_FILE },
-		{ "rsa3072_picnicl1fs", "RSA3072_PICNIC_L1FS", _PATH_HOST_RSA3072_PICNIC_L1FS_KEY_FILE },
+		{ "rsa3072_picnicl1full", "RSA3072_PICNIC_L1FULL", _PATH_HOST_RSA3072_PICNIC_L1FULL_KEY_FILE },
 		{ "rsa3072_picnic3l1", "RSA3072_PICNIC3_L1", _PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE },
 		{ "rsa3072_rainbowiaclassic", "RSA3072_RAINBOW_IA_CLASSIC", _PATH_HOST_RSA3072_RAINBOW_IA_CLASSIC_KEY_FILE },
 		{ "rsa3072_sphincsharaka128frobust", "RSA3072_SPHINCS_HARAKA_128F_ROBUST", _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE },
@@ -1104,7 +1104,7 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "p256_oqsdefault", "P256_OQSDEFAULT", _PATH_HOST_P256_OQSDEFAULT_KEY_FILE },
 		{ "p256_dilithium2", "P256_DILITHIUM_2", _PATH_HOST_P256_DILITHIUM_2_KEY_FILE },
 		{ "p256_falcon512", "P256_FALCON_512", _PATH_HOST_P256_FALCON_512_KEY_FILE },
-		{ "p256_picnicl1fs", "P256_PICNIC_L1FS", _PATH_HOST_P256_PICNIC_L1FS_KEY_FILE },
+		{ "p256_picnicl1full", "P256_PICNIC_L1FULL", _PATH_HOST_P256_PICNIC_L1FULL_KEY_FILE },
 		{ "p256_picnic3l1", "P256_PICNIC3_L1", _PATH_HOST_P256_PICNIC3_L1_KEY_FILE },
 		{ "p256_rainbowiaclassic", "P256_RAINBOW_IA_CLASSIC", _PATH_HOST_P256_RAINBOW_IA_CLASSIC_KEY_FILE },
 		{ "p384_rainbowiiicclassic", "P384_RAINBOW_IIIC_CLASSIC", _PATH_HOST_P384_RAINBOW_IIIC_CLASSIC_KEY_FILE },
@@ -2882,7 +2882,7 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
                  _PATH_HOST_FALCON_512_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
-                 _PATH_HOST_PICNIC_L1FS_KEY_FILE, rr_hostname);
+                 _PATH_HOST_PICNIC_L1FULL_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
                  _PATH_HOST_PICNIC3_L1_KEY_FILE, rr_hostname);
 			n += do_print_resource_record(pw,
