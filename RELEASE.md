@@ -20,7 +20,7 @@ What's New
 
 This is the fourth snapshot release of the OQS fork of OpenSSH.  It is based on OpenSSH 7.9 portable 1.
 
-- Uses the updated NIST Round 2 submissions added to liboqs 0.4.0, as described in the [liboqs release notes](https://github.com/open-quantum-safe/liboqs/blob/master/RELEASE.md).
+- Uses the updated NIST Round 2 submissions added to liboqs 0.4.0, as described in the [liboqs release notes](https://github.com/open-quantum-safe/liboqs/blob/main/RELEASE.md).
 
 Deprecations
 ------------
