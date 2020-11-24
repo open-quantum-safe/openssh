@@ -103,6 +103,10 @@ On **Ubuntu**, you need to install the following packages:
 
 	sudo apt install autoconf automake cmake gcc libtool libssl-dev make ninja-build zlib1g-dev
 
+If you want to run the OQS-specific tests (see the bottom of Step 2 below), you also need to install the following packages:
+
+	sudo apt install python3 python3-nose python3-rednose
+
 On **Linux**, you also may need to do the following:
 
 - You may need to create the privilege separation directory:
@@ -159,6 +163,7 @@ To test the build, run:
 	make tests
 
 To run OQS-specific tests of all the post-quantum key-exchanges:
+
 
 ```
 python3 -m nose --rednose --verbose
