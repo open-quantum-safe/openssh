@@ -3689,7 +3689,7 @@ if test "x$with_liboqs" = "xyes" ; then
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>
 			]], [[
-					#if defined(OQS_ENABLE_KEM_HQC) || (defined(OQS_ENABLE_KEM_hqc_128_1_cca2) && defined(OQS_ENABLE_KEM_hqc_192_1_cca2) && defined(OQS_ENABLE_KEM_hqc_192_2_cca2) && defined(OQS_ENABLE_KEM_hqc_256_1_cca2) && defined(OQS_ENABLE_KEM_hqc_256_2_cca2) && defined(OQS_ENABLE_KEM_hqc_256_3_cca2))
+					#if defined(OQS_ENABLE_KEM_HQC) || (defined(OQS_ENABLE_KEM_hqc_128) && defined(OQS_ENABLE_KEM_hqc_192) && defined(OQS_ENABLE_KEM_hqc_256))
 					#else
 					#error "HQC is not supported"
 					#endif

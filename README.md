@@ -59,7 +59,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **BIKE**:`bike1-l1-cpa`, `bike1-l3-cpa`, `bike1-l1-fo`, `bike2-l3-fo`
 - **Classic McEliece**: `classic-mceliece-348864`, `classic-mceliece-348864f`, `classic-mceliece-460896`, `classic-mceliece-460896f`, `classic-mceliece-6688128`, `classic-mceliece-6688128f`, `classic-mceliece-6960119`, `classic-mceliece-6960119f`, `classic-mceliece-8192128`, `classic-mceliece-8192128f`
 - **FrodoKEM**:`frodo-640-aes`, `frodo-640-shake`, `frodo-976-aes`, `frodo-976-shake`, `frodo-1344-aes`, `frodo-1344-shake`
-- **HQC**: `hqc-128-1-cca2`, `hqc-192-1-cca2`, `hqc-192-2-cca2`, `hqc-256-1-cca2`†, `hqc-256-2-cca2`†, `hqc-256-3-cca2`†
+- **HQC**: `hqc-128`, `hqc-192`, `hqc-256`†
 - **Kyber**:`kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
 - **NTRU**:`ntru-hps-2048-509`, `ntru-hps-2048-677`
 - **NTRU-Prime**: `ntrulpr-653`, `ntrulpr-761`, `ntrulpr-857`, `sntrup-653`, `sntrup-761`, `sntrup-857`

@@ -537,23 +537,14 @@ kems:
     family: "HQC"
     variants:
       -
-        name: "HQC_128_1_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_128_1_cca2'
+        name: "HQC_128"
+        oqs_meth: 'OQS_KEM_alg_hqc_128'
       -
-        name: "HQC_192_1_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_192_1_cca2'
+        name: "HQC_192"
+        oqs_meth: 'OQS_KEM_alg_hqc_192'
       -
-        name: "HQC_192_2_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_192_2_cca2'
-      -
-        name: "HQC_256_1_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_256_1_cca2'
-      -
-        name: "HQC_256_2_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_256_2_cca2'
-      -
-        name: "HQC_256_3_CCA2"
-        oqs_meth: 'OQS_KEM_alg_hqc_256_3_cca2'
+        name: "HQC_256"
+        oqs_meth: 'OQS_KEM_alg_hqc_256'
   -
     family: "NTRU_PRIME"
     variants:

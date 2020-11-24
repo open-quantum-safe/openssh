@@ -122,12 +122,9 @@
 #endif /* HAVE_SIKE */
 #ifdef HAVE_HQC
 #define KEX_PQ_METHOD_HQC \
-    PQ_OQS_KEX_METHOD("hqc-128-1-cca2-sha384") \
-    PQ_OQS_KEX_METHOD("hqc-192-1-cca2-sha384") \
-    PQ_OQS_KEX_METHOD("hqc-192-2-cca2-sha384") \
-    PQ_OQS_KEX_METHOD("hqc-256-1-cca2-sha384") \
-    PQ_OQS_KEX_METHOD("hqc-256-2-cca2-sha384") \
-    PQ_OQS_KEX_METHOD("hqc-256-3-cca2-sha384")
+    PQ_OQS_KEX_METHOD("hqc-128-sha384") \
+    PQ_OQS_KEX_METHOD("hqc-192-sha384") \
+    PQ_OQS_KEX_METHOD("hqc-256-sha384")
 #else
 #define KEX_PQ_METHOD_HQC ""
 #endif /* HAVE_HQC */
@@ -268,12 +265,9 @@
 #endif /* HAVE_SIKE */
 #ifdef HAVE_HQC
 #define KEX_HYBRID_METHOD_HQC \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-128-1-cca2-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-192-1-cca2-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-192-2-cca2-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-256-1-cca2-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-256-2-cca2-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-256-3-cca2-sha384")
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-128-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-192-sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-hqc-256-sha384")
 #else
 #define KEX_HYBRID_METHOD_HQC ""
 #endif /* HAVE_HQC */
