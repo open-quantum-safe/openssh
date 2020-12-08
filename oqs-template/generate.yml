@@ -522,7 +522,7 @@ kems:
         name: "SIKE_P751"
         oqs_meth: "OQS_KEM_alg_sike_p751"
       -
-        NAME: "SIKE_P434_COMPRESSED"
+        name: "SIKE_P434_COMPRESSED"
         oqs_meth: "OQS_KEM_alg_sike_p434_compressed"
       -
         name: "SIKE_P503_COMPRESSED"

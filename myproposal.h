@@ -113,7 +113,7 @@
     PQ_OQS_KEX_METHOD("sike-p503-sha384") \
     PQ_OQS_KEX_METHOD("sike-p610-sha384") \
     PQ_OQS_KEX_METHOD("sike-p751-sha384") \
-    PQ_OQS_KEX_METHOD("-sha384") \
+    PQ_OQS_KEX_METHOD("sike-p434-compressed-sha384") \
     PQ_OQS_KEX_METHOD("sike-p503-compressed-sha384") \
     PQ_OQS_KEX_METHOD("sike-p610-compressed-sha384") \
     PQ_OQS_KEX_METHOD("sike-p751-compressed-sha384")
@@ -256,7 +256,7 @@
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p503-sha384") \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p610-sha384") \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p751-sha384") \
-    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384--sha384") \
+    HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p434-compressed-sha384") \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p503-compressed-sha384") \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p610-compressed-sha384") \
     HYBRID_ECDH_OQS_METHOD("ecdh-nistp384-sike-p751-compressed-sha384")
