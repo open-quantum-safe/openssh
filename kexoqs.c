@@ -40,164 +40,164 @@
 #include "ssherr.h"
 #include "oqs/oqs.h"
 
-// FIXMEOQS: define all of these functions with alg-based macros
+#define DEFINE_OQS_KEYPAIR_FUNCTION(ALG)     \
+int kex_kem_##ALG##_keypair(struct kex *kex) \
+{					     \
+  struct sshbuf *buf = NULL;		     \
+  u_char *cp = NULL;			     \
+  int r;				     \
+					     \
+  if ((buf = sshbuf_new()) == NULL)	     \
+    return SSH_ERR_ALLOC_FAIL;						\
+  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_public_key, &cp)) != 0) \
+    goto out;								\
+									\
+  if ((kex->oqs_client_key = malloc(OQS_KEM_##ALG##_length_secret_key)) == NULL) { \
+    goto out;								\
+  }									\
+  if (OQS_KEM_##ALG##_keypair(cp, kex->oqs_client_key) != OQS_SUCCESS) { \
+    goto out;								\
+  }									\
+  /* #ifdef DEBUG_KEXECDH						\
+  // dump_digest("client public key ALG:", cp,				\
+  // OQS_KEM_##ALG##_length_public_key);				\
+  #endif */								\
+  kex->client_pub = buf;						\
+  buf = NULL;								\
+ out:									\
+  sshbuf_free(buf);							\
+  return r;								\
+}
+
+#define DEFINE_OQS_ENC_FUNCTION(ALG)					\
+int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
+			struct sshbuf **server_blobp, struct sshbuf **shared_secretp) \
+{									\
+  struct sshbuf *server_blob = NULL;					\
+  struct sshbuf *buf = NULL;						\
+  const u_char *client_pub;						\
+  u_char *kem_key, *ciphertext;						\
+  u_char hash[SSH_DIGEST_MAX_LENGTH];					\
+  int r;								\
+									\
+  *server_blobp = NULL;							\
+  *shared_secretp = NULL;						\
+									\
+  if (sshbuf_len(client_blob) != OQS_KEM_##ALG##_length_public_key) { \
+    r = SSH_ERR_SIGNATURE_INVALID;					\
+    goto out;								\
+  }									\
+  client_pub = sshbuf_ptr(client_blob);					\
+  /* #ifdef DEBUG_KEXECDH						\
+     dump_digest("client public key ALG:", client_pub, OQS_KEM_##ALG##_length_public_key);			\
+     #endif */								\
+  /* allocate buffer for the KEM key */					\
+  /* the buffer will be hashed and the result is the shared secret */	\
+  /* FIXMEOQS: do I need to hash for PQC only? */			\
+  if ((buf = sshbuf_new()) == NULL) {					\
+    r = SSH_ERR_ALLOC_FAIL;						\
+    goto out;								\
+  }									\
+  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_shared_secret, &kem_key)) != 0) \
+    goto out;								\
+  /* allocate space for encrypted KEM key */				\
+  if ((server_blob = sshbuf_new()) == NULL) {				\
+    r = SSH_ERR_ALLOC_FAIL;						\
+    goto out;								\
+  }									\
+  if ((r = sshbuf_reserve(server_blob, OQS_KEM_##ALG##_length_ciphertext, &ciphertext)) != 0) \
+    goto out;								\
+  /* generate and encrypt KEM key with client key */			\
+  if (OQS_KEM_##ALG##_encaps(ciphertext, kem_key, client_pub) != OQS_SUCCESS) { \
+    goto out;								\
+  }									\
+  if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0) \
+    goto out;								\
+  /* #ifdef DEBUG_KEXECDH						\
+     dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext);	\
+     dump_digest("server kem key:", kem_key, sizeof(kem_key));		\
+     dump_digest("KEM key:", sshbuf_ptr(buf), sshbuf_len(buf));		\
+     #endif */								\
+  /* string-encoded hash is resulting shared secret */			\
+  sshbuf_reset(buf);							\
+  if ((r = sshbuf_put_string(buf, hash, ssh_digest_bytes(kex->hash_alg))) != 0) \
+    goto out;								\
+  /* #ifdef DEBUG_KEXECDH						\
+     dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf)); \
+     #endif */								\
+  *server_blobp = server_blob;						\
+  *shared_secretp = buf;						\
+  server_blob = NULL;							\
+  buf = NULL;								\
+ out:									\
+  explicit_bzero(hash, sizeof(hash));					\
+  sshbuf_free(server_blob);						\
+  sshbuf_free(buf);							\
+  return r;								\
+}
+
+#define DEFINE_OQS_DEC_FUNCTION(ALG)					\
+int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
+			struct sshbuf **shared_secretp)			\
+{									\
+  struct sshbuf *buf = NULL;						\
+  u_char *kem_key = NULL;						\
+  const u_char *ciphertext;						\
+  u_char hash[SSH_DIGEST_MAX_LENGTH];					\
+  int r;								\
+									\
+  *shared_secretp = NULL;						\
+									\
+  if (sshbuf_len(server_blob) != OQS_KEM_##ALG##_length_ciphertext) {	\
+    r = SSH_ERR_SIGNATURE_INVALID;					\
+    goto out;								\
+  }									\
+  ciphertext = sshbuf_ptr(server_blob);					\
+  /* #ifdef DEBUG_KEXECDH						\
+    dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext); \
+    #endif */								\
+  /* hash KEM key */							\
+  if ((buf = sshbuf_new()) == NULL) {					\
+    r = SSH_ERR_ALLOC_FAIL;						\
+    goto out;								\
+  }									\
+  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_shared_secret, &kem_key)) != 0) \
+    goto out;								\
+  if (OQS_KEM_##ALG##_decaps(kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) { \
+    goto out;								\
+  }									\
+  if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0) \
+    goto out;								\
+  /* #ifdef DEBUG_KEXECDH						\
+    dump_digest("client kem key:", kem_key, sizeof(kem_key));		\
+  dump_digest("KEM shared key:", sshbuf_ptr(buf), sshbuf_len(buf));	\
+  #endif */								\
+  sshbuf_reset(buf);							\
+  if ((r = sshbuf_put_string(buf, hash, ssh_digest_bytes(kex->hash_alg))) != 0) \
+    goto out;								\
+  /* #ifdef DEBUG_KEXECDH						\
+    dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf)); \
+    #endif */								\
+  *shared_secretp = buf;						\
+  buf = NULL;								\
+ out:									\
+  explicit_bzero(hash, sizeof(hash));					\
+  sshbuf_free(buf);							\
+  return r;								\
+}
+
+#define DEFINE_OQS_FUNCTION(ALG)	\
+  DEFINE_OQS_KEYPAIR_FUNCTION(ALG)	\
+  DEFINE_OQS_ENC_FUNCTION(ALG)		\
+  DEFINE_OQS_DEC_FUNCTION(ALG)
+
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 #ifdef OQS_ENABLE_KEM_frodokem_640_aes
-
-int
-kex_kem_frodokem_640_aes_keypair(struct kex *kex)
-{
-  	struct sshbuf *buf = NULL;
-	u_char *cp = NULL;
-	int r;
-
-	if ((buf = sshbuf_new()) == NULL)
-		return SSH_ERR_ALLOC_FAIL;
-	if ((r = sshbuf_reserve(buf, OQS_KEM_frodokem_640_aes_length_public_key, &cp)) != 0)
-		goto out;
-
-	if ((kex->oqs_client_key = malloc(OQS_KEM_frodokem_640_aes_length_secret_key)) == NULL) {
-		goto out;
-	}
-	if (OQS_KEM_frodokem_640_aes_keypair(cp, kex->oqs_client_key) != OQS_SUCCESS) {
-		goto out;
-	}
-#ifdef DEBUG_KEXECDH
-	dump_digest("client public key frodokem_640_aes:", cp,
-	    OQS_KEM_frodokem_640_aes_length_public_key);
+DEFINE_OQS_FUNCTION(frodokem_640_aes)
 #endif
-	kex->client_pub = buf;
-	buf = NULL;
- out:
-	sshbuf_free(buf);
-	return r;
-}
-
-int
-kex_kem_frodokem_640_aes_enc(struct kex *kex, const struct sshbuf *client_blob,
-    struct sshbuf **server_blobp, struct sshbuf **shared_secretp)
-{
-	struct sshbuf *server_blob = NULL;
-	struct sshbuf *buf = NULL;
-	const u_char *client_pub;
-	u_char *kem_key, *ciphertext;
-	u_char hash[SSH_DIGEST_MAX_LENGTH];
-	int r;
-
-	*server_blobp = NULL;
-	*shared_secretp = NULL;
-
-	if (sshbuf_len(client_blob) != OQS_KEM_frodokem_640_aes_length_public_key) {
-		r = SSH_ERR_SIGNATURE_INVALID;
-		goto out;
-	}
-	client_pub = sshbuf_ptr(client_blob);
-#ifdef DEBUG_KEXECDH
-	dump_digest("client public key frodo_640_aes:", client_pub,
-	    OQS_KEM_frodokem_640_aes_length_public_key);
+#ifdef OQS_ENABLE_KEM_sike_p434
+DEFINE_OQS_FUNCTION(sike_p434)
 #endif
-	/* allocate buffer for the KEM key */
-	/* the buffer will be hashed and the result is the shared secret */
-	/* FIXMEOQS: do I need to hash for PQC only? */
-	if ((buf = sshbuf_new()) == NULL) {
-		r = SSH_ERR_ALLOC_FAIL;
-		goto out;
-	}
-	if ((r = sshbuf_reserve(buf, OQS_KEM_frodokem_640_aes_length_shared_secret,
-	    &kem_key)) != 0)
-		goto out;
-	/* allocate space for encrypted KEM key */
-	if ((server_blob = sshbuf_new()) == NULL) {
-		r = SSH_ERR_ALLOC_FAIL;
-		goto out;
-	}
-	if ((r = sshbuf_reserve(server_blob, OQS_KEM_frodokem_640_aes_length_ciphertext, &ciphertext)) != 0)
-		goto out;
-	/* generate and encrypt KEM key with client key */
-	if (OQS_KEM_frodokem_640_aes_encaps(ciphertext, kem_key, client_pub) != OQS_SUCCESS) {
-		goto out;
-	}
-	if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0)
-		goto out;
-#ifdef DEBUG_KEXECDH
-	dump_digest("server cipher text:", ciphertext,
-	    OQS_KEM_frodokem_640_aes_length_ciphertext);
-	dump_digest("server kem key:", kem_key, sizeof(kem_key));
-	dump_digest("KEM key:",
-	    sshbuf_ptr(buf), sshbuf_len(buf));
-#endif
-	/* string-encoded hash is resulting shared secret */
-	sshbuf_reset(buf);
-	if ((r = sshbuf_put_string(buf, hash,
-	    ssh_digest_bytes(kex->hash_alg))) != 0)
-		goto out;
-#ifdef DEBUG_KEXECDH
-	dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf));
-#endif
-	*server_blobp = server_blob;
-	*shared_secretp = buf;
-	server_blob = NULL;
-	buf = NULL;
- out:
-	explicit_bzero(hash, sizeof(hash));
-	sshbuf_free(server_blob);
-	sshbuf_free(buf);
-	return r;
-}
-
-int
-kex_kem_frodokem_640_aes_dec(struct kex *kex, const struct sshbuf *server_blob,
-    struct sshbuf **shared_secretp)
-{
-	struct sshbuf *buf = NULL;
-	u_char *kem_key = NULL;
-	const u_char *ciphertext;
-	u_char hash[SSH_DIGEST_MAX_LENGTH];
-	int r;
-
-	*shared_secretp = NULL;
-
-	if (sshbuf_len(server_blob) != OQS_KEM_frodokem_640_aes_length_ciphertext) {
-		r = SSH_ERR_SIGNATURE_INVALID;
-		goto out;
-	}
-	ciphertext = sshbuf_ptr(server_blob);
-#ifdef DEBUG_KEXECDH
-	dump_digest("server cipher text:", ciphertext,
-		    OQS_KEM_frodokem_640_aes_length_ciphertext);
-#endif
-	/* hash KEM key */
-	if ((buf = sshbuf_new()) == NULL) {
-		r = SSH_ERR_ALLOC_FAIL;
-		goto out;
-	}
-	if ((r = sshbuf_reserve(buf, OQS_KEM_frodokem_640_aes_length_shared_secret,
-	    &kem_key)) != 0)
-		goto out;
-	if (OQS_KEM_frodokem_640_aes_decaps(kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) {
-	        goto out;
-	}
-	if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0)
-		goto out;
-#ifdef DEBUG_KEXECDH
-	dump_digest("client kem key:", kem_key, sizeof(kem_key));
-	dump_digest("KEM shared key:",
-	    sshbuf_ptr(buf), sshbuf_len(buf));
-#endif
-	sshbuf_reset(buf);
-	if ((r = sshbuf_put_string(buf, hash,
-	    ssh_digest_bytes(kex->hash_alg))) != 0)
-		goto out;
-#ifdef DEBUG_KEXECDH
-	dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf));
-#endif
-	*shared_secretp = buf;
-	buf = NULL;
- out:
-	explicit_bzero(hash, sizeof(hash));
-	sshbuf_free(buf);
-	return r;
-}
-
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 
 #endif /* defined(WITH_OQS) */
