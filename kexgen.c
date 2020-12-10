@@ -40,6 +40,7 @@
 #include "sshbuf.h"
 #include "digest.h"
 #include "ssherr.h"
+#include "oqs/oqs.h"
 
 static int input_kex_gen_init(int, u_int32_t, struct ssh *);
 static int input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh);
@@ -120,6 +121,16 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_KEM_SNTRUP4591761X25519_SHA512:
 		r = kex_kem_sntrup4591761x25519_keypair(kex);
 		break;
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	case KEX_KEM_FRODO_640_AES_SHA512:
+		r = kex_kem_frodokem_640_aes_keypair(kex);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512:
+		r = kex_kem_frodokem_640_aes_ecdh_nistp256_keypair(kex);
+		break;
+#endif
+#endif
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
 		break;
@@ -189,6 +200,18 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_sntrup4591761x25519_dec(kex, server_blob,
 		    &shared_secret);
 		break;
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	case KEX_KEM_FRODO_640_AES_SHA512:
+		r = kex_kem_frodokem_640_aes_dec(kex, server_blob,
+						 &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512:
+		r = kex_kem_frodokem_640_aes_ecdh_nistp256_dec(kex, server_blob,
+							       &shared_secret);
+		break;
+#endif
+#endif
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
 		break;
@@ -222,6 +245,7 @@ out:
 	explicit_bzero(kex->c25519_client_key, sizeof(kex->c25519_client_key));
 	explicit_bzero(kex->sntrup4591761_client_key,
 	    sizeof(kex->sntrup4591761_client_key));
+	// free(kex->oqs_client_key); // FIXMEOQS: bzero but I need size
 	sshbuf_free(server_host_key_blob);
 	free(signature);
 	sshbuf_free(tmp);
@@ -286,6 +310,18 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_sntrup4591761x25519_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	case KEX_KEM_FRODO_640_AES_SHA512:
+		r = kex_kem_frodokem_640_aes_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512:
+		r = kex_kem_frodokem_640_aes_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+#endif
+#endif
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
 		break;

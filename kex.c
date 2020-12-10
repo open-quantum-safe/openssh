@@ -61,6 +61,7 @@
 #include "ssherr.h"
 #include "sshbuf.h"
 #include "digest.h"
+#include "oqs/oqs.h"
 
 /* prototype */
 static int kex_choose_conf(struct ssh *);
@@ -113,6 +114,14 @@ static const struct kexalg kexalgs[] = {
 	{ KEX_SNTRUP4591761X25519_SHA512, KEX_KEM_SNTRUP4591761X25519_SHA512, 0,
 	    SSH_DIGEST_SHA512 },
 #endif /* HAVE_EVP_SHA256 || !WITH_OPENSSL */
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	{ KEX_FRODO_640_AES_SHA512, KEX_KEM_FRODO_640_AES_SHA512, 0,
+	    SSH_DIGEST_SHA512 },
+#ifdef OPENSSL_HAS_ECC
+	{ KEX_FRODO_640_AES_ECDH_NISTP256_SHA512, KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512, NID_X9_62_prime256v1,
+	    SSH_DIGEST_SHA512 },
+#endif
+#endif	
 	{ NULL, 0, -1, -1},
 };
 
@@ -700,6 +709,9 @@ kex_free(struct kex *kex)
 	free(kex->failed_choice);
 	free(kex->hostkey_alg);
 	free(kex->name);
+	if (kex->oqs_client_key) {
+	  free(kex->oqs_client_key);
+	}
 	free(kex);
 }
 

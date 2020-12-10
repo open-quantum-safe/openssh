@@ -28,6 +28,7 @@
 
 #include "mac.h"
 #include "crypto_api.h"
+#include "oqs/oqs.h"
 
 #ifdef WITH_OPENSSL
 # include <openssl/bn.h>
@@ -63,6 +64,12 @@
 #define	KEX_CURVE25519_SHA256		"curve25519-sha256"
 #define	KEX_CURVE25519_SHA256_OLD	"curve25519-sha256@libssh.org"
 #define	KEX_SNTRUP4591761X25519_SHA512	"sntrup4591761x25519-sha512@tinyssh.org"
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+#define KEX_FRODO_640_AES_SHA512        "frodo-640-aes-sha256"
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#define KEX_FRODO_640_AES_ECDH_NISTP256_SHA512        "ecdh-nistp256-frodo-640-aes-sha256"
+#endif
+#endif
 
 #define COMP_NONE	0
 /* pre-auth compression (COMP_ZLIB) is only supported in the client */
@@ -102,6 +109,12 @@ enum kex_exchange {
 	KEX_ECDH_SHA2,
 	KEX_C25519_SHA256,
 	KEX_KEM_SNTRUP4591761X25519_SHA512,
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	KEX_KEM_FRODO_640_AES_SHA512,
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512,
+#endif
+#endif
 	KEX_MAX
 };
 
@@ -169,6 +182,7 @@ struct kex {
 	u_char c25519_client_key[CURVE25519_SIZE]; /* 25519 + KEM */
 	u_char c25519_client_pubkey[CURVE25519_SIZE]; /* 25519 */
 	u_char sntrup4591761_client_key[crypto_kem_sntrup4591761_SECRETKEYBYTES]; /* KEM */
+	u_char* oqs_client_key; /* OQS KEM key */
 	struct sshbuf *client_pub;
 };
 
@@ -224,6 +238,21 @@ int	 kex_kem_sntrup4591761x25519_enc(struct kex *, const struct sshbuf *,
 int	 kex_kem_sntrup4591761x25519_dec(struct kex *, const struct sshbuf *,
     struct sshbuf **);
 
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+int	 kex_kem_frodokem_640_aes_keypair(struct kex *);
+int	 kex_kem_frodokem_640_aes_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_640_aes_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+int	 kex_kem_frodokem_640_aes_ecdh_nistp256_keypair(struct kex *);
+int	 kex_kem_frodokem_640_aes_ecdh_nistp256_enc(struct kex *, const struct sshbuf *,
+    struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_640_aes_ecdh_nistp256_dec(struct kex *, const struct sshbuf *,
+    struct sshbuf **);
+#endif
+#endif
+
 int	 kex_dh_keygen(struct kex *);
 int	 kex_dh_compute_key(struct kex *, BIGNUM *, struct sshbuf *);
 
@@ -246,6 +275,7 @@ int	kexc25519_shared_key_ext(const u_char key[CURVE25519_SIZE],
 	__attribute__((__bounded__(__minbytes__, 1, CURVE25519_SIZE)))
 	__attribute__((__bounded__(__minbytes__, 2, CURVE25519_SIZE)));
 
+#define DEBUG_KEXECDH /* FIXMEOQS */
 #if defined(DEBUG_KEX) || defined(DEBUG_KEXDH) || defined(DEBUG_KEXECDH)
 void	dump_digest(const char *, const u_char *, int);
 #endif

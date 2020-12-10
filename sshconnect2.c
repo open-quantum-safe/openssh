@@ -74,6 +74,7 @@
 #include "utf8.h"
 #include "ssh-sk.h"
 #include "sk-api.h"
+#include "oqs/oqs.h"
 
 #ifdef GSSAPI
 #include "ssh-gss.h"
@@ -274,6 +275,12 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port)
 #endif
 	ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_client;
+#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+	ssh->kex->kex[KEX_KEM_FRODO_640_AES_SHA512] = kex_gen_client;
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	ssh->kex->kex[KEX_KEM_FRODO_640_AES_ECDH_NISTP256_SHA512] = kex_gen_client;
+#endif
+#endif
 	ssh->kex->verify_host_key=&verify_host_key_callback;
 
 	ssh_dispatch_run_fatal(ssh, DISPATCH_BLOCK, &ssh->kex->done);

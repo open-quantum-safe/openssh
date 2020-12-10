@@ -34,3 +34,8 @@ sshd
 !regress/misc/fuzz-harness/Makefile
 !regress/unittests/sshsig/Makefile
 tags
+# OQS files
+oqs-test/tmp
+oqs-scripts/tmp
+oqs/
+__pycache__
