@@ -52,10 +52,10 @@ int kex_kem_##ALG##_keypair(struct kex *kex) \
   if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_public_key, &cp)) != 0) \
     goto out;								\
 									\
-  if ((kex->oqs_client_key = malloc(OQS_KEM_##ALG##_length_secret_key)) == NULL) { \
-    goto out;								\
-  }									\
-  if (OQS_KEM_##ALG##_keypair(cp, kex->oqs_client_key) != OQS_SUCCESS) { \
+  kex->oqs_client_key_size = OQS_KEM_##ALG##_length_secret_key;		\
+  if ((kex->oqs_client_key = malloc(kex->oqs_client_key_size)) == NULL || \
+      OQS_KEM_##ALG##_keypair(cp, kex->oqs_client_key) != OQS_SUCCESS) { \
+    r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\
   }									\
   /* #ifdef DEBUG_KEXECDH						\
@@ -93,7 +93,7 @@ int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
      #endif */								\
   /* allocate buffer for the KEM key */					\
   /* the buffer will be hashed and the result is the shared secret */	\
-  /* FIXMEOQS: do I need to hash for PQC only? */			\
+  /* FIXMEOQS: the hash is done for hybrid algs, but perhaps we shouldn't do that for PQ-only */			\
   if ((buf = sshbuf_new()) == NULL) {					\
     r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\

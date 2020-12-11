@@ -223,6 +223,7 @@ struct kex {
 	u_char c25519_client_pubkey[CURVE25519_SIZE]; /* 25519 */
 	u_char sntrup4591761_client_key[crypto_kem_sntrup4591761_SECRETKEYBYTES]; /* KEM */
 	u_char* oqs_client_key; /* OQS KEM key */
+	size_t oqs_client_key_size; /* size of OQS KEM key */
 	struct sshbuf *client_pub;
 };
 

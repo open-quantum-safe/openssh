@@ -122,7 +122,8 @@ int kex_kem_##ALG##_ecdh_##CURVE##_keypair(struct kex *kex)		\
   if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_public_key, &pqc_public_key)) != 0) \
     goto out;								\
   /* generate the PQC key */						\
-  if ((kex->oqs_client_key = malloc(OQS_KEM_##ALG##_length_secret_key)) == NULL || \
+  kex->oqs_client_key_size = OQS_KEM_##ALG##_length_secret_key;		\
+  if ((kex->oqs_client_key = malloc(kex->oqs_client_key_size)) == NULL || \
       OQS_KEM_##ALG##_keypair(pqc_public_key, kex->oqs_client_key) != OQS_SUCCESS) { \
     r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\
@@ -235,7 +236,7 @@ int kex_kem_##ALG##_ecdh_##CURVE##_enc(struct kex *kex, const struct sshbuf *cli
     r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\
   }									\
-  ecdh_client_blob = sshbuf_from(client_pub + OQS_KEM_##ALG##_length_public_key, sshbuf_len(client_blob) - OQS_KEM_##ALG##_length_public_key); /* FIXMEOQS better way to calculate this? */ \
+  ecdh_client_blob = sshbuf_from(client_pub + OQS_KEM_##ALG##_length_public_key, sshbuf_len(client_blob) - OQS_KEM_##ALG##_length_public_key); \
 									\
   /* generate ecdh key pair, store server ecdh public key after KEM ciphertext \
      as done in kex_ecdh_enc(...) */					\
