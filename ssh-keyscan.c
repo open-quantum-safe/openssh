@@ -301,13 +301,25 @@ keygrab_ssh2(con *c)
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 	c->c_ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 	c->c_ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_client;
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	ssh_set_verify_host_key_callback(c->c_ssh, key_print_wrapper);
 	/*

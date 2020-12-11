@@ -1735,13 +1735,25 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 		kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+		kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_server;
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+		kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_server;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+		kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_server;
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+		kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_server;
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 		kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_server;
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 		kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_server;
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 		kex->load_host_public_key=&get_hostkey_public_by_type;
 		kex->load_host_private_key=&get_hostkey_private_by_type;

@@ -70,13 +70,25 @@
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 #define KEX_FRODOKEM_640_AES_ECDH_NISTP256_SHA256        "ecdh-nistp256-frodokem-640-aes-sha256"
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+#define KEX_FRODOKEM_976_AES_SHA384        "frodokem-976-aes-sha384"
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#define KEX_FRODOKEM_976_AES_ECDH_NISTP384_SHA384        "ecdh-nistp384-frodokem-976-aes-sha384"
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+#define KEX_FRODOKEM_1344_AES_SHA512        "frodokem-1344-aes-sha512"
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#define KEX_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512        "ecdh-nistp521-frodokem-1344-aes-sha512"
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 #define KEX_SIKE_P434_SHA256        "sike-p434-sha256"
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 #define KEX_SIKE_P434_ECDH_NISTP256_SHA256        "ecdh-nistp256-sike-p434-sha256"
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 
 #define COMP_NONE	0
@@ -123,13 +135,25 @@ enum kex_exchange {
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 	KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256,
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+	KEX_KEM_FRODOKEM_976_AES_SHA384,
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384,
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+	KEX_KEM_FRODOKEM_1344_AES_SHA512,
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+	KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512,
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 	KEX_KEM_SIKE_P434_SHA256,
 #if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 	KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256,
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	KEX_MAX
 };
@@ -265,6 +289,12 @@ int	 kex_kem_##ALG##_ecdh_##CURVE##_dec(struct kex *, const struct sshbuf *, str
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 #ifdef OQS_ENABLE_KEM_frodokem_640_aes
 DECLARE_OQS_FUNCTION(frodokem_640_aes,nistp256)
+#endif
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+DECLARE_OQS_FUNCTION(frodokem_976_aes,nistp384)
+#endif
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+DECLARE_OQS_FUNCTION(frodokem_1344_aes,nistp521)
 #endif
 #ifdef OQS_ENABLE_KEM_sike_p434
 DECLARE_OQS_FUNCTION(sike_p434,nistp256)

@@ -384,6 +384,12 @@ int kex_kem_##ALG##_ecdh_##CURVE##_dec(struct kex *kex, const struct sshbuf *ser
 #ifdef OQS_ENABLE_KEM_frodokem_640_aes
 DEFINE_OQS_FUNCTION(frodokem_640_aes,nistp256)
 #endif
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+DEFINE_OQS_FUNCTION(frodokem_976_aes,nistp384)
+#endif
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+DEFINE_OQS_FUNCTION(frodokem_1344_aes,nistp521)
+#endif
 #ifdef OQS_ENABLE_KEM_sike_p434
 DEFINE_OQS_FUNCTION(sike_p434,nistp256)
 #endif

@@ -195,6 +195,12 @@ int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
 #ifdef OQS_ENABLE_KEM_frodokem_640_aes
 DEFINE_OQS_FUNCTION(frodokem_640_aes)
 #endif
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+DEFINE_OQS_FUNCTION(frodokem_976_aes)
+#endif
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+DEFINE_OQS_FUNCTION(frodokem_1344_aes)
+#endif
 #ifdef OQS_ENABLE_KEM_sike_p434
 DEFINE_OQS_FUNCTION(sike_p434)
 #endif

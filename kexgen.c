@@ -131,7 +131,27 @@ kex_gen_client(struct ssh *ssh)
 		r = kex_kem_frodokem_640_aes_ecdh_nistp256_keypair(kex);
 		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+	case KEX_KEM_FRODOKEM_976_AES_SHA384:
+		r = kex_kem_frodokem_976_aes_keypair(kex);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_aes_ecdh_nistp384_keypair(kex);
+		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+	case KEX_KEM_FRODOKEM_1344_AES_SHA512:
+		r = kex_kem_frodokem_1344_aes_keypair(kex);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_keypair(kex);
+		break;
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_keypair(kex);
@@ -141,7 +161,7 @@ kex_gen_client(struct ssh *ssh)
 		r = kex_kem_sike_p434_ecdh_nistp256_keypair(kex);
 		break;
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
@@ -222,7 +242,27 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_frodokem_640_aes_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
 		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+	case KEX_KEM_FRODOKEM_976_AES_SHA384:
+		r = kex_kem_frodokem_976_aes_dec(kex, server_blob, &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_aes_ecdh_nistp384_dec(kex, server_blob, &shared_secret);
+		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+	case KEX_KEM_FRODOKEM_1344_AES_SHA512:
+		r = kex_kem_frodokem_1344_aes_dec(kex, server_blob, &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_dec(kex, server_blob, &shared_secret);
@@ -232,7 +272,7 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_sike_p434_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
 		break;
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
@@ -344,7 +384,31 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		    &server_pubkey, &shared_secret);
 		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_976_aes
+	case KEX_KEM_FRODOKEM_976_AES_SHA384:
+		r = kex_kem_frodokem_976_aes_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_aes_ecdh_nistp384_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 #endif
+#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
+#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
+	case KEX_KEM_FRODOKEM_1344_AES_SHA512:
+		r = kex_kem_frodokem_1344_aes_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+#ifdef WITH_OPENSSL
+	case KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+#endif
+#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
 #ifdef OQS_ENABLE_KEM_sike_p434
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_enc(kex, client_pubkey,
@@ -356,7 +420,7 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		    &server_pubkey, &shared_secret);
 		break;
 #endif
-#endif
+#endif /* OQS_ENABLE_KEM_sike_p434 */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
