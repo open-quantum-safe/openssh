@@ -77,7 +77,6 @@ int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
   struct sshbuf *buf = NULL;						\
   const u_char *client_pub;						\
   u_char *kem_key, *ciphertext;						\
-  u_char hash[SSH_DIGEST_MAX_LENGTH];					\
   int r;								\
 									\
   *server_blobp = NULL;							\
@@ -89,11 +88,9 @@ int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
   }									\
   client_pub = sshbuf_ptr(client_blob);					\
   /* #ifdef DEBUG_KEXECDH						\
-     dump_digest("client public key ALG:", client_pub, OQS_KEM_##ALG##_length_public_key);			\
+     dump_digest("client public key ALG:", client_pub, OQS_KEM_##ALG##_length_public_key); \
      #endif */								\
-  /* allocate buffer for the KEM key */					\
-  /* the buffer will be hashed and the result is the shared secret */	\
-  /* FIXMEOQS: the hash is done for hybrid algs, but perhaps we shouldn't do that for PQ-only */			\
+  /* allocate buffer for the KEM key (shared secret) */			\
   if ((buf = sshbuf_new()) == NULL) {					\
     r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\
@@ -111,26 +108,16 @@ int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
   if (OQS_KEM_##ALG##_encaps(ciphertext, kem_key, client_pub) != OQS_SUCCESS) { \
     goto out;								\
   }									\
-  if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0) \
-    goto out;								\
   /* #ifdef DEBUG_KEXECDH						\
      dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext);	\
      dump_digest("server kem key:", kem_key, sizeof(kem_key));		\
      dump_digest("KEM key:", sshbuf_ptr(buf), sshbuf_len(buf));		\
-     #endif */								\
-  /* string-encoded hash is resulting shared secret */			\
-  sshbuf_reset(buf);							\
-  if ((r = sshbuf_put_string(buf, hash, ssh_digest_bytes(kex->hash_alg))) != 0) \
-    goto out;								\
-  /* #ifdef DEBUG_KEXECDH						\
-     dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf)); \
      #endif */								\
   *server_blobp = server_blob;						\
   *shared_secretp = buf;						\
   server_blob = NULL;							\
   buf = NULL;								\
  out:									\
-  explicit_bzero(hash, sizeof(hash));					\
   sshbuf_free(server_blob);						\
   sshbuf_free(buf);							\
   return r;								\
@@ -143,7 +130,6 @@ int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
   struct sshbuf *buf = NULL;						\
   u_char *kem_key = NULL;						\
   const u_char *ciphertext;						\
-  u_char hash[SSH_DIGEST_MAX_LENGTH];					\
   int r;								\
 									\
   *shared_secretp = NULL;						\
@@ -156,7 +142,7 @@ int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
   /* #ifdef DEBUG_KEXECDH						\
     dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext); \
     #endif */								\
-  /* hash KEM key */							\
+  /* decrypt the KEM key */						\
   if ((buf = sshbuf_new()) == NULL) {					\
     r = SSH_ERR_ALLOC_FAIL;						\
     goto out;								\
@@ -166,22 +152,13 @@ int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
   if (OQS_KEM_##ALG##_decaps(kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) { \
     goto out;								\
   }									\
-  if ((r = ssh_digest_buffer(kex->hash_alg, buf, hash, sizeof(hash))) != 0) \
-    goto out;								\
   /* #ifdef DEBUG_KEXECDH						\
     dump_digest("client kem key:", kem_key, sizeof(kem_key));		\
   dump_digest("KEM shared key:", sshbuf_ptr(buf), sshbuf_len(buf));	\
   #endif */								\
-  sshbuf_reset(buf);							\
-  if ((r = sshbuf_put_string(buf, hash, ssh_digest_bytes(kex->hash_alg))) != 0) \
-    goto out;								\
-  /* #ifdef DEBUG_KEXECDH						\
-    dump_digest("encoded shared secret:", sshbuf_ptr(buf), sshbuf_len(buf)); \
-    #endif */								\
   *shared_secretp = buf;						\
   buf = NULL;								\
  out:									\
-  explicit_bzero(hash, sizeof(hash));					\
   sshbuf_free(buf);							\
   return r;								\
 }
