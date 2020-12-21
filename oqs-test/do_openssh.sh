@@ -12,8 +12,6 @@
 
 set -x
 
-OKAY=1
-
 PREFIX=${PREFIX:-"$(pwd)/oqs-test/tmp"}
 
 rm -f "${PREFIX}"/server_log.txt
@@ -32,7 +30,7 @@ cat "${PREFIX}"/ssh_client/*.pub >> "${PREFIX}"/ssh_server/authorized_keys
   -o "PubkeyAcceptedKeyTypes=${SIGALG}" \
   -o "StrictModes=no" \
   -h "${PREFIX}/ssh_server/id_${SIGALG}" \
-  >> ${PREFIX}/server_log.txt 2>&1 &
+  >> "${PREFIX}"/server_log.txt 2>&1 &
 
 if [[ "${SIGALG}" =~ "rainbowi" ]]; then
     sleep 10
@@ -47,8 +45,8 @@ fi
 SERVER_PID=$!
 
 "${PREFIX}/bin/ssh" \
-  -p ${PORT} 127.0.0.1 \
-  -F ${PREFIX}/ssh_config \
+  -p "${PORT}" 127.0.0.1 \
+  -F "${PREFIX}"/ssh_config \
   -o "UserKnownHostsFile /dev/null" \
   -o "KexAlgorithms=${KEXALG}" \
   -o "HostKeyAlgorithms=${SIGALG}" \
@@ -56,22 +54,23 @@ SERVER_PID=$!
   -o StrictHostKeyChecking=no \
   -i "${PREFIX}/ssh_client/id_${SIGALG}" \
   "exit" \
-  >> ${PREFIX}/client_log.txt 2>&1
+  >> "${PREFIX}"/client_log.txt 2>&1
 
 kill -9 ${SERVER_PID}
 
-cat ${PREFIX}/client_log.txt | grep SSH_CONNECTION
-if [ $? -eq 0 ];then
-  OKAY=0
-fi
-
 echo "--- SERVER LOG ---"
-cat ${PREFIX}/server_log.txt
+cat "${PREFIX}"/server_log.txt
 
 echo "--- CLIENT LOG ---"
-cat ${PREFIX}/client_log.txt
+cat "${PREFIX}"/client_log.txt
 
-rm -f ${PREFIX}/server_log.txt
-rm -f ${PREFIX}/client_log.txt
+set -e
+grep SSH_CONNECTION "${PREFIX}"/client_log.txt
+grep "debug1: kex: algorithm: ${KEXALG}" "${PREFIX}"/server_log.txt
+grep "debug1: kex: host key algorithm: ${SIGALG}" "${PREFIX}"/server_log.txt
+set +e
 
-exit ${OKAY}
+rm -f "${PREFIX}"/server_log.txt
+rm -f "${PREFIX}"/client_log.txt
+
+exit 0
