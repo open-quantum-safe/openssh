@@ -2,551 +2,551 @@ sigs:
   -
     # TODO: At the moment this should
     # always be enabled to avoid build errors.
-    family: "OQSDEFAULT"
+    family: 'OQSDEFAULT'
     variants:
       -
         enable: true
-        name: "OQSDEFAULT"
-        oqs_meth: "OQS_SIG_alg_default"
+        name: 'OQSDEFAULT'
+        oqs_meth: 'OQS_SIG_alg_default'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
   -
-    family: "DILITHIUM"
+    family: 'DILITHIUM'
     variants:
       -
         enable: true
-        name: "DILITHIUM_2"
-        oqs_meth: "OQS_SIG_alg_dilithium_2"
+        name: 'DILITHIUM_2'
+        oqs_meth: 'OQS_SIG_alg_dilithium_2'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "DILITHIUM_3"
-        oqs_meth: "OQS_SIG_alg_dilithium_3"
+        name: 'DILITHIUM_3'
+        oqs_meth: 'OQS_SIG_alg_dilithium_3'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "DILITHIUM_4"
-        oqs_meth: "OQS_SIG_alg_dilithium_4"
+        name: 'DILITHIUM_4'
+        oqs_meth: 'OQS_SIG_alg_dilithium_4'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
   -
-    family: "FALCON"
+    family: 'FALCON'
     variants:
       -
         enable: true
-        name: "FALCON_512"
-        oqs_meth: "OQS_SIG_alg_falcon_512"
+        name: 'FALCON_512'
+        oqs_meth: 'OQS_SIG_alg_falcon_512'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "FALCON_1024"
-        oqs_meth: "OQS_SIG_alg_falcon_1024"
+        name: 'FALCON_1024'
+        oqs_meth: 'OQS_SIG_alg_falcon_1024'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
   -
-    family: "PICNIC"
+    family: 'PICNIC'
     variants:
       -
         enable: false
-        name: "PICNIC_L1FS"
-        oqs_meth: "OQS_SIG_alg_picnic_L1_FS"
+        name: 'PICNIC_L1FS'
+        oqs_meth: 'OQS_SIG_alg_picnic_L1_FS'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "PICNIC_L1UR"
-        oqs_meth: "OQS_SIG_alg_picnic_L1_UR"
+        name: 'PICNIC_L1UR'
+        oqs_meth: 'OQS_SIG_alg_picnic_L1_UR'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: true
-        name: "PICNIC_L1FULL"
-        oqs_meth: "OQS_SIG_alg_picnic_L1_full"
+        name: 'PICNIC_L1FULL'
+        oqs_meth: 'OQS_SIG_alg_picnic_L1_full'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "PICNIC_L3FS"
-        oqs_meth: "OQS_SIG_alg_picnic_L3_FS"
+        name: 'PICNIC_L3FS'
+        oqs_meth: 'OQS_SIG_alg_picnic_L3_FS'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "PICNIC_L3UR"
-        oqs_meth: "OQS_SIG_alg_picnic_L3_UR"
+        name: 'PICNIC_L3UR'
+        oqs_meth: 'OQS_SIG_alg_picnic_L3_UR'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "PICNIC_L3FULL"
-        oqs_meth: "OQS_SIG_alg_picnic_L3_full"
+        name: 'PICNIC_L3FULL'
+        oqs_meth: 'OQS_SIG_alg_picnic_L3_full'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "PICNIC_L5FS"
-        oqs_meth: "OQS_SIG_alg_picnic_L5_FS"
+        name: 'PICNIC_L5FS'
+        oqs_meth: 'OQS_SIG_alg_picnic_L5_FS'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "PICNIC_L5UR"
-        oqs_meth: "OQS_SIG_alg_picnic_L5_UR"
+        name: 'PICNIC_L5UR'
+        oqs_meth: 'OQS_SIG_alg_picnic_L5_UR'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "PICNIC_L5FULL"
-        oqs_meth: "OQS_SIG_alg_picnic_L5_full"
+        name: 'PICNIC_L5FULL'
+        oqs_meth: 'OQS_SIG_alg_picnic_L5_full'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: true
-        name: "PICNIC3_L1"
-        oqs_meth: "OQS_SIG_alg_picnic3_L1"
+        name: 'PICNIC3_L1'
+        oqs_meth: 'OQS_SIG_alg_picnic3_L1'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "PICNIC3_L3"
-        oqs_meth: "OQS_SIG_alg_picnic3_L3"
+        name: 'PICNIC3_L3'
+        oqs_meth: 'OQS_SIG_alg_picnic3_L3'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "PICNIC3_L5"
-        oqs_meth: "OQS_SIG_alg_picnic3_L5"
+        name: 'PICNIC3_L5'
+        oqs_meth: 'OQS_SIG_alg_picnic3_L5'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
   -
-    family: "RAINBOW"
+    family: 'RAINBOW'
     variants:
       -
         enable: true
-        name: "RAINBOW_IA_CLASSIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_Ia_classic"
+        name: 'RAINBOW_I_CLASSIC'
+        oqs_meth: 'OQS_SIG_alg_rainbow_I_classic'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "RAINBOW_IA_CYCLIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic"
+        name: 'RAINBOW_I_CIRCUMZENITHAL'
+        oqs_meth: 'OQS_SIG_alg_rainbow_I_circumzenithal'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "RAINBOW_IA_CYCLIC_COMPRESSED"
-        oqs_meth: "OQS_SIG_alg_rainbow_Ia_cyclic_compressed"
+        name: 'RAINBOW_I_COMPRESSED'
+        oqs_meth: 'OQS_SIG_alg_rainbow_I_compressed'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: true
-        name: "RAINBOW_IIIC_CLASSIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_classic"
+        name: 'RAINBOW_III_CLASSIC'
+        oqs_meth: 'OQS_SIG_alg_rainbow_III_classic'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "RAINBOW_IIIC_CYCLIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic"
+        name: 'RAINBOW_III_CIRCUMZENITHAL'
+        oqs_meth: 'OQS_SIG_alg_rainbow_III_circumzenithal'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "RAINBOW_IIIC_CYCLIC_COMPRESSED"
-        oqs_meth: "OQS_SIG_alg_rainbow_IIIc_cyclic_compressed"
+        name: 'RAINBOW_III_COMPRESSED'
+        oqs_meth: 'OQS_SIG_alg_rainbow_III_compressed'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: true
-        name: "RAINBOW_VC_CLASSIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_Vc_classic"
+        name: 'RAINBOW_V_CLASSIC'
+        oqs_meth: 'OQS_SIG_alg_rainbow_V_classic'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "RAINBOW_VC_CYCLIC"
-        oqs_meth: "OQS_SIG_alg_rainbow_Vc_cyclic"
+        name: 'RAINBOW_V_CIRCUMZENITHAL'
+        oqs_meth: 'OQS_SIG_alg_rainbow_V_circumzenithal'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "RAINBOW_VC_CYCLIC_COMPRESSED"
-        oqs_meth: "OQS_SIG_alg_rainbow_Vc_cyclic_compressed"
+        name: 'RAINBOW_V_COMPRESSED'
+        oqs_meth: 'OQS_SIG_alg_rainbow_V_compressed'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
   -
-    family: "SPHINCS"
+    family: 'SPHINCS'
     variants:
       -
         enable: true
-        name: "SPHINCS_HARAKA_128F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_robust"
+        name: 'SPHINCS_HARAKA_128F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_128f_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_128F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128f_simple"
+        name: 'SPHINCS_HARAKA_128F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_128f_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_128S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128s_robust"
+        name: 'SPHINCS_HARAKA_128S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_128s_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_128S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_128s_simple"
+        name: 'SPHINCS_HARAKA_128S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_128s_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_192F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192f_robust"
+        name: 'SPHINCS_HARAKA_192F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_192f_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
 
       -
         enable: false
-        name: "SPHINCS_HARAKA_192F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192f_simple"
+        name: 'SPHINCS_HARAKA_192F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_192f_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_192S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192s_robust"
+        name: 'SPHINCS_HARAKA_192S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_192s_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_192S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_192s_simple"
+        name: 'SPHINCS_HARAKA_192S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_192s_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_256F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256f_robust"
+        name: 'SPHINCS_HARAKA_256F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_256f_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_256F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256f_simple"
+        name: 'SPHINCS_HARAKA_256F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_256f_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_256S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256s_robust"
+        name: 'SPHINCS_HARAKA_256S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_256s_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_HARAKA_256S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_haraka_256s_simple"
+        name: 'SPHINCS_HARAKA_256S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_haraka_256s_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: true
-        name: "SPHINCS_SHA256_128F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128f_robust"
+        name: 'SPHINCS_SHA256_128F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_128f_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_128F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128f_simple"
+        name: 'SPHINCS_SHA256_128F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_128f_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_128S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128s_robust"
+        name: 'SPHINCS_SHA256_128S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_128s_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_128S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_128s_simple"
+        name: 'SPHINCS_SHA256_128S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_128s_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_192F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_192f_robust"
+        name: 'SPHINCS_SHA256_192F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_192f_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
 
       -
         enable: false
-        name: "SPHINCS_SHA256_192F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_192f_simple"
+        name: 'SPHINCS_SHA256_192F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_192f_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_192S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_192s_robust"
+        name: 'SPHINCS_SHA256_192S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_192s_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_192S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_192s_simple"
+        name: 'SPHINCS_SHA256_192S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_192s_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_256F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_256f_robust"
+        name: 'SPHINCS_SHA256_256F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_256f_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_256F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_256f_simple"
+        name: 'SPHINCS_SHA256_256F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_256f_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_256S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_256s_robust"
+        name: 'SPHINCS_SHA256_256S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_256s_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHA256_256S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_sha256_256s_simple"
+        name: 'SPHINCS_SHA256_256S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_sha256_256s_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: true
-        name: "SPHINCS_SHAKE256_128F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_128f_robust"
+        name: 'SPHINCS_SHAKE256_128F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_128f_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_128F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_128f_simple"
+        name: 'SPHINCS_SHAKE256_128F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_128f_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_128S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_128s_robust"
+        name: 'SPHINCS_SHAKE256_128S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_128s_robust'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_128S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_128s_simple"
+        name: 'SPHINCS_SHAKE256_128S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_128s_simple'
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_192F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_192f_robust"
+        name: 'SPHINCS_SHAKE256_192F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_192f_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
 
       -
         enable: false
-        name: "SPHINCS_SHAKE256_192F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_192f_simple"
+        name: 'SPHINCS_SHAKE256_192F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_192f_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_192S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_192s_robust"
+        name: 'SPHINCS_SHAKE256_192S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_192s_robust'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_192S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_192s_simple"
+        name: 'SPHINCS_SHAKE256_192S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_192s_simple'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_256F_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_256f_robust"
+        name: 'SPHINCS_SHAKE256_256F_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_256f_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_256F_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_256f_simple"
+        name: 'SPHINCS_SHAKE256_256F_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_256f_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_256S_ROBUST"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_256s_robust"
+        name: 'SPHINCS_SHAKE256_256S_ROBUST'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_256s_robust'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
       -
         enable: false
-        name: "SPHINCS_SHAKE256_256S_SIMPLE"
-        oqs_meth: "OQS_SIG_alg_sphincs_shake256_256s_simple"
+        name: 'SPHINCS_SHAKE256_256S_SIMPLE'
+        oqs_meth: 'OQS_SIG_alg_sphincs_shake256_256s_simple'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]
 
 kems:
   -
-    family: "BIKE"
+    family: 'BIKE'
     variants:
       -
-        name: "BIKE1_L1_CPA"
-        oqs_meth: "OQS_KEM_alg_bike1_l1_cpa"
+        name: 'BIKE1_L1_CPA'
+        oqs_meth: 'OQS_KEM_alg_bike1_l1_cpa'
       -
-        name: "BIKE1_L3_CPA"
-        oqs_meth: "OQS_KEM_alg_bike1_l3_cpa"
+        name: 'BIKE1_L3_CPA'
+        oqs_meth: 'OQS_KEM_alg_bike1_l3_cpa'
       -
-        name: "BIKE1_L1_FO"
-        oqs_meth: "OQS_KEM_alg_bike1_l1_fo"
+        name: 'BIKE1_L1_FO'
+        oqs_meth: 'OQS_KEM_alg_bike1_l1_fo'
       -
-        name: "BIKE1_L3_FO"
-        oqs_meth: "OQS_KEM_alg_bike1_l3_fo"
+        name: 'BIKE1_L3_FO'
+        oqs_meth: 'OQS_KEM_alg_bike1_l3_fo'
   -
-    family: "CLASSIC_MCELIECE"
+    family: 'CLASSIC_MCELIECE'
     variants:
       -
-        name: "CLASSIC_MCELIECE_348864"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_348864"
+        name: 'CLASSIC_MCELIECE_348864'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_348864'
       -
-        name: "CLASSIC_MCELIECE_348864F"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_348864f"
+        name: 'CLASSIC_MCELIECE_348864F'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_348864f'
       -
-        name: "CLASSIC_MCELIECE_460896"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_460896"
+        name: 'CLASSIC_MCELIECE_460896'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_460896'
       -
-        name: "CLASSIC_MCELIECE_460896F"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_460896f"
+        name: 'CLASSIC_MCELIECE_460896F'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_460896f'
       -
-        name: "CLASSIC_MCELIECE_6688128"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_6688128"
+        name: 'CLASSIC_MCELIECE_6688128'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_6688128'
       -
-        name: "CLASSIC_MCELIECE_6688128F"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_6688128f"
+        name: 'CLASSIC_MCELIECE_6688128F'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_6688128f'
       -
-        name: "CLASSIC_MCELIECE_6960119"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_6960119"
+        name: 'CLASSIC_MCELIECE_6960119'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_6960119'
       -
-        name: "CLASSIC_MCELIECE_6960119F"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_6960119f"
+        name: 'CLASSIC_MCELIECE_6960119F'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_6960119f'
       -
-        name: "CLASSIC_MCELIECE_8192128"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_8192128"
+        name: 'CLASSIC_MCELIECE_8192128'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_8192128'
       -
-        name: "CLASSIC_MCELIECE_8192128F"
-        oqs_meth: "OQS_KEM_alg_classic_mceliece_8192128f"
+        name: 'CLASSIC_MCELIECE_8192128F'
+        oqs_meth: 'OQS_KEM_alg_classic_mceliece_8192128f'
   -
-    family: "FRODO"
+    family: 'FRODO'
     variants:
       -
-        name: "FRODO_640_AES"
-        oqs_meth: "OQS_KEM_alg_frodokem_640_aes"
+        name: 'FRODO_640_AES'
+        oqs_meth: 'OQS_KEM_alg_frodokem_640_aes'
       -
-        name: "FRODO_640_SHAKE"
-        oqs_meth: "OQS_KEM_alg_frodokem_640_shake"
+        name: 'FRODO_640_SHAKE'
+        oqs_meth: 'OQS_KEM_alg_frodokem_640_shake'
       -
-        name: "FRODO_976_AES"
-        oqs_meth: "OQS_KEM_alg_frodokem_976_aes"
+        name: 'FRODO_976_AES'
+        oqs_meth: 'OQS_KEM_alg_frodokem_976_aes'
       -
-        name: "FRODO_976_SHAKE"
-        oqs_meth: "OQS_KEM_alg_frodokem_976_shake"
+        name: 'FRODO_976_SHAKE'
+        oqs_meth: 'OQS_KEM_alg_frodokem_976_shake'
       -
-        name: "FRODO_1344_AES"
-        oqs_meth: "OQS_KEM_alg_frodokem_1344_aes"
+        name: 'FRODO_1344_AES'
+        oqs_meth: 'OQS_KEM_alg_frodokem_1344_aes'
       -
-        name: "FRODO_1344_SHAKE"
-        oqs_meth: "OQS_KEM_alg_frodokem_1344_shake"
+        name: 'FRODO_1344_SHAKE'
+        oqs_meth: 'OQS_KEM_alg_frodokem_1344_shake'
   -
-    family: "KYBER"
+    family: 'KYBER'
     variants:
       -
-        name: "KYBER_512"
-        oqs_meth: "OQS_KEM_alg_kyber_512"
+        name: 'KYBER_512'
+        oqs_meth: 'OQS_KEM_alg_kyber_512'
       -
-        name: "KYBER_768"
-        oqs_meth: "OQS_KEM_alg_kyber_768"
+        name: 'KYBER_768'
+        oqs_meth: 'OQS_KEM_alg_kyber_768'
       -
-        name: "KYBER_1024"
-        oqs_meth: "OQS_KEM_alg_kyber_1024"
+        name: 'KYBER_1024'
+        oqs_meth: 'OQS_KEM_alg_kyber_1024'
       -
-        name: "KYBER_512_90S"
-        oqs_meth: "OQS_KEM_alg_kyber_512_90s"
+        name: 'KYBER_512_90S'
+        oqs_meth: 'OQS_KEM_alg_kyber_512_90s'
       -
-        name: "KYBER_768_90S"
-        oqs_meth: "OQS_KEM_alg_kyber_768_90s"
+        name: 'KYBER_768_90S'
+        oqs_meth: 'OQS_KEM_alg_kyber_768_90s'
       -
-        name: "KYBER_1024_90S"
-        oqs_meth: "OQS_KEM_alg_kyber_1024_90s"
+        name: 'KYBER_1024_90S'
+        oqs_meth: 'OQS_KEM_alg_kyber_1024_90s'
   -
-    family: "NTRU"
+    family: 'NTRU'
     variants:
       -
-        name: "NTRU_HPS_2048_509"
-        oqs_meth: "OQS_KEM_alg_ntru_hps2048509"
+        name: 'NTRU_HPS_2048_509'
+        oqs_meth: 'OQS_KEM_alg_ntru_hps2048509'
       -
-        name: "NTRU_HPS_2048_677"
-        oqs_meth: "OQS_KEM_alg_ntru_hps2048677"
+        name: 'NTRU_HPS_2048_677'
+        oqs_meth: 'OQS_KEM_alg_ntru_hps2048677'
       -
-        name: "NTRU_HRSS_701"
-        oqs_meth: "OQS_KEM_alg_ntru_hrss701"
+        name: 'NTRU_HRSS_701'
+        oqs_meth: 'OQS_KEM_alg_ntru_hrss701'
       -
-        name: "NTRU_HPS_4096_821"
-        oqs_meth: "OQS_KEM_alg_ntru_hps4096821"
+        name: 'NTRU_HPS_4096_821'
+        oqs_meth: 'OQS_KEM_alg_ntru_hps4096821'
   -
-    family: "SABER"
+    family: 'SABER'
     variants:
       -
-        name: "SABER_LIGHTSABER"
-        oqs_meth: "OQS_KEM_alg_saber_lightsaber"
+        name: 'SABER_LIGHTSABER'
+        oqs_meth: 'OQS_KEM_alg_saber_lightsaber'
       -
-        name: "SABER_SABER"
-        oqs_meth: "OQS_KEM_alg_saber_saber"
+        name: 'SABER_SABER'
+        oqs_meth: 'OQS_KEM_alg_saber_saber'
       -
-        name: "SABER_FIRESABER"
-        oqs_meth: "OQS_KEM_alg_saber_firesaber"
+        name: 'SABER_FIRESABER'
+        oqs_meth: 'OQS_KEM_alg_saber_firesaber'
   -
-    family: "SIDH"
+    family: 'SIDH'
     variants:
       -
-        name: "SIDH_p434"
-        oqs_meth: "OQS_KEM_alg_sidh_p434"
+        name: 'SIDH_p434'
+        oqs_meth: 'OQS_KEM_alg_sidh_p434'
       -
-        name: "SIDH_p503"
-        oqs_meth: "OQS_KEM_alg_sidh_p503"
+        name: 'SIDH_p503'
+        oqs_meth: 'OQS_KEM_alg_sidh_p503'
       -
-        name: "SIDH_p610"
-        oqs_meth: "OQS_KEM_alg_sidh_p610"
+        name: 'SIDH_p610'
+        oqs_meth: 'OQS_KEM_alg_sidh_p610'
       -
-        name: "SIDH_p751"
-        oqs_meth: "OQS_KEM_alg_sidh_p751"
+        name: 'SIDH_p751'
+        oqs_meth: 'OQS_KEM_alg_sidh_p751'
       -
-        name: "SIDH_P434_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sidh_p434_compressed"
+        name: 'SIDH_P434_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sidh_p434_compressed'
       -
-        name: "SIDH_P503_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sidh_p503_compressed"
+        name: 'SIDH_P503_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sidh_p503_compressed'
       -
-        name: "SIDH_P610_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sidh_p610_compressed"
+        name: 'SIDH_P610_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sidh_p610_compressed'
       -
-        name: "SIDH_P751_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sidh_p751_compressed"
+        name: 'SIDH_P751_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sidh_p751_compressed'
   -
-    family: "SIKE"
+    family: 'SIKE'
     variants:
       -
-        name: "SIKE_P434"
-        oqs_meth: "OQS_KEM_alg_sike_p434"
+        name: 'SIKE_P434'
+        oqs_meth: 'OQS_KEM_alg_sike_p434'
       -
-        name: "SIKE_P503"
-        oqs_meth: "OQS_KEM_alg_sike_p503"
+        name: 'SIKE_P503'
+        oqs_meth: 'OQS_KEM_alg_sike_p503'
       -
-        name: "SIKE_P610"
-        oqs_meth: "OQS_KEM_alg_sike_p610"
+        name: 'SIKE_P610'
+        oqs_meth: 'OQS_KEM_alg_sike_p610'
       -
-        name: "SIKE_P751"
-        oqs_meth: "OQS_KEM_alg_sike_p751"
+        name: 'SIKE_P751'
+        oqs_meth: 'OQS_KEM_alg_sike_p751'
       -
-        name: "SIKE_P434_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sike_p434_compressed"
+        name: 'SIKE_P434_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sike_p434_compressed'
       -
-        name: "SIKE_P503_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sike_p503_compressed"
+        name: 'SIKE_P503_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sike_p503_compressed'
       -
-        name: "SIKE_P610_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sike_p610_compressed"
+        name: 'SIKE_P610_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sike_p610_compressed'
       -
-        name: "SIKE_P751_COMPRESSED"
-        oqs_meth: "OQS_KEM_alg_sike_p751_compressed"
+        name: 'SIKE_P751_COMPRESSED'
+        oqs_meth: 'OQS_KEM_alg_sike_p751_compressed'
   -
-    family: "HQC"
+    family: 'HQC'
     variants:
       -
-        name: "HQC_128"
+        name: 'HQC_128'
         oqs_meth: 'OQS_KEM_alg_hqc_128'
       -
-        name: "HQC_192"
+        name: 'HQC_192'
         oqs_meth: 'OQS_KEM_alg_hqc_192'
       -
-        name: "HQC_256"
+        name: 'HQC_256'
         oqs_meth: 'OQS_KEM_alg_hqc_256'
   -
-    family: "NTRU_PRIME"
+    family: 'NTRU_PRIME'
     variants:
       -
         name: 'NTRULPR_653'

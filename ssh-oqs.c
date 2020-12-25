@@ -39,16 +39,16 @@ const char* get_oqs_alg_name(int openssh_type)
 		case KEY_RSA3072_PICNIC3_L1:
 		case KEY_P256_PICNIC3_L1:
 			return OQS_SIG_alg_picnic3_L1;
-		case KEY_RAINBOW_IA_CLASSIC:
-		case KEY_RSA3072_RAINBOW_IA_CLASSIC:
-		case KEY_P256_RAINBOW_IA_CLASSIC:
-			return OQS_SIG_alg_rainbow_Ia_classic;
-		case KEY_RAINBOW_IIIC_CLASSIC:
-		case KEY_P384_RAINBOW_IIIC_CLASSIC:
-			return OQS_SIG_alg_rainbow_IIIc_classic;
-		case KEY_RAINBOW_VC_CLASSIC:
-		case KEY_P521_RAINBOW_VC_CLASSIC:
-			return OQS_SIG_alg_rainbow_Vc_classic;
+		case KEY_RAINBOW_I_CLASSIC:
+		case KEY_RSA3072_RAINBOW_I_CLASSIC:
+		case KEY_P256_RAINBOW_I_CLASSIC:
+			return OQS_SIG_alg_rainbow_I_classic;
+		case KEY_RAINBOW_III_CLASSIC:
+		case KEY_P384_RAINBOW_III_CLASSIC:
+			return OQS_SIG_alg_rainbow_III_classic;
+		case KEY_RAINBOW_V_CLASSIC:
+		case KEY_P521_RAINBOW_V_CLASSIC:
+			return OQS_SIG_alg_rainbow_V_classic;
 		case KEY_SPHINCS_HARAKA_128F_ROBUST:
 		case KEY_RSA3072_SPHINCS_HARAKA_128F_ROBUST:
 		case KEY_P256_SPHINCS_HARAKA_128F_ROBUST:
