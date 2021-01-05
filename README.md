@@ -56,16 +56,18 @@ If an algorithm is provided by liboqs but is not listed below, it can still be u
 The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs):
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
-- **BIKE**:`bike1-l1-cpa`, `bike1-l3-cpa`, `bike1-l1-fo`, `bike2-l3-fo`
-- **Classic McEliece**: `classic-mceliece-348864`, `classic-mceliece-348864f`, `classic-mceliece-460896`, `classic-mceliece-460896f`, `classic-mceliece-6688128`, `classic-mceliece-6688128f`, `classic-mceliece-6960119`, `classic-mceliece-6960119f`, `classic-mceliece-8192128`, `classic-mceliece-8192128f`
-- **FrodoKEM**:`frodo-640-aes`, `frodo-640-shake`, `frodo-976-aes`, `frodo-976-shake`, `frodo-1344-aes`, `frodo-1344-shake`
+<!--- OQS_TEMPLATE_FRAGMENT_LIST_KEXS_START -->
+- **BIKE**: `bike1-l1-cpa`, `bike1-l3-cpa`, `bike1-l1-fo`, `bike1-l3-fo`
+- **CLASSIC-MCELIECE**: `classic-mceliece-348864`, `classic-mceliece-348864f`, `classic-mceliece-460896`, `classic-mceliece-460896f`, `classic-mceliece-6688128`, `classic-mceliece-6688128f`, `classic-mceliece-6960119`, `classic-mceliece-6960119f`, `classic-mceliece-8192128`, `classic-mceliece-8192128f`
+- **FRODO**: `frodo-640-aes`, `frodo-640-shake`, `frodo-976-aes`, `frodo-976-shake`, `frodo-1344-aes`, `frodo-1344-shake`
+- **KYBER**: `kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
+- **NTRU**: `ntru-hps-2048-509`, `ntru-hps-2048-677`, `ntru-hrss-701`, `ntru-hps-4096-821`
+- **SABER**: `saber-lightsaber`, `saber-saber`, `saber-firesaber`
+- **SIDH**: `sidh-p434`, `sidh-p503`, `sidh-p610`, `sidh-p751`, `sidh-p434-compressed`, `sidh-p503-compressed`, `sidh-p610-compressed`, `sidh-p751-compressed`
+- **SIKE**: `sike-p434`, `sike-p503`, `sike-p610`, `sike-p751`, `sike-p434-compressed`, `sike-p503-compressed`, `sike-p610-compressed`, `sike-p751-compressed`
 - **HQC**: `hqc-128`, `hqc-192`, `hqc-256`†
-- **Kyber**:`kyber-512`, `kyber-768`, `kyber-1024`, `kyber-512-90s`, `kyber-768-90s`, `kyber-1024-90s`
-- **NTRU**:`ntru-hps-2048-509`, `ntru-hps-2048-677`
-- **NTRU-Prime**: `ntrulpr-653`, `ntrulpr-761`, `ntrulpr-857`, `sntrup-653`, `sntrup-761`, `sntrup-857`
-- **Saber**:`saber-lightsaber`, `saber-saber`, `saber-firesaber`
-- **SIDH**:`sidh-p434`, `sidh-p503`, `sidh-p610`, `sidh-p751`, `sidh-p434-compressed`, `sidh-p503-compressed`, `sidh-p610-compressed`, `sidh-p751-compressed`
-- **SIKE**:`sike-p434`, `sike-p503`, `sike-p610`, `sike-p751`, `sike-p434-compressed`, `sike-p503-compressed`, `sike-p610-compressed`, `sike-p751-compressed`
+- **NTRU-PRIME**: `ntrulpr-653`, `ntrulpr-761`, `ntrulpr-857`, `sntrup-653`, `sntrup-761`, `sntrup-857`
+<!--- OQS_TEMPLATE_FRAGMENT_LIST_KEXS_END -->
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with ECDH that uses NIST's P384 curve:
 
@@ -78,12 +80,13 @@ Note that algorithms marked with a dagger (†) have large stack usage and may c
 The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs). Note that only L1 signature and all **Rainbow** variants are enabled by default, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
-- **Dilithium**:`dilithium2`, `dilithium3`, `dilithium4`
-- **Picnic**:`picnicl1fs`, `picnicl1ur`, `picnicl1full`, `picnicl3fs`, `picnicl3ur`, `picnicl3full`, `picnicl5fs`, `picnicl5ur`, `picnicl5full`, `picnic3l1`, `picnic3l3`, `picnic3l5`
-- **Rainbow**: `rainbowiaclassic`, `rainbowiacyclic`, `rainbowiacycliccompressed`, `rainbowiiicclassic`, `rainbowiiiccyclic`, `rainbowiiiccycliccompressed`, `rainbowvcclassic`, `rainbowvccylic`, `rainbowvccycliccompressed`
-- **SPHINCS-Haraka**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincsharaka192frobust`, `sphincsharaka192fsimple`, `sphincsharaka192srobust`, `sphincsharaka192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256fsimple`, `sphincsharaka256srobust`, `sphincsharaka256ssimple`
-- **SPHINCS-SHA256**: `sphincssha256128frobust`, `sphincssha256128fsimple`, `sphincssha256128srobust`, `sphincssha256128ssimple`, `sphincssha256192frobust`, `sphincssha256192fsimple`, `sphincssha256192srobust`, `sphincssha256192ssimple`, `sphincssha256256frobust`, `sphincssha256256fsimple`, `sphincssha256256srobust`, `sphincssha256256ssimple`
-- **SPHINCS-SHAKE256**: `sphincsshake256128frobust`, `sphincsshake256128fsimple`, `sphincsshake256128srobust`, `sphincsshake256128ssimple`, `sphincsshake256192frobust`, `sphincsshake256192fsimple`, `sphincsshake256192srobust`, `sphincsshake256192ssimple`, `sphincsshake256256frobust`, `sphincsshake256256fsimple`, `sphincsshake256256srobust`, `sphincsshake256256ssimple`
+<!--- OQS_TEMPLATE_FRAGMENT_LIST_SIGS_START -->
+- **DILITHIUM**:`dilithium2`, `dilithium3`, `dilithium4`
+- **FALCON**:`falcon512`, `falcon1024`
+- **PICNIC**:`picnicl1fs`, `picnicl1ur`, `picnicl1full`, `picnicl3fs`, `picnicl3ur`, `picnicl3full`, `picnicl5fs`, `picnicl5ur`, `picnicl5full`, `picnic3l1`, `picnic3l3`, `picnic3l5`
+- **RAINBOW**:`rainbowiclassic`, `rainbowicircumzenithal`, `rainbowicompressed`, `rainbowiiiclassic`, `rainbowiiicircumzenithal`, `rainbowiiicompressed`, `rainbowvclassic`, `rainbowvcircumzenithal`, `rainbowvcompressed`
+- **SPHINCS**:`sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincsharaka192frobust`, `sphincsharaka192fsimple`, `sphincsharaka192srobust`, `sphincsharaka192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256fsimple`, `sphincsharaka256srobust`, `sphincsharaka256ssimple`, `sphincssha256128frobust`, `sphincssha256128fsimple`, `sphincssha256128srobust`, `sphincssha256128ssimple`, `sphincssha256192frobust`, `sphincssha256192fsimple`, `sphincssha256192srobust`, `sphincssha256192ssimple`, `sphincssha256256frobust`, `sphincssha256256fsimple`, `sphincssha256256srobust`, `sphincssha256256ssimple`, `sphincsshake256128frobust`, `sphincsshake256128fsimple`, `sphincsshake256128srobust`, `sphincsshake256128ssimple`, `sphincsshake256192frobust`, `sphincsshake256192fsimple`, `sphincsshake256192srobust`, `sphincsshake256192ssimple`, `sphincsshake256256frobust`, `sphincsshake256256fsimple`, `sphincsshake256256srobust`, `sphincsshake256256ssimple`
+<!--- OQS_TEMPLATE_FRAGMENT_LIST_SIGS_END -->
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with a traditional digital signature algorithm (`<SIG>` is any one of the algorithms listed above):
 

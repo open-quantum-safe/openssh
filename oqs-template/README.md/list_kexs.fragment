@@ -1,0 +1,4 @@
+{%- for kem in config['kems'] %}
+- **{{ kem['family']|replace('_','-') }}**: {% for variant in kem['variants'] -%} `{{ variant['name']|lower|replace('_','-') }}` {%- if not loop.last %}, {% endif -%}{%- if loop.last and kem['family'] == 'HQC' -%}†{%- endif -%}{%- endfor -%}
+{%- endfor %}
+
