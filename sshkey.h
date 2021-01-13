@@ -28,6 +28,8 @@
 
 #include <sys/types.h>
 
+#include <oqs/oqs.h>
+
 #ifdef WITH_OPENSSL
 #include <openssl/rsa.h>
 #include <openssl/dsa.h>
@@ -49,7 +51,9 @@
 #endif /* WITH_OPENSSL */
 
 #define SSH_RSA_MINIMUM_MODULUS_SIZE	1024
-#define SSH_KEY_MAX_SIGN_DATA_SIZE	(1 << 20)
+/* OQS note: We have increased the value below from (1 << 20) to (1 << 25). */
+// FIXMEOQS: still need to increase the value in 8.x? 
+#define SSH_KEY_MAX_SIGN_DATA_SIZE	(1 << 25)
 
 struct sshbuf;
 
@@ -69,6 +73,15 @@ enum sshkey_types {
 	KEY_ECDSA_SK_CERT,
 	KEY_ED25519_SK,
 	KEY_ED25519_SK_CERT,
+// FIXMEOQS: TEMPLATE ///////////////////////
+	KEY_DILITHIUM_2,
+	KEY_RSA3072_DILITHIUM_2,
+	KEY_ECDSA_NISTP256_DILITHIUM_2,
+	KEY_DILITHIUM_3,
+	KEY_ECDSA_NISTP384_DILITHIUM_3,
+	KEY_DILITHIUM_4,
+	KEY_ECDSA_NISTP521_DILITHIUM_4,
+// FIXMEOQS: TEMPLATE ///////////////////////
 	KEY_UNSPEC
 };
 
@@ -139,6 +152,10 @@ struct sshkey {
 	void	*xmss_state;	/* depends on xmss_name, opaque */
 	u_char	*xmss_sk;
 	u_char	*xmss_pk;
+	u_char	*oqs_sk; /* post-quantum secret key */
+	size_t   oqs_sk_len; /* post-quantum secret length */
+	u_char	*oqs_pk; /* post-quantum public key */
+	size_t   oqs_pk_len; /* post-quantum public length */
 	/* KEY_ECDSA_SK and KEY_ED25519_SK */
 	char	*sk_application;
 	uint8_t	sk_flags;
@@ -316,6 +333,22 @@ int ssh_xmss_sign(const struct sshkey *key, u_char **sigp, size_t *lenp,
 int ssh_xmss_verify(const struct sshkey *key,
     const u_char *signature, size_t signaturelen,
     const u_char *data, size_t datalen, u_int compat);
+// FIXMEOQS: TEMPLATE ////////////////////////////
+int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_rsa3072_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_rsa3072_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp256_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp256_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp384_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp384_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp521_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_ecdsa_nistp521_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+// FIXMEOQS: TEMPLATE ////////////////////////////
 #endif
 
 #if !defined(WITH_OPENSSL)

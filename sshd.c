@@ -123,7 +123,9 @@
 #include "version.h"
 #include "ssherr.h"
 #include "sk-api.h"
+
 #include "oqs/oqs.h"
+#include "oqs-utils.h"
 
 /* Re-exec fds */
 #define REEXEC_DEVCRYPTO_RESERVED_FD	(STDERR_FILENO + 1)
@@ -643,6 +645,8 @@ list_hostkey_types(void)
 		case KEY_ECDSA_SK:
 		case KEY_ED25519_SK:
 		case KEY_XMSS:
+		CASE_KEY_OQS:
+		CASE_KEY_HYBRID:
 			append_hostkey_type(b, sshkey_ssh_name(key));
 			break;
 		}
@@ -1890,6 +1894,8 @@ main(int ac, char **av)
 		case KEY_ECDSA_SK:
 		case KEY_ED25519_SK:
 		case KEY_XMSS:
+		CASE_KEY_OQS:
+		CASE_KEY_HYBRID:
 			if (have_agent || key != NULL)
 				sensitive_data.have_ssh2_key = 1;
 			break;

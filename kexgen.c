@@ -307,8 +307,11 @@ out:
 	explicit_bzero(kex->c25519_client_key, sizeof(kex->c25519_client_key));
 	explicit_bzero(kex->sntrup4591761_client_key,
 	    sizeof(kex->sntrup4591761_client_key));
-	explicit_bzero(kex->oqs_client_key, kex->oqs_client_key_size);
-	free(kex->oqs_client_key);
+	if (kex->oqs_client_key) {
+	  explicit_bzero(kex->oqs_client_key, kex->oqs_client_key_size);
+	  free(kex->oqs_client_key);
+	  kex->oqs_client_key = NULL;
+	}
 	sshbuf_free(server_host_key_blob);
 	free(signature);
 	sshbuf_free(tmp);

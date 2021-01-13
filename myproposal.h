@@ -24,6 +24,10 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// FIXMEOQS: can we #ifdef the PQ defs in the following #define's
+
+// FIXMEOQS: should I add the PQ auth methods here? not added in 7.9 branch...
+
 #define KEX_SERVER_KEX	\
 	"curve25519-sha256," \
 	"curve25519-sha256@libssh.org," \
@@ -33,7 +37,11 @@
 	"diffie-hellman-group-exchange-sha256," \
 	"diffie-hellman-group16-sha512," \
 	"diffie-hellman-group18-sha512," \
-	"diffie-hellman-group14-sha256"
+	"diffie-hellman-group14-sha256" \
+/* FIXMEOQS: TEMPLATE //////////////////////////////// */ \
+	"frodokem-640-aes-sha256"			  \
+	"ecdh-nistp256-frodokem-640-aes-sha256"		  \
+/* FIXMEOQS: TEMPLATE //////////////////////////////// */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX
 

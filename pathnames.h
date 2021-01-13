@@ -41,6 +41,15 @@
 #define _PATH_HOST_ED25519_KEY_FILE	SSHDIR "/ssh_host_ed25519_key"
 #define _PATH_HOST_XMSS_KEY_FILE	SSHDIR "/ssh_host_xmss_key"
 #define _PATH_HOST_RSA_KEY_FILE		SSHDIR "/ssh_host_rsa_key"
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+#define _PATH_HOST_DILITHIUM_2_KEY_FILE SSHDIR "/ssh_host_dilithium2_key"
+#define _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE SSHDIR "/ssh_host_rsa3072_dilithium2_key"
+#define _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp256_dilithium2_key"
+#define _PATH_HOST_DILITHIUM_3_KEY_FILE SSHDIR "/ssh_host_dilithium3_key"
+#define _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp384_dilithium3_key"
+#define _PATH_HOST_DILITHIUM_4_KEY_FILE SSHDIR "/ssh_host_dilithium4_key"
+#define _PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp521_dilithium4_key"
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 #define _PATH_DH_MODULI			SSHDIR "/moduli"
 
 #ifndef _PATH_SSH_PROGRAM
@@ -79,6 +88,15 @@
 #define _PATH_SSH_CLIENT_ID_XMSS	_PATH_SSH_USER_DIR "/id_xmss"
 #define _PATH_SSH_CLIENT_ID_ECDSA_SK	_PATH_SSH_USER_DIR "/id_ecdsa_sk"
 #define _PATH_SSH_CLIENT_ID_ED25519_SK	_PATH_SSH_USER_DIR "/id_ed25519_sk"
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_2	_PATH_SSH_USER_DIR "/id_dilithium2"
+#define _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2	_PATH_SSH_USER_DIR "/id_rsa3072_dilithium2"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2	_PATH_SSH_USER_DIR "/id_ecdsa_nistp256_dilithium2"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_3	_PATH_SSH_USER_DIR "/id_dilithium3"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3	_PATH_SSH_USER_DIR "/id_ecdsa_nistp384_dilithium3"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_4	_PATH_SSH_USER_DIR "/id_dilithium4"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_4	_PATH_SSH_USER_DIR "/id_ecdsa_nistp521_dilithium4"
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 
 /*
  * Configuration file in user's home directory.  This file need not be

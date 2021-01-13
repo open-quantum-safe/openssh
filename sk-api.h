@@ -31,6 +31,15 @@
 /* Algs */
 #define SSH_SK_ECDSA			0x00
 #define SSH_SK_ED25519			0x01
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+#define SSH_SK_DILITHIUM_2		0x02
+#define SSH_SK_RSA3072_DILITHIUM_2	0x03
+#define SSH_SK_ECDSA_NISTP256_DILITHIUM_2 0x04
+#define SSH_SK_DILITHIUM_3		0x05
+#define SSH_SK_ECDSA_NISTP384_DILITHIUM_3 0x06
+#define SSH_SK_DILITHIUM_4		0x07
+#define SSH_SK_ECDSA_NISTP521_DILITHIUM_4 0x08
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 
 /* Error codes */
 #define SSH_SK_ERR_GENERAL		-1

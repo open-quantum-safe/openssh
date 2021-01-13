@@ -66,6 +66,8 @@
 
 #include "openbsd-compat/openssl-compat.h"
 
+#include "oqs-utils.h"
+
 /* openssh private key file format */
 #define MARK_BEGIN		"-----BEGIN OPENSSH PRIVATE KEY-----\n"
 #define MARK_END		"-----END OPENSSH PRIVATE KEY-----\n"
@@ -87,6 +89,30 @@
 #define SSHKEY_SHIELD_PREKEY_LEN	(16 * 1024)
 #define SSHKEY_SHIELD_CIPHER		"aes256-ctr" /* XXX want AES-EME* */
 #define SSHKEY_SHIELD_PREKEY_HASH	SSH_DIGEST_SHA512
+
+/* returns the size of an oqs public key */
+static size_t oqs_sig_pk_len(int type) {
+  switch (type) {
+// FIXMEOQS: TEMPLATE
+  case KEY_DILITHIUM_2: return OQS_SIG_dilithium_2_length_public_key;
+  case KEY_DILITHIUM_3: return OQS_SIG_dilithium_2_length_public_key;
+  case KEY_DILITHIUM_4: return OQS_SIG_dilithium_2_length_public_key;
+// FIXMEOQS: TEMPLATE
+  }
+  return 0;
+}
+
+/* returns the size of an oqs secret key */
+static size_t oqs_sig_sk_len(int type) {
+  switch (type) {
+// FIXMEOQS: TEMPLATE
+  case KEY_DILITHIUM_2: return OQS_SIG_dilithium_2_length_secret_key;
+  case KEY_DILITHIUM_3: return OQS_SIG_dilithium_2_length_secret_key;
+  case KEY_DILITHIUM_4: return OQS_SIG_dilithium_2_length_secret_key;
+// FIXMEOQS: TEMPLATE
+  }
+  return 0;
+}
 
 int	sshkey_private_serialize_opt(struct sshkey *key,
     struct sshbuf *buf, enum sshkey_serialize_rep);
@@ -156,6 +182,19 @@ static const struct keytype keytypes[] = {
 	    KEY_ECDSA_SK_CERT, NID_X9_62_prime256v1, 1, 0 },
 # endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
+// FIXMEOQS: TEMPLATE /////////////////////////////
+	{ "ssh-dilithium2", "DILITHIUM2", NULL, KEY_DILITHIUM_2, 0, 0, 0 },
+	{ "ssh-dilithium3", "DILITHIUM3", NULL, KEY_DILITHIUM_3, 0, 0, 0 },
+	{ "ssh-dilithium4", "DILITHIUM4", NULL, KEY_DILITHIUM_4, 0, 0, 0 },
+#ifdef WITH_OPENSSL
+	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL, KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
+#ifdef OPENSSL_HAS_ECC
+	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL, KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL, KEY_ECDSA_NISTP384_DILITHIUM_3, NID_secp384r1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-dilithium4", "ECDSA_NISTP521_DILITHIUM4", NULL, KEY_ECDSA_NISTP521_DILITHIUM_4, NID_secp521r1, 0, 0 },
+#endif
+#endif
+// FIXMEOQS: TEMPLATE /////////////////////////////
 	{ NULL, NULL, NULL, -1, -1, 0, 0 }
 };
 
@@ -348,7 +387,19 @@ sshkey_size(const struct sshkey *k)
 	case KEY_XMSS:
 	case KEY_XMSS_CERT:
 		return 256;	/* XXX */
+	CASE_KEY_OQS:
+		return k->oqs_pk_len;
+	/* For hybrid cases, we return the sum of the classical and PQ public key lengths */
+#ifdef WITH_OPENSSL
+	CASE_KEY_RSA_HYBRID:
+		if (k->rsa == NULL)
+			return 0;
+		RSA_get0_key(k->rsa, &rsa_n, NULL, NULL);
+		return BN_num_bits(rsa_n) + k->oqs_pk_len;
+	CASE_KEY_ECDSA_HYBRID:
+		return sshkey_curve_nid_to_bits(k->ecdsa_nid) + k->oqs_pk_len;
 	}
+#endif /* WITH_OPENSSL */
 	return 0;
 }
 
@@ -363,6 +414,8 @@ sshkey_type_is_valid_ca(int type)
 	case KEY_ED25519:
 	case KEY_ED25519_SK:
 	case KEY_XMSS:
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
 		return 1;
 	default:
 		return 0;
@@ -561,10 +614,15 @@ sshkey_new(int type)
 	k->ed25519_pk = NULL;
 	k->xmss_sk = NULL;
 	k->xmss_pk = NULL;
+	k->oqs_sk = NULL;
+	k->oqs_sk_len = 0;
+	k->oqs_pk = NULL;
+	k->oqs_pk_len = 0;
 	switch (k->type) {
 #ifdef WITH_OPENSSL
 	case KEY_RSA:
 	case KEY_RSA_CERT:
+	CASE_KEY_RSA_HYBRID:
 		if ((rsa = RSA_new()) == NULL) {
 			free(k);
 			return NULL;
@@ -583,6 +641,7 @@ sshkey_new(int type)
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA_SK:
 	case KEY_ECDSA_SK_CERT:
+	CASE_KEY_ECDSA_HYBRID:
 		/* Cannot do anything until we know the group */
 		break;
 #endif /* WITH_OPENSSL */
@@ -592,7 +651,9 @@ sshkey_new(int type)
 	case KEY_ED25519_SK_CERT:
 	case KEY_XMSS:
 	case KEY_XMSS_CERT:
-		/* no need to prealloc */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
 		break;
 	case KEY_UNSPEC:
 		break;
@@ -600,7 +661,16 @@ sshkey_new(int type)
 		free(k);
 		return NULL;
 	}
-
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (k->type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		k->oqs_pk_len = oqs_sig_pk_len(k->type);
+		k->oqs_sk_len = oqs_sig_sk_len(k->type);
+		break;
+	}
 	if (sshkey_is_cert(k)) {
 		if ((k->cert = cert_new()) == NULL) {
 			sshkey_free(k);
@@ -620,6 +690,7 @@ sshkey_free(struct sshkey *k)
 #ifdef WITH_OPENSSL
 	case KEY_RSA:
 	case KEY_RSA_CERT:
+	CASE_KEY_RSA_HYBRID:
 		RSA_free(k->rsa);
 		k->rsa = NULL;
 		break;
@@ -637,6 +708,7 @@ sshkey_free(struct sshkey *k)
 		/* FALLTHROUGH */
 	case KEY_ECDSA:
 	case KEY_ECDSA_CERT:
+	CASE_KEY_ECDSA_HYBRID:
 		EC_KEY_free(k->ecdsa);
 		k->ecdsa = NULL;
 		break;
@@ -669,10 +741,24 @@ sshkey_free(struct sshkey *k)
 		k->xmss_filename = NULL;
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* free done after this switch statement */
+		break;
 	case KEY_UNSPEC:
 		break;
 	default:
 		break;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (k->type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+	    freezero(k->oqs_sk, k->oqs_sk_len);
+	    k->oqs_sk = NULL;
+	    freezero(k->oqs_pk, k->oqs_pk_len);
+	    k->oqs_pk = NULL;
 	}
 	if (sshkey_is_cert(k))
 		cert_free(k->cert);
@@ -703,6 +789,7 @@ cert_compare(struct sshkey_cert *a, struct sshkey_cert *b)
 int
 sshkey_equal_public(const struct sshkey *a, const struct sshkey *b)
 {
+	int rv = 0;
 #if defined(WITH_OPENSSL)
 	const BIGNUM *rsa_e_a, *rsa_n_a;
 	const BIGNUM *rsa_e_b, *rsa_n_b;
@@ -718,12 +805,14 @@ sshkey_equal_public(const struct sshkey *a, const struct sshkey *b)
 #ifdef WITH_OPENSSL
 	case KEY_RSA_CERT:
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		if (a->rsa == NULL || b->rsa == NULL)
 			return 0;
 		RSA_get0_key(a->rsa, &rsa_n_a, &rsa_e_a, NULL);
 		RSA_get0_key(b->rsa, &rsa_n_b, &rsa_e_b, NULL);
-		return BN_cmp(rsa_e_a, rsa_e_b) == 0 &&
+		rv = BN_cmp(rsa_e_a, rsa_e_b) == 0 &&
 		    BN_cmp(rsa_n_a, rsa_n_b) == 0;
+		break; /* break instead of return for hybrid case */
 	case KEY_DSA_CERT:
 	case KEY_DSA:
 		if (a->dsa == NULL || b->dsa == NULL)
@@ -746,6 +835,7 @@ sshkey_equal_public(const struct sshkey *a, const struct sshkey *b)
 		/* FALLTHROUGH */
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		if (a->ecdsa == NULL || b->ecdsa == NULL ||
 		    EC_KEY_get0_public_key(a->ecdsa) == NULL ||
 		    EC_KEY_get0_public_key(b->ecdsa) == NULL)
@@ -756,7 +846,8 @@ sshkey_equal_public(const struct sshkey *a, const struct sshkey *b)
 		    EC_KEY_get0_public_key(a->ecdsa),
 		    EC_KEY_get0_public_key(b->ecdsa), NULL) != 0)
 			return 0;
-		return 1;
+		rv = 1;
+		break; /* break instead of return for hybrid case */
 # endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 	case KEY_ED25519_SK:
@@ -777,10 +868,30 @@ sshkey_equal_public(const struct sshkey *a, const struct sshkey *b)
 		    sshkey_xmss_pklen(a) == sshkey_xmss_pklen(b) &&
 		    memcmp(a->xmss_pk, b->xmss_pk, sshkey_xmss_pklen(a)) == 0;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		rv = 1;
+		break;
 	default:
 		return 0;
 	}
-	/* NOTREACHED */
+	/* if classical part is not equal, no point comparing the PQ part */
+	if (rv == 0) {
+	  return rv;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (a->type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		rv = a->oqs_pk != NULL && b->oqs_pk != NULL &&
+		    a->oqs_pk_len == b->oqs_pk_len &&
+		    memcmp(a->oqs_pk, b->oqs_pk, a->oqs_pk_len) == 0;
+	}
+
+	return rv;
 }
 
 int
@@ -850,6 +961,7 @@ to_blob_buf(const struct sshkey *key, struct sshbuf *b, int force_plain,
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA:
 	case KEY_ECDSA_SK:
+	CASE_KEY_ECDSA_HYBRID:
 		if (key->ecdsa == NULL)
 			return SSH_ERR_INVALID_ARGUMENT;
 		if ((ret = sshbuf_put_cstring(b, typename)) != 0 ||
@@ -865,6 +977,7 @@ to_blob_buf(const struct sshkey *key, struct sshbuf *b, int force_plain,
 		break;
 # endif
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		if (key->rsa == NULL)
 			return SSH_ERR_INVALID_ARGUMENT;
 		RSA_get0_key(key->rsa, &rsa_n, &rsa_e, NULL);
@@ -901,9 +1014,27 @@ to_blob_buf(const struct sshkey *key, struct sshbuf *b, int force_plain,
 			return ret;
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply serialize the type name, key handling is done after the switch statement */
+		if ((ret = sshbuf_put_cstring(b, typename)) != 0)
+			return ret;
+		break;
 	default:
 		return SSH_ERR_KEY_TYPE_UNKNOWN;
 	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		if (key->oqs_pk == NULL) {
+			return SSH_ERR_INVALID_ARGUMENT;
+		}
+		if ((ret = sshbuf_put_string(b, key->oqs_pk, key->oqs_pk_len)) != 0)
+			return ret;
+	}
+
 	return 0;
 }
 
@@ -1336,6 +1467,8 @@ sshkey_read(struct sshkey *ret, char **cpp)
 	case KEY_XMSS:
 	case KEY_XMSS_CERT:
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
 		break; /* ok */
 	default:
 		return SSH_ERR_INVALID_ARGUMENT;
@@ -1481,9 +1614,31 @@ sshkey_read(struct sshkey *ret, char **cpp)
 #endif
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		break;
 	default:
 		sshkey_free(k);
 		return SSH_ERR_INTERNAL_ERROR;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (sshkey_type_plain(ret->type)) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+	  if (ret->type != k->type) {
+	    return SSH_ERR_INTERNAL_ERROR; // FIXMEOQS: that could happen!
+	  }
+		freezero(ret->oqs_pk, ret->oqs_pk_len);
+		ret->oqs_pk = k->oqs_pk;
+		ret->oqs_pk_len = oqs_sig_pk_len(k->type);
+		ret->oqs_sk_len = oqs_sig_sk_len(k->type);
+		k->oqs_pk = NULL;
+#ifdef DEBUG_PK
+		/* XXX */
+#endif
 	}
 	sshkey_free(k);
 
@@ -1742,17 +1897,53 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 		break;
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		ret = ecdsa_generate_private_key(bits, &k->ecdsa_nid,
 		    &k->ecdsa);
 		break;
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		ret = rsa_generate_private_key(bits, &k->rsa);
 		break;
 #endif /* WITH_OPENSSL */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		break;
 	default:
 		ret = SSH_ERR_INVALID_ARGUMENT;
 	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+	  k->oqs_pk_len = oqs_sig_pk_len(type);
+	  k->oqs_sk_len = oqs_sig_sk_len(type);
+	  if ((k->oqs_pk = malloc(k->oqs_pk_len)) == NULL ||
+	      (k->oqs_sk = malloc(k->oqs_sk_len)) == NULL) {
+	    ret = SSH_ERR_ALLOC_FAIL;
+	    break;
+	  }
+	  switch (type) {
+	    // FIXMEOQS: TEMPLATE
+	  case KEY_DILITHIUM_2:
+	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
+	  case KEY_RSA3072_DILITHIUM_2:
+	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	    // FIXMEOQS: TEMPLATE
+	  }
+	  if (ret != OQS_SUCCESS) {
+	    ret = SSH_ERR_INTERNAL_ERROR;
+	    break;
+	  }
+	  /* success */
+	  ret = 0;
+	}
+
 	if (ret == 0) {
 		k->type = type;
 		*keyp = k;
@@ -1879,6 +2070,7 @@ sshkey_from_private(const struct sshkey *k, struct sshkey **pkp)
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA_SK:
 	case KEY_ECDSA_SK_CERT:
+	CASE_KEY_ECDSA_HYBRID:
 		n->ecdsa_nid = k->ecdsa_nid;
 		n->ecdsa = EC_KEY_new_by_curve_name(k->ecdsa_nid);
 		if (n->ecdsa == NULL) {
@@ -1899,6 +2091,7 @@ sshkey_from_private(const struct sshkey *k, struct sshkey **pkp)
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA:
 	case KEY_RSA_CERT:
+	CASE_KEY_RSA_HYBRID:
 		RSA_get0_key(k->rsa, &rsa_n, &rsa_e, NULL);
 		if ((rsa_n_dup = BN_dup(rsa_n)) == NULL ||
 		    (rsa_e_dup = BN_dup(rsa_e)) == NULL) {
@@ -1954,9 +2147,31 @@ sshkey_from_private(const struct sshkey *k, struct sshkey **pkp)
 		}
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply create the key, handling is done after the switch statement */
+		if ((n = sshkey_new(k->type)) == NULL) {
+			r = SSH_ERR_ALLOC_FAIL;
+			goto out;
+		}
+		break;
 	default:
 		r = SSH_ERR_KEY_TYPE_UNKNOWN;
 		goto out;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (k->type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		if (k->oqs_pk != NULL) {
+			if ((n->oqs_pk = malloc(k->oqs_pk_len)) == NULL) {
+				sshkey_free(n);
+				r = SSH_ERR_ALLOC_FAIL;
+				goto out;
+			}
+			memcpy(n->oqs_pk, k->oqs_pk, k->oqs_pk_len);
+		}
 	}
 	if (sshkey_is_cert(k) && (r = sshkey_cert_copy(k, n)) != 0)
 		goto out;
@@ -2379,6 +2594,7 @@ sshkey_from_blob_internal(struct sshbuf *b, struct sshkey **keyp,
 		}
 		/* FALLTHROUGH */
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		if ((key = sshkey_new(type)) == NULL) {
 			ret = SSH_ERR_ALLOC_FAIL;
 			goto out;
@@ -2443,6 +2659,7 @@ sshkey_from_blob_internal(struct sshbuf *b, struct sshkey **keyp,
 		/* FALLTHROUGH */
 	case KEY_ECDSA:
 	case KEY_ECDSA_SK:
+	CASE_KEY_ECDSA_HYBRID:
 		if ((key = sshkey_new(type)) == NULL) {
 			ret = SSH_ERR_ALLOC_FAIL;
 			goto out;
@@ -2561,10 +2778,32 @@ sshkey_from_blob_internal(struct sshbuf *b, struct sshkey **keyp,
 			goto out;
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply create the key, handling is done after the switch statement */
+		if ((key = sshkey_new(type)) == NULL) {
+			ret = SSH_ERR_ALLOC_FAIL;
+			goto out;
+		}
+		break;
 	case KEY_UNSPEC:
 	default:
 		ret = SSH_ERR_KEY_TYPE_UNKNOWN;
 		goto out;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		if ((ret = sshbuf_get_string(b, &pk, &len)) != 0)
+			goto out;
+		if (len != key->oqs_pk_len) {
+			ret = SSH_ERR_INVALID_FORMAT;
+			goto out;
+		}
+		key->oqs_pk = pk;
+		pk = NULL;
 	}
 
 	/* Parse certificate potion */
@@ -2729,6 +2968,9 @@ sshkey_sign(struct sshkey *key,
     const u_char *data, size_t datalen,
     const char *alg, const char *sk_provider, const char *sk_pin, u_int compat)
 {
+	u_char *sig_classical = NULL, *sig_pq = NULL;
+	size_t len_classical = 0, len_pq = 0;
+	int index = 0;
 	int was_shielded = sshkey_is_shielded(key);
 	int r2, r = SSH_ERR_INTERNAL_ERROR;
 
@@ -2744,42 +2986,106 @@ sshkey_sign(struct sshkey *key,
 #ifdef WITH_OPENSSL
 	case KEY_DSA_CERT:
 	case KEY_DSA:
-		r = ssh_dss_sign(key, sigp, lenp, data, datalen, compat);
+		r = ssh_dss_sign(key, &sig_classical, &len_classical, data, datalen, compat);
 		break;
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA:
-		r = ssh_ecdsa_sign(key, sigp, lenp, data, datalen, compat);
+	CASE_KEY_ECDSA_HYBRID:
+		r = ssh_ecdsa_sign(key, &sig_classical, &len_classical, data, datalen, compat);
 		break;
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA_CERT:
 	case KEY_RSA:
-		r = ssh_rsa_sign(key, sigp, lenp, data, datalen, alg);
+	CASE_KEY_RSA_HYBRID:
+		r = ssh_rsa_sign(key, &sig_classical, &len_classical, data, datalen, alg);
 		break;
 #endif /* WITH_OPENSSL */
 	case KEY_ED25519:
 	case KEY_ED25519_CERT:
-		r = ssh_ed25519_sign(key, sigp, lenp, data, datalen, compat);
+		r = ssh_ed25519_sign(key, &sig_classical, &len_classical, data, datalen, compat);
 		break;
 	case KEY_ED25519_SK:
 	case KEY_ED25519_SK_CERT:
 	case KEY_ECDSA_SK_CERT:
 	case KEY_ECDSA_SK:
-		r = sshsk_sign(sk_provider, key, sigp, lenp, data,
+		r = sshsk_sign(sk_provider, key, &sig_classical, &len_classical, data,
 		    datalen, compat, sk_pin);
 		break;
 #ifdef WITH_XMSS
 	case KEY_XMSS:
 	case KEY_XMSS_CERT:
-		r = ssh_xmss_sign(key, sigp, lenp, data, datalen, compat);
+		r = ssh_xmss_sign(key, &sig_classical, &len_classical, data, datalen, compat);
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		break;
 	default:
 		r = SSH_ERR_KEY_TYPE_UNKNOWN;
 		break;
 	}
+	/* abort if we got an error in the classical signing */
+	if (r != 0) {
+		return r;
+	}
+	/* check if we need to handle with a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (key->type) {
+// FIXMEOQS: TEMPLATE
+	case KEY_DILITHIUM_2:
+	case KEY_ECDSA_NISTP256_DILITHIUM_2:
+	case KEY_RSA3072_DILITHIUM_2:
+		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+// FIXMEOQS: TEMPLATE
+	}
+	/* abort if we got an error in the PQ signing */
+	if (r != 0) {
+		return r;
+	}
+
 	if (was_shielded && (r2 = sshkey_shield_private(key)) != 0)
 		return r2;
+
+	/* return the correct signature */
+	switch (key->type) {
+	CASE_KEY_HYBRID:
+	  // FIXMEOQS: don't include the lenghts 
+		/* classical-PQ hybrid: we concatenate the signatures */
+		*lenp = 4 + len_classical + 4 + len_pq;
+		if ((*sigp = malloc(*lenp)) == NULL) {
+			free(sig_classical);
+			free(sig_pq);
+			return SSH_ERR_ALLOC_FAIL;
+		}
+		/* encode the classical sig length */
+		POKE_U32(*sigp + index, (size_t) len_classical);
+		index += 4;
+		/* encode the classical sig */
+		memcpy(*sigp + index, sig_classical, (size_t) len_classical);
+		index += len_classical;
+		free(sig_classical);
+		/* encode the PQ sig length */
+		POKE_U32(*sigp + index, len_pq);
+		index += 4;
+		/* encode the PQ sig */
+		memcpy(*sigp + index, sig_pq, len_pq);
+		index += len_pq;
+		free(sig_pq);
+		break;
+	CASE_KEY_OQS:
+		*sigp = sig_pq;
+		*lenp = len_pq;
+		break;
+	default:
+		*sigp = sig_classical;
+		*lenp = len_classical;
+		break;
+	}
+
 	return r;
 }
 
@@ -2793,10 +3099,45 @@ sshkey_verify(const struct sshkey *key,
     const u_char *data, size_t dlen, const char *alg, u_int compat,
     struct sshkey_sig_details **detailsp)
 {
+	const u_char *sig_classical = NULL;
+	size_t siglen_classical = 0;
+	int index = 0;
+	const u_char *sig_pq = NULL;
+	size_t siglen_pq = 0;
+	int r = 0;
+
 	if (detailsp != NULL)
 		*detailsp = NULL;
 	if (siglen == 0 || dlen > SSH_KEY_MAX_SIGN_DATA_SIZE)
 		return SSH_ERR_INVALID_ARGUMENT;
+	/* determine the type of signature: classical, PQ, or hybrid */
+	switch (key->type) {
+	CASE_KEY_HYBRID:
+		/* classical-PQ hybrid: we separate the signatures */
+		/* decode the classical sig length */
+		siglen_classical = (size_t) PEEK_U32(sig + index);
+		index += 4;
+		/* point to the classical sig */
+		sig_classical = sig + index;
+		index += siglen_classical;
+		/* decode the PQ sig length */
+		siglen_pq = (size_t) PEEK_U32(sig + index);
+		index += 4;
+		/* point to the PQ sig */
+		sig_pq = sig + index;
+		index += siglen_pq;
+		break;
+	CASE_KEY_OQS:
+		/* PQ signature */
+		sig_pq = sig;
+		siglen_pq = siglen;
+		break;
+	default:
+		/* classical signature */
+		sig_classical = sig;
+		siglen_classical = siglen;
+		break;
+	}
 	switch (key->type) {
 #ifdef WITH_OPENSSL
 	case KEY_DSA_CERT:
@@ -2805,7 +3146,9 @@ sshkey_verify(const struct sshkey *key,
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA:
-		return ssh_ecdsa_verify(key, sig, siglen, data, dlen, compat);
+	CASE_KEY_ECDSA_HYBRID:
+		r = ssh_ecdsa_verify(key, sig, siglen, data, dlen, compat);
+		break; /* break insted of return for hybrid case */
 	case KEY_ECDSA_SK_CERT:
 	case KEY_ECDSA_SK:
 		return ssh_ecdsa_sk_verify(key, sig, siglen, data, dlen,
@@ -2813,7 +3156,9 @@ sshkey_verify(const struct sshkey *key,
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA_CERT:
 	case KEY_RSA:
-		return ssh_rsa_verify(key, sig, siglen, data, dlen, alg);
+	CASE_KEY_RSA_HYBRID:
+		r = ssh_rsa_verify(key, sig, siglen, data, dlen, alg);
+		break; /* break insted of return for hybrid case */
 #endif /* WITH_OPENSSL */
 	case KEY_ED25519:
 	case KEY_ED25519_CERT:
@@ -2827,6 +3172,27 @@ sshkey_verify(const struct sshkey *key,
 	case KEY_XMSS_CERT:
 		return ssh_xmss_verify(key, sig, siglen, data, dlen, compat);
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		break;
+	default:
+		return SSH_ERR_KEY_TYPE_UNKNOWN;
+	}
+	/* abort if we got an error in the classical verification */
+	if (r != 0) {
+		return r;
+	}
+	/* check if we need to handle a PQ sig. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (key->type) {
+// FIXMEOQS: TEMPLATE
+	case KEY_DILITHIUM_2:
+	case KEY_ECDSA_NISTP256_DILITHIUM_2:
+	case KEY_RSA3072_DILITHIUM_2:
+		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+// FIXMEOQS: TEMPLATE
 	default:
 		return SSH_ERR_KEY_TYPE_UNKNOWN;
 	}
@@ -3189,6 +3555,7 @@ sshkey_private_serialize_opt(struct sshkey *key, struct sshbuf *buf,
 	switch (key->type) {
 #ifdef WITH_OPENSSL
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		RSA_get0_key(key->rsa, &rsa_n, &rsa_e, &rsa_d);
 		RSA_get0_factors(key->rsa, &rsa_p, &rsa_q);
 		RSA_get0_crt_params(key->rsa, NULL, NULL, &rsa_iqmp);
@@ -3237,6 +3604,7 @@ sshkey_private_serialize_opt(struct sshkey *key, struct sshbuf *buf,
 		break;
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		if ((r = sshbuf_put_cstring(b,
 		    sshkey_curve_nid_to_name(key->ecdsa_nid))) != 0 ||
 		    (r = sshbuf_put_eckey(b, key->ecdsa)) != 0 ||
@@ -3350,10 +3718,28 @@ sshkey_private_serialize_opt(struct sshkey *key, struct sshbuf *buf,
 			goto out;
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply break here to avoid the default clause. PQ processing
+		   is done after the switch statement */
+		break;
 	default:
 		r = SSH_ERR_INVALID_ARGUMENT;
 		goto out;
 	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (key->type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		if ((r = sshbuf_put_string(b, key->oqs_pk,
+		    key->oqs_pk_len)) != 0 ||
+		    (r = sshbuf_put_string(b, key->oqs_sk,
+		    key->oqs_sk_len)) != 0)
+			goto out;
+		break;
+	}
+
 	/*
 	 * success (but we still need to append the output to buf after
 	 * possibly re-shielding the private key)
@@ -3385,6 +3771,7 @@ sshkey_private_deserialize(struct sshbuf *buf, struct sshkey **kp)
 	int type, r = SSH_ERR_INTERNAL_ERROR;
 	u_char *ed25519_pk = NULL, *ed25519_sk = NULL;
 	u_char *xmss_pk = NULL, *xmss_sk = NULL;
+	u_char *oqs_pk = NULL, *oqs_sk = NULL;
 #ifdef WITH_OPENSSL
 	BIGNUM *exponent = NULL;
 	BIGNUM *rsa_n = NULL, *rsa_e = NULL, *rsa_d = NULL;
@@ -3452,6 +3839,7 @@ sshkey_private_deserialize(struct sshbuf *buf, struct sshkey **kp)
 		break;
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		if ((k->ecdsa_nid = sshkey_ecdsa_nid_from_name(tname)) == -1) {
 			r = SSH_ERR_INVALID_ARGUMENT;
 			goto out;
@@ -3532,6 +3920,7 @@ sshkey_private_deserialize(struct sshbuf *buf, struct sshkey **kp)
 		break;
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		if ((r = sshbuf_get_bignum2(buf, &rsa_n)) != 0 ||
 		    (r = sshbuf_get_bignum2(buf, &rsa_e)) != 0)
 			goto out;
@@ -3621,15 +4010,41 @@ sshkey_private_deserialize(struct sshbuf *buf, struct sshkey **kp)
 			goto out;
 		break;
 #endif /* WITH_XMSS */
+	CASE_KEY_OQS:
+		/* we simply create the key, handling is done after the switch statement */
+		if ((k = sshkey_new(type)) == NULL) {
+			r = SSH_ERR_ALLOC_FAIL;
+			goto out;
+		}
+		break;
 	default:
 		r = SSH_ERR_KEY_TYPE_UNKNOWN;
 		goto out;
+	}
+	/* check if we need to handle a PQ key. This is done outside the
+	   switch statement above because in the hybrid case, the classical
+	   processing is done there. */
+	switch (type) {
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
+		if ((r = sshbuf_get_string(buf, &oqs_pk, &pklen)) != 0 ||
+		    (r = sshbuf_get_string(buf, &oqs_sk, &sklen)) != 0)
+			goto out;
+		if (pklen != k->oqs_pk_len || sklen != k->oqs_sk_len) {
+			r = SSH_ERR_INVALID_FORMAT;
+			goto out;
+		}
+		k->oqs_pk = oqs_pk;
+		k->oqs_sk = oqs_sk;
+		oqs_pk = oqs_sk = NULL;
+		break;
 	}
 #ifdef WITH_OPENSSL
 	/* enable blinding */
 	switch (k->type) {
 	case KEY_RSA:
 	case KEY_RSA_CERT:
+	CASE_KEY_RSA_HYBRID:
 		if (RSA_blinding_on(k->rsa, NULL) != 1) {
 			r = SSH_ERR_LIBCRYPTO_ERROR;
 			goto out;
@@ -3666,6 +4081,8 @@ sshkey_private_deserialize(struct sshbuf *buf, struct sshkey **kp)
 	free(xmss_name);
 	freezero(xmss_pk, pklen);
 	freezero(xmss_sk, sklen);
+	freezero(oqs_pk, pklen);
+	freezero(oqs_sk, sklen);
 	return r;
 }
 
@@ -4428,7 +4845,9 @@ sshkey_private_to_fileblob(struct sshkey *key, struct sshbuf *blob,
 #endif /* WITH_XMSS */
 #ifdef WITH_OPENSSL
 	case KEY_ECDSA_SK:
+	CASE_KEY_HYBRID:
 #endif /* WITH_OPENSSL */
+	CASE_KEY_OQS:
 		return sshkey_private_to_blob2(key, blob, passphrase,
 		    comment, openssh_format_cipher, openssh_format_rounds);
 	default:
@@ -4642,6 +5061,8 @@ sshkey_parse_private_fileblob_type(struct sshbuf *blob, int type,
 	switch (type) {
 	case KEY_ED25519:
 	case KEY_XMSS:
+	CASE_KEY_OQS:
+	CASE_KEY_HYBRID:
 		/* No fallback for new-format-only keys */
 		return sshkey_parse_private2(blob, type, passphrase,
 		    keyp, commentp);

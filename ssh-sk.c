@@ -17,6 +17,8 @@
 
 /* #define DEBUG_SK 1 */
 
+// FIXMEOQS: add FIDO support?
+
 #include "includes.h"
 
 #ifdef ENABLE_SK

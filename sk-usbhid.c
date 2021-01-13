@@ -16,6 +16,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+// FIXMEOQS: integrate OQS here?
+
 #include "includes.h"
 
 #ifdef ENABLE_SK_INTERNAL

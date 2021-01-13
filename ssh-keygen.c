@@ -66,6 +66,9 @@
 #include "ssh-sk.h"
 #include "sk-api.h" /* XXX for SSH_SK_USER_PRESENCE_REQD; remove */
 
+#include <oqs/oqs.h>
+#include "oqs-utils.h"
+
 #ifdef WITH_OPENSSL
 # define DEFAULT_KEY_TYPE_NAME "rsa"
 #else
@@ -202,6 +205,24 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 			break;
 		}
 #endif
+	  /* OQS note: different parameter sets for one PQ scheme are identified
+	   * by different types (unlike ECDSA which uses one key type and a 2nd
+	   * 'nid' value to identify the curve. We need this special processing
+	   * for ECDSA hybrid of levels 3+ to avoid defaulting to P256 when
+	   * name is NULL (like when called from do_gen_all_hostkeys).
+	   */
+		if (name == NULL && IS_ECDSA_HYBRID(type)) {
+		  switch (type) {
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+		  case KEY_ECDSA_NISTP384_DILITHIUM_3:
+		    *bitsp = 384;
+		    break;
+		  case KEY_ECDSA_NISTP521_DILITHIUM_4:
+		    *bitsp = 521;
+		    break;
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+		  }
+		}
 	}
 #ifdef WITH_OPENSSL
 	switch (type) {
@@ -218,6 +239,7 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 			    OPENSSL_RSA_MAX_MODULUS_BITS);
 		break;
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		if (sshkey_ecdsa_bits_to_nid(*bitsp) == -1)
 			fatal("Invalid ECDSA key length: valid lengths are "
 #ifdef OPENSSL_HAS_NISTP521
@@ -293,6 +315,18 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_XMSS_CERT:
 			name = _PATH_SSH_CLIENT_ID_XMSS;
 			break;
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+		case KEY_DILITHIUM_2:
+			name = _PATH_SSH_CLIENT_ID_DILITHIUM_2;
+			break;
+		case KEY_DILITHIUM_3:
+			name = _PATH_SSH_CLIENT_ID_DILITHIUM_3;
+			break;
+		case KEY_DILITHIUM_4:
+			name = _PATH_SSH_CLIENT_ID_DILITHIUM_4;
+			break;
+			// FIXMEOQS: hybrid? (wasn't there in 7.9)
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 		default:
 			fatal("bad key type");
 		}
@@ -1052,6 +1086,19 @@ do_gen_all_hostkeys(struct passwd *pw)
 #ifdef WITH_XMSS
 		{ "xmss", "XMSS",_PATH_HOST_XMSS_KEY_FILE },
 #endif /* WITH_XMSS */
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
+		{ "dilithium3", "DILITHIUM_3", _PATH_HOST_DILITHIUM_3_KEY_FILE },
+		{ "dilithium4", "DILITHIUM_4", _PATH_HOST_DILITHIUM_4_KEY_FILE },
+#ifdef WITH_OPENSSL
+		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
+#ifdef OPENSSL_HAS_ECC
+		{ "ecdsa_nistp256_dilithium2", "ECDSA_NISTP256_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE },
+		{ "ecdsa_nistp384_dilithium3", "ECDSA_NISTP384_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE },
+		{ "ecdsa_nistp521_dilithium4", "ECDSA_NISTP521_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE },
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 		{ NULL, NULL, NULL }
 	};
 
@@ -1539,6 +1586,7 @@ do_change_comment(struct passwd *pw, const char *identity_comment)
 		}
 	}
 
+	// FIXMEOQS: should we add the OQS key types here?
 	if (private->type != KEY_ED25519 && private->type != KEY_XMSS &&
 	    private_key_format != SSHKEY_PRIVATE_OPENSSH) {
 		error("Comments are only supported for keys stored in "
@@ -3095,10 +3143,17 @@ save_attestation(struct sshbuf *attest, const char *path)
 static void
 usage(void)
 {
+
 	fprintf(stderr,
 	    "usage: ssh-keygen [-q] [-a rounds] [-b bits] [-C comment] [-f output_keyfile]\n"
 	    "                  [-m format] [-N new_passphrase] [-O option]\n"
-	    "                  [-t dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa]\n"
+	    "                  [-t dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa"
+// FIXMEOQS: TEMPLATE
+	    " |\n                   dilithium2 | rsa3072_dilithium2 | ecdsa_nistp256_dilithium2"
+	    " |\n                   dilithium3 | ecdsa_nistp384_dilithium3"
+	    " |\n                   dilithium4 | ecdsa_nistp521_dilithium4"
+// FIXMEOQS: TEMPLATE
+	    " ]\n"
 	    "                  [-w provider]\n"
 	    "       ssh-keygen -p [-a rounds] [-f keyfile] [-m format] [-N new_passphrase]\n"
 	    "                   [-P old_passphrase]\n"
@@ -3556,6 +3611,15 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_XMSS_KEY_FILE, rr_hostname,
 			    print_generic);
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_2_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_3_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_4_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, rr_hostname, print_generic);
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 			if (n == 0)
 				fatal("no keys found.");
 			exit(0);

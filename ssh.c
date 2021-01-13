@@ -1563,7 +1563,9 @@ main(int ac, char **av)
 	sensitive_data.nkeys = 0;
 	sensitive_data.keys = NULL;
 	if (options.hostbased_authentication) {
-		sensitive_data.nkeys = 10;
+// FIXMEOQS: TEMPLATE ///////////////////
+		sensitive_data.nkeys = 10 + 7;
+// FIXMEOQS: TEMPLATE ///////////////////
 		sensitive_data.keys = xcalloc(sensitive_data.nkeys,
 		    sizeof(struct sshkey));
 
@@ -1591,6 +1593,15 @@ main(int ac, char **av)
 			L_PUBKEY(_PATH_HOST_DSA_KEY_FILE, 7);
 			L_CERT(_PATH_HOST_XMSS_KEY_FILE, 8);
 			L_PUBKEY(_PATH_HOST_XMSS_KEY_FILE, 9);
+// FIXMEOQS: TEMPLATE ///////////////////
+			L_PUBKEY(_PATH_HOST_DILITHIUM_2_KEY_FILE, 10);
+			L_PUBKEY(_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, 11);
+			L_PUBKEY(_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, 12);
+			L_PUBKEY(_PATH_HOST_DILITHIUM_3_KEY_FILE, 13);
+			L_PUBKEY(_PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, 14);
+			L_PUBKEY(_PATH_HOST_DILITHIUM_4_KEY_FILE, 15);
+			L_PUBKEY(_PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, 16);
+// FIXMEOQS: TEMPLATE ///////////////////
 		}
 	}
 

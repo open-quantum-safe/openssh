@@ -165,7 +165,9 @@ main(int argc, char **argv)
 {
 	struct sshbuf *b;
 	Options options;
-#define NUM_KEYTYPES 5
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+#define NUM_KEYTYPES 5 + 7 /* 5 + (3 dilithium + 1 rsa/dilithium + 3 ecdsa/dilithium) */
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
 	int r, key_fd[NUM_KEYTYPES], i, found, version = 2, fd;
@@ -190,7 +192,15 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_ED25519_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_XMSS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA_KEY_FILE, O_RDONLY);
-
+// FIXMEOQS: TEMPLATE ////////////////////////////////
+	key_fd[i++] = open(_PATH_HOST_DILITHIUM_2_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_DILITHIUM_3_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_DILITHIUM_4_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, O_RDONLY);
+// FIXMEOQS: TEMPLATE ////////////////////////////////
 	if ((pw = getpwuid(getuid())) == NULL)
 		fatal("getpwuid failed");
 	pw = pwcopy(pw);
