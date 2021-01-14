@@ -94,9 +94,16 @@
 static size_t oqs_sig_pk_len(int type) {
   switch (type) {
 // FIXMEOQS: TEMPLATE
-  case KEY_DILITHIUM_2: return OQS_SIG_dilithium_2_length_public_key;
-  case KEY_DILITHIUM_3: return OQS_SIG_dilithium_2_length_public_key;
-  case KEY_DILITHIUM_4: return OQS_SIG_dilithium_2_length_public_key;
+  case KEY_DILITHIUM_2:
+  case KEY_RSA3072_DILITHIUM_2:
+  case KEY_ECDSA_NISTP256_DILITHIUM_2:
+    return OQS_SIG_dilithium_2_length_public_key;
+  case KEY_DILITHIUM_3:
+  case KEY_ECDSA_NISTP384_DILITHIUM_3:
+    return OQS_SIG_dilithium_3_length_public_key;
+  case KEY_DILITHIUM_4:
+  case KEY_ECDSA_NISTP521_DILITHIUM_4:
+    return OQS_SIG_dilithium_4_length_public_key;
 // FIXMEOQS: TEMPLATE
   }
   return 0;
@@ -106,9 +113,16 @@ static size_t oqs_sig_pk_len(int type) {
 static size_t oqs_sig_sk_len(int type) {
   switch (type) {
 // FIXMEOQS: TEMPLATE
-  case KEY_DILITHIUM_2: return OQS_SIG_dilithium_2_length_secret_key;
-  case KEY_DILITHIUM_3: return OQS_SIG_dilithium_2_length_secret_key;
-  case KEY_DILITHIUM_4: return OQS_SIG_dilithium_2_length_secret_key;
+  case KEY_DILITHIUM_2:
+  case KEY_RSA3072_DILITHIUM_2:
+  case KEY_ECDSA_NISTP256_DILITHIUM_2:
+    return OQS_SIG_dilithium_2_length_secret_key;
+  case KEY_DILITHIUM_3:
+  case KEY_ECDSA_NISTP384_DILITHIUM_3:
+    return OQS_SIG_dilithium_3_length_secret_key;
+  case KEY_DILITHIUM_4:
+  case KEY_ECDSA_NISTP521_DILITHIUM_4:
+    return OQS_SIG_dilithium_4_length_secret_key;
 // FIXMEOQS: TEMPLATE
   }
   return 0;
@@ -269,6 +283,7 @@ key_type_is_ecdsa_variant(int type)
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA_SK:
 	case KEY_ECDSA_SK_CERT:
+	CASE_KEY_ECDSA_HYBRID:
 		return 1;
 	}
 	return 0;
@@ -3142,35 +3157,35 @@ sshkey_verify(const struct sshkey *key,
 #ifdef WITH_OPENSSL
 	case KEY_DSA_CERT:
 	case KEY_DSA:
-		return ssh_dss_verify(key, sig, siglen, data, dlen, compat);
+		return ssh_dss_verify(key, sig_classical, siglen_classical, data, dlen, compat);
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA:
 	CASE_KEY_ECDSA_HYBRID:
-		r = ssh_ecdsa_verify(key, sig, siglen, data, dlen, compat);
+		r = ssh_ecdsa_verify(key, sig_classical, siglen_classical, data, dlen, compat);
 		break; /* break insted of return for hybrid case */
 	case KEY_ECDSA_SK_CERT:
 	case KEY_ECDSA_SK:
-		return ssh_ecdsa_sk_verify(key, sig, siglen, data, dlen,
+		return ssh_ecdsa_sk_verify(key, sig_classical, siglen_classical, data, dlen,
 		    compat, detailsp);
 # endif /* OPENSSL_HAS_ECC */
 	case KEY_RSA_CERT:
 	case KEY_RSA:
 	CASE_KEY_RSA_HYBRID:
-		r = ssh_rsa_verify(key, sig, siglen, data, dlen, alg);
+		r = ssh_rsa_verify(key, sig_classical, siglen_classical, data, dlen, alg);
 		break; /* break insted of return for hybrid case */
 #endif /* WITH_OPENSSL */
 	case KEY_ED25519:
 	case KEY_ED25519_CERT:
-		return ssh_ed25519_verify(key, sig, siglen, data, dlen, compat);
+		return ssh_ed25519_verify(key, sig_classical, siglen_classical, data, dlen, compat);
 	case KEY_ED25519_SK:
 	case KEY_ED25519_SK_CERT:
-		return ssh_ed25519_sk_verify(key, sig, siglen, data, dlen,
+		return ssh_ed25519_sk_verify(key, sig_classical, siglen_classical, data, dlen,
 		    compat, detailsp);
 #ifdef WITH_XMSS
 	case KEY_XMSS:
 	case KEY_XMSS_CERT:
-		return ssh_xmss_verify(key, sig, siglen, data, dlen, compat);
+		return ssh_xmss_verify(key, sig_classical, siglen_classical, data, dlen, compat);
 #endif /* WITH_XMSS */
 	CASE_KEY_OQS:
 		/* we simply break here to avoid the default clause. PQ processing

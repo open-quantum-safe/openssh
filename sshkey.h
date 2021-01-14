@@ -336,18 +336,10 @@ int ssh_xmss_verify(const struct sshkey *key,
 // FIXMEOQS: TEMPLATE ////////////////////////////
 int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_rsa3072_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_rsa3072_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp256_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp256_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp384_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp384_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp521_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_ecdsa_nistp521_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 // FIXMEOQS: TEMPLATE ////////////////////////////
 #endif
 

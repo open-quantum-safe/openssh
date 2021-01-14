@@ -4,11 +4,10 @@
 // FIXMEOQS: TEMPLATE (all file)
 // FIXMEOQS: make sure all these macros are (still) in use
 
-/* FIXMEOQS: delete
+/* FIXMEOQS: delete me
 #define IS_RSA_HYBRID_ALG_NAME(alg) ( \
-				strcmp(alg, "ssh-rsa3072-dilithium2") == 0
+				     strcmp(alg, "ssh-rsa3072-dilithium2") == 0)
 */
-
 #define IS_RSA_HYBRID(alg) ( \
 				alg == KEY_RSA3072_DILITHIUM_2)
 

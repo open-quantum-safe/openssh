@@ -51,7 +51,11 @@ ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp,
 		*sigp = NULL;
 
 	if (key == NULL ||
-	    sshkey_type_plain(key->type) != KEY_DILITHIUM_2 ||
+	    (
+	    sshkey_type_plain(key->type) != KEY_DILITHIUM_2 &&
+	    sshkey_type_plain(key->type) != KEY_RSA3072_DILITHIUM_2 &&
+	    sshkey_type_plain(key->type) != KEY_ECDSA_NISTP256_DILITHIUM_2
+	     ) ||
 	    key->oqs_sk == NULL)
 		return SSH_ERR_INVALID_ARGUMENT;
 	slen = OQS_SIG_dilithium_2_length_signature;
@@ -101,7 +105,11 @@ ssh_dilithium2_verify(const struct sshkey *key,
 	int r;
 
 	if (key == NULL ||
-	    sshkey_type_plain(key->type) != KEY_DILITHIUM_2 ||
+	    (
+	    sshkey_type_plain(key->type) != KEY_DILITHIUM_2 &&
+	    sshkey_type_plain(key->type) != KEY_RSA3072_DILITHIUM_2 &&
+	    sshkey_type_plain(key->type) != KEY_ECDSA_NISTP256_DILITHIUM_2
+	     ) ||
 	    key->oqs_pk == NULL ||
 	    signature == NULL || signaturelen == 0)
 		return SSH_ERR_INVALID_ARGUMENT;
@@ -138,39 +146,15 @@ ssh_dilithium2_verify(const struct sshkey *key,
 }
 
 // FIXMEOQS: templatize this, meanwhile let's just fake it:
-int ssh_rsa3072_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
-}
-int ssh_rsa3072_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
-}
-int ssh_ecdsa_nistp256_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
-}
-int ssh_ecdsa_nistp256_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
-}
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
   return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
 }
 int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
   return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
 }
-int ssh_ecdsa_nistp384_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
-}
-int ssh_ecdsa_nistp384_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
-}
 int ssh_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
   return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
 }
 int ssh_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
-}
-int ssh_ecdsa_nistp521_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat) {
-  return ssh_dilithium2_sign(key, sigp, lenp, data, datalen, compat);
-}
-int ssh_ecdsa_nistp521_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat) {
   return ssh_dilithium2_verify(key, signature, signaturelen, data, datalen, compat);
 }

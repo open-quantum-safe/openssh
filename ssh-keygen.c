@@ -191,9 +191,11 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 
 		switch(type) {
 		case KEY_DSA:
+
 			*bitsp = DEFAULT_BITS_DSA;
 			break;
 		case KEY_ECDSA:
+		CASE_KEY_ECDSA_HYBRID:
 			if (name != NULL &&
 			    (nid = sshkey_ecdsa_nid_from_name(name)) > 0)
 				*bitsp = sshkey_curve_nid_to_bits(nid);
@@ -201,6 +203,7 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 				*bitsp = DEFAULT_BITS_ECDSA;
 			break;
 		case KEY_RSA:
+		CASE_KEY_RSA_HYBRID:
 			*bitsp = DEFAULT_BITS;
 			break;
 		}
