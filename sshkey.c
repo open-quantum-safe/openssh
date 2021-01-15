@@ -1554,6 +1554,7 @@ sshkey_read(struct sshkey *ret, char **cpp)
 	switch (sshkey_type_plain(ret->type)) {
 #ifdef WITH_OPENSSL
 	case KEY_RSA:
+	CASE_KEY_RSA_HYBRID:
 		RSA_free(ret->rsa);
 		ret->rsa = k->rsa;
 		k->rsa = NULL;
@@ -1571,6 +1572,7 @@ sshkey_read(struct sshkey *ret, char **cpp)
 		break;
 # ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA:
+	CASE_KEY_ECDSA_HYBRID:
 		EC_KEY_free(ret->ecdsa);
 		ret->ecdsa = k->ecdsa;
 		ret->ecdsa_nid = k->ecdsa_nid;
@@ -1948,6 +1950,14 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
 	  case KEY_RSA3072_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_DILITHIUM_3:
+	  case KEY_ECDSA_NISTP384_DILITHIUM_3:
+	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_DILITHIUM_4:
+	  case KEY_ECDSA_NISTP521_DILITHIUM_4:
+	    ret = OQS_SIG_dilithium_4_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	    // FIXMEOQS: TEMPLATE
 	  }
@@ -3055,6 +3065,14 @@ sshkey_sign(struct sshkey *key,
 	case KEY_RSA3072_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_DILITHIUM_3:
+	case KEY_ECDSA_NISTP384_DILITHIUM_3:
+		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_DILITHIUM_4:
+	case KEY_ECDSA_NISTP521_DILITHIUM_4:
+		r = ssh_dilithium4_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 // FIXMEOQS: TEMPLATE
 	}
 	/* abort if we got an error in the PQ signing */
@@ -3207,6 +3225,12 @@ sshkey_verify(const struct sshkey *key,
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 	case KEY_RSA3072_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_DILITHIUM_3:
+	case KEY_ECDSA_NISTP384_DILITHIUM_3:
+		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_DILITHIUM_4:
+	case KEY_ECDSA_NISTP521_DILITHIUM_4:
+		return ssh_dilithium4_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 // FIXMEOQS: TEMPLATE
 	default:
 		return SSH_ERR_KEY_TYPE_UNKNOWN;
