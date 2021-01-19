@@ -328,7 +328,7 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_DILITHIUM_4:
 			name = _PATH_SSH_CLIENT_ID_DILITHIUM_4;
 			break;
-			// FIXMEOQS: hybrid? (wasn't there in 7.9)
+			// FIXMEOQS: add hybrid? seems like we should... (weren't there in 7.9)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 		default:
 			fatal("bad key type");

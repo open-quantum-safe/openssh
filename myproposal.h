@@ -26,7 +26,7 @@
 
 // FIXMEOQS: can we #ifdef the PQ defs in the following #define's
 
-// FIXMEOQS: should I add the PQ auth methods here? not added in 7.9 branch...
+// FIXMEOQS: should I add the PQ auth methods here? they were not added in 7.9 branch...
 
 #define KEX_SERVER_KEX	\
 	"curve25519-sha256," \

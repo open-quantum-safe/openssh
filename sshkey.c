@@ -3086,7 +3086,7 @@ sshkey_sign(struct sshkey *key,
 	/* return the correct signature */
 	switch (key->type) {
 	CASE_KEY_HYBRID:
-	  // FIXMEOQS: don't include the lenghts 
+	  // FIXMEOQS: don't include the lengths in the concatenation (this is 7.9 behavior, but new spec do away with encoded sizes)
 		/* classical-PQ hybrid: we concatenate the signatures */
 		*lenp = 4 + len_classical + 4 + len_pq;
 		if ((*sigp = malloc(*lenp)) == NULL) {
