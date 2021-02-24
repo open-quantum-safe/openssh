@@ -8,7 +8,7 @@ parameters:
     default: false
 
 jobs:
-  ubuntu_bionic:
+  ubuntu_build:
     description: A template for running BoringSSL tests on x64 Ubuntu Bionic Docker VMs
     parameters:
       WITH_OPENSSL:
@@ -16,7 +16,7 @@ jobs:
         type: boolean
         default: true
     docker:
-      - image: openquantumsafe/ci-ubuntu-bionic-x86_64:latest
+      - image: openquantumsafe/ci-ubuntu-focal-x86_64:latest
         auth:
           username: $DOCKER_LOGIN
           password: $DOCKER_PASSWORD
@@ -45,10 +45,10 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - ubuntu_bionic:
+      - ubuntu_build:
           name: with-openssl
           context: openquantumsafe
-      - ubuntu_bionic:
+      - ubuntu_build:
           name: without-openssl
           context: openquantumsafe
           WITH_OPENSSL: false
