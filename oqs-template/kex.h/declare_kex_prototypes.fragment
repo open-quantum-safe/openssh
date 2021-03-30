@@ -1,0 +1,13 @@
+{%- for kex in config['kexs'] %}
+DECLARE_OQS_PQ_KEX_PROTOTYPES({{ kex['name'] }})
+{%- endfor %}
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+{%- for kex in config['kexs'] -%}
+    {%- for curve in kex['mix_with'] %}
+DECLARE_OQS_HYBRID_KEX_PROTOTYPES({{ kex['name'] }},{{ curve['name'] }})
+    {%- endfor %}
+{%- endfor %}
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+

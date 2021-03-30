@@ -24,9 +24,8 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// FIXMEOQS: can we #ifdef the PQ defs in the following #define's
-
-// FIXMEOQS: should I add the PQ auth methods here? they were not added in 7.9 branch...
+// OQS-TODO: can we #ifdef the PQ defs in the following #define's
+// OQS-TODO: should I add the PQ auth methods here? they were not added in 7.9 branch...
 
 #define KEX_SERVER_KEX	\
 	"curve25519-sha256," \
@@ -37,11 +36,17 @@
 	"diffie-hellman-group-exchange-sha256," \
 	"diffie-hellman-group16-sha512," \
 	"diffie-hellman-group18-sha512," \
-	"diffie-hellman-group14-sha256" \
-/* FIXMEOQS: TEMPLATE //////////////////////////////// */ \
-	"frodokem-640-aes-sha256"			  \
-	"ecdh-nistp256-frodokem-640-aes-sha256"		  \
-/* FIXMEOQS: TEMPLATE //////////////////////////////// */
+	"diffie-hellman-group14-sha256," \
+/*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_START */ \
+	"frodokem-640-aes-sha256," \
+	"ecdh-nistp256-frodokem-640-aes-sha256," \
+	"frodokem-976-aes-sha384," \
+	"ecdh-nistp384-frodokem-976-aes-sha384," \
+	"frodokem-1344-aes-sha512," \
+	"ecdh-nistp521-frodokem-1344-aes-sha512," \
+	"sike-p434-sha256," \
+	"ecdh-nistp256-sike-p434-sha256"
+/*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX
 

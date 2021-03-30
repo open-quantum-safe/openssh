@@ -1729,32 +1729,20 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 #endif /* WITH_OPENSSL */
 		kex->kex[KEX_C25519_SHA256] = kex_gen_server;
 		kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_server;
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+///// OQS_TEMPLATE_FRAGMENT_APPLY_KEYSTATE_START
 		kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
 		kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
 		kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
 		kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+		kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
+		kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_server;
+		kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_server;
 		kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_APPLY_KEYSTATE_END
 		kex->load_host_public_key=&get_hostkey_public_by_type;
 		kex->load_host_private_key=&get_hostkey_private_by_type;
 		kex->host_key_index=&get_hostkey_index;

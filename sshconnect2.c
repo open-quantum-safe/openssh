@@ -276,32 +276,20 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port)
 #endif
 	ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_client;
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_START
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
 	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
 	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
 	ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_END
 	ssh->kex->verify_host_key=&verify_host_key_callback;
 
 	ssh_dispatch_run_fatal(ssh, DISPATCH_BLOCK, &ssh->kex->done);
@@ -1292,7 +1280,7 @@ identity_sign(struct identity *id, u_char **sigp, size_t *lenp,
 		debug("%s: sshkey_sign: %s", __func__, ssh_err(r));
 		goto out;
 	}
-	// FIXMEOQS: for now, our hybrid sig fail that test. Need to fix our formatting
+	// OQS-TODO: for now, our hybrid sig fail that test. Need to fix our formatting
 	// or update the test
 	if (!IS_HYBRID(sign_key->type)) {
 	  /*

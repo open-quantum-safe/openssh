@@ -64,32 +64,20 @@
 #define	KEX_CURVE25519_SHA256		"curve25519-sha256"
 #define	KEX_CURVE25519_SHA256_OLD	"curve25519-sha256@libssh.org"
 #define	KEX_SNTRUP4591761X25519_SHA512	"sntrup4591761x25519-sha512@tinyssh.org"
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
-#define KEX_FRODOKEM_640_AES_SHA256        "frodokem-640-aes-sha256"
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-#define KEX_FRODOKEM_640_AES_ECDH_NISTP256_SHA256        "ecdh-nistp256-frodokem-640-aes-sha256"
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
-#define KEX_FRODOKEM_976_AES_SHA384        "frodokem-976-aes-sha384"
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-#define KEX_FRODOKEM_976_AES_ECDH_NISTP384_SHA384        "ecdh-nistp384-frodokem-976-aes-sha384"
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
-#define KEX_FRODOKEM_1344_AES_SHA512        "frodokem-1344-aes-sha512"
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-#define KEX_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512        "ecdh-nistp521-frodokem-1344-aes-sha512"
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
-#define KEX_SIKE_P434_SHA256        "sike-p434-sha256"
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-#define KEX_SIKE_P434_ECDH_NISTP256_SHA256        "ecdh-nistp256-sike-p434-sha256"
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_PRETTY_NAMES_START
+#define	KEX_FRODOKEM_640_AES_SHA256	"frodokem-640-aes-sha256"
+#define	KEX_FRODOKEM_976_AES_SHA384	"frodokem-976-aes-sha384"
+#define	KEX_FRODOKEM_1344_AES_SHA512	"frodokem-1344-aes-sha512"
+#define	KEX_SIKE_P434_SHA256	"sike-p434-sha256"
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+#define	KEX_FRODOKEM_640_AES_ECDH_NISTP256_SHA256	"ecdh-nistp256-frodokem-640-aes-sha256"
+#define	KEX_FRODOKEM_976_AES_ECDH_NISTP384_SHA384	"ecdh-nistp384-frodokem-976-aes-sha384"
+#define	KEX_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512	"ecdh-nistp521-frodokem-1344-aes-sha512"
+#define	KEX_SIKE_P434_ECDH_NISTP256_SHA256	"ecdh-nistp256-sike-p434-sha256"
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_PRETTY_NAMES_END
 
 #define COMP_NONE	0
 /* pre-auth compression (COMP_ZLIB) is only supported in the client */
@@ -129,32 +117,20 @@ enum kex_exchange {
 	KEX_ECDH_SHA2,
 	KEX_C25519_SHA256,
 	KEX_KEM_SNTRUP4591761X25519_SHA512,
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+///// OQS_TEMPLATE_FRAGMENT_ADD_KEX_ENUMS_START
 	KEX_KEM_FRODOKEM_640_AES_SHA256,
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256,
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
 	KEX_KEM_FRODOKEM_976_AES_SHA384,
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384,
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
 	KEX_KEM_FRODOKEM_1344_AES_SHA512,
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-	KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512,
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
 	KEX_KEM_SIKE_P434_SHA256,
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+	KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256,
+	KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384,
+	KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512,
 	KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256,
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_ADD_KEX_ENUMS_END
 	KEX_MAX
 };
 
@@ -279,28 +255,30 @@ int	 kex_kem_sntrup4591761x25519_enc(struct kex *, const struct sshbuf *,
 int	 kex_kem_sntrup4591761x25519_dec(struct kex *, const struct sshbuf *,
     struct sshbuf **);
 
-#define DECLARE_OQS_FUNCTION(ALG,CURVE)		\
+#define DECLARE_OQS_PQ_KEX_PROTOTYPES(ALG)		\
 int	 kex_kem_##ALG##_keypair(struct kex *); \
 int	 kex_kem_##ALG##_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **); \
-int	 kex_kem_##ALG##_dec(struct kex *, const struct sshbuf *, struct sshbuf **); \
+int	 kex_kem_##ALG##_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+
+#define DECLARE_OQS_HYBRID_KEX_PROTOTYPES(ALG,CURVE)		\
 int	 kex_kem_##ALG##_ecdh_##CURVE##_keypair(struct kex *); \
 int	 kex_kem_##ALG##_ecdh_##CURVE##_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **); \
 int	 kex_kem_##ALG##_ecdh_##CURVE##_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
-DECLARE_OQS_FUNCTION(frodokem_640_aes,nistp256)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
-DECLARE_OQS_FUNCTION(frodokem_976_aes,nistp384)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
-DECLARE_OQS_FUNCTION(frodokem_1344_aes,nistp521)
-#endif
-#ifdef OQS_ENABLE_KEM_sike_p434
-DECLARE_OQS_FUNCTION(sike_p434,nistp256)
-#endif
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DECLARE_KEX_PROTOTYPES_START
+DECLARE_OQS_PQ_KEX_PROTOTYPES(frodokem_640_aes)
+DECLARE_OQS_PQ_KEX_PROTOTYPES(frodokem_976_aes)
+DECLARE_OQS_PQ_KEX_PROTOTYPES(frodokem_1344_aes)
+DECLARE_OQS_PQ_KEX_PROTOTYPES(sike_p434)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+DECLARE_OQS_HYBRID_KEX_PROTOTYPES(frodokem_640_aes,nistp256)
+DECLARE_OQS_HYBRID_KEX_PROTOTYPES(frodokem_976_aes,nistp384)
+DECLARE_OQS_HYBRID_KEX_PROTOTYPES(frodokem_1344_aes,nistp521)
+DECLARE_OQS_HYBRID_KEX_PROTOTYPES(sike_p434,nistp256)
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_DECLARE_KEX_PROTOTYPES_END
 
 int	 kex_dh_keygen(struct kex *);
 int	 kex_dh_compute_key(struct kex *, BIGNUM *, struct sshbuf *);

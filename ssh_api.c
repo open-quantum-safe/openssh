@@ -124,32 +124,20 @@ ssh_init(struct ssh **sshp, int is_server, struct kex_params *kex_params)
 #endif /* WITH_OPENSSL */
 		ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_server;
 		ssh->kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_server;
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_SERVER_START
 		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
 		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
 		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
 		ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_server;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
+		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_server;
+		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_server;
 		ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_server;
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_SERVER_END
 		ssh->kex->load_host_public_key=&_ssh_host_public_key;
 		ssh->kex->load_host_private_key=&_ssh_host_private_key;
 		ssh->kex->sign=&_ssh_host_key_sign;
@@ -168,32 +156,20 @@ ssh_init(struct ssh **sshp, int is_server, struct kex_params *kex_params)
 #endif /* WITH_OPENSSL */
 		ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 		ssh->kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_client;
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_CLIENT_START
 		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_640_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
 		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_976_aes */
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
 		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
-		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_frodokem_1344_aes */
-#ifdef OQS_ENABLE_KEM_sike_p434
 		ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
+#ifdef WITH_OPENSSL
+#ifdef OPENSSL_HAS_ECC
+		ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
+		ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
+		ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
 		ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_client;
-#endif
-#endif /* OQS_ENABLE_KEM_sike_p434 */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_CLIENT_END
 		ssh->kex->verify_host_key =&_ssh_verify_host_key;
 	}
 	*sshp = ssh;

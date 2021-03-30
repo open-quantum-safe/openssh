@@ -1,0 +1,44 @@
+# kexs cannot be empty due to myproposal.h
+kexs:
+  -
+    family: 'FrodoKEM'
+    name: 'frodokem_640_aes'
+    hash: 'sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'FrodoKEM'
+    name: 'frodokem_976_aes'
+    hash: 'sha384'
+    mix_with:
+      -
+        name: 'nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'FrodoKEM'
+    name: 'frodokem_1344_aes'
+    hash: 'sha512'
+    mix_with:
+      -
+        name: 'nistp521'
+        openssl_nid: 'NID_secp521r1'
+  -
+    family: 'SIKE'
+    name: 'sike_p434'
+    hash: 'sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+
+sigs:
+  -
+    family: 'CRYSTALS-DILITHIUM'
+    name: 'dilithium2'
+    oid: '1 3 6 1 4 1 2 267 7 4 4'
+    oid_encoded: '0x2B, 0x06, 0x01, 0x04, 0x01, 0x02, 0x82, 0x0B, 0x07, 0x04, 0x04'
+    oqs_meth: 'OQS_SIG_alg_dilithium_2'
+    code_point: '0xfea0'
+    claimed_security_level: '2'

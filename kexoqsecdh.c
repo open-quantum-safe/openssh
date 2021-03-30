@@ -40,7 +40,7 @@
 #include "ssherr.h"
 #include "oqs/oqs.h"
 
-/* helper static function copied from kexecdh.c (FIXMEOQS: should I expose that function instead of copying it) */
+/* helper static function copied from kexecdh.c (OQS-TODO: should I expose that function instead of copying it) */
 static int
 kex_ecdh_dec_key_group(struct kex *kex, const struct sshbuf *ec_blob,
     EC_KEY *key, const EC_GROUP *group, struct sshbuf **shared_secretp)
@@ -376,24 +376,16 @@ int kex_kem_##ALG##_ecdh_##CURVE##_dec(struct kex *kex, const struct sshbuf *ser
     return r;								\
 }
 
-#define DEFINE_OQS_FUNCTION(ALG,CURVE)	\
+#define DEFINE_ECDH_KEX_METHODS(ALG,CURVE)	\
   DEFINE_OQS_KEYPAIR_FUNCTION(ALG,CURVE)	\
   DEFINE_OQS_ENC_FUNCTION(ALG,CURVE)		\
   DEFINE_OQS_DEC_FUNCTION(ALG,CURVE)
 
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
-DEFINE_OQS_FUNCTION(frodokem_640_aes,nistp256)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
-DEFINE_OQS_FUNCTION(frodokem_976_aes,nistp384)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
-DEFINE_OQS_FUNCTION(frodokem_1344_aes,nistp521)
-#endif
-#ifdef OQS_ENABLE_KEM_sike_p434
-DEFINE_OQS_FUNCTION(sike_p434,nistp256)
-#endif
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_ECDH_KEX_METHODS_START
+DEFINE_ECDH_KEX_METHODS(frodokem_640_aes,nistp256)
+DEFINE_ECDH_KEX_METHODS(frodokem_976_aes,nistp384)
+DEFINE_ECDH_KEX_METHODS(frodokem_1344_aes,nistp521)
+DEFINE_ECDH_KEX_METHODS(sike_p434,nistp256)
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_ECDH_KEX_METHODS_END
 
 #endif /* defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC) */

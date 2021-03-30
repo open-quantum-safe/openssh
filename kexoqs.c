@@ -161,22 +161,14 @@ int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
   return r;								\
 }
 
-#define DEFINE_OQS_FUNCTION(ALG)	\
+#define DEFINE_KEX_METHODS(ALG)	\
   DEFINE_OQS_KEYPAIR_FUNCTION(ALG)	\
   DEFINE_OQS_ENC_FUNCTION(ALG)		\
   DEFINE_OQS_DEC_FUNCTION(ALG)
 
-// FIXMEOQS: TEMPLATE ////////////////////////////////
-#ifdef OQS_ENABLE_KEM_frodokem_640_aes
-DEFINE_OQS_FUNCTION(frodokem_640_aes)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_976_aes
-DEFINE_OQS_FUNCTION(frodokem_976_aes)
-#endif
-#ifdef OQS_ENABLE_KEM_frodokem_1344_aes
-DEFINE_OQS_FUNCTION(frodokem_1344_aes)
-#endif
-#ifdef OQS_ENABLE_KEM_sike_p434
-DEFINE_OQS_FUNCTION(sike_p434)
-#endif
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_METHODS_START
+DEFINE_KEX_METHODS(frodokem_640_aes)
+DEFINE_KEX_METHODS(frodokem_976_aes)
+DEFINE_KEX_METHODS(frodokem_1344_aes)
+DEFINE_KEX_METHODS(sike_p434)
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_METHODS_END

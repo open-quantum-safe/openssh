@@ -1,0 +1,4 @@
+{% for kex in config['kexs'] %}
+DEFINE_KEX_METHODS({{ kex['name'] }})
+{%- endfor %}
+
