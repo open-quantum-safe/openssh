@@ -25,8 +25,6 @@
 
 #include "includes.h"
 
-#if defined(WITH_OQS)
-
 #include <sys/types.h>
 
 #include <stdio.h>
@@ -182,5 +180,3 @@ DEFINE_OQS_FUNCTION(frodokem_1344_aes)
 DEFINE_OQS_FUNCTION(sike_p434)
 #endif
 // FIXMEOQS: TEMPLATE ////////////////////////////////
-
-#endif /* defined(WITH_OQS) */

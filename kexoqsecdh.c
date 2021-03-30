@@ -25,7 +25,7 @@
 
 #include "includes.h"
 
-#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC) && defined(WITH_OQS) && defined(WITH_HYBRID_KEX)
+#if defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC)
 
 #include <sys/types.h>
 
@@ -396,4 +396,4 @@ DEFINE_OQS_FUNCTION(sike_p434,nistp256)
 #endif
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 
-#endif /* defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC) && defined(WITH_OQS) && defined(WITH_HYBRID_KEX) */
+#endif /* defined(WITH_OPENSSL) && defined(OPENSSL_HAS_ECC) */
