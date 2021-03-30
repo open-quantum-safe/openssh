@@ -101,9 +101,9 @@ static size_t oqs_sig_pk_len(int type) {
   case KEY_DILITHIUM_3:
   case KEY_ECDSA_NISTP384_DILITHIUM_3:
     return OQS_SIG_dilithium_3_length_public_key;
-  case KEY_DILITHIUM_4:
-  case KEY_ECDSA_NISTP521_DILITHIUM_4:
-    return OQS_SIG_dilithium_4_length_public_key;
+  case KEY_DILITHIUM_5:
+  case KEY_ECDSA_NISTP521_DILITHIUM_5:
+    return OQS_SIG_dilithium_5_length_public_key;
 // FIXMEOQS: TEMPLATE
   }
   return 0;
@@ -120,9 +120,9 @@ static size_t oqs_sig_sk_len(int type) {
   case KEY_DILITHIUM_3:
   case KEY_ECDSA_NISTP384_DILITHIUM_3:
     return OQS_SIG_dilithium_3_length_secret_key;
-  case KEY_DILITHIUM_4:
-  case KEY_ECDSA_NISTP521_DILITHIUM_4:
-    return OQS_SIG_dilithium_4_length_secret_key;
+  case KEY_DILITHIUM_5:
+  case KEY_ECDSA_NISTP521_DILITHIUM_5:
+    return OQS_SIG_dilithium_5_length_secret_key;
 // FIXMEOQS: TEMPLATE
   }
   return 0;
@@ -199,13 +199,13 @@ static const struct keytype keytypes[] = {
 // FIXMEOQS: TEMPLATE /////////////////////////////
 	{ "ssh-dilithium2", "DILITHIUM2", NULL, KEY_DILITHIUM_2, 0, 0, 0 },
 	{ "ssh-dilithium3", "DILITHIUM3", NULL, KEY_DILITHIUM_3, 0, 0, 0 },
-	{ "ssh-dilithium4", "DILITHIUM4", NULL, KEY_DILITHIUM_4, 0, 0, 0 },
+	{ "ssh-dilithium5", "DILITHIUM5", NULL, KEY_DILITHIUM_5, 0, 0, 0 },
 #ifdef WITH_OPENSSL
 	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL, KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
 #ifdef OPENSSL_HAS_ECC
 	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL, KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL, KEY_ECDSA_NISTP384_DILITHIUM_3, NID_secp384r1, 0, 0 },
-	{ "ssh-ecdsa-nistp521-dilithium4", "ECDSA_NISTP521_DILITHIUM4", NULL, KEY_ECDSA_NISTP521_DILITHIUM_4, NID_secp521r1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-dilithium5", "ECDSA_NISTP521_DILITHIUM5", NULL, KEY_ECDSA_NISTP521_DILITHIUM_5, NID_secp521r1, 0, 0 },
 #endif
 #endif
 // FIXMEOQS: TEMPLATE /////////////////////////////
@@ -1955,9 +1955,9 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  case KEY_ECDSA_NISTP384_DILITHIUM_3:
 	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
-	  case KEY_DILITHIUM_4:
-	  case KEY_ECDSA_NISTP521_DILITHIUM_4:
-	    ret = OQS_SIG_dilithium_4_keypair(k->oqs_pk, k->oqs_sk);
+	  case KEY_DILITHIUM_5:
+	  case KEY_ECDSA_NISTP521_DILITHIUM_5:
+	    ret = OQS_SIG_dilithium_5_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	    // FIXMEOQS: TEMPLATE
 	  }
@@ -3069,9 +3069,9 @@ sshkey_sign(struct sshkey *key,
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
-	case KEY_DILITHIUM_4:
-	case KEY_ECDSA_NISTP521_DILITHIUM_4:
-		r = ssh_dilithium4_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+	case KEY_DILITHIUM_5:
+	case KEY_ECDSA_NISTP521_DILITHIUM_5:
+		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 // FIXMEOQS: TEMPLATE
 	}
@@ -3228,13 +3228,12 @@ sshkey_verify(const struct sshkey *key,
 	case KEY_DILITHIUM_3:
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
-	case KEY_DILITHIUM_4:
-	case KEY_ECDSA_NISTP521_DILITHIUM_4:
-		return ssh_dilithium4_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_DILITHIUM_5:
+	case KEY_ECDSA_NISTP521_DILITHIUM_5:
+		return ssh_dilithium5_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 // FIXMEOQS: TEMPLATE
-	default:
-		return SSH_ERR_KEY_TYPE_UNKNOWN;
 	}
+	return 0;
 }
 
 /* Convert a plain key to their _CERT equivalent */

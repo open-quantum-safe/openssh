@@ -198,8 +198,8 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_DILITHIUM_3_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_DILITHIUM_4_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_DILITHIUM_5_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE, O_RDONLY);
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	if ((pw = getpwuid(getuid())) == NULL)
 		fatal("getpwuid failed");

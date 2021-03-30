@@ -29,7 +29,7 @@ for fmt in '' RFC4716 PKCS8 PEM; do
 		# Some key types like ssh-ed25519 and *@openssh.com are never
 		# stored in old formats.
 		case "$t" in
-		ssh-ed25519|*openssh.com) test -z "$oldfmt" || continue ;;
+		ssh-ed25519|*openssh.com|ssh*dilithium*) test -z "$oldfmt" || continue ;;
 		esac
 		comment="foo bar"
 		fmtarg=""

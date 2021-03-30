@@ -70,22 +70,22 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_ECDSA_NISTP256_DILITHIUM_2  ((uint64_t)1<<9)
 #define KT_DILITHIUM_3                 ((uint64_t)1<<10)
 #define KT_ECDSA_NISTP384_DILITHIUM_3  ((uint64_t)1<<11)
-#define KT_DILITHIUM_4                 ((uint64_t)1<<12)
-#define KT_ECDSA_NISTP521_DILITHIUM_4  ((uint64_t)1<<13)
+#define KT_DILITHIUM_5                 ((uint64_t)1<<12)
+#define KT_ECDSA_NISTP521_DILITHIUM_5  ((uint64_t)1<<13)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 #define KT_MIN		KT_DSA
-#define KT_MAX		KT_ECDSA_NISTP521_DILITHIUM_4
+#define KT_MAX		KT_ECDSA_NISTP521_DILITHIUM_5
 
 int get_cert = 0;
-int get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|\
+uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|\
 // FIXMEOQS: TEMPLATE ////////////////////////////////
                    KT_DILITHIUM_2| \
                    KT_RSA3072_DILITHIUM_2| \
                    KT_ECDSA_NISTP256_DILITHIUM_2| \
                    KT_DILITHIUM_3| \
                    KT_ECDSA_NISTP384_DILITHIUM_3| \
-                   KT_DILITHIUM_4| \
-                   KT_ECDSA_NISTP521_DILITHIUM_4;
+                   KT_DILITHIUM_5| \
+                   KT_ECDSA_NISTP521_DILITHIUM_5;
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 
 int hash_hosts = 0;		/* Hash hostname on output */
@@ -292,20 +292,27 @@ keygrab_ssh2(con *c)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	case KT_DILITHIUM_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium2";
+	  break;
 	case KT_DILITHIUM_3:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium3";
-	case KT_DILITHIUM_4:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium4";
+	  break;
+	case KT_DILITHIUM_5:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium5";
+	  break;
 #ifdef WITH_OPENSSL
 	case KT_RSA3072_DILITHIUM_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-dilithium2";
+	  break;
 #ifdef OPENSSL_HAS_ECC
 	case KT_ECDSA_NISTP256_DILITHIUM_2:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ecdsa-nistp256-dilithium2";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-dilithium2";
+	  break;
 	case KT_ECDSA_NISTP384_DILITHIUM_3:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ecdsa-nistp384-dilithium3";
-	case KT_ECDSA_NISTP521_DILITHIUM_4:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ecdsa-nistp521-dilithium4";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-dilithium3";
+	  break;
+	case KT_ECDSA_NISTP521_DILITHIUM_5:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-dilithium5";
+	  break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 // FIXMEOQS: TEMPLATE ////////////////////////////////		
@@ -685,7 +692,7 @@ static void
 do_host(char *host)
 {
 	char *name = strnnsep(&host, " \t\n");
-	int j;
+	size_t j;
 
 	if (name == NULL)
 		return;
@@ -816,8 +823,8 @@ main(int argc, char **argv)
 				case KEY_DILITHIUM_3:
 					get_keytypes |= KT_DILITHIUM_3;
 					break;
-				case KEY_DILITHIUM_4:
-					get_keytypes |= KT_DILITHIUM_4;
+				case KEY_DILITHIUM_5:
+					get_keytypes |= KT_DILITHIUM_5;
 					break;
 #ifdef WITH_OPENSSL
 				case KEY_RSA3072_DILITHIUM_2:
@@ -830,8 +837,8 @@ main(int argc, char **argv)
 				case KEY_ECDSA_NISTP384_DILITHIUM_3:
 					get_keytypes |= KT_ECDSA_NISTP384_DILITHIUM_3;
 					break;
-				case KEY_ECDSA_NISTP521_DILITHIUM_4:
-					get_keytypes |= KT_ECDSA_NISTP521_DILITHIUM_4;
+				case KEY_ECDSA_NISTP521_DILITHIUM_5:
+					get_keytypes |= KT_ECDSA_NISTP521_DILITHIUM_5;
 					break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */

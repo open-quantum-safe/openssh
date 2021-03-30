@@ -220,7 +220,7 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 		  case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		    *bitsp = 384;
 		    break;
-		  case KEY_ECDSA_NISTP521_DILITHIUM_4:
+		  case KEY_ECDSA_NISTP521_DILITHIUM_5:
 		    *bitsp = 521;
 		    break;
 // FIXMEOQS: TEMPLATE ////////////////////////////////
@@ -325,8 +325,11 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_DILITHIUM_3:
 			name = _PATH_SSH_CLIENT_ID_DILITHIUM_3;
 			break;
-		case KEY_DILITHIUM_4:
-			name = _PATH_SSH_CLIENT_ID_DILITHIUM_4;
+		case KEY_DILITHIUM_5:
+			name = _PATH_SSH_CLIENT_ID_DILITHIUM_5;
+			break;
+		case KEY_ECDSA_NISTP256_DILITHIUM_2:
+			name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2;
 			break;
 			// FIXMEOQS: add hybrid? seems like we should... (weren't there in 7.9)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
@@ -1092,13 +1095,13 @@ do_gen_all_hostkeys(struct passwd *pw)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
 		{ "dilithium3", "DILITHIUM_3", _PATH_HOST_DILITHIUM_3_KEY_FILE },
-		{ "dilithium4", "DILITHIUM_4", _PATH_HOST_DILITHIUM_4_KEY_FILE },
+		{ "dilithium5", "DILITHIUM_5", _PATH_HOST_DILITHIUM_5_KEY_FILE },
 #ifdef WITH_OPENSSL
 		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
 		{ "ecdsa_nistp256_dilithium2", "ECDSA_NISTP256_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE },
 		{ "ecdsa_nistp384_dilithium3", "ECDSA_NISTP384_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE },
-		{ "ecdsa_nistp521_dilithium4", "ECDSA_NISTP521_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE },
+		{ "ecdsa_nistp521_dilithium5", "ECDSA_NISTP521_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE },
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 // FIXMEOQS: TEMPLATE ////////////////////////////////
@@ -1590,7 +1593,10 @@ do_change_comment(struct passwd *pw, const char *identity_comment)
 	}
 
 	// FIXMEOQS: should we add the OQS key types here?
-	if (private->type != KEY_ED25519 && private->type != KEY_XMSS &&
+	if (private->type != KEY_ED25519 &&
+	    private->type != KEY_XMSS &&
+	    // FIXMEOQS: Templating
+	    private->type != KEY_DILITHIUM_2 &&
 	    private_key_format != SSHKEY_PRIVATE_OPENSSH) {
 		error("Comments are only supported for keys stored in "
 		    "the new format (-o).");
@@ -3154,7 +3160,7 @@ usage(void)
 // FIXMEOQS: TEMPLATE
 	    " |\n                   dilithium2 | rsa3072_dilithium2 | ecdsa_nistp256_dilithium2"
 	    " |\n                   dilithium3 | ecdsa_nistp384_dilithium3"
-	    " |\n                   dilithium4 | ecdsa_nistp521_dilithium4"
+	    " |\n                   dilithium5 | ecdsa_nistp521_dilithium5"
 // FIXMEOQS: TEMPLATE
 	    " ]\n"
 	    "                  [-w provider]\n"
@@ -3620,8 +3626,8 @@ main(int argc, char **argv)
 			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, rr_hostname, print_generic);
 			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_3_KEY_FILE, rr_hostname, print_generic);
 			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, rr_hostname, print_generic);
-			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_4_KEY_FILE, rr_hostname, print_generic);
-			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_DILITHIUM_5_KEY_FILE, rr_hostname, print_generic);
+			n += do_print_resource_record(pw,_PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE, rr_hostname, print_generic);
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 			if (n == 0)
 				fatal("no keys found.");

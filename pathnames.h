@@ -47,8 +47,8 @@
 #define _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp256_dilithium2_key"
 #define _PATH_HOST_DILITHIUM_3_KEY_FILE SSHDIR "/ssh_host_dilithium3_key"
 #define _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp384_dilithium3_key"
-#define _PATH_HOST_DILITHIUM_4_KEY_FILE SSHDIR "/ssh_host_dilithium4_key"
-#define _PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp521_dilithium4_key"
+#define _PATH_HOST_DILITHIUM_5_KEY_FILE SSHDIR "/ssh_host_dilithium5_key"
+#define _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp521_dilithium5_key"
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 #define _PATH_DH_MODULI			SSHDIR "/moduli"
 
@@ -94,8 +94,8 @@
 #define _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2	_PATH_SSH_USER_DIR "/id_ecdsa_nistp256_dilithium2"
 #define _PATH_SSH_CLIENT_ID_DILITHIUM_3	_PATH_SSH_USER_DIR "/id_dilithium3"
 #define _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3	_PATH_SSH_USER_DIR "/id_ecdsa_nistp384_dilithium3"
-#define _PATH_SSH_CLIENT_ID_DILITHIUM_4	_PATH_SSH_USER_DIR "/id_dilithium4"
-#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_4	_PATH_SSH_USER_DIR "/id_ecdsa_nistp521_dilithium4"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_5	_PATH_SSH_USER_DIR "/id_dilithium5"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5	_PATH_SSH_USER_DIR "/id_ecdsa_nistp521_dilithium5"
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 
 /*

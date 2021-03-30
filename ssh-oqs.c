@@ -151,8 +151,8 @@ DEFINE_OQS_SIG_FUNCTION(dilithium2, dilithium_2, KEY_DILITHIUM_2, KEY_RSA3072_DI
 #ifdef OQS_ENABLE_SIG_dilithium_3
 DEFINE_OQS_SIG_FUNCTION(dilithium3, dilithium_3, KEY_DILITHIUM_3, KEY_UNSPEC,              KEY_ECDSA_NISTP384_DILITHIUM_3)
 #endif
-#ifdef OQS_ENABLE_SIG_dilithium_4
-DEFINE_OQS_SIG_FUNCTION(dilithium4, dilithium_4, KEY_DILITHIUM_4, KEY_UNSPEC,              KEY_ECDSA_NISTP521_DILITHIUM_4)
+#ifdef OQS_ENABLE_SIG_dilithium_5
+DEFINE_OQS_SIG_FUNCTION(dilithium5, dilithium_5, KEY_DILITHIUM_5, KEY_UNSPEC,              KEY_ECDSA_NISTP521_DILITHIUM_5)
 #endif
 
 // FIXMEOQS: TEMPLATE ////////////////////////////////

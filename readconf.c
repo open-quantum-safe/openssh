@@ -2172,12 +2172,12 @@ fill_default_options(Options * options)
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_3, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_4, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_5, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2, 0);
 #ifdef OPENSSL_HAS_ECC
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3, 0);
-		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_4, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5, 0);
 #endif
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 #ifdef OPENSSL_HAS_ECC

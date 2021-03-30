@@ -327,7 +327,7 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, 0);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_ECDSA_NISTP521_DILITHIUM_4_KEY_FILE, 0);
+		    _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE, 0);
 #endif
 // FIXMEOQS: TEMPLATE ////////////////////////////////
 	}

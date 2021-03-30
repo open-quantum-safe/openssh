@@ -79,8 +79,8 @@ enum sshkey_types {
 	KEY_ECDSA_NISTP256_DILITHIUM_2,
 	KEY_DILITHIUM_3,
 	KEY_ECDSA_NISTP384_DILITHIUM_3,
-	KEY_DILITHIUM_4,
-	KEY_ECDSA_NISTP521_DILITHIUM_4,
+	KEY_DILITHIUM_5,
+	KEY_ECDSA_NISTP521_DILITHIUM_5,
 // FIXMEOQS: TEMPLATE ///////////////////////
 	KEY_UNSPEC
 };
@@ -338,8 +338,8 @@ int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, c
 int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium4_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium4_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium5_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_dilithium5_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 // FIXMEOQS: TEMPLATE ////////////////////////////
 #endif
 
