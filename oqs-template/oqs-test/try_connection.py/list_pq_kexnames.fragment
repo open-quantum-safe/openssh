@@ -1,0 +1,4 @@
+{%- for kex in config['kexs'] %}
+    "{{ kex['name']|replace('_','-') }}-{{ kex['hash'] }}",
+{%- endfor %}
+

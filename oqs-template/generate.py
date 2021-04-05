@@ -73,3 +73,6 @@ populate('myproposal.h', config, '/*///')
 #populate('README.md', config, '<!---')
 
 # both
+
+# tests
+populate('oqs-test/try_connection.py', config, '#####')
