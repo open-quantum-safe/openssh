@@ -221,7 +221,7 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 		    *bitsp = 384;
 		    break;
 		  case KEY_ECDSA_NISTP521_DILITHIUM_5:
-		    *bitsp = 512;
+		    *bitsp = 521;
 		    break;
 ///// OQS_TEMPLATE_FRAGMENT_HANDLE_ECDSA_HYBRIDS_END
 		  }

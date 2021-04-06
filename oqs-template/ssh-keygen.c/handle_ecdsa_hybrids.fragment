@@ -4,7 +4,7 @@
         {%- if sig['level'] == 3 %}
 		    *bitsp = 384;
         {%- elif sig['level'] == 5 %}
-		    *bitsp = 512;
+		    *bitsp = 521;
         {%- endif %}
 		    break;
     {%- endfor %}
