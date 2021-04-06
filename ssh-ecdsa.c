@@ -66,7 +66,7 @@ ssh_ecdsa_sign(const struct sshkey *key, u_char **sigp, size_t *lenp,
 
 	if (key == NULL || key->ecdsa == NULL ||
 	    (sshkey_type_plain(key->type) != KEY_ECDSA &&
-	     !IS_ECDSA_HYBRID(sshkey_type_plain(key->type))))
+	     !is_oqs_ecdsa_hybrid(sshkey_type_plain(key->type))))
 		return SSH_ERR_INVALID_ARGUMENT;
 
 	if ((hash_alg = sshkey_ec_nid_to_hash_alg(key->ecdsa_nid)) == -1 ||
@@ -128,7 +128,7 @@ ssh_ecdsa_verify(const struct sshkey *key,
 
 	if (key == NULL || key->ecdsa == NULL ||
 	    (sshkey_type_plain(key->type) != KEY_ECDSA &&
-	     !IS_ECDSA_HYBRID(sshkey_type_plain(key->type))) ||
+	     !is_oqs_ecdsa_hybrid(sshkey_type_plain(key->type))) ||
 	    signature == NULL || signaturelen == 0)
 		return SSH_ERR_INVALID_ARGUMENT;
 

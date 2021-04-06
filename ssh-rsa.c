@@ -119,7 +119,7 @@ ssh_rsa_complete_crt_parameters(struct sshkey *key, const BIGNUM *iqmp)
 
 	if (key == NULL || key->rsa == NULL ||
 	    (sshkey_type_plain(key->type) != KEY_RSA &&
-	     !IS_RSA_HYBRID(sshkey_type_plain(key->type))))
+	     !is_oqs_rsa_hybrid(sshkey_type_plain(key->type))))
 		return SSH_ERR_INVALID_ARGUMENT;
 
 	RSA_get0_key(key->rsa, NULL, NULL, &rsa_d);
@@ -186,7 +186,7 @@ ssh_rsa_sign(const struct sshkey *key, u_char **sigp, size_t *lenp,
 		hash_alg = rsa_hash_id_from_keyname(alg_ident);
 	if (key == NULL || key->rsa == NULL || hash_alg == -1 ||
 	    (sshkey_type_plain(key->type) != KEY_RSA &&
-	     !IS_RSA_HYBRID(sshkey_type_plain(key->type))))
+	     !is_oqs_rsa_hybrid(sshkey_type_plain(key->type))))
 		return SSH_ERR_INVALID_ARGUMENT;
 	RSA_get0_key(key->rsa, &rsa_n, NULL, NULL);
 	if (BN_num_bits(rsa_n) < SSH_RSA_MINIMUM_MODULUS_SIZE)
@@ -260,7 +260,7 @@ ssh_rsa_verify(const struct sshkey *key,
 
 	if (key == NULL || key->rsa == NULL ||
 	    (sshkey_type_plain(key->type) != KEY_RSA &&
-	     !IS_RSA_HYBRID(sshkey_type_plain(key->type))) ||
+	     !is_oqs_rsa_hybrid(sshkey_type_plain(key->type))) ||
 	    sig == NULL || siglen == 0)
 		return SSH_ERR_INVALID_ARGUMENT;
 	RSA_get0_key(key->rsa, &rsa_n, NULL, NULL);

@@ -16,7 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-// FIXMEOQS: integrate OQS here?
+// OQS-TODO: integrate OQS here?
 
 #include "includes.h"
 

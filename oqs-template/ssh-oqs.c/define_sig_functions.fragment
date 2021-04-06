@@ -1,0 +1,10 @@
+{%- for sig in config['sigs'] -%}
+    {%- if sig['level'] == 1 %}
+DEFINE_OQS_SIG_FUNCTIONS({{ sig['name']|replace('_','') }}, {{ sig['name'] }}, KEY_{{ sig['name']|upper }}, KEY_RSA3072_{{ sig['name']|upper }}, KEY_ECDSA_NISTP256_{{ sig['name']|upper }})
+    {%- elif sig['level'] == 3 %}
+DEFINE_OQS_SIG_FUNCTIONS({{ sig['name']|replace('_','') }}, {{ sig['name'] }}, KEY_{{ sig['name']|upper }}, KEY_UNSPEC, KEY_ECDSA_NISTP384_{{ sig['name']|upper }})
+    {%- elif sig['level'] == 5 %}
+DEFINE_OQS_SIG_FUNCTIONS({{ sig['name']|replace('_','') }}, {{ sig['name'] }}, KEY_{{ sig['name']|upper }}, KEY_UNSPEC, KEY_ECDSA_NISTP521_{{ sig['name']|upper }})
+    {%- endif -%}
+{%- endfor %}
+

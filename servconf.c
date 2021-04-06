@@ -316,9 +316,14 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_XMSS_KEY_FILE, 0);
 #endif /* WITH_XMSS */
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_SERVER_ADD_HOSTKEYS_START
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_DILITHIUM_2_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_DILITHIUM_3_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_DILITHIUM_5_KEY_FILE, 0);
+#ifdef WITH_OPENSSL
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, 0);
 #ifdef OPENSSL_HAS_ECC
@@ -328,8 +333,9 @@ fill_default_server_options(ServerOptions *options)
 		    _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE, 0);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE, 0);
-#endif
-// FIXMEOQS: TEMPLATE ////////////////////////////////
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_SERVER_ADD_HOSTKEYS_END
 	}
 	/* No certificates by default */
 	if (options->num_ports == 0)

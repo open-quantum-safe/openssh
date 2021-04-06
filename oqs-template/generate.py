@@ -25,19 +25,19 @@ def populate(filename, config, delimiter):
     contents = file_get_contents(filename)
 
     for fragment in fragments:
-        identifier = os.path.splitext(os.path.basename(fragment))[0]
+        identifier_base = os.path.splitext(os.path.basename(fragment))[0]
 
         if filename == 'README.md':
-            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START -->'.format(delimiter, identifier.upper())
+            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START -->'.format(delimiter, identifier_base.upper())
         if filename == 'myproposal.h':
-            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START */ \\'.format(delimiter, identifier.upper())
+            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START */ \\'.format(delimiter, identifier_base.upper())
         else:
-            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START'.format(delimiter, identifier.upper())
+            identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START'.format(delimiter, identifier_base.upper())
 
         if filename == 'myproposal.h':
-            identifier_end = '{} OQS_TEMPLATE_FRAGMENT_{}_END */'.format(delimiter, identifier.upper())
+            identifier_end = '{} OQS_TEMPLATE_FRAGMENT_{}_END */'.format(delimiter, identifier_base.upper())
         else:
-            identifier_end = '{} OQS_TEMPLATE_FRAGMENT_{}_END'.format(delimiter, identifier.upper())
+            identifier_end = '{} OQS_TEMPLATE_FRAGMENT_{}_END'.format(delimiter, identifier_base.upper())
 
         preamble = contents[:contents.find(identifier_start)]
         postamble = contents[contents.find(identifier_end):]
@@ -64,15 +64,25 @@ populate('sshconnect2.c', config, '/////')
 populate('ssh_api.c', config, '/////')
 populate('kex.h', config, '/////')
 populate('myproposal.h', config, '/*///')
-#populate('ssl/s3_both.cc', config, '/////')
-#populate('ssl/ssl_key_share.cc', config, '/////')
-#populate('ssl/test/fuzzer.h', config, '/////')
-#populate('ssl/test/test_config.cc', config, '/////')
 
 # sigs
-#populate('README.md', config, '<!---')
+populate('readconf.c', config, '/////')
+populate('servconf.c', config, '/////')
+populate('ssh-add.c', config, '/////')
+populate('ssh-keygen.c', config, '/////')
+populate('ssh-oqs.c', config, '/////')
+populate('pathnames.h', config, '/////')
+populate('sk-api.h', config, '/////')
+populate('sshkey.c', config, '/////')
+populate('ssh-keysign.c', config, '/////')
+populate('ssh.c', config, '/////')
+populate('sshkey.h', config, '/////')
+populate('oqs-utils.h', config, '/////')
 
 # both
+populate('ssh-keyscan.c', config, '/////')
 
 # tests
 populate('oqs-test/try_connection.py', config, '#####')
+
+#populate('README.md', config, '<!---')

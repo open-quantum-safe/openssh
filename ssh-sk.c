@@ -17,7 +17,7 @@
 
 /* #define DEBUG_SK 1 */
 
-// FIXMEOQS: add FIDO support?
+// OQS-TODO: add FIDO support?
 
 #include "includes.h"
 

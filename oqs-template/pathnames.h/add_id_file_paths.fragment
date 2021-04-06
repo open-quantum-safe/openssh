@@ -1,0 +1,11 @@
+{%- for sig in config['sigs'] %}
+#define _PATH_SSH_CLIENT_ID_{{ sig['name']|upper }} _PATH_SSH_USER_DIR "/id_{{ sig['name']|replace('_', '') }}"
+    {%- for alg in sig['mix_with'] -%}
+        {%- if alg['rsa'] %}
+#define _PATH_SSH_CLIENT_ID_{{ alg['name']|upper }}_{{ sig['name']|upper }} _PATH_SSH_USER_DIR "/id_{{ alg['name'] }}_{{ sig['name']|replace('_', '') }}"
+        {%- else %}
+#define _PATH_SSH_CLIENT_ID_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }} _PATH_SSH_USER_DIR "/id_ecdsa_{{ alg['name'] }}_{{ sig['name']|replace('_', '') }}"
+        {%- endif -%}
+    {%- endfor %}
+{%- endfor %}
+

@@ -52,7 +52,7 @@
 
 #define SSH_RSA_MINIMUM_MODULUS_SIZE	1024
 /* OQS note: We have increased the value below from (1 << 20) to (1 << 25). */
-// FIXMEOQS: still need to increase the value in 8.x? 
+// OQS-TODO: still need to increase the value in 8.x? 
 #define SSH_KEY_MAX_SIGN_DATA_SIZE	(1 << 25)
 
 struct sshbuf;
@@ -73,7 +73,7 @@ enum sshkey_types {
 	KEY_ECDSA_SK_CERT,
 	KEY_ED25519_SK,
 	KEY_ED25519_SK_CERT,
-// FIXMEOQS: TEMPLATE ///////////////////////
+///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_START
 	KEY_DILITHIUM_2,
 	KEY_RSA3072_DILITHIUM_2,
 	KEY_ECDSA_NISTP256_DILITHIUM_2,
@@ -81,7 +81,7 @@ enum sshkey_types {
 	KEY_ECDSA_NISTP384_DILITHIUM_3,
 	KEY_DILITHIUM_5,
 	KEY_ECDSA_NISTP521_DILITHIUM_5,
-// FIXMEOQS: TEMPLATE ///////////////////////
+///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_END
 	KEY_UNSPEC
 };
 
@@ -333,14 +333,14 @@ int ssh_xmss_sign(const struct sshkey *key, u_char **sigp, size_t *lenp,
 int ssh_xmss_verify(const struct sshkey *key,
     const u_char *signature, size_t signaturelen,
     const u_char *data, size_t datalen, u_int compat);
-// FIXMEOQS: TEMPLATE ////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DECLARE_PROTOTYPES_START
 int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium5_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium5_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-// FIXMEOQS: TEMPLATE ////////////////////////////
+///// OQS_TEMPLATE_FRAGMENT_DECLARE_PROTOTYPES_END
 #endif
 
 #if !defined(WITH_OPENSSL)

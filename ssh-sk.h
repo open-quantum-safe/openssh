@@ -18,7 +18,7 @@
 #ifndef _SSH_SK_H
 #define _SSH_SK_H 1
 
-// FIXMEOQS: add FIDO support?
+// OQS-TODO: add FIDO support?
 
 struct sshbuf;
 struct sshkey;

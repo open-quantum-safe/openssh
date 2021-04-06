@@ -93,7 +93,7 @@
 /* returns the size of an oqs public key */
 static size_t oqs_sig_pk_len(int type) {
   switch (type) {
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_RETURN_PK_LEN_START
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -104,7 +104,7 @@ static size_t oqs_sig_pk_len(int type) {
   case KEY_DILITHIUM_5:
   case KEY_ECDSA_NISTP521_DILITHIUM_5:
     return OQS_SIG_dilithium_5_length_public_key;
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_RETURN_PK_LEN_END
   }
   return 0;
 }
@@ -112,7 +112,7 @@ static size_t oqs_sig_pk_len(int type) {
 /* returns the size of an oqs secret key */
 static size_t oqs_sig_sk_len(int type) {
   switch (type) {
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_RETURN_SK_LEN_START
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -123,7 +123,7 @@ static size_t oqs_sig_sk_len(int type) {
   case KEY_DILITHIUM_5:
   case KEY_ECDSA_NISTP521_DILITHIUM_5:
     return OQS_SIG_dilithium_5_length_secret_key;
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_RETURN_SK_LEN_END
   }
   return 0;
 }
@@ -196,19 +196,26 @@ static const struct keytype keytypes[] = {
 	    KEY_ECDSA_SK_CERT, NID_X9_62_prime256v1, 1, 0 },
 # endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
-// FIXMEOQS: TEMPLATE /////////////////////////////
-	{ "ssh-dilithium2", "DILITHIUM2", NULL, KEY_DILITHIUM_2, 0, 0, 0 },
-	{ "ssh-dilithium3", "DILITHIUM3", NULL, KEY_DILITHIUM_3, 0, 0, 0 },
-	{ "ssh-dilithium5", "DILITHIUM5", NULL, KEY_DILITHIUM_5, 0, 0, 0 },
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEYTYPES_START
+	{ "ssh-dilithium2", "DILITHIUM2", NULL,
+	    KEY_DILITHIUM_2, 0, 0, 0 },
+	{ "ssh-dilithium3", "DILITHIUM3", NULL,
+	    KEY_DILITHIUM_3, 0, 0, 0 },
+	{ "ssh-dilithium5", "DILITHIUM5", NULL,
+	    KEY_DILITHIUM_5, 0, 0, 0 },
 #ifdef WITH_OPENSSL
-	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL, KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
+	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL,
+	    KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
 #ifdef OPENSSL_HAS_ECC
-	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL, KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
-	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL, KEY_ECDSA_NISTP384_DILITHIUM_3, NID_secp384r1, 0, 0 },
-	{ "ssh-ecdsa-nistp521-dilithium5", "ECDSA_NISTP521_DILITHIUM5", NULL, KEY_ECDSA_NISTP521_DILITHIUM_5, NID_secp521r1, 0, 0 },
-#endif
-#endif
-// FIXMEOQS: TEMPLATE /////////////////////////////
+	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL,
+	    KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL,
+	    KEY_ECDSA_NISTP384_DILITHIUM_3, NID_secp384r1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-dilithium5", "ECDSA_NISTP521_DILITHIUM5", NULL,
+	    KEY_ECDSA_NISTP521_DILITHIUM_5, NID_secp521r1, 0, 0 },
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEYTYPES_END
 	{ NULL, NULL, NULL, -1, -1, 0, 0 }
 };
 
@@ -283,10 +290,9 @@ key_type_is_ecdsa_variant(int type)
 	case KEY_ECDSA_CERT:
 	case KEY_ECDSA_SK:
 	case KEY_ECDSA_SK_CERT:
-	CASE_KEY_ECDSA_HYBRID:
 		return 1;
 	}
-	return 0;
+	return is_oqs_ecdsa_hybrid(type);
 }
 
 int
@@ -1646,7 +1652,7 @@ sshkey_read(struct sshkey *ret, char **cpp)
 	CASE_KEY_OQS:
 	CASE_KEY_HYBRID:
 	  if (ret->type != k->type) {
-	    return SSH_ERR_INTERNAL_ERROR; // FIXMEOQS: that could happen!
+	    return SSH_ERR_INTERNAL_ERROR; // OQS-TODO: that could happen!
 	  }
 		freezero(ret->oqs_pk, ret->oqs_pk_len);
 		ret->oqs_pk = k->oqs_pk;
@@ -1945,21 +1951,33 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	    break;
 	  }
 	  switch (type) {
-	    // FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_GENERATE_SWITCH_KEYTYPE_START
 	  case KEY_DILITHIUM_2:
-	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
-	  case KEY_RSA3072_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	  case KEY_DILITHIUM_3:
-	  case KEY_ECDSA_NISTP384_DILITHIUM_3:
 	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	  case KEY_DILITHIUM_5:
+	    ret = OQS_SIG_dilithium_5_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+#ifdef WITH_OPENSSL
+	  case KEY_RSA3072_DILITHIUM_2:
+	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+#ifdef OPENSSL_HAS_ECC
+	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
+	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_ECDSA_NISTP384_DILITHIUM_3:
+	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_ECDSA_NISTP521_DILITHIUM_5:
 	    ret = OQS_SIG_dilithium_5_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
-	    // FIXMEOQS: TEMPLATE
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_GENERATE_SWITCH_KEYTYPE_END
 	  }
 	  if (ret != OQS_SUCCESS) {
 	    ret = SSH_ERR_INTERNAL_ERROR;
@@ -3059,21 +3077,26 @@ sshkey_sign(struct sshkey *key,
 	   switch statement above because in the hybrid case, the classical
 	   processing is done there. */
 	switch (key->type) {
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_SIGN_SWITCH_KEYTYPE_START
 	case KEY_DILITHIUM_2:
-	case KEY_ECDSA_NISTP256_DILITHIUM_2:
+		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+	case KEY_DILITHIUM_3:
+		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+	case KEY_DILITHIUM_5:
+		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+#ifdef WITH_OPENSSL
 	case KEY_RSA3072_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
-		break;
-	case KEY_DILITHIUM_3:
+#ifdef OPENSSL_HAS_ECC
+	case KEY_ECDSA_NISTP256_DILITHIUM_2:
+		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
-		break;
-	case KEY_DILITHIUM_5:
 	case KEY_ECDSA_NISTP521_DILITHIUM_5:
 		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
-		break;
-// FIXMEOQS: TEMPLATE
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_SIGN_SWITCH_KEYTYPE_END
 	}
 	/* abort if we got an error in the PQ signing */
 	if (r != 0) {
@@ -3086,7 +3109,7 @@ sshkey_sign(struct sshkey *key,
 	/* return the correct signature */
 	switch (key->type) {
 	CASE_KEY_HYBRID:
-	  // FIXMEOQS: don't include the lengths in the concatenation (this is 7.9 behavior, but new spec do away with encoded sizes)
+	  // OQS-TODO: don't include the lengths in the concatenation (this is 7.9 behavior, but new spec do away with encoded sizes)
 		/* classical-PQ hybrid: we concatenate the signatures */
 		*lenp = 4 + len_classical + 4 + len_pq;
 		if ((*sigp = malloc(*lenp)) == NULL) {
@@ -3220,18 +3243,26 @@ sshkey_verify(const struct sshkey *key,
 	   switch statement above because in the hybrid case, the classical
 	   processing is done there. */
 	switch (key->type) {
-// FIXMEOQS: TEMPLATE
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_VERIFY_SWITCH_KEYTYPE_START
 	case KEY_DILITHIUM_2:
-	case KEY_ECDSA_NISTP256_DILITHIUM_2:
-	case KEY_RSA3072_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_3:
-	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_5:
+		return ssh_dilithium5_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+#ifdef WITH_OPENSSL
+	case KEY_RSA3072_DILITHIUM_2:
+		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+#ifdef OPENSSL_HAS_ECC
+	case KEY_ECDSA_NISTP256_DILITHIUM_2:
+		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP384_DILITHIUM_3:
+		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP521_DILITHIUM_5:
 		return ssh_dilithium5_verify(key, sig_pq, siglen_pq, data, dlen, compat);
-// FIXMEOQS: TEMPLATE
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_SSHKEY_VERIFY_SWITCH_KEYTYPE_END
 	}
 	return 0;
 }

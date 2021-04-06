@@ -1282,7 +1282,7 @@ identity_sign(struct identity *id, u_char **sigp, size_t *lenp,
 	}
 	// OQS-TODO: for now, our hybrid sig fail that test. Need to fix our formatting
 	// or update the test
-	if (!IS_HYBRID(sign_key->type)) {
+	if (!is_oqs_hybrid(sign_key->type)) {
 	  /*
 	   * PKCS#11 tokens may not support all signature algorithms,
 	   * so check what we get back.
