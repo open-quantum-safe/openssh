@@ -1,9 +1,22 @@
 #!/bin/bash
 
+set -e
+
 ###########
 # Run OpenSSH regression tests
 ###########
 
-# integrity, keys-command, hostkey-agent, and principals-command test failures have to be
-# investigated further. The rest are due to us not supporting certified keys.
-env SKIP_LTESTS="agent cert-hostkey cert-userkey cert-file sshsig keys-command hostkey-agent principals-command integrity" make tests
+TO_INVESTIGATE="integrity \
+                keys-command \
+                hostkey-agent \
+                authinfo \
+                principals-command"
+SKIPPED_DUE_TO_CERTIFIED_KEYS="agent \
+                               cert-hostkey \
+                               cert-userkey \
+                               cert-file \
+                               sshsig \
+                               keys-command \
+                               hostkey-agent \
+                               principals-command"
+make tests -e SKIP_LTESTS="${TO_INVESTIGATE} ${SKIPPED_DUE_TO_CERTIFIED_KEYS}"

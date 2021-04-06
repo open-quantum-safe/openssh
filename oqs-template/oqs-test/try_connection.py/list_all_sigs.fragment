@@ -1,0 +1,11 @@
+{%- for sig in config['sigs'] %}
+    "ssh-{{ sig['name']|replace('_','') }}",
+    {%- for alg in sig['mix_with'] -%}
+        {%- if alg.rsa %}
+    "ssh-{{ alg['name'] }}-{{ sig['name']|replace('_','') }}",
+        {%- else %}
+    "ssh-ecdsa-{{ alg['name'] }}-{{ sig['name']|replace('_','') }}",
+        {%- endif -%}
+    {%- endfor -%}
+{%- endfor %}
+

@@ -3080,20 +3080,27 @@ sshkey_sign(struct sshkey *key,
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_SIGN_SWITCH_KEYTYPE_START
 	case KEY_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_DILITHIUM_5:
 		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 #ifdef WITH_OPENSSL
 	case KEY_RSA3072_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 #ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_ECDSA_NISTP521_DILITHIUM_5:
 		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_SIGN_SWITCH_KEYTYPE_END

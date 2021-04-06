@@ -29,11 +29,18 @@ hybrid_kexs = [
 
 sigs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START
+    "ssh-dilithium2",
+    "ssh-rsa3072-dilithium2",
+    "ssh-ecdsa-nistp256-dilithium2",
+    "ssh-dilithium3",
+    "ssh-ecdsa-nistp384-dilithium3",
+    "ssh-dilithium5",
+    "ssh-ecdsa-nistp521-dilithium5",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END
 ]
 
 def try_handshake(ssh, sshd):
-    random_sig = 'ssh-ed25519' ## TODO: random.choice(sigs)
+    random_sig = random.choice(sigs) #'ssh-ed25519' ## TODO: random.choice(sigs)
     random_kex = random.choice(pq_kexs)
 
     sshd_process = subprocess.Popen([sshd,
@@ -50,16 +57,17 @@ def try_handshake(ssh, sshd):
     # Try to connect to it with the client
     ssh_process = subprocess.run([ssh,
                                  '-F', os.path.abspath('regress/ssh_config'),
+                                 "-o", "HostKeyAlgorithms={}".format(random_sig),
                                  'somehost', 'true'],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.STDOUT)
-    sshd_process.kill()
 
     if ssh_process.returncode != 0:
         print(ssh_process.stdout.decode())
         raise Exception('Cannot establish a connection with {} and {}'.format(random_kex, random_sig))
 
-    print("Success! Key Exchange Algorithm: {}.".format(random_kex))
+    sshd_process.kill()
+    print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(random_kex, random_sig))
 
 if __name__ == '__main__':
     try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'))
