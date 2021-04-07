@@ -14,8 +14,8 @@
 #ifdef OPENSSL_HAS_ECC
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
-	case KT_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-{{ alg['name'] }}-{{ sig['name']|replace('_','') }}";
+	case KT_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ alg['name']|replace('_','-') }}-{{ sig['name']|replace('_','') }}";
       break;
     {%- endfor %}
 {%- endfor %}

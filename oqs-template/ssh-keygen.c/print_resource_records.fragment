@@ -2,16 +2,10 @@
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_{{ sig['name']|upper }}_KEY_FILE, rr_hostname,
 			    print_generic);
-    {%- for alg in sig['mix_with'] -%}
-        {%- if alg['rsa'] %}
+    {%- for alg in sig['mix_with'] %}
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE, rr_hostname,
 			    print_generic);
-        {%- else %}
-			n += do_print_resource_record(pw,
-			    _PATH_HOST_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE, rr_hostname,
-			    print_generic);
-        {%- endif -%}
     {%- endfor %}
 {%- endfor %}
 

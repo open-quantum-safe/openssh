@@ -83,4 +83,3 @@ populate('oqs-utils.h', config, '/////')
 populate('ssh-keyscan.c', config, '/////')
 populate('README.md', config, '<!---')
 populate('oqs-test/try_connection.py', config, '#####')
-

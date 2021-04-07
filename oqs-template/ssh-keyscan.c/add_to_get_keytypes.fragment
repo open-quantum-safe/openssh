@@ -2,16 +2,10 @@
 				case KEY_{{ sig['name']|upper }}:
 					get_keytypes |= KT_{{ sig['name']|upper }};
 					break;
-    {%- for alg in sig['mix_with'] -%}
-        {%- if alg['rsa'] %}
+    {%- for alg in sig['mix_with'] %}
 				case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
 					get_keytypes |= KT_{{ alg['name']|upper }}_{{ sig['name']|upper }};
 					break;
-        {%- else %}
-				case KEY_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-					get_keytypes |= KT_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }};
-					break;
-        {%- endif -%}
     {%- endfor %}
 {%- endfor %}
 

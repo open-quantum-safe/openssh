@@ -14,8 +14,8 @@
 #ifdef OPENSSL_HAS_ECC
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
-		  case KEY_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }};
+		  case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
+		    name = _PATH_SSH_CLIENT_ID_{{ alg['name']|upper }}_{{ sig['name']|upper }};
 		    break;
     {%- endfor %}
 {%- endfor %}

@@ -10,7 +10,7 @@
 #ifdef OPENSSL_HAS_ECC
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
-		{ "ecdsa_{{ alg['name'] }}_{{ sig['name']|replace('_','') }}", "ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}", _PATH_HOST_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE },
+		{ "{{ alg['name'] }}_{{ sig['name']|replace('_','') }}", "{{ alg['name']|upper }}_{{ sig['name']|upper }}", _PATH_HOST_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE },
     {%- endfor %}
 {%- endfor %}
 #endif /* OPENSSL_HAS_ECC */

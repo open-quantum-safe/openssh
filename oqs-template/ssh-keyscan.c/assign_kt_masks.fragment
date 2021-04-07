@@ -3,12 +3,8 @@
     {%- set count.val = count.val + 1 %}
 #define KT_{{ sig['name']|upper }} ((uint64_t)1<<{{ count.val }})
     {%- for alg in sig['mix_with'] -%}
-        {%- set count.val = count.val + 1 -%}
-        {%- if alg['rsa'] %}
+        {%- set count.val = count.val + 1 %}
 #define KT_{{ alg['name']|upper }}_{{ sig['name']|upper }} ((uint64_t)1<<{{ count.val }})
-        {%- else %}
-#define KT_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }} ((uint64_t)1<<{{ count.val }})
-        {%- endif -%}
     {%- endfor %}
 {%- endfor %}
 #define KT_MAX ((uint64_t)1<<{{ count.val }})

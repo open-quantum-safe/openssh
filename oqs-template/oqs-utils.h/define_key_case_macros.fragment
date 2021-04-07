@@ -7,7 +7,7 @@
         {%- if alg.rsa -%}
             {%- do rsa_hybrids.append("KEY_" + alg['name'] + "_" + sig['name'] ) -%}
         {%- else -%}
-            {%- do ecdsa_hybrids.append("KEY_ECDSA_" + alg['name'] + "_" + sig['name'] ) -%}
+            {%- do ecdsa_hybrids.append("KEY_" + alg['name'] + "_" + sig['name'] ) -%}
         {%- endif -%}
     {%- endfor -%}
 {%- endfor %}

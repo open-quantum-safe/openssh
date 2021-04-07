@@ -13,7 +13,7 @@
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE, 0);
+		    _PATH_HOST_{{ alg['name']|upper }}_{{ sig['name']|upper }}_KEY_FILE, 0);
     {%- endfor %}
 {%- endfor %}
 #endif /* OPENSSL_HAS_ECC */

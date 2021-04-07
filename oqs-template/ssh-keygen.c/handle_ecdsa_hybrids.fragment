@@ -1,6 +1,6 @@
 {%- for sig in config['sigs'] if sig['level'] != 1 -%}
     {%- for alg in sig['mix_with'] %}
-		  case KEY_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
+		  case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
         {%- if sig['level'] == 3 %}
 		    *bitsp = 384;
         {%- elif sig['level'] == 5 %}

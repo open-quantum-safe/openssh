@@ -12,7 +12,7 @@
 #ifdef OPENSSL_HAS_ECC
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
-	case KEY_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
+	case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
 		return ssh_{{ sig['name']|replace('_', '') }}_verify(key, sig_pq, siglen_pq, data, dlen, compat);
     {%- endfor %}
 {%- endfor %}

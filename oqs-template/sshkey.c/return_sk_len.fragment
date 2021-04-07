@@ -1,11 +1,7 @@
 {%- for sig in config['sigs'] %}
   case KEY_{{ sig['name']|upper }}:
-    {%- for alg in sig['mix_with'] -%}
-        {%- if alg['rsa'] %}
+    {%- for alg in sig['mix_with'] %}
   case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-        {%- else %}
-  case KEY_ECDSA_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-        {%- endif -%}
     {%- endfor %}
     return OQS_SIG_{{ sig['name'] }}_length_secret_key;
 {%- endfor %}
