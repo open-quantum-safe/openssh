@@ -42,7 +42,7 @@ jobs:
           command: ./oqs-test/run_tests.sh
       - run:
           name: Ensure we have the ssh and sshd syntax right
-          command: python3 oqs-test/try_connnection.py
+          command: python3 oqs-test/try_connection.py
 workflows:
   version: 2.1
   build:
