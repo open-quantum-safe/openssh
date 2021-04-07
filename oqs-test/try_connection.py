@@ -61,12 +61,13 @@ def try_handshake(ssh, sshd):
                                  'somehost', 'true'],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.STDOUT)
-
-    if ssh_process.returncode != 0:
-        print(ssh_process.stdout.decode())
-        raise Exception('Cannot establish a connection with {} and {}'.format(random_kex, random_sig))
-
+    ssh_stdout = ssh_process.stdout.decode()
     sshd_process.kill()
+
+    assert "debug1: kex: algorithm: {}".format(random_kex) in ssh_stdout, ssh_stdout
+    assert "debug1: kex: host key algorithm: {}".format(random_sig) in ssh_stdout, ssh_stdout
+    assert ssh_process.returncode == 0, ssh_stdout
+
     print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(random_kex, random_sig))
 
 if __name__ == '__main__':

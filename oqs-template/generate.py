@@ -29,7 +29,7 @@ def populate(filename, config, delimiter):
 
         if filename == 'README.md':
             identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START -->'.format(delimiter, identifier_base.upper())
-        if filename == 'myproposal.h':
+        elif filename == 'myproposal.h':
             identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START */ \\'.format(delimiter, identifier_base.upper())
         else:
             identifier_start = '{} OQS_TEMPLATE_FRAGMENT_{}_START'.format(delimiter, identifier_base.upper())
@@ -81,8 +81,6 @@ populate('oqs-utils.h', config, '/////')
 
 # both
 populate('ssh-keyscan.c', config, '/////')
-
-# tests
+populate('README.md', config, '<!---')
 populate('oqs-test/try_connection.py', config, '#####')
 
-#populate('README.md', config, '<!---')
