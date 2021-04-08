@@ -11,6 +11,8 @@ import time
 
 pq_kexs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START
+    "oqs-default-sha256",
+    "ecdh-nistp256-oqs-default-sha256",
     "frodokem-640-aes-sha256",
     "ecdh-nistp256-frodokem-640-aes-sha256",
     "frodokem-976-aes-sha384",

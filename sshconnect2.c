@@ -277,12 +277,14 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port)
 	ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SNTRUP4591761X25519_SHA512] = kex_gen_client;
 ///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_START
+	ssh->kex->kex[KEX_KEM_OQS_DEFAULT_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
+	ssh->kex->kex[KEX_KEM_OQS_DEFAULT_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;

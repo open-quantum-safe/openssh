@@ -122,6 +122,9 @@ kex_gen_client(struct ssh *ssh)
 		r = kex_kem_sntrup4591761x25519_keypair(kex);
 		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_CLIENT_SWITCH_CASES_START
+	case KEX_KEM_OQS_DEFAULT_SHA256:
+		r = kex_kem_oqs_default_keypair(kex);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_keypair(kex);
 		break;
@@ -136,6 +139,9 @@ kex_gen_client(struct ssh *ssh)
 		break;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
+	case KEX_KEM_OQS_DEFAULT_ECDH_NISTP256_SHA256:
+		r = kex_kem_oqs_default_ecdh_nistp256_keypair(kex);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256:
 		r = kex_kem_frodokem_640_aes_ecdh_nistp256_keypair(kex);
 		break;
@@ -221,6 +227,9 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		    &shared_secret);
 		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_REPLY_SWITCH_CASES_START
+	case KEX_KEM_OQS_DEFAULT_SHA256:
+		r = kex_kem_oqs_default_dec(kex, server_blob, &shared_secret);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_dec(kex, server_blob, &shared_secret);
 		break;
@@ -235,6 +244,9 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		break;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
+	case KEX_KEM_OQS_DEFAULT_ECDH_NISTP256_SHA256:
+		r = kex_kem_oqs_default_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256:
 		r = kex_kem_frodokem_640_aes_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
 		break;
@@ -353,6 +365,10 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		    &server_pubkey, &shared_secret);
 		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_INIT_SWITCH_CASES_START
+	case KEX_KEM_OQS_DEFAULT_SHA256:
+		r = kex_kem_oqs_default_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
@@ -371,6 +387,10 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		break;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
+	case KEX_KEM_OQS_DEFAULT_ECDH_NISTP256_SHA256:
+		r = kex_kem_oqs_default_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 	case KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256:
 		r = kex_kem_frodokem_640_aes_ecdh_nistp256_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);

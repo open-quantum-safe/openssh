@@ -1,6 +1,13 @@
 # kexs cannot be empty due to myproposal.h
 kexs:
   -
+    name: 'oqs_default'
+    hash: 'sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
     family: 'FrodoKEM'
     name: 'frodokem_640_aes'
     hash: 'sha256'

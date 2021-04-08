@@ -6,7 +6,11 @@
  */
 int kex_kem_{{ kex['name'] }}_ecdh_{{ curve['name'] }}_keypair(struct kex *kex)
 {
+    {% if kex['name'] == 'oqs_default' -%}
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_default);
+    {%- else -%}
     OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_{{ kex['name'] }});
+    {%- endif %}
     if (kem == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
@@ -20,7 +24,11 @@ int kex_kem_{{ kex['name'] }}_ecdh_{{ curve['name'] }}_enc(struct kex *kex,
                                    struct sshbuf **server_blobp,
                                    struct sshbuf **shared_secretp)
 {
+    {% if kex['name'] == 'oqs_default' -%}
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_default);
+    {%- else -%}
     OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_{{ kex['name'] }});
+    {%- endif %}
     if (kem == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
@@ -33,7 +41,11 @@ int kex_kem_{{ kex['name'] }}_ecdh_{{ curve['name'] }}_dec(struct kex *kex,
                                        const struct sshbuf *server_blobp,
                                        struct sshbuf **shared_secretp)
 {
+    {% if kex['name'] == 'oqs_default' -%}
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_default);
+    {%- else -%}
     OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_{{ kex['name'] }});
+    {%- endif %}
     if (kem == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }

@@ -55,7 +55,7 @@ If an algorithm is provided by liboqs but is not listed below, it can still be u
 
 The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs):
 
-- `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
+- `oqs-default-sha256` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
 - **FrodoKEM**: `frodokem-640-aes-sha256`, `frodokem-976-aes-sha384`, `frodokem-1344-aes-sha512`
 - **SIKE**: `sike-p434-sha256`

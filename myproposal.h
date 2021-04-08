@@ -38,6 +38,8 @@
 	"diffie-hellman-group18-sha512," \
 	"diffie-hellman-group14-sha256," \
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_START */ \
+	"oqs-default-sha256," \
+	"ecdh-nistp256-oqs-default-sha256," \
 	"frodokem-640-aes-sha256," \
 	"ecdh-nistp256-frodokem-640-aes-sha256," \
 	"frodokem-976-aes-sha384," \
