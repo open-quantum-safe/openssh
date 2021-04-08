@@ -9,7 +9,7 @@ import time
 
 # Requires make tests LTESTS="" to be run first
 
-pq_kexs = [
+kexs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START
     "oqs-default-sha256",
     "ecdh-nistp256-oqs-default-sha256",
@@ -37,8 +37,8 @@ sigs = [
 ]
 
 def try_handshake(ssh, sshd):
-    random_sig = random.choice(sigs) #'ssh-ed25519' ## TODO: random.choice(sigs)
-    random_kex = random.choice(pq_kexs)
+    random_sig = random.choice(sigs)
+    random_kex = random.choice(kexs)
 
     sshd_process = subprocess.Popen([sshd,
                                     '-f', os.path.abspath('regress/sshd_config'),

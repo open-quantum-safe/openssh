@@ -302,17 +302,17 @@ keygrab_ssh2(con *c)
 #ifdef WITH_OPENSSL
 	case KT_RSA3072_DILITHIUM_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-dilithium2";
-      break;
+	  break;
 #ifdef OPENSSL_HAS_ECC
 	case KT_ECDSA_NISTP256_DILITHIUM_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-dilithium2";
-      break;
+	  break;
 	case KT_ECDSA_NISTP384_DILITHIUM_3:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-dilithium3";
-      break;
+	  break;
 	case KT_ECDSA_NISTP521_DILITHIUM_5:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-dilithium5";
-      break;
+	  break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_PROPOSAL_SERVER_HOST_KEY_ALGS_END
