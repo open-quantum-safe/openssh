@@ -78,6 +78,7 @@ populate('ssh-keysign.c', config, '/////')
 populate('ssh.c', config, '/////')
 populate('sshkey.h', config, '/////')
 populate('oqs-utils.h', config, '/////')
+populate('ssh-rsa.c', config, '/////')
 
 # both
 populate('ssh-keyscan.c', config, '/////')

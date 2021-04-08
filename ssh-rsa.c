@@ -64,8 +64,11 @@ rsa_hash_id_from_ident(const char *ident)
 	if (strcmp(ident, "ssh-rsa") == 0)
 		return SSH_DIGEST_SHA1;
 	if (strcmp(ident, "rsa-sha2-256") == 0 ||
-	    /* OQS note: RSA is currently only used for L1 PQ hybrids, corresponding to SHA256's security level */
+	    /* OQS-note: Currently, only L1 algorithms support RSA hybrids */
+///// OQS_TEMPLATE_FRAGMENT_LIST_L1_RSA_HYBRIDS_START
+	    strcmp(ident, "ssh-rsa3072-oqsdefault") == 0 ||
 	    strcmp(ident, "ssh-rsa3072-dilithium2") == 0)
+///// OQS_TEMPLATE_FRAGMENT_LIST_L1_RSA_HYBRIDS_END
 		return SSH_DIGEST_SHA256;
 	if (strcmp(ident, "rsa-sha2-512") == 0)
 		return SSH_DIGEST_SHA512;
