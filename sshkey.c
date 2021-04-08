@@ -316,7 +316,7 @@ key_type_is_ecdsa_variant(int type)
 	case KEY_ECDSA_SK_CERT:
 		return 1;
 	}
-	return is_oqs_ecdsa_hybrid(type);
+	return oqs_utils_is_ecdsa_hybrid(type);
 }
 
 int

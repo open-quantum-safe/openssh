@@ -214,7 +214,7 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 	   * for ECDSA hybrid of levels 3+ to avoid defaulting to P256 when
 	   * name is NULL (like when called from do_gen_all_hostkeys).
 	   */
-		if (name == NULL && is_oqs_ecdsa_hybrid(type)) {
+		if (name == NULL && oqs_utils_is_ecdsa_hybrid(type)) {
 		  switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_HANDLE_ECDSA_HYBRIDS_START
 		  case KEY_ECDSA_NISTP384_DILITHIUM_3:

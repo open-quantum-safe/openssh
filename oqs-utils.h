@@ -1,6 +1,8 @@
 #ifndef OQS_UTIL_H
 #define OQS_UTIL_H
 
+#include "includes.h"
+#include "sshkey.h"
 
 // OQS-TODO: Replace these macros with the functions below
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEY_CASE_MACROS_START
@@ -25,36 +27,8 @@
 	CASE_KEY_RSA_HYBRID: \
 	CASE_KEY_ECDSA_HYBRID
 
-static int is_oqs_rsa_hybrid(int keytype) {
-    switch(keytype) {
-///// OQS_TEMPLATE_FRAGMENT_LIST_RSA_HYBRIDS_START
-        case KEY_RSA3072_OQS_DEFAULT:
-            return 1;
-        case KEY_RSA3072_DILITHIUM_2:
-            return 1;
-///// OQS_TEMPLATE_FRAGMENT_LIST_RSA_HYBRIDS_END
-    }
-    return 0;
-}
-
-static int is_oqs_ecdsa_hybrid(int keytype) {
-    switch(keytype) {
-///// OQS_TEMPLATE_FRAGMENT_LIST_ECDSA_HYBRIDS_START
-        case KEY_ECDSA_NISTP256_OQS_DEFAULT:
-            return 1;
-        case KEY_ECDSA_NISTP256_DILITHIUM_2:
-            return 1;
-        case KEY_ECDSA_NISTP384_DILITHIUM_3:
-            return 1;
-        case KEY_ECDSA_NISTP521_DILITHIUM_5:
-            return 1;
-///// OQS_TEMPLATE_FRAGMENT_LIST_ECDSA_HYBRIDS_END
-    }
-    return 0;
-}
-
-static int is_oqs_hybrid(int keytype) {
-    return is_oqs_rsa_hybrid(keytype) || is_oqs_ecdsa_hybrid(keytype);
-}
+int oqs_utils_is_rsa_hybrid(int keytype);
+int oqs_utils_is_ecdsa_hybrid(int keytype);
+int oqs_utils_is_hybrid(int keytype);
 
 #endif /* OQS_UTIL_H */
