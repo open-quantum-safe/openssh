@@ -74,6 +74,9 @@ enum sshkey_types {
 	KEY_ED25519_SK,
 	KEY_ED25519_SK_CERT,
 ///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_START
+	KEY_OQS_DEFAULT,
+	KEY_RSA3072_OQS_DEFAULT,
+	KEY_ECDSA_NISTP256_OQS_DEFAULT,
 	KEY_DILITHIUM_2,
 	KEY_RSA3072_DILITHIUM_2,
 	KEY_ECDSA_NISTP256_DILITHIUM_2,
@@ -334,6 +337,8 @@ int ssh_xmss_verify(const struct sshkey *key,
     const u_char *signature, size_t signaturelen,
     const u_char *data, size_t datalen, u_int compat);
 ///// OQS_TEMPLATE_FRAGMENT_DECLARE_PROTOTYPES_START
+int ssh_oqsdefault_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_oqsdefault_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);

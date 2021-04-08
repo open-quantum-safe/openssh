@@ -26,6 +26,9 @@ kexs = [
 
 sigs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START
+    "ssh-oqsdefault",
+    "ssh-rsa3072-oqsdefault",
+    "ssh-ecdsa-nistp256-oqsdefault",
     "ssh-dilithium2",
     "ssh-rsa3072-dilithium2",
     "ssh-ecdsa-nistp256-dilithium2",

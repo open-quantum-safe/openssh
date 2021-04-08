@@ -319,6 +319,9 @@ ask_filename(struct passwd *pw, const char *prompt)
 			name = _PATH_SSH_CLIENT_ID_XMSS;
 			break;
 ///// OQS_TEMPLATE_FRAGMENT_HANDLE_ID_FILES_START
+		  case KEY_OQS_DEFAULT:
+		    name = _PATH_SSH_CLIENT_ID_OQS_DEFAULT;
+		    break;
 		  case KEY_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_DILITHIUM_2;
 		    break;
@@ -329,10 +332,16 @@ ask_filename(struct passwd *pw, const char *prompt)
 		    name = _PATH_SSH_CLIENT_ID_DILITHIUM_5;
 		    break;
 #ifdef WITH_OPENSSL
+		  case KEY_RSA3072_OQS_DEFAULT:
+		    name = _PATH_SSH_CLIENT_ID_RSA3072_OQS_DEFAULT;
+		    break;
 		  case KEY_RSA3072_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2;
 		    break;
 #ifdef OPENSSL_HAS_ECC
+		  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_OQS_DEFAULT;
+		    break;
 		  case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2;
 		    break;
@@ -1105,12 +1114,15 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "xmss", "XMSS",_PATH_HOST_XMSS_KEY_FILE },
 #endif /* WITH_XMSS */
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEY_TYPES_START
+		{ "oqsdefault", "OQS_DEFAULT", _PATH_HOST_OQS_DEFAULT_KEY_FILE },
 		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
 		{ "dilithium3", "DILITHIUM_3", _PATH_HOST_DILITHIUM_3_KEY_FILE },
 		{ "dilithium5", "DILITHIUM_5", _PATH_HOST_DILITHIUM_5_KEY_FILE },
 #ifdef WITH_OPENSSL
+		{ "rsa3072_oqsdefault", "RSA3072_OQS_DEFAULT", _PATH_HOST_RSA3072_OQS_DEFAULT_KEY_FILE },
 		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
+		{ "ecdsa_nistp256_oqsdefault", "ECDSA_NISTP256_OQS_DEFAULT", _PATH_HOST_ECDSA_NISTP256_OQS_DEFAULT_KEY_FILE },
 		{ "ecdsa_nistp256_dilithium2", "ECDSA_NISTP256_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE },
 		{ "ecdsa_nistp384_dilithium3", "ECDSA_NISTP384_DILITHIUM_3", _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE },
 		{ "ecdsa_nistp521_dilithium5", "ECDSA_NISTP521_DILITHIUM_5", _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE },
@@ -1607,12 +1619,15 @@ do_change_comment(struct passwd *pw, const char *identity_comment)
 	if (private->type != KEY_ED25519 &&
 	    private->type != KEY_XMSS &&
 	    ///// OQS_TEMPLATE_FRAGMENT_CHECK_PRIVATE_KEY_TYPE_START
+	    private->type != KEY_OQS_DEFAULT &&
 	    private->type != KEY_DILITHIUM_2 &&
 	    private->type != KEY_DILITHIUM_3 &&
 	    private->type != KEY_DILITHIUM_5 &&
 #ifdef WITH_OPENSSL
+	    private->type != KEY_RSA3072_OQS_DEFAULT &&
 	    private->type != KEY_RSA3072_DILITHIUM_2 &&
 #ifdef OPENSSL_HAS_ECC
+	    private->type != KEY_ECDSA_NISTP256_OQS_DEFAULT &&
 	    private->type != KEY_ECDSA_NISTP256_DILITHIUM_2 &&
 	    private->type != KEY_ECDSA_NISTP384_DILITHIUM_3 &&
 	    private->type != KEY_ECDSA_NISTP521_DILITHIUM_5 &&
@@ -3639,6 +3654,15 @@ main(int argc, char **argv)
 			    _PATH_HOST_XMSS_KEY_FILE, rr_hostname,
 			    print_generic);
 ///// OQS_TEMPLATE_FRAGMENT_PRINT_RESOURCE_RECORDS_START
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_OQS_DEFAULT_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_RSA3072_OQS_DEFAULT_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_ECDSA_NISTP256_OQS_DEFAULT_KEY_FILE, rr_hostname,
+			    print_generic);
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_DILITHIUM_2_KEY_FILE, rr_hostname,
 			    print_generic);

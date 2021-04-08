@@ -166,7 +166,7 @@ main(int argc, char **argv)
 	struct sshbuf *b;
 	Options options;
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KEYTYPES_START
-#define NUM_KEYTYPES 5 + 7
+#define NUM_KEYTYPES 5 + 10
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KEYTYPES_END
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
@@ -193,6 +193,9 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_XMSS_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA_KEY_FILE, O_RDONLY);
 ///// OQS_TEMPLATE_FRAGMENT_OPEN_KEY_FILES_START
+	key_fd[i++] = open(_PATH_HOST_OQS_DEFAULT_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_RSA3072_OQS_DEFAULT_KEY_FILE, O_RDONLY);
+	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_OQS_DEFAULT_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE, O_RDONLY);

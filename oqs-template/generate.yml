@@ -42,6 +42,16 @@ kexs:
 
 sigs:
   -
+    name: 'oqs_default'
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
     family: 'Dilithium'
     name: 'dilithium_2'
     level: 1

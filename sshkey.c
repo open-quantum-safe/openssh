@@ -94,6 +94,15 @@
 static size_t oqs_sig_pk_len(int type) {
   switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_RETURN_PK_LEN_START
+  case KEY_OQS_DEFAULT:
+  case KEY_RSA3072_OQS_DEFAULT:
+  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+  { // OQS-TODO: Find a cleaner way
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_default);
+    size_t pk_len = sig->length_public_key;
+    OQS_SIG_free(sig);
+    return pk_len;
+  }
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -113,6 +122,15 @@ static size_t oqs_sig_pk_len(int type) {
 static size_t oqs_sig_sk_len(int type) {
   switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_RETURN_SK_LEN_START
+  case KEY_OQS_DEFAULT:
+  case KEY_RSA3072_OQS_DEFAULT:
+  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+  { // OQS-TODO: Find a cleaner way
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_default);
+    size_t sk_len = sig->length_secret_key;
+    OQS_SIG_free(sig);
+    return sk_len;
+  }
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -197,6 +215,8 @@ static const struct keytype keytypes[] = {
 # endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEYTYPES_START
+	{ "ssh-oqsdefault", "OQSDEFAULT", NULL,
+	    KEY_OQS_DEFAULT, 0, 0, 0 },
 	{ "ssh-dilithium2", "DILITHIUM2", NULL,
 	    KEY_DILITHIUM_2, 0, 0, 0 },
 	{ "ssh-dilithium3", "DILITHIUM3", NULL,
@@ -204,9 +224,13 @@ static const struct keytype keytypes[] = {
 	{ "ssh-dilithium5", "DILITHIUM5", NULL,
 	    KEY_DILITHIUM_5, 0, 0, 0 },
 #ifdef WITH_OPENSSL
+	{ "ssh-rsa3072-oqsdefault", "RSA3072_OQSDEFAULT", NULL,
+	    KEY_RSA3072_OQS_DEFAULT, 0, 0, 0 },
 	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL,
 	    KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
 #ifdef OPENSSL_HAS_ECC
+	{ "ssh-ecdsa-nistp256-oqsdefault", "ECDSA_NISTP256_OQSDEFAULT", NULL,
+	    KEY_ECDSA_NISTP256_OQS_DEFAULT, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL,
 	    KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL,
@@ -1952,6 +1976,13 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  }
 	  switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_GENERATE_SWITCH_KEYTYPE_START
+	  case KEY_OQS_DEFAULT:
+	  { // OQS-TODO: Clean this up
+	    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_default);
+	    ret = sig->keypair(k->oqs_pk, k->oqs_sk);
+	    OQS_SIG_free(sig);
+	    break;
+	  }
 	  case KEY_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
@@ -1962,10 +1993,24 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	    ret = OQS_SIG_dilithium_5_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 #ifdef WITH_OPENSSL
+	  case KEY_RSA3072_OQS_DEFAULT:
+	  { // OQS-TODO: Clean this up
+	    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_default);
+	    ret = sig->keypair(k->oqs_pk, k->oqs_sk);
+	    OQS_SIG_free(sig);
+	    break;
+	  }
 	  case KEY_RSA3072_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 #ifdef OPENSSL_HAS_ECC
+	  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+	  { // OQS-TODO: Clean this up
+	    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_default);
+	    ret = sig->keypair(k->oqs_pk, k->oqs_sk);
+	    OQS_SIG_free(sig);
+	    break;
+	  }
 	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
@@ -3078,6 +3123,9 @@ sshkey_sign(struct sshkey *key,
 	   processing is done there. */
 	switch (key->type) {
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_SIGN_SWITCH_KEYTYPE_START
+	case KEY_OQS_DEFAULT:
+		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
@@ -3088,10 +3136,16 @@ sshkey_sign(struct sshkey *key,
 		r = ssh_dilithium5_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 #ifdef WITH_OPENSSL
+	case KEY_RSA3072_OQS_DEFAULT:
+		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_RSA3072_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 #ifdef OPENSSL_HAS_ECC
+	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
@@ -3251,6 +3305,8 @@ sshkey_verify(const struct sshkey *key,
 	   processing is done there. */
 	switch (key->type) {
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_VERIFY_SWITCH_KEYTYPE_START
+	case KEY_OQS_DEFAULT:
+		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_3:
@@ -3258,9 +3314,13 @@ sshkey_verify(const struct sshkey *key,
 	case KEY_DILITHIUM_5:
 		return ssh_dilithium5_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 #ifdef WITH_OPENSSL
+	case KEY_RSA3072_OQS_DEFAULT:
+		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_RSA3072_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 #ifdef OPENSSL_HAS_ECC
+	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
+		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
