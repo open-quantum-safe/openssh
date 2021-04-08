@@ -10,21 +10,16 @@ import time
 # Requires make tests LTESTS="" to be run first
 
 pq_kexs = [
-##### OQS_TEMPLATE_FRAGMENT_LIST_PQ_KEXNAMES_START
+##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START
     "frodokem-640-aes-sha256",
-    "frodokem-976-aes-sha384",
-    "frodokem-1344-aes-sha512",
-    "sike-p434-sha256",
-##### OQS_TEMPLATE_FRAGMENT_LIST_PQ_KEXNAMES_END
-]
-
-hybrid_kexs = [
-##### OQS_TEMPLATE_FRAGMENT_LIST_HYBRID_KEXNAMES_START
     "ecdh-nistp256-frodokem-640-aes-sha256",
+    "frodokem-976-aes-sha384",
     "ecdh-nistp384-frodokem-976-aes-sha384",
+    "frodokem-1344-aes-sha512",
     "ecdh-nistp521-frodokem-1344-aes-sha512",
+    "sike-p434-sha256",
     "ecdh-nistp256-sike-p434-sha256",
-##### OQS_TEMPLATE_FRAGMENT_LIST_HYBRID_KEXNAMES_END
+##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END
 ]
 
 sigs = [

@@ -1,4 +1,5 @@
-{%- for kex in config['kexs'] -%}
+{%- for kex in config['kexs'] %}
+    "{{ kex['name']|replace('_','-') }}-{{ kex['hash'] }}",
     {%- for curve in kex['mix_with'] %}
     "ecdh-{{ curve['name'] }}-{{ kex['name']|replace('_','-') }}-{{ kex['hash'] }}",
     {%- endfor -%}

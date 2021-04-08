@@ -1,6 +1,0 @@
-{% for kex in config['kexs'] %}
-    {%- for curve in kex['mix_with'] %}
-DEFINE_ECDH_KEX_METHODS({{ kex['name'] }},{{ curve['name'] }})
-    {%- endfor %}
-{%- endfor %}
-
