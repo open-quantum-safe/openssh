@@ -38,137 +38,266 @@
 #include "ssherr.h"
 #include "oqs/oqs.h"
 
-#define DEFINE_OQS_KEYPAIR_FUNCTION(ALG)     \
-int kex_kem_##ALG##_keypair(struct kex *kex) \
-{					     \
-  struct sshbuf *buf = NULL;		     \
-  u_char *cp = NULL;			     \
-  int r;				     \
-					     \
-  if ((buf = sshbuf_new()) == NULL)	     \
-    return SSH_ERR_ALLOC_FAIL;						\
-  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_public_key, &cp)) != 0) \
-    goto out;								\
-									\
-  kex->oqs_client_key_size = OQS_KEM_##ALG##_length_secret_key;		\
-  if ((kex->oqs_client_key = malloc(kex->oqs_client_key_size)) == NULL || \
-      OQS_KEM_##ALG##_keypair(cp, kex->oqs_client_key) != OQS_SUCCESS) { \
-    r = SSH_ERR_ALLOC_FAIL;						\
-    goto out;								\
-  }									\
-  /* #ifdef DEBUG_KEXECDH						\
-  // dump_digest("client public key ALG:", cp,				\
-  // OQS_KEM_##ALG##_length_public_key);				\
-  #endif */								\
-  kex->client_pub = buf;						\
-  buf = NULL;								\
- out:									\
-  sshbuf_free(buf);							\
-  return r;								\
+static int kex_kem_generic_keypair(OQS_KEM *kem, struct kex *kex)
+{
+  struct sshbuf *buf = NULL;
+  u_char *cp = NULL;
+  int r;
+  if ((buf = sshbuf_new()) == NULL)
+    return SSH_ERR_ALLOC_FAIL;
+  if ((r = sshbuf_reserve(buf, kem->length_public_key, &cp)) != 0) \
+    goto out;
+  kex->oqs_client_key_size = kem->length_secret_key;
+  if ((kex->oqs_client_key = malloc(kex->oqs_client_key_size)) == NULL ||
+      OQS_KEM_keypair(kem, cp, kex->oqs_client_key) != OQS_SUCCESS) {
+    r = SSH_ERR_ALLOC_FAIL;
+    goto out;
+  }
+  kex->client_pub = buf;
+  buf = NULL;
+ out:
+  sshbuf_free(buf);
+  return r;
 }
 
-#define DEFINE_OQS_ENC_FUNCTION(ALG)					\
-int kex_kem_##ALG##_enc(struct kex *kex, const struct sshbuf *client_blob, \
-			struct sshbuf **server_blobp, struct sshbuf **shared_secretp) \
-{									\
-  struct sshbuf *server_blob = NULL;					\
-  struct sshbuf *buf = NULL;						\
-  const u_char *client_pub;						\
-  u_char *kem_key, *ciphertext;						\
-  int r;								\
-									\
-  *server_blobp = NULL;							\
-  *shared_secretp = NULL;						\
-									\
-  if (sshbuf_len(client_blob) != OQS_KEM_##ALG##_length_public_key) { \
-    r = SSH_ERR_SIGNATURE_INVALID;					\
-    goto out;								\
-  }									\
-  client_pub = sshbuf_ptr(client_blob);					\
-  /* #ifdef DEBUG_KEXECDH						\
-     dump_digest("client public key ALG:", client_pub, OQS_KEM_##ALG##_length_public_key); \
-     #endif */								\
-  /* allocate buffer for the KEM key (shared secret) */			\
-  if ((buf = sshbuf_new()) == NULL) {					\
-    r = SSH_ERR_ALLOC_FAIL;						\
-    goto out;								\
-  }									\
-  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_shared_secret, &kem_key)) != 0) \
-    goto out;								\
-  /* allocate space for encrypted KEM key */				\
-  if ((server_blob = sshbuf_new()) == NULL) {				\
-    r = SSH_ERR_ALLOC_FAIL;						\
-    goto out;								\
-  }									\
-  if ((r = sshbuf_reserve(server_blob, OQS_KEM_##ALG##_length_ciphertext, &ciphertext)) != 0) \
-    goto out;								\
-  /* generate and encrypt KEM key with client key */			\
-  if (OQS_KEM_##ALG##_encaps(ciphertext, kem_key, client_pub) != OQS_SUCCESS) { \
-    goto out;								\
-  }									\
-  /* #ifdef DEBUG_KEXECDH						\
-     dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext);	\
-     dump_digest("server kem key:", kem_key, sizeof(kem_key));		\
-     dump_digest("KEM key:", sshbuf_ptr(buf), sshbuf_len(buf));		\
-     #endif */								\
-  *server_blobp = server_blob;						\
-  *shared_secretp = buf;						\
-  server_blob = NULL;							\
-  buf = NULL;								\
- out:									\
-  sshbuf_free(server_blob);						\
-  sshbuf_free(buf);							\
-  return r;								\
+static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
+                               const struct sshbuf *client_blob,
+                               struct sshbuf **server_blobp,
+                               struct sshbuf **shared_secretp)
+{
+  struct sshbuf *server_blob = NULL;
+  struct sshbuf *buf = NULL;
+  const u_char *client_pub;
+  u_char *kem_key, *ciphertext;
+  int r;
+  *server_blobp = NULL;
+  *shared_secretp = NULL;
+  if (sshbuf_len(client_blob) != kem->length_public_key) {
+    r = SSH_ERR_SIGNATURE_INVALID;
+    goto out;
+  }
+  client_pub = sshbuf_ptr(client_blob);
+  if ((buf = sshbuf_new()) == NULL) {
+    r = SSH_ERR_ALLOC_FAIL;
+    goto out;
+  }
+  if ((r = sshbuf_reserve(buf, kem->length_shared_secret, &kem_key)) != 0)
+    goto out;
+  /* allocate space for encrypted KEM key */
+  if ((server_blob = sshbuf_new()) == NULL) {
+    r = SSH_ERR_ALLOC_FAIL;
+    goto out;
+  }
+  if ((r = sshbuf_reserve(server_blob, kem->length_ciphertext, &ciphertext)) != 0)
+    goto out;
+  /* generate and encrypt KEM key with client key */
+  if (OQS_KEM_encaps(kem, ciphertext, kem_key, client_pub) != OQS_SUCCESS) {
+    goto out;
+  }
+  *server_blobp = server_blob;
+  *shared_secretp = buf;
+  server_blob = NULL;
+  buf = NULL;
+ out:
+  sshbuf_free(server_blob);
+  sshbuf_free(buf);
+  return r;
 }
 
-#define DEFINE_OQS_DEC_FUNCTION(ALG)					\
-int kex_kem_##ALG##_dec(struct kex *kex, const struct sshbuf *server_blob, \
-			struct sshbuf **shared_secretp)			\
-{									\
-  struct sshbuf *buf = NULL;						\
-  u_char *kem_key = NULL;						\
-  const u_char *ciphertext;						\
-  int r;								\
-									\
-  *shared_secretp = NULL;						\
-									\
-  if (sshbuf_len(server_blob) != OQS_KEM_##ALG##_length_ciphertext) {	\
-    r = SSH_ERR_SIGNATURE_INVALID;					\
-    goto out;								\
-  }									\
-  ciphertext = sshbuf_ptr(server_blob);					\
-  /* #ifdef DEBUG_KEXECDH						\
-    dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext); \
-    #endif */								\
-  /* decrypt the KEM key */						\
-  if ((buf = sshbuf_new()) == NULL) {					\
-    r = SSH_ERR_ALLOC_FAIL;						\
-    goto out;								\
-  }									\
-  if ((r = sshbuf_reserve(buf, OQS_KEM_##ALG##_length_shared_secret, &kem_key)) != 0) \
-    goto out;								\
-  if (OQS_KEM_##ALG##_decaps(kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) { \
-    goto out;								\
-  }									\
-  /* #ifdef DEBUG_KEXECDH						\
-    dump_digest("client kem key:", kem_key, sizeof(kem_key));		\
-  dump_digest("KEM shared key:", sshbuf_ptr(buf), sshbuf_len(buf));	\
-  #endif */								\
-  *shared_secretp = buf;						\
-  buf = NULL;								\
- out:									\
-  sshbuf_free(buf);							\
-  return r;								\
+static int kex_kem_generic_dec(OQS_KEM *kem,
+                               struct kex *kex,
+                               const struct sshbuf *server_blob,
+                               struct sshbuf **shared_secretp)
+{
+  struct sshbuf *buf = NULL;
+  u_char *kem_key = NULL;
+  const u_char *ciphertext;
+  int r;
+  *shared_secretp = NULL;
+  if (sshbuf_len(server_blob) != kem->length_ciphertext) {
+    r = SSH_ERR_SIGNATURE_INVALID;
+    goto out;
+  }
+  ciphertext = sshbuf_ptr(server_blob);
+  /* #ifdef DEBUG_KEXECDH
+    dump_digest("server cipher text:", ciphertext, OQS_KEM_##ALG##_length_ciphertext);
+    #endif */
+  /* decrypt the KEM key */
+  if ((buf = sshbuf_new()) == NULL) {
+    r = SSH_ERR_ALLOC_FAIL;
+    goto out;
+  }
+  if ((r = sshbuf_reserve(buf, kem->length_shared_secret, &kem_key)) != 0)
+    goto out;
+  if (OQS_KEM_decaps(kem, kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) {
+    goto out;
+  }
+  *shared_secretp = buf;
+  buf = NULL;
+ out:
+  sshbuf_free(buf);
+  return r;
 }
-
-#define DEFINE_KEX_METHODS(ALG)	\
-  DEFINE_OQS_KEYPAIR_FUNCTION(ALG)	\
-  DEFINE_OQS_ENC_FUNCTION(ALG)		\
-  DEFINE_OQS_DEC_FUNCTION(ALG)
 
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_METHODS_START
-DEFINE_KEX_METHODS(frodokem_640_aes)
-DEFINE_KEX_METHODS(frodokem_976_aes)
-DEFINE_KEX_METHODS(frodokem_1344_aes)
-DEFINE_KEX_METHODS(sike_p434)
+/*---------------------------------------------------
+ * FRODOKEM_640_AES METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_frodokem_640_aes_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_640_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_frodokem_640_aes_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_640_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_frodokem_640_aes_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_640_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * FRODOKEM_976_AES METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_frodokem_976_aes_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_976_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_frodokem_976_aes_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_976_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_frodokem_976_aes_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_976_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * FRODOKEM_1344_AES METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_frodokem_1344_aes_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_1344_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_frodokem_1344_aes_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_1344_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_frodokem_1344_aes_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_frodokem_1344_aes);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * SIKE_P434 METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_sike_p434_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_sike_p434);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_sike_p434_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_sike_p434);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_sike_p434_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_sike_p434);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_METHODS_END
