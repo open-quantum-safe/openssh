@@ -119,7 +119,7 @@ The following instructions install liboqs into a subdirectory inside the OpenSSH
 git clone --branch master --single-branch --depth 1 https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 mkdir build && cd build
-cmake .. -GNinja -DENABLE_SIG_PICNIC=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_INSTALL_PREFIX=<OPENSSH_ROOT>/oqs
+cmake .. -GNinja -DOQS_ENABLE_SIG_PICNIC=OFF -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DCMAKE_INSTALL_PREFIX=<OPENSSH_ROOT>/oqs
 ninja
 ninja install
 ```
