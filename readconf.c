@@ -2174,14 +2174,21 @@ fill_default_options(Options * options)
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_3, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_5, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2_AES, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_3_AES, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_5_AES, 0);
 #ifdef WITH_OPENSSL
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_OQS_DEFAULT, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2_AES, 0);
 #ifdef OPENSSL_HAS_ECC
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_OQS_DEFAULT, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3, 0);
 		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2_AES, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3_AES, 0);
+		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5_AES, 0);
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_ID_FILES_END

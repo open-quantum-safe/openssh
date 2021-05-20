@@ -47,7 +47,19 @@
 	"frodokem-1344-aes-sha512," \
 	"ecdh-nistp521-frodokem-1344-aes-sha512," \
 	"sike-p434-sha256," \
-	"ecdh-nistp256-sike-p434-sha256"
+	"ecdh-nistp256-sike-p434-sha256," \
+	"kyber-512-sha256," \
+	"ecdh-nistp256-kyber-512-sha256," \
+	"kyber-768-sha384," \
+	"ecdh-nistp384-kyber-768-sha384," \
+	"kyber-1024-sha512," \
+	"ecdh-nistp521-kyber-1024-sha512," \
+	"kyber-512-90s-sha256," \
+	"ecdh-nistp256-kyber-512-90s-sha256," \
+	"kyber-768-90s-sha384," \
+	"ecdh-nistp384-kyber-768-90s-sha384," \
+	"kyber-1024-90s-sha512," \
+	"ecdh-nistp521-kyber-1024-90s-sha512"
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX

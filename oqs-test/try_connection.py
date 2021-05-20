@@ -22,6 +22,18 @@ kexs = [
     "ecdh-nistp521-frodokem-1344-aes-sha512",
     "sike-p434-sha256",
     "ecdh-nistp256-sike-p434-sha256",
+    "kyber-512-sha256",
+    "ecdh-nistp256-kyber-512-sha256",
+    "kyber-768-sha384",
+    "ecdh-nistp384-kyber-768-sha384",
+    "kyber-1024-sha512",
+    "ecdh-nistp521-kyber-1024-sha512",
+    "kyber-512-90s-sha256",
+    "ecdh-nistp256-kyber-512-90s-sha256",
+    "kyber-768-90s-sha384",
+    "ecdh-nistp384-kyber-768-90s-sha384",
+    "kyber-1024-90s-sha512",
+    "ecdh-nistp521-kyber-1024-90s-sha512",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END
 ]
 
@@ -37,6 +49,13 @@ sigs = [
     "ssh-ecdsa-nistp384-dilithium3",
     "ssh-dilithium5",
     "ssh-ecdsa-nistp521-dilithium5",
+    "ssh-dilithium2aes",
+    "ssh-rsa3072-dilithium2aes",
+    "ssh-ecdsa-nistp256-dilithium2aes",
+    "ssh-dilithium3aes",
+    "ssh-ecdsa-nistp384-dilithium3aes",
+    "ssh-dilithium5aes",
+    "ssh-ecdsa-nistp521-dilithium5aes",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END
 ]
 

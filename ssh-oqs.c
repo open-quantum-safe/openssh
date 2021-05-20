@@ -293,4 +293,106 @@ int ssh_dilithium5_verify(const struct sshkey *key,
     OQS_SIG_free(sig);
     return r;
 }
+/*---------------------------------------------------
+ * DILITHIUM_2_AES METHODS
+ *---------------------------------------------------
+ */
+int ssh_dilithium2aes_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_2_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "dilithium2aes", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_dilithium2aes_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_2_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "dilithium2aes", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * DILITHIUM_3_AES METHODS
+ *---------------------------------------------------
+ */
+int ssh_dilithium3aes_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_3_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "dilithium3aes", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_dilithium3aes_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_3_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "dilithium3aes", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * DILITHIUM_5_AES METHODS
+ *---------------------------------------------------
+ */
+int ssh_dilithium5aes_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_5_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "dilithium5aes", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_dilithium5aes_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_5_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "dilithium5aes", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_SIG_FUNCTIONS_END

@@ -58,6 +58,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - `oqs-default-sha256` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
 - **FrodoKEM**: `frodokem-640-aes-sha256`, `frodokem-976-aes-sha384`, `frodokem-1344-aes-sha512`
+- **Kyber**: `kyber-512-sha256`, `kyber-768-sha384`, `kyber-1024-sha512`, `kyber-512-90s-sha256`, `kyber-768-90s-sha384`, `kyber-1024-90s-sha512`
 - **SIKE**: `sike-p434-sha256`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
@@ -75,7 +76,7 @@ The following digital signature algorithms from liboqs are supported (assuming t
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START -->
-- **Dilithium**: `dilithium2`, `dilithium3`, `dilithium5`
+- **Dilithium**: `dilithium2`, `dilithium3`, `dilithium5`, `dilithium2aes`, `dilithium3aes`, `dilithium5aes`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with a traditional digital signature algorithm (`<SIG>` is any one of the algorithms listed above):
@@ -188,7 +189,7 @@ In one terminal, run a server:
 	                            -o AuthorizedKeysFile=<absolute-path-to>/ssh_server/authorized_keys \
 	                            -o HostKeyAlgorithms=ssh-<SIG> \
 	                            -o PubkeyAcceptedKeyTypes=ssh-<SIG> \
-	                            -h <absolute-path-to>/ssh_server/id_<SIG>]
+	                            -h <absolute-path-to>/ssh_server/id_<SIG>
 
 `<KEX>` and `<SIG>` are respectively one of the key exchange and signature (PQ-only or hybrid) algorithms listed in the [Supported Algorithms](#supported-algorithms) section above.
 

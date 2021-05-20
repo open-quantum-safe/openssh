@@ -340,4 +340,244 @@ int kex_kem_sike_p434_dec(struct kex *kex,
     OQS_KEM_free(kem);
     return r;
 }
+/*---------------------------------------------------
+ * KYBER_512 METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_512_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_512_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_512_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * KYBER_768 METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_768_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_768_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_768_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * KYBER_1024 METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_1024_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_1024_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_1024_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * KYBER_512_90S METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_512_90s_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_512_90s_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_512_90s_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_512_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * KYBER_768_90S METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_768_90s_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_768_90s_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_768_90s_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_768_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------
+ * KYBER_1024_90S METHODS
+ *---------------------------------------------------
+ */
+int kex_kem_kyber_1024_90s_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+int kex_kem_kyber_1024_90s_enc(struct kex *kex,
+                                  const struct sshbuf *client_blob,
+                                  struct sshbuf **server_blobp,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_kyber_1024_90s_dec(struct kex *kex,
+                                  const struct sshbuf *server_blob,
+                                  struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024_90s);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_dec(kem, kex, server_blob, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_METHODS_END

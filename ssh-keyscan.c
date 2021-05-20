@@ -75,7 +75,14 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_ECDSA_NISTP384_DILITHIUM_3 ((uint64_t)1<<14)
 #define KT_DILITHIUM_5 ((uint64_t)1<<15)
 #define KT_ECDSA_NISTP521_DILITHIUM_5 ((uint64_t)1<<16)
-#define KT_MAX ((uint64_t)1<<16)
+#define KT_DILITHIUM_2_AES ((uint64_t)1<<17)
+#define KT_RSA3072_DILITHIUM_2_AES ((uint64_t)1<<18)
+#define KT_ECDSA_NISTP256_DILITHIUM_2_AES ((uint64_t)1<<19)
+#define KT_DILITHIUM_3_AES ((uint64_t)1<<20)
+#define KT_ECDSA_NISTP384_DILITHIUM_3_AES ((uint64_t)1<<21)
+#define KT_DILITHIUM_5_AES ((uint64_t)1<<22)
+#define KT_ECDSA_NISTP521_DILITHIUM_5_AES ((uint64_t)1<<23)
+#define KT_MAX ((uint64_t)1<<23)
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_END
 #define KT_MIN		KT_DSA
 
@@ -91,7 +98,14 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|\
                         KT_DILITHIUM_3 | \
                         KT_ECDSA_NISTP384_DILITHIUM_3 | \
                         KT_DILITHIUM_5 | \
-                        KT_ECDSA_NISTP521_DILITHIUM_5;
+                        KT_ECDSA_NISTP521_DILITHIUM_5 | \
+                        KT_DILITHIUM_2_AES | \
+                        KT_RSA3072_DILITHIUM_2_AES | \
+                        KT_ECDSA_NISTP256_DILITHIUM_2_AES | \
+                        KT_DILITHIUM_3_AES | \
+                        KT_ECDSA_NISTP384_DILITHIUM_3_AES | \
+                        KT_DILITHIUM_5_AES | \
+                        KT_ECDSA_NISTP521_DILITHIUM_5_AES;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEYTYPES_END
 
 int hash_hosts = 0;		/* Hash hostname on output */
@@ -308,12 +322,24 @@ keygrab_ssh2(con *c)
 	case KT_DILITHIUM_5:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium5";
 	  break;
+	case KT_DILITHIUM_2_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium2aes";
+	  break;
+	case KT_DILITHIUM_3_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium3aes";
+	  break;
+	case KT_DILITHIUM_5_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium5aes";
+	  break;
 #ifdef WITH_OPENSSL
 	case KT_RSA3072_OQS_DEFAULT:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-oqsdefault";
 	  break;
 	case KT_RSA3072_DILITHIUM_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-dilithium2";
+	  break;
+	case KT_RSA3072_DILITHIUM_2_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-dilithium2aes";
 	  break;
 #ifdef OPENSSL_HAS_ECC
 	case KT_ECDSA_NISTP256_OQS_DEFAULT:
@@ -327,6 +353,15 @@ keygrab_ssh2(con *c)
 	  break;
 	case KT_ECDSA_NISTP521_DILITHIUM_5:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-dilithium5";
+	  break;
+	case KT_ECDSA_NISTP256_DILITHIUM_2_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-dilithium2aes";
+	  break;
+	case KT_ECDSA_NISTP384_DILITHIUM_3_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-dilithium3aes";
+	  break;
+	case KT_ECDSA_NISTP521_DILITHIUM_5_AES:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-dilithium5aes";
 	  break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
@@ -360,6 +395,12 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_512_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_768_SHA384] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_512_90S_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_768_90S_SHA384] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_90S_SHA512] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	c->c_ssh->kex->kex[KEX_KEM_OQS_DEFAULT_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -367,6 +408,12 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_768_ECDH_NISTP384_SHA384] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_ECDH_NISTP521_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_512_90S_ECDH_NISTP256_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_768_90S_ECDH_NISTP384_SHA384] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_90S_ECDH_NISTP521_SHA512] = kex_gen_client;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KEX_GEN_CLIENT_END
@@ -851,6 +898,27 @@ main(int argc, char **argv)
 					break;
 				case KEY_ECDSA_NISTP521_DILITHIUM_5:
 					get_keytypes |= KT_ECDSA_NISTP521_DILITHIUM_5;
+					break;
+				case KEY_DILITHIUM_2_AES:
+					get_keytypes |= KT_DILITHIUM_2_AES;
+					break;
+				case KEY_RSA3072_DILITHIUM_2_AES:
+					get_keytypes |= KT_RSA3072_DILITHIUM_2_AES;
+					break;
+				case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+					get_keytypes |= KT_ECDSA_NISTP256_DILITHIUM_2_AES;
+					break;
+				case KEY_DILITHIUM_3_AES:
+					get_keytypes |= KT_DILITHIUM_3_AES;
+					break;
+				case KEY_ECDSA_NISTP384_DILITHIUM_3_AES:
+					get_keytypes |= KT_ECDSA_NISTP384_DILITHIUM_3_AES;
+					break;
+				case KEY_DILITHIUM_5_AES:
+					get_keytypes |= KT_DILITHIUM_5_AES;
+					break;
+				case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+					get_keytypes |= KT_ECDSA_NISTP521_DILITHIUM_5_AES;
 					break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_TO_GET_KEYTYPES_END
 				case KEY_UNSPEC:

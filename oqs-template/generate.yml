@@ -39,6 +39,54 @@ kexs:
       -
         name: 'nistp256'
         openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'Kyber'
+    name: 'kyber_512'
+    hash: 'sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'Kyber'
+    name: 'kyber_768'
+    hash: 'sha384'
+    mix_with:
+      -
+        name: 'nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'Kyber'
+    name: 'kyber_1024'
+    hash: 'sha512'
+    mix_with:
+      -
+        name: 'nistp521'
+        openssl_nid: 'NID_secp521r1'
+  -
+    family: 'Kyber'
+    name: 'kyber_512_90s'
+    hash: 'sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'Kyber'
+    name: 'kyber_768_90s'
+    hash: 'sha384'
+    mix_with:
+      -
+        name: 'nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'Kyber'
+    name: 'kyber_1024_90s'
+    hash: 'sha512'
+    mix_with:
+      -
+        name: 'nistp521'
+        openssl_nid: 'NID_secp521r1'
 
 sigs:
   -
@@ -78,3 +126,31 @@ sigs:
       -
         name: 'ecdsa_nistp521'
         openssl_nid: 'NID_secp521r1'
+  -
+    family: 'Dilithium'
+    name: 'dilithium_2_aes'
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'Dilithium'
+    name: 'dilithium_3_aes'
+    level: 3
+    mix_with:
+      -
+        name: 'ecdsa_nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'Dilithium'
+    name: 'dilithium_5_aes'
+    level: 5
+    mix_with:
+      -
+        name: 'ecdsa_nistp521'
+        openssl_nid: 'NID_secp521r1'
+

@@ -52,6 +52,13 @@
 #define _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp384_dilithium3_key"
 #define _PATH_HOST_DILITHIUM_5_KEY_FILE SSHDIR "/ssh_host_dilithium5_key"
 #define _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp521_dilithium5_key"
+#define _PATH_HOST_DILITHIUM_2_AES_KEY_FILE SSHDIR "/ssh_host_dilithium2aes_key"
+#define _PATH_HOST_RSA3072_DILITHIUM_2_AES_KEY_FILE SSHDIR "/ssh_host_rsa3072_dilithium2aes_key"
+#define _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_AES_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp256_dilithium2aes_key"
+#define _PATH_HOST_DILITHIUM_3_AES_KEY_FILE SSHDIR "/ssh_host_dilithium3aes_key"
+#define _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_AES_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp384_dilithium3aes_key"
+#define _PATH_HOST_DILITHIUM_5_AES_KEY_FILE SSHDIR "/ssh_host_dilithium5aes_key"
+#define _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_AES_KEY_FILE SSHDIR "/ssh_host_ecdsa_nistp521_dilithium5aes_key"
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEY_FILE_PATHS_END
 #define _PATH_DH_MODULI			SSHDIR "/moduli"
 
@@ -102,6 +109,13 @@
 #define _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3 _PATH_SSH_USER_DIR "/id_ecdsa_nistp384_dilithium3"
 #define _PATH_SSH_CLIENT_ID_DILITHIUM_5 _PATH_SSH_USER_DIR "/id_dilithium5"
 #define _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5 _PATH_SSH_USER_DIR "/id_ecdsa_nistp521_dilithium5"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_2_AES _PATH_SSH_USER_DIR "/id_dilithium2aes"
+#define _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2_AES _PATH_SSH_USER_DIR "/id_rsa3072_dilithium2aes"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2_AES _PATH_SSH_USER_DIR "/id_ecdsa_nistp256_dilithium2aes"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_3_AES _PATH_SSH_USER_DIR "/id_dilithium3aes"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_DILITHIUM_3_AES _PATH_SSH_USER_DIR "/id_ecdsa_nistp384_dilithium3aes"
+#define _PATH_SSH_CLIENT_ID_DILITHIUM_5_AES _PATH_SSH_USER_DIR "/id_dilithium5aes"
+#define _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_DILITHIUM_5_AES _PATH_SSH_USER_DIR "/id_ecdsa_nistp521_dilithium5aes"
 ///// OQS_TEMPLATE_FRAGMENT_ADD_ID_FILE_PATHS_END
 
 /*
