@@ -6,6 +6,7 @@ import os
 import random
 import subprocess
 import time
+import sys
 
 # Requires make tests LTESTS="" to be run first
 
@@ -39,36 +40,43 @@ sigs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END
 ]
 
-def try_handshake(ssh, sshd):
-    random_sig = random.choice(sigs)
-    random_kex = random.choice(kexs)
-
+def do_handshake(ssh, sshd, test_sig, test_kex):
     sshd_process = subprocess.Popen([sshd,
                                     '-f', os.path.abspath('regress/sshd_config'),
-                                    "-o", "KexAlgorithms={}".format(random_kex),
-                                    "-o", "HostKeyAlgorithms={}".format(random_sig),
+                                    "-o", "KexAlgorithms={}".format(test_kex),
+                                    "-o", "HostKeyAlgorithms={}".format(test_sig),
                                     '-D'],
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.STDOUT)
 
-    # sshd should (hopefully?) start in 10 seconds.
-    time.sleep(10)
+    # sshd should locally (hopefully?) start in 1 second.
+    time.sleep(1)
 
     # Try to connect to it with the client
     ssh_process = subprocess.run([ssh,
                                  '-F', os.path.abspath('regress/ssh_config'),
-                                 "-o", "HostKeyAlgorithms={}".format(random_sig),
+                                 "-o", "HostKeyAlgorithms={}".format(test_sig),
                                  'somehost', 'true'],
                                  stdout=subprocess.PIPE,
                                  stderr=subprocess.STDOUT)
     ssh_stdout = ssh_process.stdout.decode()
     sshd_process.kill()
 
-    assert "debug1: kex: algorithm: {}".format(random_kex) in ssh_stdout, ssh_stdout
-    assert "debug1: kex: host key algorithm: {}".format(random_sig) in ssh_stdout, ssh_stdout
+    assert "debug1: kex: algorithm: {}".format(test_kex) in ssh_stdout, ssh_stdout
+    assert "debug1: kex: host key algorithm: {}".format(test_sig) in ssh_stdout, ssh_stdout
     assert ssh_process.returncode == 0, ssh_stdout
 
-    print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(random_kex, random_sig))
+    print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(test_kex, test_sig))
+
+def try_handshake(ssh, sshd, dorandom=True):
+    if dorandom:
+       test_sig = random.choice(sigs)
+       test_kex = random.choice(kexs)
+       do_handshake(ssh, sshd, test_sig, test_kex)
+    else:
+       for test_kex in kexs:
+           for test_sig in sigs:
+              do_handshake(ssh, sshd, test_sig, test_kex)
 
 if __name__ == '__main__':
-    try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'))
+    try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'), dorandom=(len(sys.argv)==1))

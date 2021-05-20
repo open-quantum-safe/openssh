@@ -131,7 +131,6 @@ Building liboqs requires your system to have OpenSSL 1.1.1 or higher already ins
 In `<OPENSSH_ROOT>`, first run:
 
 ```
-export LIBOQS_INSTALL=<path-to-liboqs>
 export OPENSSH_INSTALL=<path-to-install-openssh>
 autoreconf
 ```
@@ -143,25 +142,17 @@ Then, run the following:
 	            --with-libs=-lm                          \
 	            --prefix=$OPENSSH_INSTALL                \
 	            --sysconfdir=$OPENSSH_INSTALL            \
-	            --with-liboqs-dir=$LIBOQS_INSTALL
-	make -j
+	            --with-liboqs-dir=`pwd`/oqs
+	make 
 	make install
 
-To test the build, run:
+Again, the `path-to-openssl` (1.1.1) does not need to be specified if it is in one of the standard locations.
 
-	make tests
+So, in summary, if OpenSSL is installed in a default location and `oqs-openssh` is to be installed in `/opt/openssh` this command builds and installs `oqs-openssh`: `export OPENSSH_INSTALL=/opt/openssh && autoreconf && ./configure --with-libs=-lm --prefix=$OPENSSH_INSTALL --sysconfdir=$OPENSSH_INSTALL --with-liboqs-dir=`pwd`/oqs && make && make install`
 
-To run OQS-specific tests of all the post-quantum key-exchanges:
+As not all stock `openssh` tests are passing, be sure to execute `oqs-test/run_tests.sh` instead of simply executing `make tests` to ensure the build was successful.
 
-```
-python3 -m nose --rednose --verbose
-```
-
-To run OQS-specific tests of all combinations of post-quantum key-exchange and authentication algorithms:
-
-```
-env WITH_PQAUTH=true python3 -m nose --rednose --verbose
-```
+To execute a connection test with one of the supported quantum-safe algorithms (chosen at random), run `python3 oqs-test/try_connection.py`. If all algorithms should be exercized, pass a parameter to this command, e.g., like this: `python3 oqs-test/try_connection.py all`. Be aware that this test can take a long time due to the number of algorithm combinations available.
 
 ### Running OQS-OpenSSH
 
