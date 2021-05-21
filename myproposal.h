@@ -46,8 +46,20 @@
 	"ecdh-nistp384-frodokem-976-aes-sha384," \
 	"frodokem-1344-aes-sha512," \
 	"ecdh-nistp521-frodokem-1344-aes-sha512," \
+	"frodokem-640-shake-sha256," \
+	"ecdh-nistp256-frodokem-640-shake-sha256," \
+	"frodokem-976-shake-sha384," \
+	"ecdh-nistp384-frodokem-976-shake-sha384," \
+	"frodokem-1344-shake-sha512," \
+	"ecdh-nistp521-frodokem-1344-shake-sha512," \
 	"sike-p434-sha256," \
 	"ecdh-nistp256-sike-p434-sha256," \
+	"saber-lightsaber-sha256," \
+	"ecdh-nistp256-saber-lightsaber-sha256," \
+	"saber-saber-sha384," \
+	"ecdh-nistp384-saber-saber-sha384," \
+	"saber-firesaber-sha512," \
+	"ecdh-nistp521-saber-firesaber-sha512," \
 	"kyber-512-sha256," \
 	"ecdh-nistp256-kyber-512-sha256," \
 	"kyber-768-sha384," \

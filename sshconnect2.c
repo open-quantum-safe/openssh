@@ -281,7 +281,13 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port)
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_SHA512] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_640_SHAKE_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_976_SHAKE_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_SHAKE_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SIKE_P434_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_LIGHTSABER_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_SABER_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_FIRESABER_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_512_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_768_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_1024_SHA512] = kex_gen_client;
@@ -294,7 +300,13 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port)
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_LIGHTSABER_ECDH_NISTP256_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_SABER_ECDH_NISTP384_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SABER_FIRESABER_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_768_ECDH_NISTP384_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_KYBER_1024_ECDH_NISTP521_SHA512] = kex_gen_client;

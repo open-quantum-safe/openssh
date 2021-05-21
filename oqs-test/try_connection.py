@@ -20,8 +20,20 @@ kexs = [
     "ecdh-nistp384-frodokem-976-aes-sha384",
     "frodokem-1344-aes-sha512",
     "ecdh-nistp521-frodokem-1344-aes-sha512",
+    "frodokem-640-shake-sha256",
+    "ecdh-nistp256-frodokem-640-shake-sha256",
+    "frodokem-976-shake-sha384",
+    "ecdh-nistp384-frodokem-976-shake-sha384",
+    "frodokem-1344-shake-sha512",
+    "ecdh-nistp521-frodokem-1344-shake-sha512",
     "sike-p434-sha256",
     "ecdh-nistp256-sike-p434-sha256",
+    "saber-lightsaber-sha256",
+    "ecdh-nistp256-saber-lightsaber-sha256",
+    "saber-saber-sha384",
+    "ecdh-nistp384-saber-saber-sha384",
+    "saber-firesaber-sha512",
+    "ecdh-nistp521-saber-firesaber-sha512",
     "kyber-512-sha256",
     "ecdh-nistp256-kyber-512-sha256",
     "kyber-768-sha384",
@@ -42,6 +54,11 @@ sigs = [
     "ssh-oqsdefault",
     "ssh-rsa3072-oqsdefault",
     "ssh-ecdsa-nistp256-oqsdefault",
+    "ssh-falcon512",
+    "ssh-rsa3072-falcon512",
+    "ssh-ecdsa-nistp256-falcon512",
+    "ssh-falcon1024",
+    "ssh-ecdsa-nistp521-falcon1024",
     "ssh-dilithium2",
     "ssh-rsa3072-dilithium2",
     "ssh-ecdsa-nistp256-dilithium2",
@@ -87,15 +104,20 @@ def do_handshake(ssh, sshd, test_sig, test_kex):
 
     print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(test_kex, test_sig))
 
-def try_handshake(ssh, sshd, dorandom=True):
-    if dorandom:
+def try_handshake(ssh, sshd, dorandom="random"):
+    if dorandom!="random":
+       for test_kex in kexs:
+           for test_sig in sigs:
+               if dorandom=="doall" or (dorandom=="doone" and (test_kex==kexs[0] or test_sig==sigs[0])):
+                   do_handshake(ssh, sshd, test_sig, test_kex)
+    else:
        test_sig = random.choice(sigs)
        test_kex = random.choice(kexs)
        do_handshake(ssh, sshd, test_sig, test_kex)
-    else:
-       for test_kex in kexs:
-           for test_sig in sigs:
-              do_handshake(ssh, sshd, test_sig, test_kex)
 
 if __name__ == '__main__':
-    try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'), dorandom=(len(sys.argv)==1))
+    if len(sys.argv)==1:
+        try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'))
+    else:
+        try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'), dorandom=sys.argv[1])
+

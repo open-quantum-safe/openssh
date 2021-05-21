@@ -103,6 +103,13 @@ static size_t oqs_sig_pk_len(int type) {
     OQS_SIG_free(sig);
     return pk_len;
   }
+  case KEY_FALCON_512:
+  case KEY_RSA3072_FALCON_512:
+  case KEY_ECDSA_NISTP256_FALCON_512:
+    return OQS_SIG_falcon_512_length_public_key;
+  case KEY_FALCON_1024:
+  case KEY_ECDSA_NISTP521_FALCON_1024:
+    return OQS_SIG_falcon_1024_length_public_key;
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -141,6 +148,13 @@ static size_t oqs_sig_sk_len(int type) {
     OQS_SIG_free(sig);
     return sk_len;
   }
+  case KEY_FALCON_512:
+  case KEY_RSA3072_FALCON_512:
+  case KEY_ECDSA_NISTP256_FALCON_512:
+    return OQS_SIG_falcon_512_length_secret_key;
+  case KEY_FALCON_1024:
+  case KEY_ECDSA_NISTP521_FALCON_1024:
+    return OQS_SIG_falcon_1024_length_secret_key;
   case KEY_DILITHIUM_2:
   case KEY_RSA3072_DILITHIUM_2:
   case KEY_ECDSA_NISTP256_DILITHIUM_2:
@@ -237,6 +251,10 @@ static const struct keytype keytypes[] = {
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEYTYPES_START
 	{ "ssh-oqsdefault", "OQSDEFAULT", NULL,
 	    KEY_OQS_DEFAULT, 0, 0, 0 },
+	{ "ssh-falcon512", "FALCON512", NULL,
+	    KEY_FALCON_512, 0, 0, 0 },
+	{ "ssh-falcon1024", "FALCON1024", NULL,
+	    KEY_FALCON_1024, 0, 0, 0 },
 	{ "ssh-dilithium2", "DILITHIUM2", NULL,
 	    KEY_DILITHIUM_2, 0, 0, 0 },
 	{ "ssh-dilithium3", "DILITHIUM3", NULL,
@@ -252,6 +270,8 @@ static const struct keytype keytypes[] = {
 #ifdef WITH_OPENSSL
 	{ "ssh-rsa3072-oqsdefault", "RSA3072_OQSDEFAULT", NULL,
 	    KEY_RSA3072_OQS_DEFAULT, 0, 0, 0 },
+	{ "ssh-rsa3072-falcon512", "RSA3072_FALCON512", NULL,
+	    KEY_RSA3072_FALCON_512, 0, 0, 0 },
 	{ "ssh-rsa3072-dilithium2", "RSA3072_DILITHIUM2", NULL,
 	    KEY_RSA3072_DILITHIUM_2, 0, 0, 0 },
 	{ "ssh-rsa3072-dilithium2aes", "RSA3072_DILITHIUM2AES", NULL,
@@ -259,6 +279,10 @@ static const struct keytype keytypes[] = {
 #ifdef OPENSSL_HAS_ECC
 	{ "ssh-ecdsa-nistp256-oqsdefault", "ECDSA_NISTP256_OQSDEFAULT", NULL,
 	    KEY_ECDSA_NISTP256_OQS_DEFAULT, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp256-falcon512", "ECDSA_NISTP256_FALCON512", NULL,
+	    KEY_ECDSA_NISTP256_FALCON_512, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-falcon1024", "ECDSA_NISTP521_FALCON1024", NULL,
+	    KEY_ECDSA_NISTP521_FALCON_1024, NID_secp521r1, 0, 0 },
 	{ "ssh-ecdsa-nistp256-dilithium2", "ECDSA_NISTP256_DILITHIUM2", NULL,
 	    KEY_ECDSA_NISTP256_DILITHIUM_2, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL,
@@ -2017,6 +2041,12 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	    OQS_SIG_free(sig);
 	    break;
 	  }
+	  case KEY_FALCON_512:
+	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_FALCON_1024:
+	    ret = OQS_SIG_falcon_1024_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
@@ -2043,6 +2073,9 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	    OQS_SIG_free(sig);
 	    break;
 	  }
+	  case KEY_RSA3072_FALCON_512:
+	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_RSA3072_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
@@ -2057,6 +2090,12 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	    OQS_SIG_free(sig);
 	    break;
 	  }
+	  case KEY_ECDSA_NISTP256_FALCON_512:
+	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_ECDSA_NISTP521_FALCON_1024:
+	    ret = OQS_SIG_falcon_1024_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_ECDSA_NISTP256_DILITHIUM_2:
 	    ret = OQS_SIG_dilithium_2_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
@@ -3181,6 +3220,12 @@ sshkey_sign(struct sshkey *key,
 	case KEY_OQS_DEFAULT:
 		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_FALCON_512:
+		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_FALCON_1024:
+		r = ssh_falcon1024_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
@@ -3203,6 +3248,9 @@ sshkey_sign(struct sshkey *key,
 	case KEY_RSA3072_OQS_DEFAULT:
 		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_RSA3072_FALCON_512:
+		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_RSA3072_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
@@ -3212,6 +3260,12 @@ sshkey_sign(struct sshkey *key,
 #ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_ECDSA_NISTP256_FALCON_512:
+		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_ECDSA_NISTP521_FALCON_1024:
+		r = ssh_falcon1024_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		r = ssh_dilithium2_sign(key, &sig_pq, &len_pq, data, datalen, compat);
@@ -3383,6 +3437,10 @@ sshkey_verify(const struct sshkey *key,
 ///// OQS_TEMPLATE_FRAGMENT_SSHKEY_VERIFY_SWITCH_KEYTYPE_START
 	case KEY_OQS_DEFAULT:
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_FALCON_512:
+		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_FALCON_1024:
+		return ssh_falcon1024_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_3:
@@ -3398,6 +3456,8 @@ sshkey_verify(const struct sshkey *key,
 #ifdef WITH_OPENSSL
 	case KEY_RSA3072_OQS_DEFAULT:
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_RSA3072_FALCON_512:
+		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_RSA3072_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_RSA3072_DILITHIUM_2_AES:
@@ -3405,6 +3465,10 @@ sshkey_verify(const struct sshkey *key,
 #ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP256_FALCON_512:
+		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP521_FALCON_1024:
+		return ssh_falcon1024_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		return ssh_dilithium2_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:

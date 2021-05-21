@@ -192,6 +192,74 @@ int ssh_oqsdefault_verify(const struct sshkey *key,
     return r;
 }
 /*---------------------------------------------------
+ * FALCON_512 METHODS
+ *---------------------------------------------------
+ */
+int ssh_falcon512_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_512);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "falcon512", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_falcon512_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_512);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "falcon512", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * FALCON_1024 METHODS
+ *---------------------------------------------------
+ */
+int ssh_falcon1024_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_1024);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "falcon1024", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_falcon1024_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_1024);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "falcon1024", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
  * DILITHIUM_2 METHODS
  *---------------------------------------------------
  */

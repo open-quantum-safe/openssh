@@ -134,8 +134,26 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_KEM_FRODOKEM_1344_AES_SHA512:
 		r = kex_kem_frodokem_1344_aes_keypair(kex);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_SHA256:
+		r = kex_kem_frodokem_640_shake_keypair(kex);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_SHA384:
+		r = kex_kem_frodokem_976_shake_keypair(kex);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_SHA512:
+		r = kex_kem_frodokem_1344_shake_keypair(kex);
+		break;
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_keypair(kex);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_SHA256:
+		r = kex_kem_saber_lightsaber_keypair(kex);
+		break;
+	case KEX_KEM_SABER_SABER_SHA384:
+		r = kex_kem_saber_saber_keypair(kex);
+		break;
+	case KEX_KEM_SABER_FIRESABER_SHA512:
+		r = kex_kem_saber_firesaber_keypair(kex);
 		break;
 	case KEX_KEM_KYBER_512_SHA256:
 		r = kex_kem_kyber_512_keypair(kex);
@@ -169,8 +187,26 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512:
 		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_keypair(kex);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256:
+		r = kex_kem_frodokem_640_shake_ecdh_nistp256_keypair(kex);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_shake_ecdh_nistp384_keypair(kex);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_shake_ecdh_nistp521_keypair(kex);
+		break;
 	case KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256:
 		r = kex_kem_sike_p434_ecdh_nistp256_keypair(kex);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_ECDH_NISTP256_SHA256:
+		r = kex_kem_saber_lightsaber_ecdh_nistp256_keypair(kex);
+		break;
+	case KEX_KEM_SABER_SABER_ECDH_NISTP384_SHA384:
+		r = kex_kem_saber_saber_ecdh_nistp384_keypair(kex);
+		break;
+	case KEX_KEM_SABER_FIRESABER_ECDH_NISTP521_SHA512:
+		r = kex_kem_saber_firesaber_ecdh_nistp521_keypair(kex);
 		break;
 	case KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256:
 		r = kex_kem_kyber_512_ecdh_nistp256_keypair(kex);
@@ -275,8 +311,26 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 	case KEX_KEM_FRODOKEM_1344_AES_SHA512:
 		r = kex_kem_frodokem_1344_aes_dec(kex, server_blob, &shared_secret);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_SHA256:
+		r = kex_kem_frodokem_640_shake_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_SHA384:
+		r = kex_kem_frodokem_976_shake_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_SHA512:
+		r = kex_kem_frodokem_1344_shake_dec(kex, server_blob, &shared_secret);
+		break;
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_SHA256:
+		r = kex_kem_saber_lightsaber_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_SABER_SHA384:
+		r = kex_kem_saber_saber_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_FIRESABER_SHA512:
+		r = kex_kem_saber_firesaber_dec(kex, server_blob, &shared_secret);
 		break;
 	case KEX_KEM_KYBER_512_SHA256:
 		r = kex_kem_kyber_512_dec(kex, server_blob, &shared_secret);
@@ -310,8 +364,26 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 	case KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512:
 		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256:
+		r = kex_kem_frodokem_640_shake_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_shake_ecdh_nistp384_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_shake_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
 	case KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256:
 		r = kex_kem_sike_p434_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_ECDH_NISTP256_SHA256:
+		r = kex_kem_saber_lightsaber_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_SABER_ECDH_NISTP384_SHA384:
+		r = kex_kem_saber_saber_ecdh_nistp384_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_SABER_FIRESABER_ECDH_NISTP521_SHA512:
+		r = kex_kem_saber_firesaber_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
 		break;
 	case KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256:
 		r = kex_kem_kyber_512_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
@@ -453,8 +525,32 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_frodokem_1344_aes_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_SHA256:
+		r = kex_kem_frodokem_640_shake_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_SHA384:
+		r = kex_kem_frodokem_976_shake_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_SHA512:
+		r = kex_kem_frodokem_1344_shake_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 	case KEX_KEM_SIKE_P434_SHA256:
 		r = kex_kem_sike_p434_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_SHA256:
+		r = kex_kem_saber_lightsaber_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_SABER_SHA384:
+		r = kex_kem_saber_saber_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_FIRESABER_SHA512:
+		r = kex_kem_saber_firesaber_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
 	case KEX_KEM_KYBER_512_SHA256:
@@ -499,8 +595,32 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_frodokem_1344_aes_ecdh_nistp521_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
+	case KEX_KEM_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256:
+		r = kex_kem_frodokem_640_shake_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384:
+		r = kex_kem_frodokem_976_shake_ecdh_nistp384_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512:
+		r = kex_kem_frodokem_1344_shake_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 	case KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256:
 		r = kex_kem_sike_p434_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_LIGHTSABER_ECDH_NISTP256_SHA256:
+		r = kex_kem_saber_lightsaber_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_SABER_ECDH_NISTP384_SHA384:
+		r = kex_kem_saber_saber_ecdh_nistp384_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_SABER_FIRESABER_ECDH_NISTP521_SHA512:
+		r = kex_kem_saber_firesaber_ecdh_nistp521_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
 	case KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256:

@@ -69,7 +69,13 @@
 #define	KEX_FRODOKEM_640_AES_SHA256	"frodokem-640-aes-sha256"
 #define	KEX_FRODOKEM_976_AES_SHA384	"frodokem-976-aes-sha384"
 #define	KEX_FRODOKEM_1344_AES_SHA512	"frodokem-1344-aes-sha512"
+#define	KEX_FRODOKEM_640_SHAKE_SHA256	"frodokem-640-shake-sha256"
+#define	KEX_FRODOKEM_976_SHAKE_SHA384	"frodokem-976-shake-sha384"
+#define	KEX_FRODOKEM_1344_SHAKE_SHA512	"frodokem-1344-shake-sha512"
 #define	KEX_SIKE_P434_SHA256	"sike-p434-sha256"
+#define	KEX_SABER_LIGHTSABER_SHA256	"saber-lightsaber-sha256"
+#define	KEX_SABER_SABER_SHA384	"saber-saber-sha384"
+#define	KEX_SABER_FIRESABER_SHA512	"saber-firesaber-sha512"
 #define	KEX_KYBER_512_SHA256	"kyber-512-sha256"
 #define	KEX_KYBER_768_SHA384	"kyber-768-sha384"
 #define	KEX_KYBER_1024_SHA512	"kyber-1024-sha512"
@@ -82,7 +88,13 @@
 #define	KEX_FRODOKEM_640_AES_ECDH_NISTP256_SHA256	"ecdh-nistp256-frodokem-640-aes-sha256"
 #define	KEX_FRODOKEM_976_AES_ECDH_NISTP384_SHA384	"ecdh-nistp384-frodokem-976-aes-sha384"
 #define	KEX_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512	"ecdh-nistp521-frodokem-1344-aes-sha512"
+#define	KEX_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256	"ecdh-nistp256-frodokem-640-shake-sha256"
+#define	KEX_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384	"ecdh-nistp384-frodokem-976-shake-sha384"
+#define	KEX_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512	"ecdh-nistp521-frodokem-1344-shake-sha512"
 #define	KEX_SIKE_P434_ECDH_NISTP256_SHA256	"ecdh-nistp256-sike-p434-sha256"
+#define	KEX_SABER_LIGHTSABER_ECDH_NISTP256_SHA256	"ecdh-nistp256-saber-lightsaber-sha256"
+#define	KEX_SABER_SABER_ECDH_NISTP384_SHA384	"ecdh-nistp384-saber-saber-sha384"
+#define	KEX_SABER_FIRESABER_ECDH_NISTP521_SHA512	"ecdh-nistp521-saber-firesaber-sha512"
 #define	KEX_KYBER_512_ECDH_NISTP256_SHA256	"ecdh-nistp256-kyber-512-sha256"
 #define	KEX_KYBER_768_ECDH_NISTP384_SHA384	"ecdh-nistp384-kyber-768-sha384"
 #define	KEX_KYBER_1024_ECDH_NISTP521_SHA512	"ecdh-nistp521-kyber-1024-sha512"
@@ -136,7 +148,13 @@ enum kex_exchange {
 	KEX_KEM_FRODOKEM_640_AES_SHA256,
 	KEX_KEM_FRODOKEM_976_AES_SHA384,
 	KEX_KEM_FRODOKEM_1344_AES_SHA512,
+	KEX_KEM_FRODOKEM_640_SHAKE_SHA256,
+	KEX_KEM_FRODOKEM_976_SHAKE_SHA384,
+	KEX_KEM_FRODOKEM_1344_SHAKE_SHA512,
 	KEX_KEM_SIKE_P434_SHA256,
+	KEX_KEM_SABER_LIGHTSABER_SHA256,
+	KEX_KEM_SABER_SABER_SHA384,
+	KEX_KEM_SABER_FIRESABER_SHA512,
 	KEX_KEM_KYBER_512_SHA256,
 	KEX_KEM_KYBER_768_SHA384,
 	KEX_KEM_KYBER_1024_SHA512,
@@ -149,7 +167,13 @@ enum kex_exchange {
 	KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256,
 	KEX_KEM_FRODOKEM_976_AES_ECDH_NISTP384_SHA384,
 	KEX_KEM_FRODOKEM_1344_AES_ECDH_NISTP521_SHA512,
+	KEX_KEM_FRODOKEM_640_SHAKE_ECDH_NISTP256_SHA256,
+	KEX_KEM_FRODOKEM_976_SHAKE_ECDH_NISTP384_SHA384,
+	KEX_KEM_FRODOKEM_1344_SHAKE_ECDH_NISTP521_SHA512,
 	KEX_KEM_SIKE_P434_ECDH_NISTP256_SHA256,
+	KEX_KEM_SABER_LIGHTSABER_ECDH_NISTP256_SHA256,
+	KEX_KEM_SABER_SABER_ECDH_NISTP384_SHA384,
+	KEX_KEM_SABER_FIRESABER_ECDH_NISTP521_SHA512,
 	KEX_KEM_KYBER_512_ECDH_NISTP256_SHA256,
 	KEX_KEM_KYBER_768_ECDH_NISTP384_SHA384,
 	KEX_KEM_KYBER_1024_ECDH_NISTP521_SHA512,
@@ -300,10 +324,34 @@ int	 kex_kem_frodokem_976_aes_dec(struct kex *, const struct sshbuf *, struct ss
 int	 kex_kem_frodokem_1344_aes_keypair(struct kex *);
 int	 kex_kem_frodokem_1344_aes_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_frodokem_1344_aes_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_640_shake prototypes */
+int	 kex_kem_frodokem_640_shake_keypair(struct kex *);
+int	 kex_kem_frodokem_640_shake_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_640_shake_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_976_shake prototypes */
+int	 kex_kem_frodokem_976_shake_keypair(struct kex *);
+int	 kex_kem_frodokem_976_shake_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_976_shake_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_1344_shake prototypes */
+int	 kex_kem_frodokem_1344_shake_keypair(struct kex *);
+int	 kex_kem_frodokem_1344_shake_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_1344_shake_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* sike_p434 prototypes */
 int	 kex_kem_sike_p434_keypair(struct kex *);
 int	 kex_kem_sike_p434_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_sike_p434_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_lightsaber prototypes */
+int	 kex_kem_saber_lightsaber_keypair(struct kex *);
+int	 kex_kem_saber_lightsaber_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_lightsaber_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_saber prototypes */
+int	 kex_kem_saber_saber_keypair(struct kex *);
+int	 kex_kem_saber_saber_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_saber_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_firesaber prototypes */
+int	 kex_kem_saber_firesaber_keypair(struct kex *);
+int	 kex_kem_saber_firesaber_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_firesaber_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* kyber_512 prototypes */
 int	 kex_kem_kyber_512_keypair(struct kex *);
 int	 kex_kem_kyber_512_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
@@ -346,10 +394,34 @@ int	 kex_kem_frodokem_976_aes_ecdh_nistp384_dec(struct kex *, const struct sshbu
 int	 kex_kem_frodokem_1344_aes_ecdh_nistp521_keypair(struct kex *);
 int	 kex_kem_frodokem_1344_aes_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_frodokem_1344_aes_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_640_shake_nistp256 prototypes */
+int	 kex_kem_frodokem_640_shake_ecdh_nistp256_keypair(struct kex *);
+int	 kex_kem_frodokem_640_shake_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_640_shake_ecdh_nistp256_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_976_shake_nistp384 prototypes */
+int	 kex_kem_frodokem_976_shake_ecdh_nistp384_keypair(struct kex *);
+int	 kex_kem_frodokem_976_shake_ecdh_nistp384_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_976_shake_ecdh_nistp384_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* frodokem_1344_shake_nistp521 prototypes */
+int	 kex_kem_frodokem_1344_shake_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_frodokem_1344_shake_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_frodokem_1344_shake_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* sike_p434_nistp256 prototypes */
 int	 kex_kem_sike_p434_ecdh_nistp256_keypair(struct kex *);
 int	 kex_kem_sike_p434_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_sike_p434_ecdh_nistp256_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_lightsaber_nistp256 prototypes */
+int	 kex_kem_saber_lightsaber_ecdh_nistp256_keypair(struct kex *);
+int	 kex_kem_saber_lightsaber_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_lightsaber_ecdh_nistp256_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_saber_nistp384 prototypes */
+int	 kex_kem_saber_saber_ecdh_nistp384_keypair(struct kex *);
+int	 kex_kem_saber_saber_ecdh_nistp384_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_saber_ecdh_nistp384_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* saber_firesaber_nistp521 prototypes */
+int	 kex_kem_saber_firesaber_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_saber_firesaber_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_saber_firesaber_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* kyber_512_nistp256 prototypes */
 int	 kex_kem_kyber_512_ecdh_nistp256_keypair(struct kex *);
 int	 kex_kem_kyber_512_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);

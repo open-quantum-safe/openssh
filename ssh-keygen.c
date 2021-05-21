@@ -217,6 +217,9 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 		if (name == NULL && oqs_utils_is_ecdsa_hybrid(type)) {
 		  switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_HANDLE_ECDSA_HYBRIDS_START
+		  case KEY_ECDSA_NISTP521_FALCON_1024:
+		    *bitsp = 521;
+		    break;
 		  case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		    *bitsp = 384;
 		    break;
@@ -328,6 +331,12 @@ ask_filename(struct passwd *pw, const char *prompt)
 		  case KEY_OQS_DEFAULT:
 		    name = _PATH_SSH_CLIENT_ID_OQS_DEFAULT;
 		    break;
+		  case KEY_FALCON_512:
+		    name = _PATH_SSH_CLIENT_ID_FALCON_512;
+		    break;
+		  case KEY_FALCON_1024:
+		    name = _PATH_SSH_CLIENT_ID_FALCON_1024;
+		    break;
 		  case KEY_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_DILITHIUM_2;
 		    break;
@@ -350,6 +359,9 @@ ask_filename(struct passwd *pw, const char *prompt)
 		  case KEY_RSA3072_OQS_DEFAULT:
 		    name = _PATH_SSH_CLIENT_ID_RSA3072_OQS_DEFAULT;
 		    break;
+		  case KEY_RSA3072_FALCON_512:
+		    name = _PATH_SSH_CLIENT_ID_RSA3072_FALCON_512;
+		    break;
 		  case KEY_RSA3072_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_RSA3072_DILITHIUM_2;
 		    break;
@@ -359,6 +371,12 @@ ask_filename(struct passwd *pw, const char *prompt)
 #ifdef OPENSSL_HAS_ECC
 		  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_OQS_DEFAULT;
+		    break;
+		  case KEY_ECDSA_NISTP256_FALCON_512:
+		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_FALCON_512;
+		    break;
+		  case KEY_ECDSA_NISTP521_FALCON_1024:
+		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_FALCON_1024;
 		    break;
 		  case KEY_ECDSA_NISTP256_DILITHIUM_2:
 		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_DILITHIUM_2;
@@ -1142,6 +1160,8 @@ do_gen_all_hostkeys(struct passwd *pw)
 #endif /* WITH_XMSS */
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEY_TYPES_START
 		{ "oqsdefault", "OQS_DEFAULT", _PATH_HOST_OQS_DEFAULT_KEY_FILE },
+		{ "falcon512", "FALCON_512", _PATH_HOST_FALCON_512_KEY_FILE },
+		{ "falcon1024", "FALCON_1024", _PATH_HOST_FALCON_1024_KEY_FILE },
 		{ "dilithium2", "DILITHIUM_2", _PATH_HOST_DILITHIUM_2_KEY_FILE },
 		{ "dilithium3", "DILITHIUM_3", _PATH_HOST_DILITHIUM_3_KEY_FILE },
 		{ "dilithium5", "DILITHIUM_5", _PATH_HOST_DILITHIUM_5_KEY_FILE },
@@ -1150,10 +1170,13 @@ do_gen_all_hostkeys(struct passwd *pw)
 		{ "dilithium5aes", "DILITHIUM_5_AES", _PATH_HOST_DILITHIUM_5_AES_KEY_FILE },
 #ifdef WITH_OPENSSL
 		{ "rsa3072_oqsdefault", "RSA3072_OQS_DEFAULT", _PATH_HOST_RSA3072_OQS_DEFAULT_KEY_FILE },
+		{ "rsa3072_falcon512", "RSA3072_FALCON_512", _PATH_HOST_RSA3072_FALCON_512_KEY_FILE },
 		{ "rsa3072_dilithium2", "RSA3072_DILITHIUM_2", _PATH_HOST_RSA3072_DILITHIUM_2_KEY_FILE },
 		{ "rsa3072_dilithium2aes", "RSA3072_DILITHIUM_2_AES", _PATH_HOST_RSA3072_DILITHIUM_2_AES_KEY_FILE },
 #ifdef OPENSSL_HAS_ECC
 		{ "ecdsa_nistp256_oqsdefault", "ECDSA_NISTP256_OQS_DEFAULT", _PATH_HOST_ECDSA_NISTP256_OQS_DEFAULT_KEY_FILE },
+		{ "ecdsa_nistp256_falcon512", "ECDSA_NISTP256_FALCON_512", _PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE },
+		{ "ecdsa_nistp521_falcon1024", "ECDSA_NISTP521_FALCON_1024", _PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE },
 		{ "ecdsa_nistp256_dilithium2", "ECDSA_NISTP256_DILITHIUM_2", _PATH_HOST_ECDSA_NISTP256_DILITHIUM_2_KEY_FILE },
 		{ "ecdsa_nistp384_dilithium3", "ECDSA_NISTP384_DILITHIUM_3", _PATH_HOST_ECDSA_NISTP384_DILITHIUM_3_KEY_FILE },
 		{ "ecdsa_nistp521_dilithium5", "ECDSA_NISTP521_DILITHIUM_5", _PATH_HOST_ECDSA_NISTP521_DILITHIUM_5_KEY_FILE },
@@ -1654,6 +1677,8 @@ do_change_comment(struct passwd *pw, const char *identity_comment)
 	    private->type != KEY_XMSS &&
 	    ///// OQS_TEMPLATE_FRAGMENT_CHECK_PRIVATE_KEY_TYPE_START
 	    private->type != KEY_OQS_DEFAULT &&
+	    private->type != KEY_FALCON_512 &&
+	    private->type != KEY_FALCON_1024 &&
 	    private->type != KEY_DILITHIUM_2 &&
 	    private->type != KEY_DILITHIUM_3 &&
 	    private->type != KEY_DILITHIUM_5 &&
@@ -1662,10 +1687,13 @@ do_change_comment(struct passwd *pw, const char *identity_comment)
 	    private->type != KEY_DILITHIUM_5_AES &&
 #ifdef WITH_OPENSSL
 	    private->type != KEY_RSA3072_OQS_DEFAULT &&
+	    private->type != KEY_RSA3072_FALCON_512 &&
 	    private->type != KEY_RSA3072_DILITHIUM_2 &&
 	    private->type != KEY_RSA3072_DILITHIUM_2_AES &&
 #ifdef OPENSSL_HAS_ECC
 	    private->type != KEY_ECDSA_NISTP256_OQS_DEFAULT &&
+	    private->type != KEY_ECDSA_NISTP256_FALCON_512 &&
+	    private->type != KEY_ECDSA_NISTP521_FALCON_1024 &&
 	    private->type != KEY_ECDSA_NISTP256_DILITHIUM_2 &&
 	    private->type != KEY_ECDSA_NISTP384_DILITHIUM_3 &&
 	    private->type != KEY_ECDSA_NISTP521_DILITHIUM_5 &&
@@ -3703,6 +3731,21 @@ main(int argc, char **argv)
 			    print_generic);
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_ECDSA_NISTP256_OQS_DEFAULT_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_FALCON_512_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_RSA3072_FALCON_512_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_FALCON_1024_KEY_FILE, rr_hostname,
+			    print_generic);
+			n += do_print_resource_record(pw,
+			    _PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE, rr_hostname,
 			    print_generic);
 			n += do_print_resource_record(pw,
 			    _PATH_HOST_DILITHIUM_2_KEY_FILE, rr_hostname,
