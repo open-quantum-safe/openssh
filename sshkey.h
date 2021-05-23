@@ -80,22 +80,12 @@ enum sshkey_types {
 	KEY_FALCON_512,
 	KEY_RSA3072_FALCON_512,
 	KEY_ECDSA_NISTP256_FALCON_512,
-	KEY_FALCON_1024,
-	KEY_ECDSA_NISTP521_FALCON_1024,
-	KEY_DILITHIUM_2,
-	KEY_RSA3072_DILITHIUM_2,
-	KEY_ECDSA_NISTP256_DILITHIUM_2,
 	KEY_DILITHIUM_3,
 	KEY_ECDSA_NISTP384_DILITHIUM_3,
-	KEY_DILITHIUM_5,
-	KEY_ECDSA_NISTP521_DILITHIUM_5,
-	KEY_DILITHIUM_2_AES,
-	KEY_RSA3072_DILITHIUM_2_AES,
-	KEY_ECDSA_NISTP256_DILITHIUM_2_AES,
-	KEY_DILITHIUM_3_AES,
-	KEY_ECDSA_NISTP384_DILITHIUM_3_AES,
-	KEY_DILITHIUM_5_AES,
-	KEY_ECDSA_NISTP521_DILITHIUM_5_AES,
+	KEY_PICNIC_L3_FS,
+	KEY_ECDSA_NISTP384_PICNIC_L3_FS,
+	KEY_SPHINCS_HARAKA_192F_ROBUST,
+	KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST,
 ///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_END
 	KEY_UNSPEC
 };
@@ -353,20 +343,12 @@ int ssh_oqsdefault_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, c
 int ssh_oqsdefault_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_falcon512_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_falcon512_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_falcon1024_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_falcon1024_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium2_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium2_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
 int ssh_dilithium3_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium5_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium5_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium2aes_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium2aes_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium3aes_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium3aes_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium5aes_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
-int ssh_dilithium5aes_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_picnicL3FS_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_picnicL3FS_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
+int ssh_sphincsharaka192frobust_sign(const struct sshkey *key, u_char **sigp, size_t *lenp, const u_char *data, size_t datalen, u_int compat);
+int ssh_sphincsharaka192frobust_verify(const struct sshkey *key, const u_char *signature, size_t signaturelen, const u_char *data, size_t datalen, u_int compat);
 ///// OQS_TEMPLATE_FRAGMENT_DECLARE_PROTOTYPES_END
 #endif
 

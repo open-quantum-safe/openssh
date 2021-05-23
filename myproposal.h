@@ -52,8 +52,30 @@
 	"ecdh-nistp384-frodokem-976-shake-sha384," \
 	"frodokem-1344-shake-sha512," \
 	"ecdh-nistp521-frodokem-1344-shake-sha512," \
+	"sidh-p434-sha256," \
+	"ecdh-nistp256-sidh-p434-sha256," \
+	"sidh-p434-compressed-sha256," \
+	"ecdh-nistp256-sidh-p434-compressed-sha256," \
+	"sidh-p610-sha256," \
+	"ecdh-nistp384-sidh-p610-sha256," \
+	"sidh-p610-compressed-sha256," \
+	"ecdh-nistp384-sidh-p610-compressed-sha256," \
+	"sidh-p751-sha256," \
+	"ecdh-nistp521-sidh-p751-sha256," \
+	"sidh-p751-compressed-sha256," \
+	"ecdh-nistp521-sidh-p751-compressed-sha256," \
 	"sike-p434-sha256," \
 	"ecdh-nistp256-sike-p434-sha256," \
+	"sike-p434-compressed-sha256," \
+	"ecdh-nistp256-sike-p434-compressed-sha256," \
+	"sike-p610-sha256," \
+	"ecdh-nistp384-sike-p610-sha256," \
+	"sike-p610-compressed-sha256," \
+	"ecdh-nistp384-sike-p610-compressed-sha256," \
+	"sike-p751-sha256," \
+	"ecdh-nistp521-sike-p751-sha256," \
+	"sike-p751-compressed-sha256," \
+	"ecdh-nistp521-sike-p751-compressed-sha256," \
 	"saber-lightsaber-sha256," \
 	"ecdh-nistp256-saber-lightsaber-sha256," \
 	"saber-saber-sha384," \
@@ -71,7 +93,41 @@
 	"kyber-768-90s-sha384," \
 	"ecdh-nistp384-kyber-768-90s-sha384," \
 	"kyber-1024-90s-sha512," \
-	"ecdh-nistp521-kyber-1024-90s-sha512"
+	"ecdh-nistp521-kyber-1024-90s-sha512," \
+	"bike1-l1-cpa-sha512," \
+	"ecdh-nistp256-bike1-l1-cpa-sha512," \
+	"bike1-l1-fo-sha512," \
+	"ecdh-nistp256-bike1-l1-fo-sha512," \
+	"bike1-l3-cpa-sha512," \
+	"ecdh-nistp384-bike1-l3-cpa-sha512," \
+	"bike1-l3-fo-sha512," \
+	"ecdh-nistp384-bike1-l3-fo-sha512," \
+	"ntru-hps2048509-sha512," \
+	"ecdh-nistp256-ntru-hps2048509-sha512," \
+	"ntru-hps2048677-sha512," \
+	"ecdh-nistp384-ntru-hps2048677-sha512," \
+	"ntru-hrss701-sha512," \
+	"ecdh-nistp384-ntru-hrss701-sha512," \
+	"ntru-hps4096821-sha512," \
+	"ecdh-nistp521-ntru-hps4096821-sha512," \
+	"hqc-128-sha256," \
+	"ecdh-nistp256-hqc-128-sha256," \
+	"hqc-192-sha384," \
+	"ecdh-nistp384-hqc-192-sha384," \
+	"hqc-256-sha512," \
+	"ecdh-nistp521-hqc-256-sha512," \
+	"ntruprime-ntrulpr653-sha256," \
+	"ecdh-nistp256-ntruprime-ntrulpr653-sha256," \
+	"ntruprime-sntrup653-sha256," \
+	"ecdh-nistp256-ntruprime-sntrup653-sha256," \
+	"ntruprime-ntrulpr761-sha384," \
+	"ecdh-nistp384-ntruprime-ntrulpr761-sha384," \
+	"ntruprime-sntrup761-sha384," \
+	"ecdh-nistp384-ntruprime-sntrup761-sha384," \
+	"ntruprime-ntrulpr857-sha384," \
+	"ecdh-nistp384-ntruprime-ntrulpr857-sha384," \
+	"ntruprime-sntrup857-sha384," \
+	"ecdh-nistp384-ntruprime-sntrup857-sha384"
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX
