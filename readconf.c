@@ -2187,9 +2187,6 @@ fill_default_options(Options * options)
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ADD_ID_FILES_END
-#ifdef OPENSSL_HAS_ECC
-// deletion TBC		add_identity_file(options, "~/", _PATH_SSH_CLIENT_ID_DILITHIUM_2, 0);
-#endif
 	}
 	if (options->escape_char == -1)
 		options->escape_char = '~';
