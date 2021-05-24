@@ -79,7 +79,7 @@ Note that algorithms marked with a dagger (†) have large stack usage and may c
 
 #### Digital Signature
 
-The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs). Note that only L1 signature and all **Rainbow** variants are enabled by default, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-for://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
+The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs). Note that only select L3 signature variants are enabled by default, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation). Note that enabling Rainbow will introduce a substantial execution delay to all operations. If doing it inadvertently, tests will fail and all kind of headaches occur. You have been warned.
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START -->
@@ -90,7 +90,6 @@ The following digital signature algorithms from liboqs are supported (assuming t
 - **SPHINCS**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincssha256128frobust`, `sphincssha256128srobust`, `sphincssha256128fsimple`, `sphincssha256128ssimple`, `sphincsshake256128frobust`, `sphincsshake256128srobust`, `sphincsshake256128fsimple`, `sphincsshake256128ssimple`, `sphincsharaka192frobust`*, `sphincsharaka192srobust`, `sphincsharaka192fsimple`, `sphincsharaka192ssimple`, `sphincssha256192frobust`, `sphincssha256192srobust`, `sphincssha256192fsimple`, `sphincssha256192ssimple`, `sphincsshake256192frobust`, `sphincsshake256192srobust`, `sphincsshake256192fsimple`, `sphincsshake256192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256srobust`, `sphincsharaka256fsimple`, `sphincsharaka256ssimple`, `sphincssha256256frobust`, `sphincssha256256srobust`, `sphincssha256256fsimple`, `sphincssha256256ssimple`, `sphincsshake256256frobust`, `sphincsshake256256srobust`, `sphincsshake256256fsimple`, `sphincsshake256256ssimple`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
-The activation of any "Rainbow" algorithm is currently not recommended due to an execution delay introduced when doing so.
 
 The following hybrid algorithms are supported; they combine a quantum-safe algorithm listed above with a traditional digital signature algorithm (`<SIG>` is any one of the algorithms listed above):
 
@@ -100,7 +99,7 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 
 ## Quickstart
 
-The steps below have been confirmed to work on macOS 10.14 (clang 10.0.0) and Ubuntu 18.04.1 Bionic (gcc-7).
+The steps below have been confirmed to work on Ubuntu 20.04.1 Focal
 
 ### Building OQS-OpenSSH
 
@@ -242,6 +241,7 @@ Contributors to this fork of OpenSSH include:
 - Christian Paquin (Microsoft Research)
 - Douglas Stebila (University of Waterloo)
 - Goutam Tamvada (University of Waterloo)
+- Michael Baentsch
 
 Contributors to an earlier OQS fork of OpenSSH included:
 
