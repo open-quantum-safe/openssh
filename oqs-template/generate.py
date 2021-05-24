@@ -55,8 +55,6 @@ def load_config(include_disabled_algs=False):
         # enable if single KEXs are to be en/disabled:
         #config['kexs'] = [kex for kex in config['kexs'] if 'enable' in kex.keys() and kex['enable']]
 
-        # remove mceliece as it causes endless loops: TBC
-        config['kexs'] = [kex for kex in config['kexs'] if not ('mceliece' in kex['name'])]
     return config
 
 config = load_config()

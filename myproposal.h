@@ -110,6 +110,26 @@
 	"ecdh-nistp384-ntru-hrss701-sha512," \
 	"ntru-hps4096821-sha512," \
 	"ecdh-nistp521-ntru-hps4096821-sha512," \
+	"classic-mceliece-348864-sha256," \
+	"ecdh-nistp256-classic-mceliece-348864-sha256," \
+	"classic-mceliece-348864f-sha256," \
+	"ecdh-nistp256-classic-mceliece-348864f-sha256," \
+	"classic-mceliece-460896-sha512," \
+	"ecdh-nistp384-classic-mceliece-460896-sha512," \
+	"classic-mceliece-460896f-sha512," \
+	"ecdh-nistp384-classic-mceliece-460896f-sha512," \
+	"classic-mceliece-6688128-sha512," \
+	"ecdh-nistp521-classic-mceliece-6688128-sha512," \
+	"classic-mceliece-6688128f-sha512," \
+	"ecdh-nistp521-classic-mceliece-6688128f-sha512," \
+	"classic-mceliece-6960119-sha512," \
+	"ecdh-nistp521-classic-mceliece-6960119-sha512," \
+	"classic-mceliece-6960119f-sha512," \
+	"ecdh-nistp521-classic-mceliece-6960119f-sha512," \
+	"classic-mceliece-8192128-sha512," \
+	"ecdh-nistp521-classic-mceliece-8192128-sha512," \
+	"classic-mceliece-8192128f-sha512," \
+	"ecdh-nistp521-classic-mceliece-8192128f-sha512," \
 	"hqc-128-sha256," \
 	"ecdh-nistp256-hqc-128-sha256," \
 	"hqc-192-sha384," \

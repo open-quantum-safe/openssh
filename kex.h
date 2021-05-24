@@ -101,6 +101,16 @@
 #define	KEX_NTRU_HPS2048677_SHA512	"ntru-hps2048677-sha512"
 #define	KEX_NTRU_HRSS701_SHA512	"ntru-hrss701-sha512"
 #define	KEX_NTRU_HPS4096821_SHA512	"ntru-hps4096821-sha512"
+#define	KEX_CLASSIC_MCELIECE_348864_SHA256	"classic-mceliece-348864-sha256"
+#define	KEX_CLASSIC_MCELIECE_348864F_SHA256	"classic-mceliece-348864f-sha256"
+#define	KEX_CLASSIC_MCELIECE_460896_SHA512	"classic-mceliece-460896-sha512"
+#define	KEX_CLASSIC_MCELIECE_460896F_SHA512	"classic-mceliece-460896f-sha512"
+#define	KEX_CLASSIC_MCELIECE_6688128_SHA512	"classic-mceliece-6688128-sha512"
+#define	KEX_CLASSIC_MCELIECE_6688128F_SHA512	"classic-mceliece-6688128f-sha512"
+#define	KEX_CLASSIC_MCELIECE_6960119_SHA512	"classic-mceliece-6960119-sha512"
+#define	KEX_CLASSIC_MCELIECE_6960119F_SHA512	"classic-mceliece-6960119f-sha512"
+#define	KEX_CLASSIC_MCELIECE_8192128_SHA512	"classic-mceliece-8192128-sha512"
+#define	KEX_CLASSIC_MCELIECE_8192128F_SHA512	"classic-mceliece-8192128f-sha512"
 #define	KEX_HQC_128_SHA256	"hqc-128-sha256"
 #define	KEX_HQC_192_SHA384	"hqc-192-sha384"
 #define	KEX_HQC_256_SHA512	"hqc-256-sha512"
@@ -148,6 +158,16 @@
 #define	KEX_NTRU_HPS2048677_ECDH_NISTP384_SHA512	"ecdh-nistp384-ntru-hps2048677-sha512"
 #define	KEX_NTRU_HRSS701_ECDH_NISTP384_SHA512	"ecdh-nistp384-ntru-hrss701-sha512"
 #define	KEX_NTRU_HPS4096821_ECDH_NISTP521_SHA512	"ecdh-nistp521-ntru-hps4096821-sha512"
+#define	KEX_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256	"ecdh-nistp256-classic-mceliece-348864-sha256"
+#define	KEX_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256	"ecdh-nistp256-classic-mceliece-348864f-sha256"
+#define	KEX_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512	"ecdh-nistp384-classic-mceliece-460896-sha512"
+#define	KEX_CLASSIC_MCELIECE_460896F_ECDH_NISTP384_SHA512	"ecdh-nistp384-classic-mceliece-460896f-sha512"
+#define	KEX_CLASSIC_MCELIECE_6688128_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-6688128-sha512"
+#define	KEX_CLASSIC_MCELIECE_6688128F_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-6688128f-sha512"
+#define	KEX_CLASSIC_MCELIECE_6960119_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-6960119-sha512"
+#define	KEX_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-6960119f-sha512"
+#define	KEX_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-8192128-sha512"
+#define	KEX_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512	"ecdh-nistp521-classic-mceliece-8192128f-sha512"
 #define	KEX_HQC_128_ECDH_NISTP256_SHA256	"ecdh-nistp256-hqc-128-sha256"
 #define	KEX_HQC_192_ECDH_NISTP384_SHA384	"ecdh-nistp384-hqc-192-sha384"
 #define	KEX_HQC_256_ECDH_NISTP521_SHA512	"ecdh-nistp521-hqc-256-sha512"
@@ -236,6 +256,16 @@ enum kex_exchange {
 	KEX_KEM_NTRU_HPS2048677_SHA512,
 	KEX_KEM_NTRU_HRSS701_SHA512,
 	KEX_KEM_NTRU_HPS4096821_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_348864_SHA256,
+	KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256,
+	KEX_KEM_CLASSIC_MCELIECE_460896_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_460896F_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6688128_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6688128F_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6960119_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6960119F_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_8192128_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_8192128F_SHA512,
 	KEX_KEM_HQC_128_SHA256,
 	KEX_KEM_HQC_192_SHA384,
 	KEX_KEM_HQC_256_SHA512,
@@ -283,6 +313,16 @@ enum kex_exchange {
 	KEX_KEM_NTRU_HPS2048677_ECDH_NISTP384_SHA512,
 	KEX_KEM_NTRU_HRSS701_ECDH_NISTP384_SHA512,
 	KEX_KEM_NTRU_HPS4096821_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256,
+	KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256,
+	KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_460896F_ECDH_NISTP384_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6688128_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6688128F_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6960119_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512,
+	KEX_KEM_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512,
 	KEX_KEM_HQC_128_ECDH_NISTP256_SHA256,
 	KEX_KEM_HQC_192_ECDH_NISTP384_SHA384,
 	KEX_KEM_HQC_256_ECDH_NISTP521_SHA512,
@@ -564,6 +604,46 @@ int	 kex_kem_ntru_hrss701_dec(struct kex *, const struct sshbuf *, struct sshbuf
 int	 kex_kem_ntru_hps4096821_keypair(struct kex *);
 int	 kex_kem_ntru_hps4096821_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_ntru_hps4096821_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_348864 prototypes */
+int	 kex_kem_classic_mceliece_348864_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_348864_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_348864_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_348864f prototypes */
+int	 kex_kem_classic_mceliece_348864f_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_348864f_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_348864f_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_460896 prototypes */
+int	 kex_kem_classic_mceliece_460896_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_460896_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_460896_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_460896f prototypes */
+int	 kex_kem_classic_mceliece_460896f_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_460896f_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_460896f_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6688128 prototypes */
+int	 kex_kem_classic_mceliece_6688128_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6688128_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6688128_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6688128f prototypes */
+int	 kex_kem_classic_mceliece_6688128f_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6688128f_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6688128f_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6960119 prototypes */
+int	 kex_kem_classic_mceliece_6960119_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6960119_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6960119_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6960119f prototypes */
+int	 kex_kem_classic_mceliece_6960119f_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6960119f_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6960119f_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_8192128 prototypes */
+int	 kex_kem_classic_mceliece_8192128_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_8192128_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_8192128_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_8192128f prototypes */
+int	 kex_kem_classic_mceliece_8192128f_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_8192128f_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_8192128f_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* hqc_128 prototypes */
 int	 kex_kem_hqc_128_keypair(struct kex *);
 int	 kex_kem_hqc_128_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
@@ -746,6 +826,46 @@ int	 kex_kem_ntru_hrss701_ecdh_nistp384_dec(struct kex *, const struct sshbuf *,
 int	 kex_kem_ntru_hps4096821_ecdh_nistp521_keypair(struct kex *);
 int	 kex_kem_ntru_hps4096821_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_ntru_hps4096821_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_348864_nistp256 prototypes */
+int	 kex_kem_classic_mceliece_348864_ecdh_nistp256_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_348864_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_348864_ecdh_nistp256_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_348864f_nistp256 prototypes */
+int	 kex_kem_classic_mceliece_348864f_ecdh_nistp256_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_348864f_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_348864f_ecdh_nistp256_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_460896_nistp384 prototypes */
+int	 kex_kem_classic_mceliece_460896_ecdh_nistp384_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_460896_ecdh_nistp384_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_460896_ecdh_nistp384_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_460896f_nistp384 prototypes */
+int	 kex_kem_classic_mceliece_460896f_ecdh_nistp384_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_460896f_ecdh_nistp384_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_460896f_ecdh_nistp384_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6688128_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_6688128_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6688128_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6688128_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6688128f_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_6688128f_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6688128f_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6688128f_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6960119_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_6960119_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6960119_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6960119_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_6960119f_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_6960119f_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_6960119f_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_6960119f_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_8192128_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_8192128_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_8192128_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_8192128_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* classic_mceliece_8192128f_nistp521 prototypes */
+int	 kex_kem_classic_mceliece_8192128f_ecdh_nistp521_keypair(struct kex *);
+int	 kex_kem_classic_mceliece_8192128f_ecdh_nistp521_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_classic_mceliece_8192128f_ecdh_nistp521_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 /* hqc_128_nistp256 prototypes */
 int	 kex_kem_hqc_128_ecdh_nistp256_keypair(struct kex *);
 int	 kex_kem_hqc_128_ecdh_nistp256_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);

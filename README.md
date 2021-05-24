@@ -69,8 +69,6 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **Saber**: `saber-lightsaber-sha256`, `saber-saber-sha384`*, `saber-firesaber-sha512`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
-However, all McEliece algorithm versions are not enabled due to an as-yet unresolved error (execution delays) if such algorithm is activated.
-
 For each `<KEX>` listed above, the following hybrid algorithms are made available as follows:
 
 - If `<KEX>` has L1 security, the method `ecdh-nistp256-<KEX>` is available, which combines `<KEX>` with ECDH using NIST's P256 curve

@@ -230,6 +230,36 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_KEM_NTRU_HPS4096821_SHA512:
 		r = kex_kem_ntru_hps4096821_keypair(kex);
 		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_SHA256:
+		r = kex_kem_classic_mceliece_348864_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256:
+		r = kex_kem_classic_mceliece_348864f_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_SHA512:
+		r = kex_kem_classic_mceliece_460896_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_SHA512:
+		r = kex_kem_classic_mceliece_460896f_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_SHA512:
+		r = kex_kem_classic_mceliece_6688128_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_SHA512:
+		r = kex_kem_classic_mceliece_6960119_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_SHA512:
+		r = kex_kem_classic_mceliece_8192128_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_keypair(kex);
+		break;
 	case KEX_KEM_HQC_128_SHA256:
 		r = kex_kem_hqc_128_keypair(kex);
 		break;
@@ -366,6 +396,36 @@ kex_gen_client(struct ssh *ssh)
 		break;
 	case KEX_KEM_NTRU_HPS4096821_ECDH_NISTP521_SHA512:
 		r = kex_kem_ntru_hps4096821_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864_ecdh_nistp256_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864f_ecdh_nistp256_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896_ecdh_nistp384_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896f_ecdh_nistp384_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128_ecdh_nistp521_keypair(kex);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_ecdh_nistp521_keypair(kex);
 		break;
 	case KEX_KEM_HQC_128_ECDH_NISTP256_SHA256:
 		r = kex_kem_hqc_128_ecdh_nistp256_keypair(kex);
@@ -575,6 +635,36 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 	case KEX_KEM_NTRU_HPS4096821_SHA512:
 		r = kex_kem_ntru_hps4096821_dec(kex, server_blob, &shared_secret);
 		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_SHA256:
+		r = kex_kem_classic_mceliece_348864_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256:
+		r = kex_kem_classic_mceliece_348864f_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_SHA512:
+		r = kex_kem_classic_mceliece_460896_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_SHA512:
+		r = kex_kem_classic_mceliece_460896f_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_SHA512:
+		r = kex_kem_classic_mceliece_6688128_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_SHA512:
+		r = kex_kem_classic_mceliece_6960119_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_SHA512:
+		r = kex_kem_classic_mceliece_8192128_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_dec(kex, server_blob, &shared_secret);
+		break;
 	case KEX_KEM_HQC_128_SHA256:
 		r = kex_kem_hqc_128_dec(kex, server_blob, &shared_secret);
 		break;
@@ -711,6 +801,36 @@ input_kex_gen_reply(int type, u_int32_t seq, struct ssh *ssh)
 		break;
 	case KEX_KEM_NTRU_HPS4096821_ECDH_NISTP521_SHA512:
 		r = kex_kem_ntru_hps4096821_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864f_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896_ecdh_nistp384_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896f_ecdh_nistp384_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_ecdh_nistp521_dec(kex, server_blob, &shared_secret);
 		break;
 	case KEX_KEM_HQC_128_ECDH_NISTP256_SHA256:
 		r = kex_kem_hqc_128_ecdh_nistp256_dec(kex, server_blob, &shared_secret);
@@ -989,6 +1109,46 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		r = kex_kem_ntru_hps4096821_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_SHA256:
+		r = kex_kem_classic_mceliece_348864_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256:
+		r = kex_kem_classic_mceliece_348864f_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_SHA512:
+		r = kex_kem_classic_mceliece_460896_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_SHA512:
+		r = kex_kem_classic_mceliece_460896f_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_SHA512:
+		r = kex_kem_classic_mceliece_6688128_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_SHA512:
+		r = kex_kem_classic_mceliece_6960119_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_SHA512:
+		r = kex_kem_classic_mceliece_8192128_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 	case KEX_KEM_HQC_128_SHA256:
 		r = kex_kem_hqc_128_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
@@ -1169,6 +1329,46 @@ input_kex_gen_init(int type, u_int32_t seq, struct ssh *ssh)
 		break;
 	case KEX_KEM_NTRU_HPS4096821_ECDH_NISTP521_SHA512:
 		r = kex_kem_ntru_hps4096821_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256:
+		r = kex_kem_classic_mceliece_348864f_ecdh_nistp256_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896_ecdh_nistp384_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_460896F_ECDH_NISTP384_SHA512:
+		r = kex_kem_classic_mceliece_460896f_ecdh_nistp384_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6688128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6688128f_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_6960119f_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128_ecdh_nistp521_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512:
+		r = kex_kem_classic_mceliece_8192128f_ecdh_nistp521_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
 	case KEX_KEM_HQC_128_ECDH_NISTP256_SHA256:
