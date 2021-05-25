@@ -8,11 +8,20 @@ if test "x$REGRESS_INTEROP_PUTTY" != "xyes" ; then
 	exit 0
 fi
 
+echo "Putty Interop testing commencing" 1>&2
+pwd 1>&2
+ls -l 1>&2
+chmod go-rwx ssh-* 1>&2
+chmod go-rwx regress/*ssh-* 1>&2
+echo "Putty interop setup done" 1>&2
+echo "Putty interop setup done (2)" 2>&1
+
 if [ "`${SSH} -Q compression`" = "none" ]; then
 	comp="0"
 else
 	comp="0 1"
 fi
+echo "ssh startup done" 1>&2
 
 for c in $comp; do 
 	verbose "$tid: compression $c"
@@ -41,4 +50,6 @@ for c in $comp; do
 	done
 done
 rm -f ${COPY}
+
+echo "Putty Interop testing done" 1>&2
 
