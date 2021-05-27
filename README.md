@@ -60,13 +60,13 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **BIKE**: `bike1-l1-cpa-sha512`, `bike1-l1-fo-sha512`, `bike1-l3-cpa-sha512`, `bike1-l3-fo-sha512`
 - **ClassicMcEliece**: `classic-mceliece-348864-sha256`, `classic-mceliece-348864f-sha256`, `classic-mceliece-460896-sha512`, `classic-mceliece-460896f-sha512`, `classic-mceliece-6688128-sha512`, `classic-mceliece-6688128f-sha512`, `classic-mceliece-6960119-sha512`, `classic-mceliece-6960119f-sha512`, `classic-mceliece-8192128-sha512`, `classic-mceliece-8192128f-sha512`
 - **FrodoKEM**: `frodokem-640-aes-sha256`, `frodokem-976-aes-sha384`, `frodokem-1344-aes-sha512`, `frodokem-640-shake-sha256`, `frodokem-976-shake-sha384`, `frodokem-1344-shake-sha512`
-- **HQC**: `hqc-128-sha256`, `hqc-192-sha384`*, `hqc-256-sha512`†
-- **Kyber**: `kyber-512-sha256`, `kyber-768-sha384`*, `kyber-1024-sha512`, `kyber-512-90s-sha256`, `kyber-768-90s-sha384`, `kyber-1024-90s-sha512`
+- **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
+- **Kyber**: `kyber-512-sha256`, `kyber-768-sha384`, `kyber-1024-sha512`, `kyber-512-90s-sha256`, `kyber-768-90s-sha384`, `kyber-1024-90s-sha512`
 - **NTRU**: `ntru-hps2048509-sha512`, `ntru-hps2048677-sha512`, `ntru-hrss701-sha512`, `ntru-hps4096821-sha512`
 - **NTRU-PRIME**: `ntruprime-ntrulpr653-sha256`, `ntruprime-sntrup653-sha256`, `ntruprime-ntrulpr761-sha384`, `ntruprime-sntrup761-sha384`, `ntruprime-ntrulpr857-sha384`, `ntruprime-sntrup857-sha384`
 - **SIDH**: `sidh-p434-sha256`, `sidh-p434-compressed-sha256`, `sidh-p610-sha256`, `sidh-p610-compressed-sha256`, `sidh-p751-sha256`, `sidh-p751-compressed-sha256`
 - **SIKE**: `sike-p434-sha256`, `sike-p434-compressed-sha256`, `sike-p610-sha256`, `sike-p610-compressed-sha256`, `sike-p751-sha256`, `sike-p751-compressed-sha256`
-- **Saber**: `saber-lightsaber-sha256`, `saber-saber-sha384`*, `saber-firesaber-sha512`
+- **Saber**: `saber-lightsaber-sha256`, `saber-saber-sha384`, `saber-firesaber-sha512`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
 For each `<KEX>` listed above, the following hybrid algorithms are made available as follows:
@@ -83,11 +83,11 @@ The following digital signature algorithms from liboqs are supported (assuming t
 
 - `oqsdefault` (see [here](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork) for what this denotes)
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START -->
-- **Dilithium**: `dilithium2`, `dilithium3`*, `dilithium5`, `dilithium2aes`, `dilithium3aes`, `dilithium5aes`
-- **Falcon**: `falcon512`*, `falcon1024`
-- **Picnic**: `picnicL1FS`, `picnicL1UR`, `picnicL1full`, `picnicL3FS`*, `picnicL3UR`, `picnicL3full`, `picnicL5FS`, `picnicL5UR`, `picnicL5full`
+- **Dilithium**: `dilithium2`, `dilithium3`*, `dilithium5`, `dilithium2aes`*, `dilithium3aes`, `dilithium5aes`*
+- **Falcon**: `falcon512`*, `falcon1024`*
+- **Picnic**: `picnicL1FS`, `picnicL1UR`, `picnicL1full`*, `picnicL3FS`*, `picnicL3UR`, `picnicL3full`, `picnicL5FS`, `picnicL5UR`, `picnicL5full`
 - **Rainbow**: `rainbowIclassic`, `rainbowIcircumzenithal`, `rainbowIcompressed`, `rainbowIIIclassic`, `rainbowIIIcircumzenithal`, `rainbowIIIcompressed`, `rainbowVclassic`, `rainbowVcircumzenithal`, `rainbowVcompressed`
-- **SPHINCS**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincssha256128frobust`, `sphincssha256128srobust`, `sphincssha256128fsimple`, `sphincssha256128ssimple`, `sphincsshake256128frobust`, `sphincsshake256128srobust`, `sphincsshake256128fsimple`, `sphincsshake256128ssimple`, `sphincsharaka192frobust`*, `sphincsharaka192srobust`, `sphincsharaka192fsimple`, `sphincsharaka192ssimple`, `sphincssha256192frobust`, `sphincssha256192srobust`, `sphincssha256192fsimple`, `sphincssha256192ssimple`, `sphincsshake256192frobust`, `sphincsshake256192srobust`, `sphincsshake256192fsimple`, `sphincsshake256192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256srobust`, `sphincsharaka256fsimple`, `sphincsharaka256ssimple`, `sphincssha256256frobust`, `sphincssha256256srobust`, `sphincssha256256fsimple`, `sphincssha256256ssimple`, `sphincsshake256256frobust`, `sphincsshake256256srobust`, `sphincsshake256256fsimple`, `sphincsshake256256ssimple`
+- **SPHINCS**: `sphincsharaka128frobust`, `sphincsharaka128fsimple`*, `sphincsharaka128srobust`, `sphincsharaka128ssimple`, `sphincssha256128frobust`, `sphincssha256128srobust`, `sphincssha256128fsimple`, `sphincssha256128ssimple`, `sphincsshake256128frobust`, `sphincsshake256128srobust`, `sphincsshake256128fsimple`, `sphincsshake256128ssimple`, `sphincsharaka192frobust`*, `sphincsharaka192srobust`, `sphincsharaka192fsimple`, `sphincsharaka192ssimple`, `sphincssha256192frobust`, `sphincssha256192srobust`, `sphincssha256192fsimple`, `sphincssha256192ssimple`, `sphincsshake256192frobust`, `sphincsshake256192srobust`, `sphincsshake256192fsimple`, `sphincsshake256192ssimple`, `sphincsharaka256frobust`, `sphincsharaka256srobust`, `sphincsharaka256fsimple`, `sphincsharaka256ssimple`, `sphincssha256256frobust`, `sphincssha256256srobust`, `sphincssha256256fsimple`, `sphincssha256256ssimple`, `sphincsshake256256frobust`, `sphincsshake256256srobust`, `sphincsshake256256fsimple`, `sphincsshake256256ssimple`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
 

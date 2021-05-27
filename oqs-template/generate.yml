@@ -162,7 +162,6 @@ kexs:
   -
     family: 'Saber'
     name: 'saber_saber'
-    enable: true
     hash: 'sha384'
     mix_with:
       -
@@ -187,7 +186,6 @@ kexs:
   -
     family: 'Kyber'
     name: 'kyber_768'
-    enable: true
     hash: 'sha384'
     mix_with:
       -
@@ -380,7 +378,6 @@ kexs:
   -
     family: 'HQC'
     name: 'hqc_192'
-    enable: true
     hash: 'sha384'
     mix_with:
       -
@@ -470,6 +467,7 @@ sigs:
   -
     family: 'Falcon'
     name: 'falcon_1024'
+    enable: true
     level: 5
     mix_with:
       -
@@ -506,6 +504,7 @@ sigs:
   -
     family: 'Dilithium'
     name: 'dilithium_2_aes'
+    enable: true
     level: 1
     mix_with:
       -
@@ -525,6 +524,7 @@ sigs:
   -
     family: 'Dilithium'
     name: 'dilithium_5_aes'
+    enable: true
     level: 5
     mix_with:
       -
@@ -555,6 +555,7 @@ sigs:
   -
     family: 'Picnic'
     name: 'picnic_L1_full'
+    enable: true
     level: 1
     mix_with:
       -
@@ -707,6 +708,7 @@ sigs:
   -
     family: 'SPHINCS'
     name: 'sphincs_haraka_128f_simple'
+    enable: true
     level: 1
     mix_with:
       -

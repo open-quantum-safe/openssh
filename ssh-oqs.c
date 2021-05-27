@@ -226,6 +226,40 @@ int ssh_falcon512_verify(const struct sshkey *key,
     return r;
 }
 /*---------------------------------------------------
+ * FALCON_1024 METHODS
+ *---------------------------------------------------
+ */
+int ssh_falcon1024_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_1024);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "falcon1024", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_falcon1024_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_falcon_1024);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "falcon1024", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
  * DILITHIUM_3 METHODS
  *---------------------------------------------------
  */
@@ -260,6 +294,108 @@ int ssh_dilithium3_verify(const struct sshkey *key,
     return r;
 }
 /*---------------------------------------------------
+ * DILITHIUM_2_AES METHODS
+ *---------------------------------------------------
+ */
+int ssh_dilithium2aes_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_2_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "dilithium2aes", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_dilithium2aes_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_2_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "dilithium2aes", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * DILITHIUM_5_AES METHODS
+ *---------------------------------------------------
+ */
+int ssh_dilithium5aes_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_5_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "dilithium5aes", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_dilithium5aes_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_dilithium_5_aes);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "dilithium5aes", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * PICNIC_L1_FULL METHODS
+ *---------------------------------------------------
+ */
+int ssh_picnicL1full_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_picnic_L1_full);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "picnicL1full", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_picnicL1full_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_picnic_L1_full);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "picnicL1full", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
  * PICNIC_L3_FS METHODS
  *---------------------------------------------------
  */
@@ -290,6 +426,40 @@ int ssh_picnicL3FS_verify(const struct sshkey *key,
         return SSH_ERR_ALLOC_FAIL;
     }
     int r = ssh_generic_verify(sig, "picnicL3FS", key, signature, signaturelen, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+/*---------------------------------------------------
+ * SPHINCS_HARAKA_128F_SIMPLE METHODS
+ *---------------------------------------------------
+ */
+int ssh_sphincsharaka128fsimple_sign(const struct sshkey *key,
+                     u_char **sigp,
+                     size_t *lenp,
+                     const u_char *data,
+                     size_t datalen,
+                     u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_sphincs_haraka_128f_simple);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_sign(sig, "sphincsharaka128fsimple", key, sigp, lenp, data, datalen, compat);
+    OQS_SIG_free(sig);
+    return r;
+}
+int ssh_sphincsharaka128fsimple_verify(const struct sshkey *key,
+                       const u_char *signature,
+                       size_t signaturelen,
+                       const u_char *data,
+                       size_t datalen,
+                       u_int compat)
+{
+    OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_sphincs_haraka_128f_simple);
+    if (sig == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = ssh_generic_verify(sig, "sphincsharaka128fsimple", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }

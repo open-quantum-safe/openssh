@@ -107,12 +107,30 @@ static size_t oqs_sig_pk_len(int type) {
   case KEY_RSA3072_FALCON_512:
   case KEY_ECDSA_NISTP256_FALCON_512:
     return OQS_SIG_falcon_512_length_public_key;
+  case KEY_FALCON_1024:
+  case KEY_ECDSA_NISTP521_FALCON_1024:
+    return OQS_SIG_falcon_1024_length_public_key;
   case KEY_DILITHIUM_3:
   case KEY_ECDSA_NISTP384_DILITHIUM_3:
     return OQS_SIG_dilithium_3_length_public_key;
+  case KEY_DILITHIUM_2_AES:
+  case KEY_RSA3072_DILITHIUM_2_AES:
+  case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+    return OQS_SIG_dilithium_2_aes_length_public_key;
+  case KEY_DILITHIUM_5_AES:
+  case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+    return OQS_SIG_dilithium_5_aes_length_public_key;
+  case KEY_PICNIC_L1_FULL:
+  case KEY_RSA3072_PICNIC_L1_FULL:
+  case KEY_ECDSA_NISTP256_PICNIC_L1_FULL:
+    return OQS_SIG_picnic_L1_full_length_public_key;
   case KEY_PICNIC_L3_FS:
   case KEY_ECDSA_NISTP384_PICNIC_L3_FS:
     return OQS_SIG_picnic_L3_FS_length_public_key;
+  case KEY_SPHINCS_HARAKA_128F_SIMPLE:
+  case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
+  case KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE:
+    return OQS_SIG_sphincs_haraka_128f_simple_length_public_key;
   case KEY_SPHINCS_HARAKA_192F_ROBUST:
   case KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST:
     return OQS_SIG_sphincs_haraka_192f_robust_length_public_key;
@@ -138,12 +156,30 @@ static size_t oqs_sig_sk_len(int type) {
   case KEY_RSA3072_FALCON_512:
   case KEY_ECDSA_NISTP256_FALCON_512:
     return OQS_SIG_falcon_512_length_secret_key;
+  case KEY_FALCON_1024:
+  case KEY_ECDSA_NISTP521_FALCON_1024:
+    return OQS_SIG_falcon_1024_length_secret_key;
   case KEY_DILITHIUM_3:
   case KEY_ECDSA_NISTP384_DILITHIUM_3:
     return OQS_SIG_dilithium_3_length_secret_key;
+  case KEY_DILITHIUM_2_AES:
+  case KEY_RSA3072_DILITHIUM_2_AES:
+  case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+    return OQS_SIG_dilithium_2_aes_length_secret_key;
+  case KEY_DILITHIUM_5_AES:
+  case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+    return OQS_SIG_dilithium_5_aes_length_secret_key;
+  case KEY_PICNIC_L1_FULL:
+  case KEY_RSA3072_PICNIC_L1_FULL:
+  case KEY_ECDSA_NISTP256_PICNIC_L1_FULL:
+    return OQS_SIG_picnic_L1_full_length_secret_key;
   case KEY_PICNIC_L3_FS:
   case KEY_ECDSA_NISTP384_PICNIC_L3_FS:
     return OQS_SIG_picnic_L3_FS_length_secret_key;
+  case KEY_SPHINCS_HARAKA_128F_SIMPLE:
+  case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
+  case KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE:
+    return OQS_SIG_sphincs_haraka_128f_simple_length_secret_key;
   case KEY_SPHINCS_HARAKA_192F_ROBUST:
   case KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST:
     return OQS_SIG_sphincs_haraka_192f_robust_length_secret_key;
@@ -225,10 +261,20 @@ static const struct keytype keytypes[] = {
 	    KEY_OQS_DEFAULT, 0, 0, 0 },
 	{ "ssh-falcon512", "FALCON512", NULL,
 	    KEY_FALCON_512, 0, 0, 0 },
+	{ "ssh-falcon1024", "FALCON1024", NULL,
+	    KEY_FALCON_1024, 0, 0, 0 },
 	{ "ssh-dilithium3", "DILITHIUM3", NULL,
 	    KEY_DILITHIUM_3, 0, 0, 0 },
+	{ "ssh-dilithium2aes", "DILITHIUM2AES", NULL,
+	    KEY_DILITHIUM_2_AES, 0, 0, 0 },
+	{ "ssh-dilithium5aes", "DILITHIUM5AES", NULL,
+	    KEY_DILITHIUM_5_AES, 0, 0, 0 },
+	{ "ssh-picnicL1full", "PICNICL1FULL", NULL,
+	    KEY_PICNIC_L1_FULL, 0, 0, 0 },
 	{ "ssh-picnicL3FS", "PICNICL3FS", NULL,
 	    KEY_PICNIC_L3_FS, 0, 0, 0 },
+	{ "ssh-sphincsharaka128fsimple", "SPHINCSHARAKA128FSIMPLE", NULL,
+	    KEY_SPHINCS_HARAKA_128F_SIMPLE, 0, 0, 0 },
 	{ "ssh-sphincsharaka192frobust", "SPHINCSHARAKA192FROBUST", NULL,
 	    KEY_SPHINCS_HARAKA_192F_ROBUST, 0, 0, 0 },
 #ifdef WITH_OPENSSL
@@ -236,15 +282,31 @@ static const struct keytype keytypes[] = {
 	    KEY_RSA3072_OQS_DEFAULT, 0, 0, 0 },
 	{ "ssh-rsa3072-falcon512", "RSA3072_FALCON512", NULL,
 	    KEY_RSA3072_FALCON_512, 0, 0, 0 },
+	{ "ssh-rsa3072-dilithium2aes", "RSA3072_DILITHIUM2AES", NULL,
+	    KEY_RSA3072_DILITHIUM_2_AES, 0, 0, 0 },
+	{ "ssh-rsa3072-picnicL1full", "RSA3072_PICNICL1FULL", NULL,
+	    KEY_RSA3072_PICNIC_L1_FULL, 0, 0, 0 },
+	{ "ssh-rsa3072-sphincsharaka128fsimple", "RSA3072_SPHINCSHARAKA128FSIMPLE", NULL,
+	    KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE, 0, 0, 0 },
 #ifdef OPENSSL_HAS_ECC
 	{ "ssh-ecdsa-nistp256-oqsdefault", "ECDSA_NISTP256_OQSDEFAULT", NULL,
 	    KEY_ECDSA_NISTP256_OQS_DEFAULT, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp256-falcon512", "ECDSA_NISTP256_FALCON512", NULL,
 	    KEY_ECDSA_NISTP256_FALCON_512, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-falcon1024", "ECDSA_NISTP521_FALCON1024", NULL,
+	    KEY_ECDSA_NISTP521_FALCON_1024, NID_secp521r1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-dilithium3", "ECDSA_NISTP384_DILITHIUM3", NULL,
 	    KEY_ECDSA_NISTP384_DILITHIUM_3, NID_secp384r1, 0, 0 },
+	{ "ssh-ecdsa-nistp256-dilithium2aes", "ECDSA_NISTP256_DILITHIUM2AES", NULL,
+	    KEY_ECDSA_NISTP256_DILITHIUM_2_AES, NID_X9_62_prime256v1, 0, 0 },
+	{ "ssh-ecdsa-nistp521-dilithium5aes", "ECDSA_NISTP521_DILITHIUM5AES", NULL,
+	    KEY_ECDSA_NISTP521_DILITHIUM_5_AES, NID_secp521r1, 0, 0 },
+	{ "ssh-ecdsa-nistp256-picnicL1full", "ECDSA_NISTP256_PICNICL1FULL", NULL,
+	    KEY_ECDSA_NISTP256_PICNIC_L1_FULL, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-picnicL3FS", "ECDSA_NISTP384_PICNICL3FS", NULL,
 	    KEY_ECDSA_NISTP384_PICNIC_L3_FS, NID_secp384r1, 0, 0 },
+	{ "ssh-ecdsa-nistp256-sphincsharaka128fsimple", "ECDSA_NISTP256_SPHINCSHARAKA128FSIMPLE", NULL,
+	    KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE, NID_X9_62_prime256v1, 0, 0 },
 	{ "ssh-ecdsa-nistp384-sphincsharaka192frobust", "ECDSA_NISTP384_SPHINCSHARAKA192FROBUST", NULL,
 	    KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST, NID_secp384r1, 0, 0 },
 #endif /* OPENSSL_HAS_ECC */
@@ -1996,11 +2058,26 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  case KEY_FALCON_512:
 	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
+	  case KEY_FALCON_1024:
+	    ret = OQS_SIG_falcon_1024_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_DILITHIUM_3:
 	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
+	  case KEY_DILITHIUM_2_AES:
+	    ret = OQS_SIG_dilithium_2_aes_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_DILITHIUM_5_AES:
+	    ret = OQS_SIG_dilithium_5_aes_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_PICNIC_L1_FULL:
+	    ret = OQS_SIG_picnic_L1_full_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_PICNIC_L3_FS:
 	    ret = OQS_SIG_picnic_L3_FS_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_SPHINCS_HARAKA_128F_SIMPLE:
+	    ret = OQS_SIG_sphincs_haraka_128f_simple_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	  case KEY_SPHINCS_HARAKA_192F_ROBUST:
 	    ret = OQS_SIG_sphincs_haraka_192f_robust_keypair(k->oqs_pk, k->oqs_sk);
@@ -2016,6 +2093,15 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  case KEY_RSA3072_FALCON_512:
 	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
+	  case KEY_RSA3072_DILITHIUM_2_AES:
+	    ret = OQS_SIG_dilithium_2_aes_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_RSA3072_PICNIC_L1_FULL:
+	    ret = OQS_SIG_picnic_L1_full_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
+	    ret = OQS_SIG_sphincs_haraka_128f_simple_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 #ifdef OPENSSL_HAS_ECC
 	  case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 	  { // OQS-TODO: Clean this up
@@ -2027,11 +2113,26 @@ sshkey_generate(int type, u_int bits, struct sshkey **keyp)
 	  case KEY_ECDSA_NISTP256_FALCON_512:
 	    ret = OQS_SIG_falcon_512_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
+	  case KEY_ECDSA_NISTP521_FALCON_1024:
+	    ret = OQS_SIG_falcon_1024_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_ECDSA_NISTP384_DILITHIUM_3:
 	    ret = OQS_SIG_dilithium_3_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
+	  case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+	    ret = OQS_SIG_dilithium_2_aes_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+	    ret = OQS_SIG_dilithium_5_aes_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_ECDSA_NISTP256_PICNIC_L1_FULL:
+	    ret = OQS_SIG_picnic_L1_full_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
 	  case KEY_ECDSA_NISTP384_PICNIC_L3_FS:
 	    ret = OQS_SIG_picnic_L3_FS_keypair(k->oqs_pk, k->oqs_sk);
+	    break;
+	  case KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE:
+	    ret = OQS_SIG_sphincs_haraka_128f_simple_keypair(k->oqs_pk, k->oqs_sk);
 	    break;
 	  case KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST:
 	    ret = OQS_SIG_sphincs_haraka_192f_robust_keypair(k->oqs_pk, k->oqs_sk);
@@ -3145,11 +3246,26 @@ sshkey_sign(struct sshkey *key,
 	case KEY_FALCON_512:
 		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_FALCON_1024:
+		r = ssh_falcon1024_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_DILITHIUM_2_AES:
+		r = ssh_dilithium2aes_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_DILITHIUM_5_AES:
+		r = ssh_dilithium5aes_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_PICNIC_L1_FULL:
+		r = ssh_picnicL1full_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_PICNIC_L3_FS:
 		r = ssh_picnicL3FS_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_SPHINCS_HARAKA_128F_SIMPLE:
+		r = ssh_sphincsharaka128fsimple_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 	case KEY_SPHINCS_HARAKA_192F_ROBUST:
 		r = ssh_sphincsharaka192frobust_sign(key, &sig_pq, &len_pq, data, datalen, compat);
@@ -3161,6 +3277,15 @@ sshkey_sign(struct sshkey *key,
 	case KEY_RSA3072_FALCON_512:
 		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_RSA3072_DILITHIUM_2_AES:
+		r = ssh_dilithium2aes_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_RSA3072_PICNIC_L1_FULL:
+		r = ssh_picnicL1full_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
+		r = ssh_sphincsharaka128fsimple_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 #ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 		r = ssh_oqsdefault_sign(key, &sig_pq, &len_pq, data, datalen, compat);
@@ -3168,11 +3293,26 @@ sshkey_sign(struct sshkey *key,
 	case KEY_ECDSA_NISTP256_FALCON_512:
 		r = ssh_falcon512_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_ECDSA_NISTP521_FALCON_1024:
+		r = ssh_falcon1024_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		r = ssh_dilithium3_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
+	case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+		r = ssh_dilithium2aes_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+		r = ssh_dilithium5aes_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_ECDSA_NISTP256_PICNIC_L1_FULL:
+		r = ssh_picnicL1full_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
 	case KEY_ECDSA_NISTP384_PICNIC_L3_FS:
 		r = ssh_picnicL3FS_sign(key, &sig_pq, &len_pq, data, datalen, compat);
+		break;
+	case KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE:
+		r = ssh_sphincsharaka128fsimple_sign(key, &sig_pq, &len_pq, data, datalen, compat);
 		break;
 	case KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST:
 		r = ssh_sphincsharaka192frobust_sign(key, &sig_pq, &len_pq, data, datalen, compat);
@@ -3331,10 +3471,20 @@ sshkey_verify(const struct sshkey *key,
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_FALCON_512:
 		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_FALCON_1024:
+		return ssh_falcon1024_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_DILITHIUM_3:
 		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_DILITHIUM_2_AES:
+		return ssh_dilithium2aes_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_DILITHIUM_5_AES:
+		return ssh_dilithium5aes_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_PICNIC_L1_FULL:
+		return ssh_picnicL1full_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_PICNIC_L3_FS:
 		return ssh_picnicL3FS_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_SPHINCS_HARAKA_128F_SIMPLE:
+		return ssh_sphincsharaka128fsimple_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_SPHINCS_HARAKA_192F_ROBUST:
 		return ssh_sphincsharaka192frobust_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 #ifdef WITH_OPENSSL
@@ -3342,15 +3492,31 @@ sshkey_verify(const struct sshkey *key,
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_RSA3072_FALCON_512:
 		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_RSA3072_DILITHIUM_2_AES:
+		return ssh_dilithium2aes_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_RSA3072_PICNIC_L1_FULL:
+		return ssh_picnicL1full_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_RSA3072_SPHINCS_HARAKA_128F_SIMPLE:
+		return ssh_sphincsharaka128fsimple_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 #ifdef OPENSSL_HAS_ECC
 	case KEY_ECDSA_NISTP256_OQS_DEFAULT:
 		return ssh_oqsdefault_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP256_FALCON_512:
 		return ssh_falcon512_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP521_FALCON_1024:
+		return ssh_falcon1024_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP384_DILITHIUM_3:
 		return ssh_dilithium3_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP256_DILITHIUM_2_AES:
+		return ssh_dilithium2aes_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP521_DILITHIUM_5_AES:
+		return ssh_dilithium5aes_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP256_PICNIC_L1_FULL:
+		return ssh_picnicL1full_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP384_PICNIC_L3_FS:
 		return ssh_picnicL3FS_verify(key, sig_pq, siglen_pq, data, dlen, compat);
+	case KEY_ECDSA_NISTP256_SPHINCS_HARAKA_128F_SIMPLE:
+		return ssh_sphincsharaka128fsimple_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 	case KEY_ECDSA_NISTP384_SPHINCS_HARAKA_192F_ROBUST:
 		return ssh_sphincsharaka192frobust_verify(key, sig_pq, siglen_pq, data, dlen, compat);
 #endif /* OPENSSL_HAS_ECC */
