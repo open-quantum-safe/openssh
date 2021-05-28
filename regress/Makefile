@@ -230,12 +230,7 @@ t-exec-interop:	${INTEROP_TESTS:=.sh}
 	for TEST in ""$?; do \
 		echo "run test $${TEST}" ... 1>&2; \
 		chmod go-rwx .; \
-		ls -la 1>&2 ; \
-		pwd 1>&2 ; \
-		echo "executing: TEST_ENV=${TEST_ENV} ${TEST_SHELL} -x ${.CURDIR}/test-exec.sh ${.OBJDIR} ${.CURDIR}/$${TEST}"; \
-		(env SUDO="${SUDO}" TEST_ENV=${TEST_ENV} ${TEST_SHELL} -x ${.CURDIR}/test-exec.sh ${.OBJDIR} ${.CURDIR}/$${TEST}) || exit $$?; \
-		echo "test $${TEST} done" 1>&2; \
-		ls -l 1>&2; \
+		(env SUDO="${SUDO}" TEST_ENV=${TEST_ENV} ${TEST_SHELL} ${.CURDIR}/test-exec.sh ${.OBJDIR} ${.CURDIR}/$${TEST}) || exit $$?; \
 	done
 
 t-extra:	${EXTRA_TESTS:=.sh}
