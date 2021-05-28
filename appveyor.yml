@@ -32,5 +32,5 @@ test_script:
   - cmd: |-
          cd %APPVEYOR_BUILD_FOLDER%
          echo "%PATH%"
-         set PATH=%cd%;c:\cygwin64\bin;%PATH% && echo %PATH% && python oqs-test/try_connection.py 
+         set PATH=%cd%;c:\cygwin64\bin;%PATH% && echo %PATH% && python oqs-test/try_connection.py doone
 
