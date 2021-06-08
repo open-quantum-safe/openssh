@@ -140,11 +140,11 @@ Run the following:
 env OPENSSL_SYS_DIR=<PATH_TO_OPENSSL> ./oqs-scripts/build_openssh.sh
 ```
 
-`OPENSSL_SYS_DIR` does not have to be specified if OpenSSL is present under `usr/`.
+`OPENSSL_SYS_DIR` does not have to be specified if OpenSSL is present under `/usr`.
 
 As not all tests in the stock regression suite pass, run `oqs-test/run_tests.sh` instead of simply executing `make tests` to ensure the build was successful.
 
-To execute a connection test with a randomly chosen key-exchange and signature algorithm, run `python3 oqs-test/try_connection.py`. If it is desired that all such combinations should be tested, run `python3 oqs-test/try_connection.py all`. Be aware that this test can take a long time due to the number of algorithm combinations available.
+To execute a connection test with a randomly chosen key-exchange and signature algorithm, run `python3 oqs-test/try_connection.py`. If it is desired that each such combination be tested (exactly once), run `python3 oqs-test/try_connection.py all`. Be aware that the latter can take a long time due to the number of algorithm combinations available.
 
 ### Running OQS-OpenSSH
 
@@ -154,16 +154,22 @@ The following instructions explain how to establish an SSH connection that uses 
 
 To setup quantum-safe authentication, the server (and optionally, the client) need to generate quantum-safe keys. To generate keys for all the OQS algorithms supported by fork, simply run `make tests -e LTESTS=""`.
 
+Keys for a particular `<SIG>` also be generated using the `ssh-keygen` command as follows:
+
+`<OPENSSH_SRC>/ssh-keygen -t ssh-<SIG> -f ~/ssh_client/id_<SIG>`
+
 #### Establishing a quantum-safe SSH connection
+
+Let `<OPENSSH_SRC>` denote the absolute path to the directory in which this source is present.
 
 In one terminal, run the ssh server:
 
-	<path-to-openssh>/sbin/sshd -D \
-	                            -f <absolute-path-to>/regress/sshd_config \
-	                            -o KexAlgorithms=<KEX> \
-	                            -o HostKeyAlgorithms=ssh-<SIG> \
-	                            -o PubkeyAcceptedKeyTypes=ssh-<SIG> \
-	                            -h <absolute-path-to>/regress/host.<SIG>
+	<OPENSSH_SRC>/sshd -D \
+	                   -f <OPENSSH_SRC>/regress/sshd_config \
+	                   -o KexAlgorithms=<KEX> \
+	                   -o HostKeyAlgorithms=ssh-<SIG> \
+	                   -o PubkeyAcceptedKeyTypes=ssh-<SIG> \
+	                   -h <OPENSSH_SRC>/regress/host.ssh-<SIG>
 
 `<KEX>` and `<SIG>` are respectively one of the key exchange and signature (PQ-only or hybrid) algorithms listed in the [Supported Algorithms](#supported-algorithms) section above.
 
@@ -171,15 +177,17 @@ The `-o` options can also be added to the server/client configuration file inste
 
 In another terminal, run the ssh client:
 
-	<path-to-openssh>/bin/ssh -F <absolute-path-to>/regress/ssh_config \
-	                          -o KexAlgorithms=<KEX> \
-	                          -o HostKeyAlgorithms=ssh-<SIG>\
-	                          -o PubkeyAcceptedKeyTypes=ssh-<SIG> \
-	                          -o PasswordAuthentication=no \
-	                          -i regress/<SIG> \
-                              somehost true
+	<OPENSSH_SRC>/ssh -F <OPENSSH_SRC>/regress/ssh_config \
+	                  -o KexAlgorithms=<KEX> \
+	                  -o HostKeyAlgorithms=ssh-<SIG>\
+	                  -o PubkeyAcceptedKeyTypes=ssh-<SIG> \
+	                  -o PasswordAuthentication=no \
+	                  -i regress/ssh-<SIG> \
+	                  somehost true
 
 The `PasswordAuthentication` option is used to ensure the test server does not fall back to password authentication if public key authentication fails for some reason.
+
+The -o options can also be added to the `regress/{ssh|sshd}_config` client/server configuration files instead of being specified on the command line.
 
 ## Contributing
 
