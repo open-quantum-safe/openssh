@@ -115,7 +115,7 @@ sigs:
     family: 'RAINBOW'
     variants:
       -
-        enable: true
+        enable: false
         name: 'RAINBOW_I_CLASSIC'
         oqs_meth: 'OQS_SIG_alg_rainbow_I_classic'
         mix_with: [{'name':'rsa3072'},
@@ -133,7 +133,7 @@ sigs:
         mix_with: [{'name':'rsa3072'},
                    {'name': 'p256', 'curve':'NID_X9_62_prime256v1'}]
       -
-        enable: true
+        enable: false
         name: 'RAINBOW_III_CLASSIC'
         oqs_meth: 'OQS_SIG_alg_rainbow_III_classic'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
@@ -148,7 +148,7 @@ sigs:
         oqs_meth: 'OQS_SIG_alg_rainbow_III_compressed'
         mix_with: [{'name': 'p384', 'curve':'NID_secp384r1'}]
       -
-        enable: true
+        enable: false
         name: 'RAINBOW_V_CLASSIC'
         oqs_meth: 'OQS_SIG_alg_rainbow_V_classic'
         mix_with: [{'name': 'p521', 'curve':'NID_secp521r1'}]

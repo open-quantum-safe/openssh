@@ -3756,20 +3756,6 @@ if test "x$with_liboqs" = "xyes" ; then
 			], [AC_MSG_RESULT([no])
 	])
 
-	AC_MSG_CHECKING([for libOQS RAINBOW support])
-	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
-				#include <oqs/oqs.h>
-			]], [[
-					#if defined(OQS_ENABLE_SIG_RAINBOW) || (defined(OQS_ENABLE_SIG_rainbow_I_classic) && defined(OQS_ENABLE_SIG_rainbow_III_classic) && defined(OQS_ENABLE_SIG_rainbow_V_classic))
-					#else
-					#error "RAINBOW is not supported"
-					#endif
-			]])],
-			[ AC_MSG_RESULT([yes])
-				AC_DEFINE([HAVE_RAINBOW], [1], [Define to 1 if LibOQS library is compiled with support for RAINBOW])
-			], [AC_MSG_RESULT([no])
-	])
-
 	AC_MSG_CHECKING([for libOQS SPHINCS support])
 	AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 				#include <oqs/oqs.h>

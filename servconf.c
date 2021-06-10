@@ -292,12 +292,6 @@ fill_default_server_options(ServerOptions *options)
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RAINBOW_I_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RAINBOW_III_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RAINBOW_V_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_SPHINCS_SHA256_128F_ROBUST_KEY_FILE);
@@ -327,14 +321,6 @@ fill_default_server_options(ServerOptions *options)
 		    _PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_P256_PICNIC3_L1_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_RSA3072_RAINBOW_I_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P256_RAINBOW_I_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P384_RAINBOW_III_CLASSIC_KEY_FILE);
-		servconf_add_hostkey("[default]", 0, options,
-		    _PATH_HOST_P521_RAINBOW_V_CLASSIC_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE);
 		servconf_add_hostkey("[default]", 0, options,

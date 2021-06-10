@@ -167,7 +167,7 @@ main(int argc, char **argv)
 	struct sshbuf *b;
 	Options options;
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_START
-#define NUM_KEYTYPES 36
+#define NUM_KEYTYPES 29
 ///// OQS_TEMPLATE_FRAGMENT_COUNT_KT_END
 	struct sshkey *keys[NUM_KEYTYPES], *key = NULL;
 	struct passwd *pw;
@@ -198,9 +198,6 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_FALCON_512_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC_L1FULL_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_PICNIC3_L1_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RAINBOW_I_CLASSIC_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RAINBOW_III_CLASSIC_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RAINBOW_V_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_SPHINCS_SHA256_128F_ROBUST_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_SPHINCS_SHAKE256_128F_ROBUST_KEY_FILE, O_RDONLY);
@@ -214,10 +211,6 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC_L1FULL_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_PICNIC3_L1_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_PICNIC3_L1_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_RAINBOW_I_CLASSIC_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P256_RAINBOW_I_CLASSIC_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P384_RAINBOW_III_CLASSIC_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_P521_RAINBOW_V_CLASSIC_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_P256_SPHINCS_HARAKA_128F_ROBUST_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA3072_SPHINCS_SHA256_128F_ROBUST_KEY_FILE, O_RDONLY);
