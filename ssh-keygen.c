@@ -241,9 +241,6 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
 	if (IS_ECDSA_HYBRID(type)) {
 		switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_START
-			*bitsp = 384;
-			break;
-			*bitsp = 521;
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
 		}
 	}

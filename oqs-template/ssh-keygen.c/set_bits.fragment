@@ -11,13 +11,26 @@
         {%- endfor -%}
     {%- endfor -%}
 {%- endfor %}
+{%- if (with_p384|length > 0) or (with_p521|length > 0) -%}
+        if (IS_ECDSA_HYBRID(type)) {
+                switch (type) {
+{%- endif %}
+
+{%- if with_p384|length > 0 -%}
 {%- for pq_alg in with_p384 %}
 		case KEY_P384_{{ pq_alg['name'] }}:
 {%- endfor %}
 			*bitsp = 384;
 			break;
+{%- endif -%}
+{%- if with_p521|length > 0 -%}
 {%- for pq_alg in with_p521 %}
 		case KEY_P521_{{ pq_alg['name'] }}:
 {%- endfor %}
 			*bitsp = 521;
+{%- endif -%}
+{%- if (with_p384|length > 0) or (with_p521|length > 0) -%}
+                }
+        }
+{%- endif %}
 
