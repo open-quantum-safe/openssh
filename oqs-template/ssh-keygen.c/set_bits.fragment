@@ -11,7 +11,7 @@
         {%- endfor -%}
     {%- endfor -%}
 {%- endfor %}
-{%- if (with_p384|length > 0) or (with_p521|length > 0) -%}
+{%- if (with_p384|length > 0) or (with_p521|length > 0) %}
         if (IS_ECDSA_HYBRID(type)) {
                 switch (type) {
 {%- endif %}
@@ -29,7 +29,7 @@
 {%- endfor %}
 			*bitsp = 521;
 {%- endif -%}
-{%- if (with_p384|length > 0) or (with_p521|length > 0) -%}
+{%- if (with_p384|length > 0) or (with_p521|length > 0) %}
                 }
         }
 {%- endif %}

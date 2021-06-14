@@ -238,12 +238,8 @@ type_bits_valid(int type, const char *name, u_int32_t *bitsp)
            * the short name for one of these particular schemes is used, as is
            * the norm for the -t argument to ssh-keygen.
 	   */
-	if (IS_ECDSA_HYBRID(type)) {
-		switch (type) {
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_START
 ///// OQS_TEMPLATE_FRAGMENT_SET_BITS_END
-		}
-	}
 #ifdef WITH_OPENSSL
 	maxbits = (type == KEY_DSA) ?
 	    OPENSSL_DSA_MAX_MODULUS_BITS : OPENSSL_RSA_MAX_MODULUS_BITS;
