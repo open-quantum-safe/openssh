@@ -68,7 +68,7 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
   struct sshbuf *server_blob = NULL;
   struct sshbuf *buf = NULL;
   const u_char *client_pub;
-  u_char *kem_key, *ciphertext;
+  u_char *kem_key = NULL, *ciphertext;
   int r;
   *server_blobp = NULL;
   *shared_secretp = NULL;
@@ -81,8 +81,10 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
     r = SSH_ERR_ALLOC_FAIL;
     goto out;
   }
-  if ((r = sshbuf_reserve(buf, kem->length_shared_secret, &kem_key)) != 0)
+  if ((kem_key = malloc(kem->length_shared_secret)) == NULL) {
+    r = SSH_ERR_ALLOC_FAIL;
     goto out;
+  }
   /* allocate space for encrypted KEM key */
   if ((server_blob = sshbuf_new()) == NULL) {
     r = SSH_ERR_ALLOC_FAIL;
@@ -94,6 +96,8 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
   if (OQS_KEM_encaps(kem, ciphertext, kem_key, client_pub) != OQS_SUCCESS) {
     goto out;
   }
+  if ((r = sshbuf_put_string(buf, kem_key, kem->length_shared_secret)) != 0)
+    goto out;
   *server_blobp = server_blob;
   *shared_secretp = buf;
   server_blob = NULL;
@@ -101,6 +105,10 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
  out:
   sshbuf_free(server_blob);
   sshbuf_free(buf);
+  if (kem_key != NULL) {
+      explicit_bzero(kem_key, kem->length_shared_secret);
+      free(kem_key);
+  }
   return r;
 }
 
@@ -127,15 +135,23 @@ static int kex_kem_generic_dec(OQS_KEM *kem,
     r = SSH_ERR_ALLOC_FAIL;
     goto out;
   }
-  if ((r = sshbuf_reserve(buf, kem->length_shared_secret, &kem_key)) != 0)
+  if ((kem_key = malloc(kem->length_shared_secret)) == NULL) {
+    r = SSH_ERR_ALLOC_FAIL;
     goto out;
+  }
   if (OQS_KEM_decaps(kem, kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) {
     goto out;
   }
+  if ((r = sshbuf_put_string(buf, kem_key, kem->length_shared_secret)) != 0)
+    goto out;
   *shared_secretp = buf;
   buf = NULL;
  out:
   sshbuf_free(buf);
+  if (kem_key != NULL) {
+      explicit_bzero(kem_key, kem->length_shared_secret);
+      free(kem_key);
+  }
   return r;
 }
 
