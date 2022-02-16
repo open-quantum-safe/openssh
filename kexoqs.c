@@ -94,6 +94,7 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
     goto out;
   /* generate and encrypt KEM key with client key */
   if (OQS_KEM_encaps(kem, ciphertext, kem_key, client_pub) != OQS_SUCCESS) {
+    r = SSH_ERR_LIBCRYPTO_ERROR;
     goto out;
   }
   if ((r = sshbuf_put_string(buf, kem_key, kem->length_shared_secret)) != 0)
@@ -140,6 +141,7 @@ static int kex_kem_generic_dec(OQS_KEM *kem,
     goto out;
   }
   if (OQS_KEM_decaps(kem, kem_key, ciphertext, kex->oqs_client_key) != OQS_SUCCESS) {
+    r = SSH_ERR_LIBCRYPTO_ERROR;
     goto out;
   }
   if ((r = sshbuf_put_string(buf, kem_key, kem->length_shared_secret)) != 0)
