@@ -111,8 +111,8 @@ static int kex_kem_generic_enc(OQS_KEM *kem, struct kex *kex,
   sshbuf_free(server_blob);
   sshbuf_free(buf);
   if (kem_key != NULL) {
-      explicit_bzero(kem_key, kem->length_shared_secret);
-      free(kem_key);
+    explicit_bzero(kem_key, kem->length_shared_secret);
+    free(kem_key);
   }
   return r;
 }
@@ -156,8 +156,8 @@ static int kex_kem_generic_dec(OQS_KEM *kem,
  out:
   sshbuf_free(buf);
   if (kem_key != NULL) {
-      explicit_bzero(kem_key, kem->length_shared_secret);
-      free(kem_key);
+    explicit_bzero(kem_key, kem->length_shared_secret);
+    free(kem_key);
   }
   return r;
 }
