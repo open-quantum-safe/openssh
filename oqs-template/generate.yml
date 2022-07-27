@@ -613,39 +613,6 @@ sigs:
         openssl_nid: 'NID_secp521r1'
   -
     family: 'Rainbow'
-    name: 'rainbow_I_classic'
-    level: 1
-    mix_with:
-      -
-        name: 'rsa3072'
-        rsa: true
-      -
-        name: 'ecdsa_nistp256'
-        openssl_nid: 'NID_X9_62_prime256v1'
-  -
-    family: 'Rainbow'
-    name: 'rainbow_I_circumzenithal'
-    level: 1
-    mix_with:
-      -
-        name: 'rsa3072'
-        rsa: true
-      -
-        name: 'ecdsa_nistp256'
-        openssl_nid: 'NID_X9_62_prime256v1'
-  -
-    family: 'Rainbow'
-    name: 'rainbow_I_compressed'
-    level: 1
-    mix_with:
-      -
-        name: 'rsa3072'
-        rsa: true
-      -
-        name: 'ecdsa_nistp256'
-        openssl_nid: 'NID_X9_62_prime256v1'
-  -
-    family: 'Rainbow'
     name: 'rainbow_III_classic'
     level: 3
     mix_with:
