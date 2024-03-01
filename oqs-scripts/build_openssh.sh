@@ -33,4 +33,8 @@ if [ "x${CIRCLECI}" == "xtrue" ] || [ "x${TRAVIS}" == "xtrue" ]; then
 else
     make -j
 fi
+# check whether INSTALL_PREFIX/lib exists to support shared OQS builds
+if [ ! -d $INSTALL_PREFIX/lib ]; then
+   cp -R oqs/lib $INSTALL_PREFIX
+fi
 make install
