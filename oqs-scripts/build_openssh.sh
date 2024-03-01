@@ -35,6 +35,7 @@ else
 fi
 # check whether INSTALL_PREFIX/lib exists to support shared OQS builds
 if [ ! -d $INSTALL_PREFIX/lib ]; then
+   mkdir -p $INSTALL_PREFIX
    cp -R oqs/lib $INSTALL_PREFIX
 fi
 make install
