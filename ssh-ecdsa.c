@@ -305,8 +305,8 @@ ssh_ecdsa_verify(const struct sshkey *key,
 	char *ktype = NULL;
 
 	if (key == NULL || key->ecdsa == NULL ||
-	    sshkey_type_plain(key->type) != KEY_ECDSA &&
-		!oqs_utils_is_ecdsa_hybrid(sshkey_type_plain(key->type)) ||
+			(sshkey_type_plain(key->type) != KEY_ECDSA &&
+			 !oqs_utils_is_ecdsa_hybrid(sshkey_type_plain(key->type))) ||
 	    sig == NULL || siglen == 0)
 		return SSH_ERR_INVALID_ARGUMENT;
 

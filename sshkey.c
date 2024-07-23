@@ -142,8 +142,7 @@ extern const struct sshkey_impl sshkey_dilithium5_impl;
 extern const struct sshkey_impl sshkey_sphincssha2128fsimple_impl;
 extern const struct sshkey_impl sshkey_sphincssha2256fsimple_impl;
 
-#ifdef HYBRID_IMPLEMENTATION_EXISTS
-// #ifdef WITH_OPENSSL
+#ifdef WITH_OPENSSL
 extern const struct sshkey_impl sshkey_rsa3072_falcon512_impl;
 extern const struct sshkey_impl sshkey_rsa3072_dilithium2_impl;
 extern const struct sshkey_impl sshkey_rsa3072_sphincssha2128fsimple_impl;
@@ -205,8 +204,7 @@ const struct sshkey_impl * const keyimpls[] = {
 	&sshkey_dilithium5_impl,
 	&sshkey_sphincssha2128fsimple_impl,
 	&sshkey_sphincssha2256fsimple_impl,
-#ifdef HYBRID_IMPLEMENTATION_EXISTS
-// #ifdef WITH_OPENSSL
+#ifdef WITH_OPENSSL
 	&sshkey_rsa3072_falcon512_impl,
 	&sshkey_rsa3072_dilithium2_impl,
 	&sshkey_rsa3072_sphincssha2128fsimple_impl,

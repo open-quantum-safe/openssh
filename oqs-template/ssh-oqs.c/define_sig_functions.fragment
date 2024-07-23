@@ -15,7 +15,7 @@ static int ssh_{{ symbol_base_name }}_generate(struct sshkey *k, int bits)
   return OQS_SIG_{{ sig['name'] }}_keypair(k->oqs_pk, k->oqs_sk);
 }
 
-int ssh_{{ symbol_base_name }}_sign(const struct sshkey *key,
+int ssh_{{ symbol_base_name }}_sign(struct sshkey *key,
                      u_char **sigp,
                      size_t *lenp,
                      const u_char *data,
@@ -29,7 +29,7 @@ int ssh_{{ symbol_base_name }}_sign(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = ssh_generic_sign(sig, "{{ symbol_base_name }}", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "{{ symbol_base_name }}", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -40,13 +40,14 @@ int ssh_{{ symbol_base_name }}_verify(const struct sshkey *key,
                        const u_char *data,
                        size_t datalen,
                        const char *alg,
-                       u_int compat)
+                       u_int compat,
+                       struct sshkey_sig_details **detailsp)
 {
     OQS_SIG *sig = OQS_SIG_new(OQS_SIG_alg_{{ sig['name'] }});
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = ssh_generic_verify(sig, "{{ symbol_base_name }}", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "{{ symbol_base_name }}", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -74,13 +75,12 @@ const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
   /* .nid = */ 0,
   /* .cert = */ 0,
   /* .sigonly = */ 0,
-  /* .keybits = */ 256, // TODO - What should be here?
+  /* .keybits = */ 0,
   /* .funcs = */ &sshkey_{{ symbol_base_name }}_funcs,
 };
 {%- endfor %}
 
-#ifdef HYBRID_IMPLEMENTATION_EXISTS
-// #ifdef WITH_OPENSSL
+#ifdef WITH_OPENSSL
 {%- for sig in config['sigs'] %}
 {%- for alg in sig['mix_with'] if alg['rsa'] %}
 {%- set symbol_base_name = alg['name']|replace('_','') + '_' + sig['name']|replace('_','') %}
@@ -93,24 +93,57 @@ static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
   /* .ssh_deserialize_public = */ ssh_generic_deserialize_public,
   /* .ssh_serialize_private = */ ssh_generic_serialize_private,
   /* .ssh_deserialize_private = */ ssh_generic_deserialize_private,
-  /* .generate = */ ssh_{{ symbol_base_name }}_generate,
+  /* .generate = */ ssh_generic_generate,
   /* .copy_public = */ ssh_generic_copy_public,
-  /* .sign = */ ssh_{{ symbol_base_name }}_sign,
-  /* .verify = */ ssh_{{ symbol_base_name }}_verify,
+  /* .sign = */ ssh_generic_sign,
+  /* .verify = */ ssh_generic_verify,
 };
 
 const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
-  /* .name = */ "ssh-{{ symbol_base_name }}",
+  /* .name = */ "ssh-{{ alg['name']|replace('_','') + '-' + sig['name']|replace('_','') }}",
   /* .shortname = */ "{{ symbol_base_name|upper }}",
   /* .sigalg = */ NULL,
-  /* .type = */ KEY_{{ sig['name']|upper }},
+  /* .type = */ KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }},
   /* .nid = */ 0,
   /* .cert = */ 0,
   /* .sigonly = */ 0,
-  /* .keybits = */ 256, // TODO - What should be here?
+  /* .keybits = */ 0,
   /* .funcs = */ &sshkey_{{ symbol_base_name }}_funcs,
 };
 {%- endfor %}
 {%- endfor %}
+#ifdef OPENSSL_HAS_ECC
+{%- for sig in config['sigs'] %}
+{%- for alg in sig['mix_with'] if not alg['rsa'] %}
+{%- set symbol_base_name = alg['name']|replace('_','') + '_' + sig['name']|replace('_','') %}
+static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
+  /* .size = */ ssh_generic_size,
+  /* .alloc = */ ssh_generic_alloc,
+  /* .cleanup = */ ssh_generic_cleanup,
+  /* .equal = */ ssh_generic_equal,
+  /* .ssh_serialize_public = */ ssh_generic_serialize_public,
+  /* .ssh_deserialize_public = */ ssh_generic_deserialize_public,
+  /* .ssh_serialize_private = */ ssh_generic_serialize_private,
+  /* .ssh_deserialize_private = */ ssh_generic_deserialize_private,
+  /* .generate = */ ssh_generic_generate,
+  /* .copy_public = */ ssh_generic_copy_public,
+  /* .sign = */ ssh_generic_sign,
+  /* .verify = */ ssh_generic_verify,
+};
+
+const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
+  /* .name = */ "ssh-{{ alg['name']|replace('_','-') + '-' + sig['name']|replace('_','') }}",
+  /* .shortname = */ "{{ alg['name']|upper + '_' + sig['name']|replace('_','')|upper }}",
+  /* .sigalg = */ NULL,
+  /* .type = */ KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }},
+  /* .nid = */ {{ alg['openssl_nid'] }},
+  /* .cert = */ 0,
+  /* .sigonly = */ 0,
+  /* .keybits = */ 0,
+  /* .funcs = */ &sshkey_{{ symbol_base_name }}_funcs,
+};
+{%- endfor %}
+{%- endfor %}
+#endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 

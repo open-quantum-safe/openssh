@@ -1,7 +1,7 @@
 {%- for kex in config['kexs'] %}
     "{{ kex['pretty_name'] }}",
     {%- for curve in kex['mix_with'] %}
-    # "{{ curve['pretty_name'] }}",
+    "{{ curve['pretty_name'] }}",
     {%- endfor -%}
 {%- endfor %}
 

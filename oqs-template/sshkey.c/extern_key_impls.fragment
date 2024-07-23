@@ -2,8 +2,7 @@
 extern const struct sshkey_impl sshkey_{{ sig['name']|replace('_','') }}_impl;
 {%- endfor %}
 
-#ifdef HYBRID_IMPLEMENTATION_EXISTS
-// #ifdef WITH_OPENSSL
+#ifdef WITH_OPENSSL
 {%- for sig in config['sigs'] %}
   {%- for alg in sig['mix_with'] if alg['rsa'] %}
 extern const struct sshkey_impl sshkey_{{ alg['name']|replace('_','') }}_{{ sig['name']|replace('_','') }}_impl;

@@ -1,0 +1,9 @@
+{% for sig in config['sigs'] %}
+    case KEY_{{ sig['name']|upper }}:
+  {%- for alg in sig['mix_with'] %}
+    case KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
+  {%- endfor %}
+      impl = &sshkey_{{ sig['name']|replace('_','') }}_impl;
+      break;
+{%- endfor %}
+

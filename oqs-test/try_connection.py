@@ -2,6 +2,7 @@
 # and signature algorithm, and checks whether the stock BoringSSL
 # client and server can establish a handshake with the choices.
 
+import argparse
 import os
 import random
 import subprocess
@@ -13,75 +14,75 @@ import sys
 kexs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START
     "frodokem-640-aes-sha256",
-    # "ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org",
+    "ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org",
     "frodokem-976-aes-sha384",
-    # "ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org",
+    "ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org",
     "frodokem-1344-aes-sha512",
-    # "ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org",
+    "ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org",
     "frodokem-640-shake-sha256",
-    # "ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org",
+    "ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org",
     "frodokem-976-shake-sha384",
-    # "ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org",
+    "ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org",
     "frodokem-1344-shake-sha512",
-    # "ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org",
+    "ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org",
     "kyber-512-sha256",
-    # "ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org",
+    "ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org",
     "kyber-768-sha384",
-    # "ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org",
+    "ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org",
     "kyber-1024-sha512",
-    # "ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org",
+    "ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org",
     "bike-l1-sha512",
-    # "ecdh-nistp256-bike-l1r3-sha512@openquantumsafe.org",
+    "ecdh-nistp256-bike-l1r3-sha512@openquantumsafe.org",
     "bike-l3-sha512",
-    # "ecdh-nistp384-bike-l3r3-sha512@openquantumsafe.org",
+    "ecdh-nistp384-bike-l3r3-sha512@openquantumsafe.org",
     "classic-mceliece-348864-sha256",
-    # "ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org",
+    "ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org",
     "classic-mceliece-348864f-sha256",
-    # "ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org",
+    "ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org",
     "classic-mceliece-460896-sha512",
-    # "ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org",
+    "ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org",
     "classic-mceliece-460896f-sha512",
-    # "ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org",
+    "ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org",
     "classic-mceliece-6688128-sha512",
-    # "ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org",
     "classic-mceliece-6688128f-sha512",
-    # "ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org",
     "classic-mceliece-6960119-sha512",
-    # "ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org",
     "classic-mceliece-6960119f-sha512",
-    # "ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org",
     "classic-mceliece-8192128-sha512",
-    # "ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org",
     "classic-mceliece-8192128f-sha512",
-    # "ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org",
+    "ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org",
     "hqc-128-sha256",
-    # "ecdh-nistp256-hqc-128r3-sha256@openquantumsafe.org",
+    "ecdh-nistp256-hqc-128r3-sha256@openquantumsafe.org",
     "hqc-192-sha384",
-    # "ecdh-nistp384-hqc-192r3-sha384@openquantumsafe.org",
+    "ecdh-nistp384-hqc-192r3-sha384@openquantumsafe.org",
     "hqc-256-sha512",
-    # "ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org",
+    "ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END
 ]
 
 sigs = [
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START
     "ssh-falcon512",
-    # "ssh-rsa3072-falcon512",
-    # "ssh-ecdsa-nistp256-falcon512",
+    "ssh-rsa3072-falcon512",
+    "ssh-ecdsa-nistp256-falcon512",
     "ssh-falcon1024",
-    # "ssh-ecdsa-nistp521-falcon1024",
+    "ssh-ecdsa-nistp521-falcon1024",
     "ssh-dilithium2",
-    # "ssh-rsa3072-dilithium2",
-    # "ssh-ecdsa-nistp256-dilithium2",
+    "ssh-rsa3072-dilithium2",
+    "ssh-ecdsa-nistp256-dilithium2",
     "ssh-dilithium3",
-    # "ssh-ecdsa-nistp384-dilithium3",
+    "ssh-ecdsa-nistp384-dilithium3",
     "ssh-dilithium5",
-    # "ssh-ecdsa-nistp521-dilithium5",
+    "ssh-ecdsa-nistp521-dilithium5",
     "ssh-sphincssha2128fsimple",
-    # "ssh-rsa3072-sphincssha2128fsimple",
-    # "ssh-ecdsa-nistp256-sphincssha2128fsimple",
+    "ssh-rsa3072-sphincssha2128fsimple",
+    "ssh-ecdsa-nistp256-sphincssha2128fsimple",
     "ssh-sphincssha2256fsimple",
-    # "ssh-ecdsa-nistp521-sphincssha2256fsimple",
+    "ssh-ecdsa-nistp521-sphincssha2256fsimple",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END
 ]
 
@@ -131,8 +132,11 @@ def try_handshake(ssh, sshd, dorandom="random"):
        do_handshake(ssh, sshd, test_sig, test_kex)
 
 if __name__ == '__main__':
-    if len(sys.argv)==1:
-        try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'))
-    else:
-        try_handshake(os.path.abspath('ssh'), os.path.abspath('sshd'), dorandom=sys.argv[1])
+    parser = argparse.ArgumentParser(description="Test connections between ssh and sshd using PQ algorithms.")
+    parser.add_argument("--ssh", default=os.path.abspath('ssh'), type=str, help="Override the ssh binary.")
+    parser.add_argument("--sshd", default=os.path.abspath('sshd'), type=str, help="Override the sshd binary.")
+    parser.add_argument("dorandom", type=str, default="random", choices=["doall", "doone", "random"],
+                        help="Slice of test cases to run.")
+    args = parser.parse_args()
+    try_handshake(args.ssh, args.sshd, args.dorandom)
 

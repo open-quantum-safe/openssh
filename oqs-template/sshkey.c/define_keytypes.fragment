@@ -1,8 +1,7 @@
 {%- for sig in config['sigs'] %}
 	&sshkey_{{ sig['name']|replace('_','') }}_impl,
 {%- endfor %}
-#ifdef HYBRID_IMPLEMENTATION_EXISTS
-// #ifdef WITH_OPENSSL
+#ifdef WITH_OPENSSL
 {%- for sig in config['sigs'] %}
 	{%- for alg in sig['mix_with'] if alg['rsa'] %}
 	&sshkey_{{ alg['name']|replace('_','') }}_{{ sig['name']|replace('_','') }}_impl,
