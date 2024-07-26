@@ -65,32 +65,38 @@ If an algorithm is provided by liboqs but is not listed below, it can still be u
 The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs):
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
-- **BIKE**: `bike-l1-sha512`, `bike-l3-sha512`
+- **BIKE**: `bike-l1-sha512`, `bike-l3-sha512`, `bike-l5-sha512`
 - **ClassicMcEliece**: `classic-mceliece-348864-sha256`, `classic-mceliece-348864f-sha256`, `classic-mceliece-460896-sha512`, `classic-mceliece-460896f-sha512`, `classic-mceliece-6688128-sha512`, `classic-mceliece-6688128f-sha512`, `classic-mceliece-6960119-sha512`, `classic-mceliece-6960119f-sha512`, `classic-mceliece-8192128-sha512`, `classic-mceliece-8192128f-sha512`
 - **FrodoKEM**: `frodokem-640-aes-sha256`, `frodokem-976-aes-sha384`, `frodokem-1344-aes-sha512`, `frodokem-640-shake-sha256`, `frodokem-976-shake-sha384`, `frodokem-1344-shake-sha512`
 - **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
 - **Kyber**: `kyber-512-sha256`, `kyber-768-sha384`, `kyber-1024-sha512`
+- **ML-KEM**: `ml-kem-512-sha256`, `ml-kem-768-sha256`, `ml-kem-1024-sha384`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
 The following hybrid algorithms are made available:
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_HYBRID_KEXS_START -->
-- **BIKE**: `ecdh-nistp256-bike-l1r3-sha512@openquantumsafe.org` `ecdh-nistp384-bike-l3r3-sha512@openquantumsafe.org`
+- **BIKE**: `ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org` `ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org` `ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org`
 - **ClassicMcEliece**: `ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org` `ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org` `ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org` `ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org`
 - **FrodoKEM**: `ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org` `ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org` `ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org` `ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org` `ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org` `ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org`
 - **HQC**: `ecdh-nistp256-hqc-128r3-sha256@openquantumsafe.org` `ecdh-nistp384-hqc-192r3-sha384@openquantumsafe.org` `ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org`
 - **Kyber**: `ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org` `ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org` `ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org`
+- **ML-KEM**: `ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org` `mlkem768nistp256-sha256` `mlkem1024nistp384-sha384`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_HYBRID_KEXS_END -->
 
 Note that algorithms marked with a dagger (†) have large stack usage and may cause failures when run on threads or in constrained environments. For example, McEliece require building `oqs-openssh` with a large(r) stack provision than is default: Adding `LDFLAGS="-Wl,--stack,20000000"` to [the `./configure` command below](#step-2-build-the-fork) is required to allow cygwin-based testing to pass.
+
+Algorithms which involve ML-KEM are provided using the names as proposed in [draft-kampanakis-curdle-ssh-pq-ke](https://datatracker.ietf.org/doc/draft-kampanakis-curdle-ssh-pq-ke/). The underlying implementation uses a liboqs API name for the final ML-KEM implementation which is currently (August 13th, 2024) aliased to ML-KEM-IPD. When the final implementation for ML-KEM becomes available, the alias will also be updated to the standardized ML-KEM implementation.
 
 #### Digital Signature
 
 The following digital signature algorithms from liboqs are supported (assuming they have been enabled in liboqs). Note that only select L3 signature variants are enabled by default. In general, algorithms that are enabled by default are marked with an asterisk, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_START -->
-- **Dilithium**: `dilithium2`\*, `dilithium3`\*, `dilithium5`\*
-- **Falcon**: `falcon512`\*, `falcon1024`\*
+- **Dilithium**: `dilithium2`, `dilithium3`, `dilithium5`
+- **Falcon**: `falcon512`\*, `falcon1024`\*, `falconpadded512`, `falconpadded1024`
+- **MAYO**: `mayo1`, `mayo2`\*, `mayo3`\*, `mayo5`\*
+- **ML-DSA**: `mldsa44`\*, `mldsa65`\*, `mldsa87`\*
 - **SPHINCS**: `sphincssha2128fsimple`\*, `sphincssha2128ssimple`, `sphincsshake128fsimple`, `sphincsshake128ssimple`, `sphincssha2192fsimple`, `sphincssha2192ssimple`, `sphincsshake192fsimple`, `sphincsshake192ssimple`, `sphincssha2256fsimple`\*, `sphincssha2256ssimple`, `sphincsshake256fsimple`, `sphincsshake256ssimple`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
@@ -100,6 +106,8 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 - if `<SIG>` has L1 security, then the fork provides the methods `rsa3072-<SIG>` and `ecdsa-nistp256-<SIG>`, which combine `<SIG>` with RSA3072 and with ECDSA using NIST's P256 curve respectively.
 - if `<SIG>` has L3 security, the fork provides the method `ecdsa-nistp384-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P384 curve.
 - if `<SIG>` has L5 security, the fork provides the method `ecdsa-nistp521-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P521 curve.
+
+Algorithms which involve ML-DSA use a liboqs API name for the final ML-DSA implementation which is currently (August 13th, 2024) aliased to ML-DSA-IPD. When the final implementation for ML-DSA becomes available, the alias will also be updated to the standardized ML-DSA implementation.
 
 ## Quickstart
 

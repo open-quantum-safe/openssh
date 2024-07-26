@@ -99,7 +99,7 @@ kexs:
       -
         name: 'nistp256'
         openssl_nid: 'NID_X9_62_prime256v1'
-        pretty_name: 'ecdh-nistp256-bike-l1r3-sha512@openquantumsafe.org'
+        pretty_name: 'ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org'
   -
     family: 'BIKE'
     name: 'bike_l3'
@@ -109,7 +109,17 @@ kexs:
       -
         name: 'nistp384'
         openssl_nid: 'NID_secp384r1'
-        pretty_name: 'ecdh-nistp384-bike-l3r3-sha512@openquantumsafe.org'
+        pretty_name: 'ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org'
+  -
+    family: 'BIKE'
+    name: 'bike_l5'
+    hash: 'sha512'
+    pretty_name: 'bike-l5-sha512'
+    mix_with:
+      -
+        name: 'nistp521'
+        openssl_nid: 'NID_secp521r1'
+        pretty_name: 'ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org'
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_348864'
@@ -240,6 +250,36 @@ kexs:
         name: 'nistp521'
         openssl_nid: 'NID_secp521r1'
         pretty_name: 'ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org'
+  -
+    family: 'ML-KEM'
+    name: 'ml_kem_512'
+    hash: 'sha256'
+    pretty_name: 'ml-kem-512-sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+        pretty_name: 'ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org'
+  -
+    family: 'ML-KEM'
+    name: 'ml_kem_768'
+    hash: 'sha256'
+    pretty_name: 'ml-kem-768-sha256'
+    mix_with:
+      -
+        name: 'nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+        pretty_name: 'mlkem768nistp256-sha256'
+  -
+    family: 'ML-KEM'
+    name: 'ml_kem_1024'
+    hash: 'sha384'
+    pretty_name: 'ml-kem-1024-sha384'
+    mix_with:
+      -
+        name: 'nistp384'
+        openssl_nid: 'NID_secp384r1'
+        pretty_name: 'mlkem1024nistp384-sha384'
 
 sigs:
   -
@@ -264,9 +304,27 @@ sigs:
         name: 'ecdsa_nistp521'
         openssl_nid: 'NID_secp521r1'
   -
+    family: 'Falcon'
+    name: 'falcon_padded_512'
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'Falcon'
+    name: 'falcon_padded_1024'
+    level: 5
+    mix_with:
+      -
+        name: 'ecdsa_nistp521'
+        openssl_nid: 'NID_secp521r1'
+  -
     family: 'Dilithium'
     name: 'dilithium_2'
-    enable: true
     level: 1
     mix_with:
       -
@@ -278,7 +336,6 @@ sigs:
   -
     family: 'Dilithium'
     name: 'dilithium_3'
-    enable: true
     level: 3
     mix_with:
       -
@@ -287,7 +344,6 @@ sigs:
   -
     family: 'Dilithium'
     name: 'dilithium_5'
-    enable: true
     level: 5
     mix_with:
       -
@@ -403,4 +459,74 @@ sigs:
       -
         name: 'ecdsa_nistp521'
         openssl_nid: 'NID_secp521r1'
-
+  -
+    family: 'ML-DSA'
+    name: 'ml_dsa_44'
+    enable: true
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'ML-DSA'
+    name: 'ml_dsa_65'
+    enable: true
+    level: 3
+    mix_with:
+      -
+        name: 'ecdsa_nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'ML-DSA'
+    name: 'ml_dsa_87'
+    enable: true
+    level: 5
+    mix_with:
+      -
+        name: 'ecdsa_nistp521'
+        openssl_nid: 'NID_secp521r1'
+  -
+    family: 'MAYO'
+    name: 'mayo_1'
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'MAYO'
+    name: 'mayo_2'
+    enable: true
+    level: 1
+    mix_with:
+      -
+        name: 'rsa3072'
+        rsa: true
+      -
+        name: 'ecdsa_nistp256'
+        openssl_nid: 'NID_X9_62_prime256v1'
+  -
+    family: 'MAYO'
+    name: 'mayo_3'
+    enable: true
+    level: 3
+    mix_with:
+      -
+        name: 'ecdsa_nistp384'
+        openssl_nid: 'NID_secp384r1'
+  -
+    family: 'MAYO'
+    name: 'mayo_5'
+    enable: true
+    level: 5
+    mix_with:
+      -
+        name: 'ecdsa_nistp521'
+        openssl_nid: 'NID_secp521r1'

@@ -804,6 +804,47 @@ int kex_kem_bike_l3_ecdh_nistp384_dec(struct kex *kex,
     return r;
 }
 /*---------------------------------------------------------------
+ * BIKE_L5_ECDH_NISTP521 METHODS
+ *---------------------------------------------------------------
+ */
+int kex_kem_bike_l5_ecdh_nistp521_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_bike_l5);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_bike_l5_ecdh_nistp521_enc(struct kex *kex,
+                                   const struct sshbuf *client_blob,
+                                   struct sshbuf **server_blobp,
+                                   struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_bike_l5);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_bike_l5_ecdh_nistp521_dec(struct kex *kex,
+                                       const struct sshbuf *server_blobp,
+                                       struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_bike_l5);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_dec(kem, kex, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------------------
  * CLASSIC_MCELIECE_348864_ECDH_NISTP256 METHODS
  *---------------------------------------------------------------
  */
@@ -1329,6 +1370,129 @@ int kex_kem_hqc_256_ecdh_nistp521_dec(struct kex *kex,
                                        struct sshbuf **shared_secretp)
 {
     OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_hqc_256);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_dec(kem, kex, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------------------
+ * ML_KEM_512_ECDH_NISTP256 METHODS
+ *---------------------------------------------------------------
+ */
+int kex_kem_ml_kem_512_ecdh_nistp256_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_512_ecdh_nistp256_enc(struct kex *kex,
+                                   const struct sshbuf *client_blob,
+                                   struct sshbuf **server_blobp,
+                                   struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_512_ecdh_nistp256_dec(struct kex *kex,
+                                       const struct sshbuf *server_blobp,
+                                       struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_512);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_dec(kem, kex, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------------------
+ * ML_KEM_768_ECDH_NISTP256 METHODS
+ *---------------------------------------------------------------
+ */
+int kex_kem_ml_kem_768_ecdh_nistp256_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_768_ecdh_nistp256_enc(struct kex *kex,
+                                   const struct sshbuf *client_blob,
+                                   struct sshbuf **server_blobp,
+                                   struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_768_ecdh_nistp256_dec(struct kex *kex,
+                                       const struct sshbuf *server_blobp,
+                                       struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_768);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_dec(kem, kex, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+/*---------------------------------------------------------------
+ * ML_KEM_1024_ECDH_NISTP384 METHODS
+ *---------------------------------------------------------------
+ */
+int kex_kem_ml_kem_1024_ecdh_nistp384_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_1024);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_1024_ecdh_nistp384_enc(struct kex *kex,
+                                   const struct sshbuf *client_blob,
+                                   struct sshbuf **server_blobp,
+                                   struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_1024);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_ec_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ml_kem_1024_ecdh_nistp384_dec(struct kex *kex,
+                                       const struct sshbuf *server_blobp,
+                                       struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_1024);
     if (kem == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }

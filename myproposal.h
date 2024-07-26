@@ -58,9 +58,11 @@
 	"kyber-1024-sha512," \
 	"ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org," \
 	"bike-l1-sha512," \
-	"ecdh-nistp256-bike-l1r3-sha512@openquantumsafe.org," \
+	"ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org," \
 	"bike-l3-sha512," \
-	"ecdh-nistp384-bike-l3r3-sha512@openquantumsafe.org," \
+	"ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org," \
+	"bike-l5-sha512," \
+	"ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org," \
 	"classic-mceliece-348864-sha256," \
 	"ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org," \
 	"classic-mceliece-348864f-sha256," \
@@ -86,7 +88,13 @@
 	"hqc-192-sha384," \
 	"ecdh-nistp384-hqc-192r3-sha384@openquantumsafe.org," \
 	"hqc-256-sha512," \
-	"ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org"
+	"ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org," \
+	"ml-kem-512-sha256," \
+	"ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org," \
+	"ml-kem-768-sha256," \
+	"mlkem768nistp256-sha256," \
+	"ml-kem-1024-sha384," \
+	"mlkem1024nistp384-sha384"
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX

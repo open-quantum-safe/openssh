@@ -76,19 +76,26 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_ECDSA_NISTP256_FALCON_512 ((uint64_t)1<<9)
 #define KT_FALCON_1024 ((uint64_t)1<<10)
 #define KT_ECDSA_NISTP521_FALCON_1024 ((uint64_t)1<<11)
-#define KT_DILITHIUM_2 ((uint64_t)1<<12)
-#define KT_RSA3072_DILITHIUM_2 ((uint64_t)1<<13)
-#define KT_ECDSA_NISTP256_DILITHIUM_2 ((uint64_t)1<<14)
-#define KT_DILITHIUM_3 ((uint64_t)1<<15)
-#define KT_ECDSA_NISTP384_DILITHIUM_3 ((uint64_t)1<<16)
-#define KT_DILITHIUM_5 ((uint64_t)1<<17)
-#define KT_ECDSA_NISTP521_DILITHIUM_5 ((uint64_t)1<<18)
-#define KT_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<19)
-#define KT_RSA3072_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<20)
-#define KT_ECDSA_NISTP256_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<21)
-#define KT_SPHINCS_SHA2_256F_SIMPLE ((uint64_t)1<<22)
-#define KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE ((uint64_t)1<<23)
-#define KT_MAX ((uint64_t)1<<23)
+#define KT_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<12)
+#define KT_RSA3072_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<13)
+#define KT_ECDSA_NISTP256_SPHINCS_SHA2_128F_SIMPLE ((uint64_t)1<<14)
+#define KT_SPHINCS_SHA2_256F_SIMPLE ((uint64_t)1<<15)
+#define KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE ((uint64_t)1<<16)
+#define KT_ML_DSA_44 ((uint64_t)1<<17)
+#define KT_RSA3072_ML_DSA_44 ((uint64_t)1<<18)
+#define KT_ECDSA_NISTP256_ML_DSA_44 ((uint64_t)1<<19)
+#define KT_ML_DSA_65 ((uint64_t)1<<20)
+#define KT_ECDSA_NISTP384_ML_DSA_65 ((uint64_t)1<<21)
+#define KT_ML_DSA_87 ((uint64_t)1<<22)
+#define KT_ECDSA_NISTP521_ML_DSA_87 ((uint64_t)1<<23)
+#define KT_MAYO_2 ((uint64_t)1<<24)
+#define KT_RSA3072_MAYO_2 ((uint64_t)1<<25)
+#define KT_ECDSA_NISTP256_MAYO_2 ((uint64_t)1<<26)
+#define KT_MAYO_3 ((uint64_t)1<<27)
+#define KT_ECDSA_NISTP384_MAYO_3 ((uint64_t)1<<28)
+#define KT_MAYO_5 ((uint64_t)1<<29)
+#define KT_ECDSA_NISTP521_MAYO_5 ((uint64_t)1<<30)
+#define KT_MAX ((uint64_t)1<<30)
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_END
 #define KT_MIN		KT_DSA
 
@@ -100,18 +107,25 @@ uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|\
                         KT_ECDSA_NISTP256_FALCON_512 | \
                         KT_FALCON_1024 | \
                         KT_ECDSA_NISTP521_FALCON_1024 | \
-                        KT_DILITHIUM_2 | \
-                        KT_RSA3072_DILITHIUM_2 | \
-                        KT_ECDSA_NISTP256_DILITHIUM_2 | \
-                        KT_DILITHIUM_3 | \
-                        KT_ECDSA_NISTP384_DILITHIUM_3 | \
-                        KT_DILITHIUM_5 | \
-                        KT_ECDSA_NISTP521_DILITHIUM_5 | \
                         KT_SPHINCS_SHA2_128F_SIMPLE | \
                         KT_RSA3072_SPHINCS_SHA2_128F_SIMPLE | \
                         KT_ECDSA_NISTP256_SPHINCS_SHA2_128F_SIMPLE | \
                         KT_SPHINCS_SHA2_256F_SIMPLE | \
-                        KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE;
+                        KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE | \
+                        KT_ML_DSA_44 | \
+                        KT_RSA3072_ML_DSA_44 | \
+                        KT_ECDSA_NISTP256_ML_DSA_44 | \
+                        KT_ML_DSA_65 | \
+                        KT_ECDSA_NISTP384_ML_DSA_65 | \
+                        KT_ML_DSA_87 | \
+                        KT_ECDSA_NISTP521_ML_DSA_87 | \
+                        KT_MAYO_2 | \
+                        KT_RSA3072_MAYO_2 | \
+                        KT_ECDSA_NISTP256_MAYO_2 | \
+                        KT_MAYO_3 | \
+                        KT_ECDSA_NISTP384_MAYO_3 | \
+                        KT_MAYO_5 | \
+                        KT_ECDSA_NISTP521_MAYO_5;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEYTYPES_END
 
 int hash_hosts = 0;		/* Hash hostname on output */
@@ -329,30 +343,42 @@ keygrab_ssh2(con *c)
 	case KT_FALCON_1024:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-falcon1024";
 	  break;
-	case KT_DILITHIUM_2:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium2";
-	  break;
-	case KT_DILITHIUM_3:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium3";
-	  break;
-	case KT_DILITHIUM_5:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-dilithium5";
-	  break;
 	case KT_SPHINCS_SHA2_128F_SIMPLE:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-sphincssha2128fsimple";
 	  break;
 	case KT_SPHINCS_SHA2_256F_SIMPLE:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-sphincssha2256fsimple";
 	  break;
+	case KT_ML_DSA_44:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa44";
+	  break;
+	case KT_ML_DSA_65:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa65";
+	  break;
+	case KT_ML_DSA_87:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa87";
+	  break;
+	case KT_MAYO_2:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mayo2";
+	  break;
+	case KT_MAYO_3:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mayo3";
+	  break;
+	case KT_MAYO_5:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mayo5";
+	  break;
 #ifdef WITH_OPENSSL
 	case KT_RSA3072_FALCON_512:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-falcon512";
 	  break;
-	case KT_RSA3072_DILITHIUM_2:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-dilithium2";
-	  break;
 	case KT_RSA3072_SPHINCS_SHA2_128F_SIMPLE:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-sphincssha2128fsimple";
+	  break;
+	case KT_RSA3072_ML_DSA_44:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-mldsa44";
+	  break;
+	case KT_RSA3072_MAYO_2:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-mayo2";
 	  break;
 #ifdef OPENSSL_HAS_ECC
 	case KT_ECDSA_NISTP256_FALCON_512:
@@ -361,20 +387,29 @@ keygrab_ssh2(con *c)
 	case KT_ECDSA_NISTP521_FALCON_1024:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-falcon1024";
 	  break;
-	case KT_ECDSA_NISTP256_DILITHIUM_2:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-dilithium2";
-	  break;
-	case KT_ECDSA_NISTP384_DILITHIUM_3:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-dilithium3";
-	  break;
-	case KT_ECDSA_NISTP521_DILITHIUM_5:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-dilithium5";
-	  break;
 	case KT_ECDSA_NISTP256_SPHINCS_SHA2_128F_SIMPLE:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-sphincssha2128fsimple";
 	  break;
 	case KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-sphincssha2256fsimple";
+	  break;
+	case KT_ECDSA_NISTP256_ML_DSA_44:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-mldsa44";
+	  break;
+	case KT_ECDSA_NISTP384_ML_DSA_65:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-mldsa65";
+	  break;
+	case KT_ECDSA_NISTP521_ML_DSA_87:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-mldsa87";
+	  break;
+	case KT_ECDSA_NISTP256_MAYO_2:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-mayo2";
+	  break;
+	case KT_ECDSA_NISTP384_MAYO_3:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-mayo3";
+	  break;
+	case KT_ECDSA_NISTP521_MAYO_5:
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-mayo5";
 	  break;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
@@ -413,6 +448,7 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_BIKE_L1_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_BIKE_L3_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_BIKE_L5_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_460896_SHA512] = kex_gen_client;
@@ -426,6 +462,9 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_HQC_128_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_HQC_192_SHA384] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_HQC_256_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_512_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -439,6 +478,7 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_KYBER_1024_ECDH_NISTP521_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_BIKE_L1_ECDH_NISTP256_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_BIKE_L3_ECDH_NISTP384_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_BIKE_L5_ECDH_NISTP521_SHA512] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512] = kex_gen_client;
@@ -452,6 +492,9 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_HQC_128_ECDH_NISTP256_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_HQC_192_ECDH_NISTP384_SHA384] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_HQC_256_ECDH_NISTP521_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_512_ECDH_NISTP256_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_ECDH_NISTP256_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_1024_ECDH_NISTP384_SHA384] = kex_gen_client;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KEX_GEN_CLIENT_END
@@ -979,27 +1022,6 @@ main(int argc, char **argv)
 				case KEY_ECDSA_NISTP521_FALCON_1024:
 					get_keytypes |= KT_ECDSA_NISTP521_FALCON_1024;
 					break;
-				case KEY_DILITHIUM_2:
-					get_keytypes |= KT_DILITHIUM_2;
-					break;
-				case KEY_RSA3072_DILITHIUM_2:
-					get_keytypes |= KT_RSA3072_DILITHIUM_2;
-					break;
-				case KEY_ECDSA_NISTP256_DILITHIUM_2:
-					get_keytypes |= KT_ECDSA_NISTP256_DILITHIUM_2;
-					break;
-				case KEY_DILITHIUM_3:
-					get_keytypes |= KT_DILITHIUM_3;
-					break;
-				case KEY_ECDSA_NISTP384_DILITHIUM_3:
-					get_keytypes |= KT_ECDSA_NISTP384_DILITHIUM_3;
-					break;
-				case KEY_DILITHIUM_5:
-					get_keytypes |= KT_DILITHIUM_5;
-					break;
-				case KEY_ECDSA_NISTP521_DILITHIUM_5:
-					get_keytypes |= KT_ECDSA_NISTP521_DILITHIUM_5;
-					break;
 				case KEY_SPHINCS_SHA2_128F_SIMPLE:
 					get_keytypes |= KT_SPHINCS_SHA2_128F_SIMPLE;
 					break;
@@ -1014,6 +1036,48 @@ main(int argc, char **argv)
 					break;
 				case KEY_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE:
 					get_keytypes |= KT_ECDSA_NISTP521_SPHINCS_SHA2_256F_SIMPLE;
+					break;
+				case KEY_ML_DSA_44:
+					get_keytypes |= KT_ML_DSA_44;
+					break;
+				case KEY_RSA3072_ML_DSA_44:
+					get_keytypes |= KT_RSA3072_ML_DSA_44;
+					break;
+				case KEY_ECDSA_NISTP256_ML_DSA_44:
+					get_keytypes |= KT_ECDSA_NISTP256_ML_DSA_44;
+					break;
+				case KEY_ML_DSA_65:
+					get_keytypes |= KT_ML_DSA_65;
+					break;
+				case KEY_ECDSA_NISTP384_ML_DSA_65:
+					get_keytypes |= KT_ECDSA_NISTP384_ML_DSA_65;
+					break;
+				case KEY_ML_DSA_87:
+					get_keytypes |= KT_ML_DSA_87;
+					break;
+				case KEY_ECDSA_NISTP521_ML_DSA_87:
+					get_keytypes |= KT_ECDSA_NISTP521_ML_DSA_87;
+					break;
+				case KEY_MAYO_2:
+					get_keytypes |= KT_MAYO_2;
+					break;
+				case KEY_RSA3072_MAYO_2:
+					get_keytypes |= KT_RSA3072_MAYO_2;
+					break;
+				case KEY_ECDSA_NISTP256_MAYO_2:
+					get_keytypes |= KT_ECDSA_NISTP256_MAYO_2;
+					break;
+				case KEY_MAYO_3:
+					get_keytypes |= KT_MAYO_3;
+					break;
+				case KEY_ECDSA_NISTP384_MAYO_3:
+					get_keytypes |= KT_ECDSA_NISTP384_MAYO_3;
+					break;
+				case KEY_MAYO_5:
+					get_keytypes |= KT_MAYO_5;
+					break;
+				case KEY_ECDSA_NISTP521_MAYO_5:
+					get_keytypes |= KT_ECDSA_NISTP521_MAYO_5;
 					break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_TO_GET_KEYTYPES_END
 				case KEY_UNSPEC:

@@ -1761,6 +1761,7 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 	kex->kex[KEX_KEM_KYBER_1024_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_BIKE_L1_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_BIKE_L3_SHA512] = kex_gen_server;
+	kex->kex[KEX_KEM_BIKE_L5_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864F_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_460896_SHA512] = kex_gen_server;
@@ -1774,6 +1775,9 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 	kex->kex[KEX_KEM_HQC_128_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_HQC_192_SHA384] = kex_gen_server;
 	kex->kex[KEX_KEM_HQC_256_SHA512] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_512_SHA256] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_server;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_server;
@@ -1787,6 +1791,7 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 	kex->kex[KEX_KEM_KYBER_1024_ECDH_NISTP521_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_BIKE_L1_ECDH_NISTP256_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_BIKE_L3_ECDH_NISTP384_SHA512] = kex_gen_server;
+	kex->kex[KEX_KEM_BIKE_L5_ECDH_NISTP521_SHA512] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864_ECDH_NISTP256_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_348864F_ECDH_NISTP256_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_CLASSIC_MCELIECE_460896_ECDH_NISTP384_SHA512] = kex_gen_server;
@@ -1800,6 +1805,9 @@ monitor_apply_keystate(struct ssh *ssh, struct monitor *pmonitor)
 	kex->kex[KEX_KEM_HQC_128_ECDH_NISTP256_SHA256] = kex_gen_server;
 	kex->kex[KEX_KEM_HQC_192_ECDH_NISTP384_SHA384] = kex_gen_server;
 	kex->kex[KEX_KEM_HQC_256_ECDH_NISTP521_SHA512] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_512_ECDH_NISTP256_SHA256] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_768_ECDH_NISTP256_SHA256] = kex_gen_server;
+	kex->kex[KEX_KEM_ML_KEM_1024_ECDH_NISTP384_SHA384] = kex_gen_server;
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_APPLY_KEYSTATE_END
