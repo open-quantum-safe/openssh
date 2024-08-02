@@ -474,6 +474,8 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_X25519_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -507,7 +509,6 @@ keygrab_ssh2(con *c)
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KEX_GEN_CLIENT_END
-	c->c_ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
 	ssh_set_verify_host_key_callback(c->c_ssh, key_print_wrapper);
 	/*
 	 * do the key-exchange until an error occurs or until

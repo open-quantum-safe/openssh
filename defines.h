@@ -940,6 +940,7 @@ struct winsize {
  * so only enable if the compiler supports them.
  */
 #if defined(VARIABLE_LENGTH_ARRAYS) && defined(VARIABLE_DECLARATION_AFTER_CODE)
-# define USE_SNTRUP761X25519 1
+// OQS Note: Disabled upstream SNTRUP761X25519 support.
+# define USE_SNTRUP761X25519 0
 #endif
 #endif /* _DEFINES_H */

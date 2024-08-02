@@ -316,6 +316,16 @@ kexs:
         name: 'nistp384'
         openssl_nid: 'NID_secp384r1'
         pretty_name: 'mlkem1024nistp384-sha384'
+  -
+    family: 'NTRU-Prime'
+    name: 'ntruprime_sntrup761'
+    hash: 'sha512'
+    pretty_name: 'sntrup761-sha512'
+    mix_with:
+      -
+        name: 'x25519'
+        x25519: true
+        pretty_name: 'sntrup761x25519-sha512@openssh.com'
 
 sigs:
   -

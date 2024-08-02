@@ -78,6 +78,8 @@ kexs = [
     "mlkem768x25519-sha256",
     "ml-kem-1024-sha384",
     "mlkem1024nistp384-sha384",
+    "sntrup761-sha512",
+    "sntrup761x25519-sha512@openssh.com",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END
 ]
 
@@ -108,6 +110,7 @@ sigs = [
     "ssh-mayo5",
     "ssh-ecdsa-nistp521-mayo5",
 ##### OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END
+    "ssh-ed25519", # Classical signature algorithm for OpenSSH interop testing
 ]
 
 def do_handshake(ssh, sshd, test_sig, test_kex):
@@ -144,11 +147,11 @@ def do_handshake(ssh, sshd, test_sig, test_kex):
 
     print("Success! Key Exchange Algorithm: {}. Signature Algorithm: {}.".format(test_kex, test_sig))
 
-def try_handshake(ssh, sshd, dorandom="random"):
+def try_handshake(ssh, sshd, test_kexes, test_sigs, dorandom="random"):
     if dorandom!="random":
-       for test_kex in kexs:
-           for test_sig in sigs:
-               if dorandom=="doall" or (dorandom=="doone" and (test_kex==kexs[0] or test_sig==sigs[0])):
+       for test_kex in test_kexes:
+           for test_sig in test_sigs:
+               if dorandom=="doall" or (dorandom=="doone" and (test_kex==test_kexes[0] or test_sig==test_sigs[0])):
                    do_handshake(ssh, sshd, test_sig, test_kex)
     else:
        test_sig = random.choice(sigs)
@@ -158,9 +161,13 @@ def try_handshake(ssh, sshd, dorandom="random"):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Test connections between ssh and sshd using PQ algorithms.")
     parser.add_argument("--ssh", default=os.path.abspath('ssh'), type=str, help="Override the ssh binary.")
+    parser.add_argument("--kex", choices=kexs, help="Specific KEX algorithm to test.")
+    parser.add_argument("--sig", choices=sigs, help="Specific SIG algorithm to test.")
     parser.add_argument("--sshd", default=os.path.abspath('sshd'), type=str, help="Override the sshd binary.")
     parser.add_argument("dorandom", type=str, default="random", choices=["doall", "doone", "random"],
                         help="Slice of test cases to run.")
     args = parser.parse_args()
-    try_handshake(args.ssh, args.sshd, args.dorandom)
+    test_kexes = [args.kex] if args.kex else kexs
+    test_sigs = [args.sig] if args.sig else sigs
+    try_handshake(args.ssh, args.sshd, test_kexes, test_sigs, args.dorandom)
 

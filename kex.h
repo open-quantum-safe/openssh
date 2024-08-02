@@ -63,7 +63,6 @@
 #define	KEX_ECDH_SHA2_NISTP521		"ecdh-sha2-nistp521"
 #define	KEX_CURVE25519_SHA256		"curve25519-sha256"
 #define	KEX_CURVE25519_SHA256_OLD	"curve25519-sha256@libssh.org"
-#define	KEX_SNTRUP761X25519_SHA512	"sntrup761x25519-sha512@openssh.com"
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_PRETTY_NAMES_START
 #define	KEX_FRODOKEM_640_AES_SHA256	"frodokem-640-aes-sha256"
 #define	KEX_FRODOKEM_640_AES_X25519_SHA256	"x25519-frodokem-640-aesr2-sha256@openquantumsafe.org"
@@ -102,6 +101,8 @@
 #define	KEX_ML_KEM_768_SHA256	"ml-kem-768-sha256"
 #define	KEX_ML_KEM_768_X25519_SHA256	"mlkem768x25519-sha256"
 #define	KEX_ML_KEM_1024_SHA384	"ml-kem-1024-sha384"
+#define	KEX_NTRUPRIME_SNTRUP761_SHA512	"sntrup761-sha512"
+#define	KEX_NTRUPRIME_SNTRUP761_X25519_SHA512	"sntrup761x25519-sha512@openssh.com"
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 #define	KEX_FRODOKEM_640_AES_ECDH_NISTP256_SHA256	"ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org"
@@ -173,7 +174,6 @@ enum kex_exchange {
 	KEX_DH_GEX_SHA256,
 	KEX_ECDH_SHA2,
 	KEX_C25519_SHA256,
-	KEX_KEM_SNTRUP761X25519_SHA512,
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEX_ENUMS_START
 	KEX_KEM_FRODOKEM_640_AES_SHA256,
 	KEX_KEM_FRODOKEM_640_AES_X25519_SHA256,
@@ -212,6 +212,8 @@ enum kex_exchange {
 	KEX_KEM_ML_KEM_768_SHA256,
 	KEX_KEM_ML_KEM_768_X25519_SHA256,
 	KEX_KEM_ML_KEM_1024_SHA384,
+	KEX_KEM_NTRUPRIME_SNTRUP761_SHA512,
+	KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512,
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256,
@@ -380,12 +382,6 @@ int	 kex_c25519_enc(struct kex *, const struct sshbuf *, struct sshbuf **,
     struct sshbuf **);
 int	 kex_c25519_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 
-int	 kex_kem_sntrup761x25519_keypair(struct kex *);
-int	 kex_kem_sntrup761x25519_enc(struct kex *, const struct sshbuf *,
-    struct sshbuf **, struct sshbuf **);
-int	 kex_kem_sntrup761x25519_dec(struct kex *, const struct sshbuf *,
-    struct sshbuf **);
-
 ///// OQS_TEMPLATE_FRAGMENT_DECLARE_KEX_PROTOTYPES_START
 /* frodokem_640_aes prototypes */
 int	 kex_kem_frodokem_640_aes_keypair(struct kex *);
@@ -535,6 +531,14 @@ int	 kex_kem_ml_kem_768_x25519_dec(struct kex *, const struct sshbuf *, struct s
 int	 kex_kem_ml_kem_1024_keypair(struct kex *);
 int	 kex_kem_ml_kem_1024_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
 int	 kex_kem_ml_kem_1024_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* ntruprime_sntrup761 prototypes */
+int	 kex_kem_ntruprime_sntrup761_keypair(struct kex *);
+int	 kex_kem_ntruprime_sntrup761_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_ntruprime_sntrup761_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
+/* ntruprime_sntrup761_x25519 prototypes */
+int	 kex_kem_ntruprime_sntrup761_x25519_keypair(struct kex *);
+int	 kex_kem_ntruprime_sntrup761_x25519_enc(struct kex *, const struct sshbuf *, struct sshbuf **, struct sshbuf **);
+int	 kex_kem_ntruprime_sntrup761_x25519_dec(struct kex *, const struct sshbuf *, struct sshbuf **);
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 /* frodokem_640_aes_nistp256 prototypes */

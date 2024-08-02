@@ -28,7 +28,6 @@
 // OQS-TODO: should I add the PQ auth methods here? they were not added in 7.9 branch...
 
 #define KEX_SERVER_KEX	\
-	"sntrup761x25519-sha512@openssh.com," \
 	"curve25519-sha256," \
 	"curve25519-sha256@libssh.org," \
 	"ecdh-sha2-nistp256," \
@@ -103,7 +102,9 @@
 	"mlkem768nistp256-sha256," \
 	"mlkem768x25519-sha256," \
 	"ml-kem-1024-sha384," \
-	"mlkem1024nistp384-sha384"
+	"mlkem1024nistp384-sha384," \
+	"sntrup761-sha512," \
+	"sntrup761x25519-sha512@openssh.com"
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX

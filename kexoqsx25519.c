@@ -579,4 +579,45 @@ int kex_kem_ml_kem_768_x25519_dec(struct kex *kex,
     OQS_KEM_free(kem);
     return r;
 }
+/*---------------------------------------------------------------
+ * NTRUPRIME_SNTRUP761_X25519 METHODS
+ *---------------------------------------------------------------
+ */
+int kex_kem_ntruprime_sntrup761_x25519_keypair(struct kex *kex)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ntruprime_sntrup761);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_x25519_keypair(kem, kex);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ntruprime_sntrup761_x25519_enc(struct kex *kex,
+                                   const struct sshbuf *client_blob,
+                                   struct sshbuf **server_blobp,
+                                   struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ntruprime_sntrup761);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_x25519_enc(kem, kex, client_blob, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
+
+int kex_kem_ntruprime_sntrup761_x25519_dec(struct kex *kex,
+                                       const struct sshbuf *server_blobp,
+                                       struct sshbuf **shared_secretp)
+{
+    OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ntruprime_sntrup761);
+    if (kem == NULL) {
+        return SSH_ERR_ALLOC_FAIL;
+    }
+    int r = kex_kem_generic_with_x25519_dec(kem, kex, server_blobp, shared_secretp);
+    OQS_KEM_free(kem);
+    return r;
+}
 ///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEX_WITH_X25519_METHODS_END

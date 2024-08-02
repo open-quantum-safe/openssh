@@ -315,6 +315,8 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 	ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_768_X25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_SHA512] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -348,7 +350,6 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 ///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_END
-	ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
 	ssh->kex->verify_host_key=&verify_host_key_callback;
 
 	ssh_dispatch_run_fatal(ssh, DISPATCH_BLOCK, &ssh->kex->done);
