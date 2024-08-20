@@ -1,0 +1,24 @@
+name: CI Checks
+on: [ push, pull_request, workflow_dispatch ]
+jobs:
+  ubuntu_build:
+    runs-on: ubuntu-latest
+    container:
+      image: openquantumsafe/ci-ubuntu-focal-x86_64:latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up SSH environment
+      run: |
+        mkdir -p -m 0755 /var/empty
+        groupadd sshd
+        useradd -g sshd -c 'sshd privsep' -d /var/empty -s /bin/false sshd
+    - name: Clone liboqs
+      run: ./oqs-scripts/clone_liboqs.sh
+    - name: Build liboqs
+      run: ./oqs-scripts/build_liboqs.sh
+    - name: Build OpenSSH
+      run: env WITH_OPENSSL=true ./oqs-scripts/build_openssh.sh
+    - name: Run tests documented to pass
+      run: ./oqs-test/run_tests.sh
+    - name: Ensure we have the ssh and sshd syntax right once for each algorithm
+      run: python3 oqs-test/try_connection.py doone

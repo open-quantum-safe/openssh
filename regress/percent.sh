@@ -13,6 +13,7 @@ USERID=`id -u`
 HOST=`hostname | cut -f1 -d.`
 HOSTNAME=`hostname`
 HASH=""
+HOME=`grep $USER /etc/passwd | cut -d ':' -f6`
 
 # Localcommand is evaluated after connection because %T is not available
 # until then.  Because of this we use a different method of exercising it,
