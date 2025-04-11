@@ -3,6 +3,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_640_aes'
+    enable: true
     hash: 'sha256'
     pretty_name: 'frodokem-640-aes-sha256'
     mix_with:
@@ -17,6 +18,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_976_aes'
+    enable: true
     hash: 'sha384'
     pretty_name: 'frodokem-976-aes-sha384'
     mix_with:
@@ -27,6 +29,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_1344_aes'
+    enable: true
     hash: 'sha512'
     pretty_name: 'frodokem-1344-aes-sha512'
     mix_with:
@@ -37,6 +40,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_640_shake'
+    enable: true
     hash: 'sha256'
     pretty_name: 'frodokem-640-shake-sha256'
     mix_with:
@@ -51,6 +55,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_976_shake'
+    enable: true
     hash: 'sha384'
     pretty_name: 'frodokem-976-shake-sha384'
     mix_with:
@@ -61,6 +66,7 @@ kexs:
   -
     family: 'FrodoKEM'
     name: 'frodokem_1344_shake'
+    enable: true
     hash: 'sha512'
     pretty_name: 'frodokem-1344-shake-sha512'
     mix_with:
@@ -71,6 +77,7 @@ kexs:
   -
     family: 'Kyber'
     name: 'kyber_512'
+    enable: true
     hash: 'sha256'
     pretty_name: 'kyber-512-sha256'
     mix_with:
@@ -85,6 +92,7 @@ kexs:
   -
     family: 'Kyber'
     name: 'kyber_768'
+    enable: true
     hash: 'sha384'
     pretty_name: 'kyber-768-sha384'
     mix_with:
@@ -95,6 +103,7 @@ kexs:
   -
     family: 'Kyber'
     name: 'kyber_1024'
+    enable: true
     hash: 'sha512'
     pretty_name: 'kyber-1024-sha512'
     mix_with:
@@ -105,6 +114,7 @@ kexs:
   -
     family: 'BIKE'
     name: 'bike_l1'
+    enable: true
     hash: 'sha512'
     pretty_name: 'bike-l1-sha512'
     mix_with:
@@ -119,6 +129,7 @@ kexs:
   -
     family: 'BIKE'
     name: 'bike_l3'
+    enable: true
     hash: 'sha512'
     pretty_name: 'bike-l3-sha512'
     mix_with:
@@ -129,6 +140,7 @@ kexs:
   -
     family: 'BIKE'
     name: 'bike_l5'
+    enable: true
     hash: 'sha512'
     pretty_name: 'bike-l5-sha512'
     mix_with:
@@ -139,6 +151,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_348864'
+    enable: true
     hash: 'sha256'
     pretty_name: 'classic-mceliece-348864-sha256'
     mix_with:
@@ -153,6 +166,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_348864f'
+    enable: true
     hash: 'sha256'
     pretty_name: 'classic-mceliece-348864f-sha256'
     mix_with:
@@ -167,6 +181,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_460896'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-460896-sha512'
     mix_with:
@@ -177,6 +192,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_460896f'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-460896f-sha512'
     mix_with:
@@ -187,6 +203,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_6688128'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-6688128-sha512'
     mix_with:
@@ -197,6 +214,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_6688128f'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-6688128f-sha512'
     mix_with:
@@ -207,6 +225,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_6960119'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-6960119-sha512'
     mix_with:
@@ -217,6 +236,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_6960119f'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-6960119f-sha512'
     mix_with:
@@ -227,6 +247,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_8192128'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-8192128-sha512'
     mix_with:
@@ -237,6 +258,7 @@ kexs:
   -
     family: 'ClassicMcEliece'
     name: 'classic_mceliece_8192128f'
+    enable: true
     hash: 'sha512'
     pretty_name: 'classic-mceliece-8192128f-sha512'
     mix_with:
@@ -247,6 +269,7 @@ kexs:
   -
     family: 'HQC'
     name: 'hqc_128'
+    enable: false
     hash: 'sha256'
     pretty_name: 'hqc-128-sha256'
     mix_with:
@@ -261,6 +284,7 @@ kexs:
   -
     family: 'HQC'
     name: 'hqc_192'
+    enable: false
     hash: 'sha384'
     pretty_name: 'hqc-192-sha384'
     mix_with:
@@ -271,6 +295,7 @@ kexs:
   -
     family: 'HQC'
     name: 'hqc_256'
+    enable: false
     hash: 'sha512'
     pretty_name: 'hqc-256-sha512'
     mix_with:
@@ -281,6 +306,7 @@ kexs:
   -
     family: 'ML-KEM'
     name: 'ml_kem_512'
+    enable: true
     hash: 'sha256'
     pretty_name: 'ml-kem-512-sha256'
     mix_with:
@@ -295,6 +321,7 @@ kexs:
   -
     family: 'ML-KEM'
     name: 'ml_kem_768'
+    enable: true
     hash: 'sha256'
     pretty_name: 'ml-kem-768-sha256'
     mix_with:
@@ -309,6 +336,7 @@ kexs:
   -
     family: 'ML-KEM'
     name: 'ml_kem_1024'
+    enable: true
     hash: 'sha384'
     pretty_name: 'ml-kem-1024-sha384'
     mix_with:
@@ -319,6 +347,7 @@ kexs:
   -
     family: 'NTRU-Prime'
     name: 'ntruprime_sntrup761'
+    enable: true
     hash: 'sha512'
     pretty_name: 'sntrup761-sha512'
     mix_with:

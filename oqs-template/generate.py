@@ -53,7 +53,7 @@ def load_config(include_disabled_algs=False):
         config['sigs'] = [sig for sig in config['sigs'] if 'enable' in sig.keys() and sig['enable']]
 
         # enable if single KEXs are to be en/disabled:
-        #config['kexs'] = [kex for kex in config['kexs'] if 'enable' in kex.keys() and kex['enable']]
+        config['kexs'] = [kex for kex in config['kexs'] if 'enable' in kex.keys() and kex['enable']]
 
     return config
 
