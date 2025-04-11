@@ -58,7 +58,7 @@ If an algorithm is provided by liboqs but is not listed below, it can still be u
 
 #### Key Exchange
 
-The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs):
+The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs). In general, algorithms that are enabled by default are marked with an asterisk, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
 - **BIKE**: `bike-l1-sha512`, `bike-l3-sha512`, `bike-l5-sha512`
@@ -70,7 +70,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **NTRU-Prime**: `ntruprime-sntrup761-sha512`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
-The following hybrid algorithms are made available:
+The following hybrid algorithms are made available (dependent on the associated quantum-safe algorithm being enabled):
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_HYBRID_KEXS_START -->
 - **BIKE**: `ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org` `x25519-bike-l1r4-sha512@openquantumsafe.org` `ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org` `ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org`
