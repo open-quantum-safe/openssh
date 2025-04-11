@@ -61,13 +61,13 @@ If an algorithm is provided by liboqs but is not listed below, it can still be u
 The following quantum-safe algorithms from liboqs are supported (assuming they have been enabled in liboqs). In general, algorithms that are enabled by default are marked with an asterisk, and should you wish to enable additional variants, consult [the "Code Generation" section of the documentation in the wiki](https://github.com/open-quantum-safe/openssh/wiki/Using-liboqs-supported-algorithms-in-the-fork#code-generation).
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
-- **BIKE**: `bike-l1-sha512`, `bike-l3-sha512`, `bike-l5-sha512`
-- **ClassicMcEliece**: `classic-mceliece-348864-sha256`, `classic-mceliece-348864f-sha256`, `classic-mceliece-460896-sha512`, `classic-mceliece-460896f-sha512`, `classic-mceliece-6688128-sha512`, `classic-mceliece-6688128f-sha512`, `classic-mceliece-6960119-sha512`, `classic-mceliece-6960119f-sha512`, `classic-mceliece-8192128-sha512`, `classic-mceliece-8192128f-sha512`
-- **FrodoKEM**: `frodokem-640-aes-sha256`, `frodokem-976-aes-sha384`, `frodokem-1344-aes-sha512`, `frodokem-640-shake-sha256`, `frodokem-976-shake-sha384`, `frodokem-1344-shake-sha512`
+- **BIKE**: `bike-l1-sha512`\*, `bike-l3-sha512`\*, `bike-l5-sha512`\*
+- **ClassicMcEliece**: `classic-mceliece-348864-sha256`\*, `classic-mceliece-348864f-sha256`\*, `classic-mceliece-460896-sha512`\*, `classic-mceliece-460896f-sha512`\*, `classic-mceliece-6688128-sha512`\*, `classic-mceliece-6688128f-sha512`\*, `classic-mceliece-6960119-sha512`\*, `classic-mceliece-6960119f-sha512`\*, `classic-mceliece-8192128-sha512`\*, `classic-mceliece-8192128f-sha512`\*
+- **FrodoKEM**: `frodokem-640-aes-sha256`\*, `frodokem-976-aes-sha384`\*, `frodokem-1344-aes-sha512`\*, `frodokem-640-shake-sha256`\*, `frodokem-976-shake-sha384`\*, `frodokem-1344-shake-sha512`\*
 - **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
-- **Kyber**: `kyber-512-sha256`, `kyber-768-sha384`, `kyber-1024-sha512`
-- **ML-KEM**: `ml-kem-512-sha256`, `ml-kem-768-sha256`, `ml-kem-1024-sha384`
-- **NTRU-Prime**: `ntruprime-sntrup761-sha512`
+- **Kyber**: `kyber-512-sha256`\*, `kyber-768-sha384`\*, `kyber-1024-sha512`\*
+- **ML-KEM**: `ml-kem-512-sha256`\*, `ml-kem-768-sha256`\*, `ml-kem-1024-sha384`\*
+- **NTRU-Prime**: `ntruprime-sntrup761-sha512`\*
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
 The following hybrid algorithms are made available (dependent on the associated quantum-safe algorithm being enabled):

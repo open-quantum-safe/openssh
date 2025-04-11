@@ -306,10 +306,6 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_6960119F_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_8192128_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_8192128F_SHA512] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_128_SHA256] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_128_X25519_SHA256] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_192_SHA384] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_256_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_512_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_512_X25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
@@ -341,9 +337,6 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_6960119F_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_8192128_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_CLASSIC_MCELIECE_8192128F_ECDH_NISTP521_SHA512] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_128_ECDH_NISTP256_SHA256] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_192_ECDH_NISTP384_SHA384] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_HQC_256_ECDH_NISTP521_SHA512] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_512_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_768_ECDH_NISTP256_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_1024_ECDH_NISTP384_SHA384] = kex_gen_client;
