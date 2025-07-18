@@ -1,4 +1,4 @@
-/* $OpenBSD: kex.c,v 1.185 2024/01/08 00:34:33 djm Exp $ */
+/* $OpenBSD: kex.c,v 1.186 2024/05/17 00:30:23 djm Exp $ */
 /*
  * Copyright (c) 2000, 2001 Markus Friedl.  All rights reserved.
  *
@@ -590,11 +590,11 @@ kex_set_server_sig_algs(struct ssh *ssh, const char *allowed_algs)
 	    (alg = strsep(&algs, ","))) {
 		if ((sigalg = sshkey_sigalg_by_name(alg)) == NULL)
 			continue;
-		if (!has_any_alg(sigalg, sigalgs))
+		if (!kex_has_any_alg(sigalg, sigalgs))
 			continue;
 		/* Don't add an algorithm twice. */
 		if (ssh->kex->server_sig_algs != NULL &&
-		    has_any_alg(sigalg, ssh->kex->server_sig_algs))
+		    kex_has_any_alg(sigalg, ssh->kex->server_sig_algs))
 			continue;
 		xextendf(&ssh->kex->server_sig_algs, ",", "%s", sigalg);
 	}
@@ -1175,20 +1175,18 @@ choose_comp(struct sshcomp *comp, char *client, char *server)
 static int
 choose_kex(struct kex *k, char *client, char *server)
 {
-	const struct kexalg *kexalg;
-
 	k->name = match_list(client, server, NULL);
 
 	debug("kex: algorithm: %s", k->name ? k->name : "(no match)");
 	if (k->name == NULL)
 		return SSH_ERR_NO_KEX_ALG_MATCH;
-	if ((kexalg = kex_alg_by_name(k->name)) == NULL) {
+	if (!kex_name_valid(k->name)) {
 		error_f("unsupported KEX method %s", k->name);
 		return SSH_ERR_INTERNAL_ERROR;
 	}
-	k->kex_type = kexalg->type;
-	k->hash_alg = kexalg->hash_alg;
-	k->ec_nid = kexalg->ec_nid;
+	k->kex_type = kex_type_from_name(k->name);
+	k->hash_alg = kex_hash_from_name(k->name);
+	k->ec_nid = kex_nid_from_name(k->name);
 	return 0;
 }
 
@@ -1238,7 +1236,7 @@ proposals_match(char *my[PROPOSAL_MAX], char *peer[PROPOSAL_MAX])
 static int
 kexalgs_contains(char **peer, const char *ext)
 {
-	return has_any_alg(peer[PROPOSAL_KEX_ALGS], ext);
+	return kex_has_any_alg(peer[PROPOSAL_KEX_ALGS], ext);
 }
 
 static int
@@ -1289,10 +1287,10 @@ kex_choose_conf(struct ssh *ssh, uint32_t seq)
 
 	/* Check whether client supports rsa-sha2 algorithms */
 	if (kex->server && (kex->flags & KEX_INITIAL)) {
-		if (has_any_alg(peer[PROPOSAL_SERVER_HOST_KEY_ALGS],
+		if (kex_has_any_alg(peer[PROPOSAL_SERVER_HOST_KEY_ALGS],
 		    "rsa-sha2-256,rsa-sha2-256-cert-v01@openssh.com"))
 			kex->flags |= KEX_RSA_SHA2_256_SUPPORTED;
-		if (has_any_alg(peer[PROPOSAL_SERVER_HOST_KEY_ALGS],
+		if (kex_has_any_alg(peer[PROPOSAL_SERVER_HOST_KEY_ALGS],
 		    "rsa-sha2-512,rsa-sha2-512-cert-v01@openssh.com"))
 			kex->flags |= KEX_RSA_SHA2_512_SUPPORTED;
 	}

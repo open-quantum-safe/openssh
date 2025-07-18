@@ -1,18 +1,14 @@
 Makefile
 buildpkg.sh
 config.h
-config.h.in
 config.h.in~
 config.log
 config.status
-configure
-aclocal.m4
 openbsd-compat/Makefile
 openbsd-compat/regress/Makefile
 openssh.xml
 opensshd.init
 survey.sh
-**/*.0
 **/*.o
 **/*.lo
 **/*.so
@@ -43,3 +39,4 @@ oqs-scripts/tmp
 oqs/
 *.dSYM
 __pycache__
+
