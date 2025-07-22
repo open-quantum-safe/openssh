@@ -807,6 +807,7 @@ with_pam
 with_pam_service
 with_privsep_user
 with_sandbox
+with_liboqs_dir
 with_selinux
 with_kerberos5
 with_privsep_path
@@ -1515,6 +1516,7 @@ Optional Packages:
   --with-pam-service=name Specify PAM service name
   --with-privsep-user=user Specify non-privileged user for privilege separation
   --with-sandbox=style    Specify privilege separation sandbox (no, capsicum, darwin, rlimit, seccomp_filter, systrace, pledge)
+  --with-liboqs-dir=PATH     Specify path to LibOQS installation
   --with-selinux          Enable SELinux support
   --with-kerberos5=PATH   Enable Kerberos 5 support
   --with-privsep-path=xxx Path for privilege separation chroot (default=/var/empty)
@@ -20603,6 +20605,126 @@ else
 	as_fn_error $? "unsupported --with-sandbox" "$LINENO" 5
 fi
 
+# Check for LibOQS
+with_liboqs=no
+
+# Check whether --with-liboqs-dir was given.
+if test ${with_liboqs_dir+y}
+then :
+  withval=$with_liboqs_dir;
+		if test "x$withval" != "xno" ; then
+			with_liboqs=yes
+			case "$withval" in
+				# Relative paths
+				./*|../*)	withval="`pwd`/$withval"
+			esac
+			if test -d "$withval/lib"; then
+				if test -n "${need_dash_r}"; then
+					LDFLAGS="-L${withval}/lib -R${withval}/lib ${LDFLAGS}"
+				else
+					LDFLAGS="-L${withval}/lib ${LDFLAGS}"
+				fi
+			elif test -d "$withval/lib64"; then
+				if test -n "${need_dash_r}"; then
+					LDFLAGS="-L${withval}/lib64 -R${withval}/lib64 ${LDFLAGS}"
+				else
+					LDFLAGS="-L${withval}/lib64 ${LDFLAGS}"
+				fi
+			else
+				if test -n "${need_dash_r}"; then
+					LDFLAGS="-L${withval} -R${withval} ${LDFLAGS}"
+				else
+					LDFLAGS="-L${withval} ${LDFLAGS}"
+				fi
+			fi
+			if test -d "$withval/include"; then
+				CPPFLAGS="-I${withval}/include ${CPPFLAGS}"
+			else
+				CPPFLAGS="-I${withval} ${CPPFLAGS}"
+			fi
+		fi
+
+
+fi
+
+
+if test "x$with_liboqs" = "xyes" ; then
+
+printf "%s\n" "#define WITH_OQS 1" >>confdefs.h
+
+	LIBS="-loqs -lcrypto $LIBS"
+	ac_fn_c_check_header_compile "$LINENO" "oqs/kem.h" "ac_cv_header_oqs_kem_h" "$ac_includes_default"
+if test "x$ac_cv_header_oqs_kem_h" = xyes
+then :
+
+else $as_nop
+  as_fn_error $? "*** LibOQS headers missing - please install first or check config.log ***" "$LINENO" 5
+fi
+
+	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <oqs/kem.h>
+int
+main (void)
+{
+
+					char *alg = OQS_KEM_alg_identifier(0);
+					if (alg == NULL) {
+						return 1;
+					}
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+
+else $as_nop
+
+					as_fn_error $? "*** Can't find LibOQS library (see config.log for details) ***" "$LINENO" 5
+
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+	ac_fn_c_check_header_compile "$LINENO" "oqs/sig.h" "ac_cv_header_oqs_sig_h" "$ac_includes_default"
+if test "x$ac_cv_header_oqs_sig_h" = xyes
+then :
+
+else $as_nop
+  as_fn_error $? "*** LibOQS headers missing - please install first or check config.log ***" "$LINENO" 5
+fi
+
+	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <oqs/sig.h>
+int
+main (void)
+{
+
+					char *alg = OQS_SIG_alg_identifier(0);
+					if (alg == NULL) {
+						return 1;
+					}
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"
+then :
+
+else $as_nop
+
+					as_fn_error $? "*** Can't find LibOQS library (see config.log for details) ***" "$LINENO" 5
+
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam \
+    conftest$ac_exeext conftest.$ac_ext
+	fi
+
 # Cheap hack to ensure NEWS-OS libraries are arranged right.
 if test ! -z "$SONY" ; then
   LIBS="$LIBS -liberty";
@@ -27689,3 +27811,4 @@ if test "$AUDIT_MODULE" = "bsm" ; then
 	echo "WARNING: BSM audit support is currently considered EXPERIMENTAL."
 	echo "See the Solaris section in README.platform for details."
 fi
+
