@@ -1,4 +1,4 @@
-/* $OpenBSD: kexgen.c,v 1.8 2021/12/19 22:08:06 djm Exp $ */
+/* $OpenBSD: kexgen.c,v 1.10 2024/09/09 02:39:57 djm Exp $ */
 /*
  * Copyright (c) 2019 Markus Friedl.  All rights reserved.
  *
@@ -609,6 +609,8 @@ out:
 	explicit_bzero(kex->c25519_client_key, sizeof(kex->c25519_client_key));
 	explicit_bzero(kex->sntrup761_client_key,
 	    sizeof(kex->sntrup761_client_key));
+	explicit_bzero(kex->mlkem768_client_key,
+	    sizeof(kex->mlkem768_client_key));
 	if (kex->oqs_client_key) {
 		explicit_bzero(kex->oqs_client_key, kex->oqs_client_key_size);
 		free(kex->oqs_client_key);

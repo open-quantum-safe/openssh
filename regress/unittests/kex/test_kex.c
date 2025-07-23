@@ -1,4 +1,4 @@
-/* 	$OpenBSD: test_kex.c,v 1.8 2024/03/25 19:28:09 djm Exp $ */
+/* 	$OpenBSD: test_kex.c,v 1.9 2024/09/09 03:13:39 djm Exp $ */
 /*
  * Regress test KEX
  *

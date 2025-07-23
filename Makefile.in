@@ -114,7 +114,7 @@ LIBSSH_OBJS=${LIBOPENSSH_OBJS} \
 	kex.o kex-names.o kexdh.o kexgex.o kexecdh.o kexc25519.o \
 	kexgexc.o kexgexs.o \
 	kexoqs.o kexoqsecdh.o kexoqsx25519.o \
-	kexsntrup761x25519.o sntrup761.o kexgen.o \
+	kexsntrup761x25519.o kexmlkem768x25519.o sntrup761.o kexgen.o \
 	sftp-realpath.o platform-pledge.o platform-tracing.o platform-misc.o \
 	sshbuf-io.o
 

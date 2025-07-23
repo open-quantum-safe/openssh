@@ -1,4 +1,4 @@
-/* $OpenBSD: sshd-session.c,v 1.4 2024/06/26 23:16:52 deraadt Exp $ */
+/* $OpenBSD: sshd-session.c,v 1.9 2024/09/09 02:39:57 djm Exp $ */
 /*
  * SSH2 implementation:
  * Privilege Separation:
@@ -217,7 +217,9 @@ grace_alarm_handler(int sig)
 		memset(&sa, 0, sizeof(sa));
 		sa.sa_handler = SIG_IGN;
 		sigfillset(&sa.sa_mask);
+#if defined(SA_RESTART)
 		sa.sa_flags = SA_RESTART;
+#endif
 		(void)sigaction(SIGTERM, &sa, NULL);
 		kill(0, SIGTERM);
 	}
@@ -822,7 +824,6 @@ check_ip_options(struct ssh *ssh)
 		fatal("Connection from %.100s port %d with IP opts: %.800s",
 		    ssh_remote_ipaddr(ssh), ssh_remote_port(ssh), text);
 	}
-	return;
 #endif /* IP_OPTIONS */
 }
 
@@ -886,6 +887,7 @@ main(int ac, char **av)
 	struct connection_info *connection_info = NULL;
 	sigset_t sigmask;
 	uint64_t timing_secret = 0;
+	struct itimerval itv;
 
 	sigemptyset(&sigmask);
 	sigprocmask(SIG_SETMASK, &sigmask, NULL);
@@ -1280,8 +1282,17 @@ main(int ac, char **av)
 	 * are about to discover the bug.
 	 */
 	ssh_signal(SIGALRM, grace_alarm_handler);
-	if (!debug_flag)
-		alarm(options.login_grace_time);
+	if (!debug_flag && options.login_grace_time > 0) {
+		int ujitter = arc4random_uniform(4 * 1000000);
+
+		timerclear(&itv.it_interval);
+		itv.it_value.tv_sec = options.login_grace_time;
+		itv.it_value.tv_sec += ujitter / 1000000;
+		itv.it_value.tv_usec = ujitter % 1000000; 
+
+		if (setitimer(ITIMER_REAL, &itv, NULL) == -1)
+			fatal("login grace time setitimer failed");
+	}
 
 	if ((r = kex_exchange_identification(ssh, -1,
 	    options.version_addendum)) != 0)
@@ -1325,7 +1336,10 @@ main(int ac, char **av)
 	 * Cancel the alarm we set to limit the time taken for
 	 * authentication.
 	 */
-	alarm(0);
+	timerclear(&itv.it_interval);
+	timerclear(&itv.it_value);
+	if (setitimer(ITIMER_REAL, &itv, NULL) == -1)
+		fatal("login grace time clear failed");
 	ssh_signal(SIGALRM, SIG_DFL);
 	authctxt->authenticated = 1;
 	if (startup_pipe != -1) {
@@ -1558,13 +1572,13 @@ cleanup_exit(int i)
 			}
 		}
 	}
-	/* Override default fatal exit value when auth was attempted */
-	if (i == 255 && auth_attempted)
-		_exit(EXIT_AUTH_ATTEMPTED);
 #ifdef SSH_AUDIT_EVENTS
 	/* done after do_cleanup so it can cancel the PAM auth 'thread' */
 	if (the_active_state != NULL && mm_is_monitor())
 		audit_event(the_active_state, SSH_CONNECTION_ABANDON);
 #endif
+	/* Override default fatal exit value when auth was attempted */
+	if (i == 255 && auth_attempted)
+		_exit(EXIT_AUTH_ATTEMPTED);
 	_exit(i);
 }

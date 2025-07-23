@@ -1,4 +1,4 @@
-/* $OpenBSD: ssh_api.c,v 1.29 2024/05/17 00:30:24 djm Exp $ */
+/* $OpenBSD: ssh_api.c,v 1.31 2024/09/09 02:39:57 djm Exp $ */
 /*
  * Copyright (c) 2012 Markus Friedl.  All rights reserved.
  *
