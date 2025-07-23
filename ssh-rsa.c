@@ -377,11 +377,6 @@ ssh_rsa_complete_crt_parameters(const BIGNUM *rsa_d, const BIGNUM *rsa_p,
 	BN_CTX *ctx = NULL;
 	int r;
 
-	if (key == NULL || key->rsa == NULL ||
-	    (sshkey_type_plain(key->type) != KEY_RSA &&
-	     !oqs_utils_is_rsa_hybrid(sshkey_type_plain(key->type))))
-		return SSH_ERR_INVALID_ARGUMENT;
-
 	*rsa_dmq1 = *rsa_dmp1 = NULL;
 	if ((ctx = BN_CTX_new()) == NULL)
 		return SSH_ERR_ALLOC_FAIL;
