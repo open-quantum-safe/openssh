@@ -60,13 +60,14 @@ def load_config(include_disabled_algs=False):
 config = load_config()
 
 # kexs
+populate('kex-names.c', config, '/////')
 populate('kex.c', config, '/////')
 populate('kexgen.c', config, '/////')
 populate('kexoqs.c', config, '/////')
 populate('kexoqsecdh.c', config, '/////')
 populate('kexoqsx25519.c', config, '/////')
 populate('monitor.c', config, '/////')
-populate('sshd.c', config, '/////')
+populate('sshd-session.c', config, '/////')
 populate('sshconnect2.c', config, '/////')
 populate('ssh_api.c', config, '/////')
 populate('kex.h', config, '/////')
