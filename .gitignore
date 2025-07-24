@@ -12,6 +12,8 @@ survey.sh
 **/*.o
 **/*.lo
 **/*.so
+**/*.dylib
+**/*.dll
 **/*.out
 **/*.a
 **/*.un~
@@ -30,8 +32,9 @@ ssh-pkcs11-helper
 ssh-sk-helper
 sshd
 sshd-session
-!regress/misc/fuzz-harness/Makefile
-!regress/unittests/sshsig/Makefile
+sshd-auth
+!regress/misc/**/Makefile
+!regress/unittests/**/Makefile
 tags
 
 # Added by OQS
