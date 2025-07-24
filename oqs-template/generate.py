@@ -71,6 +71,7 @@ populate('sshd-auth.c', config, '/////')
 populate('sshconnect2.c', config, '/////')
 populate('ssh_api.c', config, '/////')
 populate('kex.h', config, '/////')
+populate('myproposal.h', config, '/*///')
 
 # sigs
 populate('readconf.c', config, '/////')
