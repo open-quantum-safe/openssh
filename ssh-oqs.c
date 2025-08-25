@@ -904,7 +904,7 @@ int ssh_mldsa44_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa44", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-44", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -922,7 +922,7 @@ int ssh_mldsa44_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa44", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-44", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -982,7 +982,7 @@ int ssh_mldsa65_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa65", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-65", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1000,7 +1000,7 @@ int ssh_mldsa65_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa65", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-65", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1060,7 +1060,7 @@ int ssh_mldsa87_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa87", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-87", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1078,7 +1078,7 @@ int ssh_mldsa87_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa87", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-87", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }

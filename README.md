@@ -94,7 +94,7 @@ The following digital signature algorithms from liboqs are supported (assuming t
 - **Dilithium**: `dilithium2`, `dilithium3`, `dilithium5`
 - **Falcon**: `falcon512`\*, `falcon1024`\*, `falconpadded512`, `falconpadded1024`
 - **MAYO**: `mayo1`, `mayo2`\*, `mayo3`\*, `mayo5`\*
-- **ML-DSA**: `mldsa44`\*, `mldsa65`\*, `mldsa87`\*
+- **ML-DSA**: `mldsa-44`\*, `mldsa-65`\*, `mldsa-87`\*
 - **SPHINCS**: `sphincssha2128fsimple`\*, `sphincssha2128ssimple`, `sphincsshake128fsimple`, `sphincsshake128ssimple`, `sphincssha2192fsimple`, `sphincssha2192ssimple`, `sphincsshake192fsimple`, `sphincsshake192ssimple`, `sphincssha2256fsimple`\*, `sphincssha2256ssimple`, `sphincsshake256fsimple`, `sphincsshake256ssimple`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
