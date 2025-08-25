@@ -943,7 +943,7 @@ static const struct sshkey_impl_funcs sshkey_mldsa44_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa44_impl = {
-  /* .name = */ "ssh-mldsa44",
+  /* .name = */ "ssh-mldsa-44",
   /* .shortname = */ "MLDSA44",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_44,
@@ -1021,7 +1021,7 @@ static const struct sshkey_impl_funcs sshkey_mldsa65_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa65_impl = {
-  /* .name = */ "ssh-mldsa65",
+  /* .name = */ "ssh-mldsa-65",
   /* .shortname = */ "MLDSA65",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_65,
@@ -1099,7 +1099,7 @@ static const struct sshkey_impl_funcs sshkey_mldsa87_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa87_impl = {
-  /* .name = */ "ssh-mldsa87",
+  /* .name = */ "ssh-mldsa-87",
   /* .shortname = */ "MLDSA87",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_87,

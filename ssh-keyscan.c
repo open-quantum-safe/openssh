@@ -350,13 +350,13 @@ keygrab_ssh2(con *c)
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-sphincssha2256fsimple";
 	  break;
 	case KT_ML_DSA_44:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa44";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-44";
 	  break;
 	case KT_ML_DSA_65:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa65";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-65";
 	  break;
 	case KT_ML_DSA_87:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa87";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-87";
 	  break;
 	case KT_MAYO_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mayo2";
