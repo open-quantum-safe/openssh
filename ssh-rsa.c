@@ -295,7 +295,7 @@ rsa_hash_id_from_ident(const char *ident)
 ///// OQS_TEMPLATE_FRAGMENT_LIST_L1_RSA_HYBRIDS_START
 	    strcmp(ident, "ssh-rsa3072-falcon512") == 0 ||
 	    strcmp(ident, "ssh-rsa3072-sphincssha2128fsimple") == 0 ||
-	    strcmp(ident, "ssh-rsa3072-mldsa44") == 0 ||
+	    strcmp(ident, "ssh-rsa3072-mldsa-44") == 0 ||
 	    strcmp(ident, "ssh-rsa3072-mayo2") == 0)
 ///// OQS_TEMPLATE_FRAGMENT_LIST_L1_RSA_HYBRIDS_END
 		return SSH_DIGEST_SHA256;

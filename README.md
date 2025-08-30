@@ -66,7 +66,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **FrodoKEM**: `frodokem-640-aes-sha256`\*, `frodokem-976-aes-sha384`\*, `frodokem-1344-aes-sha512`\*, `frodokem-640-shake-sha256`\*, `frodokem-976-shake-sha384`\*, `frodokem-1344-shake-sha512`\*
 - **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
 - **Kyber**: `kyber-512-sha256`\*, `kyber-768-sha384`\*, `kyber-1024-sha512`\*
-- **ML-KEM**: `mlkem512-sha256`\*, `mlkem768-sha256`\*, `mlkem1024-sha384`\*
+- **ML-KEM**: `ml-kem-512-sha256`\*, `ml-kem-768-sha256`\*, `ml-kem-1024-sha384`\*
 - **NTRU-Prime**: `ntruprime-sntrup761-sha512`\*
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 
@@ -94,7 +94,7 @@ The following digital signature algorithms from liboqs are supported (assuming t
 - **Dilithium**: `dilithium2`, `dilithium3`, `dilithium5`
 - **Falcon**: `falcon512`\*, `falcon1024`\*, `falconpadded512`, `falconpadded1024`
 - **MAYO**: `mayo1`, `mayo2`\*, `mayo3`\*, `mayo5`\*
-- **ML-DSA**: `mldsa-44`\*, `mldsa-65`\*, `mldsa-87`\*
+- **ML-DSA**: `mldsa44`\*, `mldsa65`\*, `mldsa87`\*
 - **SPHINCS**: `sphincssha2128fsimple`\*, `sphincssha2128ssimple`, `sphincsshake128fsimple`, `sphincsshake128ssimple`, `sphincssha2192fsimple`, `sphincssha2192ssimple`, `sphincsshake192fsimple`, `sphincsshake192ssimple`, `sphincssha2256fsimple`\*, `sphincssha2256ssimple`, `sphincsshake256fsimple`, `sphincsshake256ssimple`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_SIGS_END -->
 
