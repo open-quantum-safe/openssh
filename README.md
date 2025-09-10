@@ -66,7 +66,7 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 - **FrodoKEM**: `frodokem-640-aes-sha256`\*, `frodokem-976-aes-sha384`\*, `frodokem-1344-aes-sha512`\*, `frodokem-640-shake-sha256`\*, `frodokem-976-shake-sha384`\*, `frodokem-1344-shake-sha512`\*
 - **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
 - **Kyber**: `kyber-512-sha256`\*, `kyber-768-sha384`\*, `kyber-1024-sha512`\*
-- **ML-KEM**: `mlkem512-sha256`\*, `mlkem768-sha256`\*, `mlkem1024-sha384`\*
+- **ML-KEM**: `ml-kem-512-sha256`\*, `ml-kem-768-sha256`\*, `ml-kem-1024-sha384`\*
 - **NTRU-Prime**: `ntruprime-sntrup761-sha512`\*
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_END -->
 

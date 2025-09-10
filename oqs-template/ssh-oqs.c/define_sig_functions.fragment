@@ -1,5 +1,6 @@
 {%- for sig in config['sigs'] %}
 {%- set symbol_base_name = sig['name']|replace('_','') %}
+{%- set symbol_base_pretty_name = sig.get('pretty_name', sig['name']|replace('_','')) %}
 /*---------------------------------------------------
  * {{ sig['name']|upper }} METHODS
  *---------------------------------------------------
@@ -29,7 +30,7 @@ int ssh_{{ symbol_base_name }}_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "{{ symbol_base_name }}", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "{{ symbol_base_pretty_name }}", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -47,7 +48,7 @@ int ssh_{{ symbol_base_name }}_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "{{ symbol_base_name }}", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "{{ symbol_base_pretty_name }}", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -68,8 +69,8 @@ static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
 };
 
 const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
-  /* .name = */ "ssh-{{ symbol_base_name }}",
-  /* .shortname = */ "{{ symbol_base_name|upper }}",
+  /* .name = */ "ssh-{{ symbol_base_pretty_name }}",
+  /* .shortname = */ "{{ symbol_base_pretty_name|upper }}",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_{{ sig['name']|upper }},
   /* .nid = */ 0,
@@ -84,6 +85,7 @@ const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
 {%- for sig in config['sigs'] %}
 {%- for alg in sig['mix_with'] if alg['rsa'] %}
 {%- set symbol_base_name = alg['name']|replace('_','') + '_' + sig['name']|replace('_','') %}
+{%- set symbol_base_pretty_name = alg['name']|replace('_','') + '_' + sig.get('pretty_name', sig['name']|replace('_','')) %}
 static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
   /* .size = */ ssh_generic_size,
   /* .alloc = */ ssh_generic_alloc,
@@ -100,8 +102,8 @@ static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
 };
 
 const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
-  /* .name = */ "ssh-{{ alg['name']|replace('_','') + '-' + sig['name']|replace('_','') }}",
-  /* .shortname = */ "{{ symbol_base_name|upper }}",
+  /* .name = */ "ssh-{{ alg['name']|replace('_','') + '-' + sig.get('pretty_name', sig['name']|replace('_','')) }}",
+  /* .shortname = */ "{{ symbol_base_pretty_name|upper }}",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }},
   /* .nid = */ 0,
@@ -132,8 +134,8 @@ static const struct sshkey_impl_funcs sshkey_{{ symbol_base_name }}_funcs = {
 };
 
 const struct sshkey_impl sshkey_{{ symbol_base_name }}_impl = {
-  /* .name = */ "ssh-{{ alg['name']|replace('_','-') + '-' + sig['name']|replace('_','') }}",
-  /* .shortname = */ "{{ alg['name']|upper + '_' + sig['name']|replace('_','')|upper }}",
+  /* .name = */ "ssh-{{ alg['name']|replace('_','-') + '-' + sig.get('pretty_name', sig['name']|replace('_','')) }}",
+  /* .shortname = */ "{{ alg['name']|upper + '_' + sig.get('pretty_name', sig['name']|replace('_',''))|upper }}",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_{{ alg['name']|upper }}_{{ sig['name']|upper }},
   /* .nid = */ {{ alg['openssl_nid'] }},

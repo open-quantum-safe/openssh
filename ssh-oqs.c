@@ -904,7 +904,7 @@ int ssh_mldsa44_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa44", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-44", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -922,7 +922,7 @@ int ssh_mldsa44_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa44", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-44", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -943,8 +943,8 @@ static const struct sshkey_impl_funcs sshkey_mldsa44_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa44_impl = {
-  /* .name = */ "ssh-mldsa44",
-  /* .shortname = */ "MLDSA44",
+  /* .name = */ "ssh-mldsa-44",
+  /* .shortname = */ "MLDSA-44",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_44,
   /* .nid = */ 0,
@@ -982,7 +982,7 @@ int ssh_mldsa65_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa65", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-65", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1000,7 +1000,7 @@ int ssh_mldsa65_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa65", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-65", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1021,8 +1021,8 @@ static const struct sshkey_impl_funcs sshkey_mldsa65_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa65_impl = {
-  /* .name = */ "ssh-mldsa65",
-  /* .shortname = */ "MLDSA65",
+  /* .name = */ "ssh-mldsa-65",
+  /* .shortname = */ "MLDSA-65",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_65,
   /* .nid = */ 0,
@@ -1060,7 +1060,7 @@ int ssh_mldsa87_sign(struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_sign(sig, "mldsa87", key, sigp, lenp, data, datalen, compat);
+    int r = oqs_sign(sig, "mldsa-87", key, sigp, lenp, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1078,7 +1078,7 @@ int ssh_mldsa87_verify(const struct sshkey *key,
     if (sig == NULL) {
         return SSH_ERR_ALLOC_FAIL;
     }
-    int r = oqs_verify(sig, "mldsa87", key, signature, signaturelen, data, datalen, compat);
+    int r = oqs_verify(sig, "mldsa-87", key, signature, signaturelen, data, datalen, compat);
     OQS_SIG_free(sig);
     return r;
 }
@@ -1099,8 +1099,8 @@ static const struct sshkey_impl_funcs sshkey_mldsa87_funcs = {
 };
 
 const struct sshkey_impl sshkey_mldsa87_impl = {
-  /* .name = */ "ssh-mldsa87",
-  /* .shortname = */ "MLDSA87",
+  /* .name = */ "ssh-mldsa-87",
+  /* .shortname = */ "MLDSA-87",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ML_DSA_87,
   /* .nid = */ 0,
@@ -1413,8 +1413,8 @@ static const struct sshkey_impl_funcs sshkey_rsa3072_mldsa44_funcs = {
 };
 
 const struct sshkey_impl sshkey_rsa3072_mldsa44_impl = {
-  /* .name = */ "ssh-rsa3072-mldsa44",
-  /* .shortname = */ "RSA3072_MLDSA44",
+  /* .name = */ "ssh-rsa3072-mldsa-44",
+  /* .shortname = */ "RSA3072_MLDSA-44",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_RSA3072_ML_DSA_44,
   /* .nid = */ 0,
@@ -1570,8 +1570,8 @@ static const struct sshkey_impl_funcs sshkey_ecdsanistp256_mldsa44_funcs = {
 };
 
 const struct sshkey_impl sshkey_ecdsanistp256_mldsa44_impl = {
-  /* .name = */ "ssh-ecdsa-nistp256-mldsa44",
-  /* .shortname = */ "ECDSA_NISTP256_MLDSA44",
+  /* .name = */ "ssh-ecdsa-nistp256-mldsa-44",
+  /* .shortname = */ "ECDSA_NISTP256_MLDSA-44",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ECDSA_NISTP256_ML_DSA_44,
   /* .nid = */ NID_X9_62_prime256v1,
@@ -1596,8 +1596,8 @@ static const struct sshkey_impl_funcs sshkey_ecdsanistp384_mldsa65_funcs = {
 };
 
 const struct sshkey_impl sshkey_ecdsanistp384_mldsa65_impl = {
-  /* .name = */ "ssh-ecdsa-nistp384-mldsa65",
-  /* .shortname = */ "ECDSA_NISTP384_MLDSA65",
+  /* .name = */ "ssh-ecdsa-nistp384-mldsa-65",
+  /* .shortname = */ "ECDSA_NISTP384_MLDSA-65",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ECDSA_NISTP384_ML_DSA_65,
   /* .nid = */ NID_secp384r1,
@@ -1622,8 +1622,8 @@ static const struct sshkey_impl_funcs sshkey_ecdsanistp521_mldsa87_funcs = {
 };
 
 const struct sshkey_impl sshkey_ecdsanistp521_mldsa87_impl = {
-  /* .name = */ "ssh-ecdsa-nistp521-mldsa87",
-  /* .shortname = */ "ECDSA_NISTP521_MLDSA87",
+  /* .name = */ "ssh-ecdsa-nistp521-mldsa-87",
+  /* .shortname = */ "ECDSA_NISTP521_MLDSA-87",
   /* .sigalg = */ NULL,
   /* .type = */ KEY_ECDSA_NISTP521_ML_DSA_87,
   /* .nid = */ NID_secp521r1,

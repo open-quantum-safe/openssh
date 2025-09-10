@@ -346,13 +346,13 @@ keygrab_ssh2(con *c)
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-sphincssha2256fsimple";
 	  break;
 	case KT_ML_DSA_44:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa44";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-44";
 	  break;
 	case KT_ML_DSA_65:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa65";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-65";
 	  break;
 	case KT_ML_DSA_87:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa87";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mldsa-87";
 	  break;
 	case KT_MAYO_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-mayo2";
@@ -371,7 +371,7 @@ keygrab_ssh2(con *c)
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-sphincssha2128fsimple";
 	  break;
 	case KT_RSA3072_ML_DSA_44:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-mldsa44";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-mldsa-44";
 	  break;
 	case KT_RSA3072_MAYO_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-rsa3072-mayo2";
@@ -390,13 +390,13 @@ keygrab_ssh2(con *c)
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-sphincssha2256fsimple";
 	  break;
 	case KT_ECDSA_NISTP256_ML_DSA_44:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-mldsa44";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-mldsa-44";
 	  break;
 	case KT_ECDSA_NISTP384_ML_DSA_65:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-mldsa65";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp384-mldsa-65";
 	  break;
 	case KT_ECDSA_NISTP521_ML_DSA_87:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-mldsa87";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp521-mldsa-87";
 	  break;
 	case KT_ECDSA_NISTP256_MAYO_2:
 	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-ecdsa-nistp256-mayo2";

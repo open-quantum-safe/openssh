@@ -1,13 +1,13 @@
 {%- for sig in config['sigs'] %}
 	case KT_{{ sig['name']|upper }}:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ sig['name']|replace('_','') }}";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ sig.get('pretty_name', sig['name']|replace('_','')) }}";
 	  break;
 {%- endfor %}
 #ifdef WITH_OPENSSL
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if alg['rsa'] %}
 	case KT_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ alg['name'] }}-{{ sig['name']|replace('_','') }}";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ alg['name'] }}-{{ sig.get('pretty_name', sig['name']|replace('_','')) }}";
 	  break;
     {%- endfor %}
 {%- endfor %}
@@ -15,7 +15,7 @@
 {%- for sig in config['sigs'] %}
     {%- for alg in sig['mix_with'] if not alg['rsa'] %}
 	case KT_{{ alg['name']|upper }}_{{ sig['name']|upper }}:
-	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ alg['name']|replace('_','-') }}-{{ sig['name']|replace('_','') }}";
+	  myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = "ssh-{{ alg['name']|replace('_','-') }}-{{ sig.get('pretty_name', sig['name']|replace('_','')) }}";
 	  break;
     {%- endfor %}
 {%- endfor %}

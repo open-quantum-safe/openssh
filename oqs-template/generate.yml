@@ -537,6 +537,7 @@ sigs:
   -
     family: 'ML-DSA'
     name: 'ml_dsa_44'
+    pretty_name: 'mldsa-44'
     enable: true
     level: 1
     mix_with:
@@ -549,6 +550,7 @@ sigs:
   -
     family: 'ML-DSA'
     name: 'ml_dsa_65'
+    pretty_name: 'mldsa-65'
     enable: true
     level: 3
     mix_with:
@@ -558,6 +560,7 @@ sigs:
   -
     family: 'ML-DSA'
     name: 'ml_dsa_87'
+    pretty_name: 'mldsa-87'
     enable: true
     level: 5
     mix_with:

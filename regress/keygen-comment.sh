@@ -35,9 +35,9 @@ for fmt in '' RFC4716 PKCS8 PEM; do
 		*falcon1024*) test -z "$oldfmt" || continue ;;
 		*sphincssha2128fsimple*) test -z "$oldfmt" || continue ;;
 		*sphincssha2256fsimple*) test -z "$oldfmt" || continue ;;
-		*mldsa44*) test -z "$oldfmt" || continue ;;
-		*mldsa65*) test -z "$oldfmt" || continue ;;
-		*mldsa87*) test -z "$oldfmt" || continue ;;
+		*mldsa-44*) test -z "$oldfmt" || continue ;;
+		*mldsa-65*) test -z "$oldfmt" || continue ;;
+		*mldsa-87*) test -z "$oldfmt" || continue ;;
 		*mayo2*) test -z "$oldfmt" || continue ;;
 		*mayo3*) test -z "$oldfmt" || continue ;;
 		*mayo5*) test -z "$oldfmt" || continue ;;
