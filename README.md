@@ -222,6 +222,8 @@ Contributors to this fork of OpenSSH include:
 - Goutam Tamvada (University of Waterloo)
 - Michael Baentsch
 - Gerardo Ravago (Amazon Web Services)
+- Alex Harrison (Cisco Systems)
+- Andrew Younkers (Cisco Systems)
 
 Contributors to an earlier OQS fork of OpenSSH included:
 
