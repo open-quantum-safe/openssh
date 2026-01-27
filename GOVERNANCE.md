@@ -109,7 +109,6 @@ Votes are to be executed by way of open GitHub discussions. No quorum is needed 
 
 ### Committers
 
-@baentsch
 @geedo0
 @xuganyu96
 @andrewyounkers
