@@ -52,6 +52,12 @@ While at the time of this writing there are no vulnerabilities known in any of t
 
 We realize some parties may want to deploy quantum-safe cryptography prior to the conclusion of the standardization project.  We strongly recommend such attempts make use of so-called **hybrid cryptography**, in which quantum-safe public-key algorithms are combined with traditional public key algorithms (like RSA or elliptic curves) such that the solution is at least no less secure than existing traditional cryptography. This fork provides the ability to use hybrid cryptography.
 
+### PQ Offered in OpenSSH
+
+While OpenSSH has provided two PQ KEMs, sntrup761x25519-sha512 and mlkem768x25519-sha256, this may not be sufficient for an individual or an organization's use-case. Currently, OpenSSH does not offer a PQ digital signature algorithm or any pure PQ KEM algorithms. These may be needed for compliance efforts or other use-cases.
+
+In such cases, this fork provides a valuable reference and an implementation for interoperability testing. This allows implementors to have a common third-party to test against to help ensure that different implementors will be able to interoperate as the PQ landscape matures in SSH communication.
+
 ### Supported Algorithms
 
 If an algorithm is provided by liboqs but is not listed below, it can still be used in the fork through [either one of two ways](https://github.com/open-quantum-safe/openssh-portable/wiki/Using-liboqs-supported-algorithms-in-the-fork).
