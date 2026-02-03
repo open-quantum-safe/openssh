@@ -54,7 +54,7 @@ We realize some parties may want to deploy quantum-safe cryptography prior to th
 
 ### PQ Offered in OpenSSH
 
-While OpenSSH has provided two PQ KEMs, sntrup761x25519-sha512 and mlkem768x25519-sha256, this may not be sufficient for an individual or an organization's use-case. Currently, OpenSSH does not offer a PQ digital signature algorithm or any pure PQ KEM algorithms. These may be needed for compliance efforts or other use-cases.
+While current versions of (mainline) OpenSSH provide two PQ KEMs, sntrup761x25519-sha512 and mlkem768x25519-sha256, this may not be sufficient for an individual or an organization's use-case. Currently, OpenSSH does not offer a PQ digital signature algorithm or any pure PQ KEM algorithms. These may be needed for compliance efforts or other use-cases.
 
 In such cases, this fork provides a valuable reference and an implementation for interoperability testing. This allows implementors to have a common third-party to test against to help ensure that different implementors will be able to interoperate as the PQ landscape matures in SSH communication.
 
