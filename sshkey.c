@@ -854,6 +854,13 @@ sshkey_free(struct sshkey *k)
 	freezero(k, sizeof(*k));
 }
 
+/* Frees EVP_PKEY pkey field */
+void
+sshkey_clear_pkey(struct sshkey *k) {
+	EVP_PKEY_free(k->pkey);
+	k->pkey = NULL;
+}
+
 static int
 cert_compare(struct sshkey_cert *a, struct sshkey_cert *b)
 {

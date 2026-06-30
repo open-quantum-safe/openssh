@@ -159,6 +159,7 @@ static void ssh_generic_cleanup(struct sshkey *k)
   if ((classical != NULL) && (classical->funcs->cleanup != NULL)) {
     classical->funcs->cleanup(k);
   }
+  sshkey_clear_pkey(k);
   return;
 }
 
@@ -559,6 +560,7 @@ out:
   sshbuf_free(b);
   sshbuf_free(algname_expected);
   free(algname_expected_str);
+  free(algname);
   return r;
 }
 
