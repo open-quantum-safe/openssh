@@ -719,6 +719,26 @@ kex_free_newkeys(struct newkeys *newkeys)
 }
 
 void
+kex_reset_keys(struct kex *kex) {
+#ifdef OPENSSL_HAS_ECC
+	EC_KEY_free(kex->ec_client_key);
+	kex->ec_client_key = NULL;
+	kex->ec_group = NULL;
+#endif
+	if (kex->oqs_client_key != NULL)
+		freezero(kex->oqs_client_key, kex->oqs_client_key_size);
+	kex->oqs_client_key = NULL;
+	kex->oqs_client_key_size = 0;
+#ifndef USE_ECDH_X25519
+	explicit_bzero(kex->c25519_client_key, sizeof(kex->c25519_client_key));
+#endif
+	explicit_bzero(kex->sntrup761_client_key,
+	    sizeof(kex->sntrup761_client_key));
+	explicit_bzero(kex->mlkem768_client_key,
+	    sizeof(kex->mlkem768_client_key));
+}
+
+void
 kex_free(struct kex *kex)
 {
 	u_int mode;
@@ -728,10 +748,8 @@ kex_free(struct kex *kex)
 
 #ifdef WITH_OPENSSL
 	DH_free(kex->dh);
-#ifdef OPENSSL_HAS_ECC
-	EC_KEY_free(kex->ec_client_key);
-#endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
+	kex_reset_keys(kex);
 	for (mode = 0; mode < MODE_MAX; mode++) {
 		kex_free_newkeys(kex->newkeys[mode]);
 		kex->newkeys[mode] = NULL;
@@ -748,10 +766,6 @@ kex_free(struct kex *kex)
 	free(kex->hostkey_alg);
 	free(kex->name);
 	free(kex->server_sig_algs);
-	if (kex->oqs_client_key) {
-	  free(kex->oqs_client_key);
-	  kex->oqs_client_key = NULL;
-	}
 	free(kex);
 }
 

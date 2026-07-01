@@ -606,6 +606,7 @@ input_kex_gen_reply(int type, uint32_t seq, struct ssh *ssh)
 	/* success */
 out:
 	explicit_bzero(hash, sizeof(hash));
+	kex_reset_keys(kex);
 	explicit_bzero(kex->c25519_client_key, sizeof(kex->c25519_client_key));
 	explicit_bzero(kex->sntrup761_client_key,
 	    sizeof(kex->sntrup761_client_key));
