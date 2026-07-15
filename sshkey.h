@@ -359,6 +359,7 @@ int	sshkey_serialize_private_sk(const struct sshkey *key,
     struct sshbuf *buf);
 int	sshkey_private_deserialize_sk(struct sshbuf *buf, struct sshkey *k);
 #ifdef WITH_OPENSSL
+void	sshkey_clear_pkey(struct sshkey *k);
 int	check_rsa_length(const RSA *rsa); /* XXX remove */
 #endif
 #endif
