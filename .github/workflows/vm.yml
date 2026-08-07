@@ -284,7 +284,7 @@ jobs:
         chown -R builder .
         doas -u builder env LIBOQS_CMAKE_ARGS="-DOQS_BUILD_ONLY_LIB=ON -DOQS_USE_OPENSSL=OFF" \
           bash ./oqs-scripts/build_liboqs.sh
-        ln -sf liboqs.so.0.16.0 oqs/lib/liboqs.so
+        (cd oqs/lib && ln -sf liboqs.so.*.*.* liboqs.so)
     - name: Build OpenSSH
       shell: openbsd {0}
       run: |
@@ -381,7 +381,7 @@ jobs:
         chown -R builder .
         doas -u builder env LIBOQS_CMAKE_ARGS="-DOQS_BUILD_ONLY_LIB=ON -DOQS_USE_OPENSSL=OFF" \
           bash ./oqs-scripts/build_liboqs.sh
-        ln -sf liboqs.so.0.16.0 oqs/lib/liboqs.so
+        (cd oqs/lib && ln -sf liboqs.so.*.*.* liboqs.so)
     - name: Build OpenSSH
       shell: openbsd {0}
       run: |
