@@ -1,4 +1,4 @@
-/* $OpenBSD: servconf.c,v 1.451 2026/07/07 01:00:22 djm Exp $ */
+/* $OpenBSD: servconf.c,v 1.450 2026/06/29 08:59:31 djm Exp $ */
 /*
  * Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
  *                    All rights reserved
@@ -321,6 +321,60 @@ fill_default_server_options(ServerOptions *options)
 		    _PATH_HOST_ED25519_KEY_FILE, 0);
 		servconf_add_hostkey("[default]", 0, options,
 		    _PATH_HOST_MLDSA44_ED25519_KEY_FILE, 0);
+///// OQS_TEMPLATE_FRAGMENT_SERVER_ADD_HOSTKEYS_START
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_FALCON_512_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_FALCON_1024_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_SLH_DSA_PURE_SHA2_256F_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ML_DSA_44_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ML_DSA_65_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ML_DSA_87_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_MAYO_2_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_MAYO_3_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_MAYO_5_KEY_FILE, 0);
+#ifdef WITH_OPENSSL
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_FALCON_512_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_ML_DSA_44_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_RSA3072_MAYO_2_KEY_FILE, 0);
+#ifdef OPENSSL_HAS_ECC
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP256_ML_DSA_44_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP384_ML_DSA_65_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP521_ML_DSA_87_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP256_MAYO_2_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP384_MAYO_3_KEY_FILE, 0);
+		servconf_add_hostkey("[default]", 0, options,
+		    _PATH_HOST_ECDSA_NISTP521_MAYO_5_KEY_FILE, 0);
+#endif /* OPENSSL_HAS_ECC */
+#endif /* WITH_OPENSSL */
+///// OQS_TEMPLATE_FRAGMENT_SERVER_ADD_HOSTKEYS_END
 	}
 	/* No certificates by default */
 	if (options->num_ports == 0)
@@ -1433,19 +1487,19 @@ process_server_config_line_depth(ServerOptions *options, char *line,
 #endif /* KRB5 */
 
 #ifdef GSSAPI
-	case sGSSAPIAuthentication:
+	case sGssAuthentication:
 		intptr = &options->gss_authentication;
 		goto parse_flag;
 
-	case sGSSAPICleanupCredentials:
+	case sGssCleanupCreds:
 		intptr = &options->gss_cleanup_creds;
 		goto parse_flag;
 
-	case sGSSAPIDelegateCredentials:
+	case sGssDelegateCreds:
 		intptr = &options->gss_deleg_creds;
 		goto parse_flag;
 
-	case sGSSAPIStrictAcceptorCheck:
+	case sGssStrictAcceptor:
 		intptr = &options->gss_strict_acceptor;
 		goto parse_flag;
 #endif /* GSSAPI */
@@ -4215,10 +4269,10 @@ dump_config(ServerOptions *o)
 # endif
 #endif
 #ifdef GSSAPI
-	dump_cfg_fmtint(sGSSAPIAuthentication, o->gss_authentication);
-	dump_cfg_fmtint(sGSSAPICleanupCredentials, o->gss_cleanup_creds);
-	dump_cfg_fmtint(sGSSAPIDelegateCredentials, o->gss_deleg_creds);
-	dump_cfg_fmtint(sGSSAPIStrictAcceptorCheck, o->gss_strict_acceptor);
+	dump_cfg_fmtint(sGssAuthentication, o->gss_authentication);
+	dump_cfg_fmtint(sGssCleanupCreds, o->gss_cleanup_creds);
+	dump_cfg_fmtint(sGssDelegateCreds, o->gss_deleg_creds);
+	dump_cfg_fmtint(sGssStrictAcceptor, o->gss_strict_acceptor);
 #endif
 	dump_cfg_fmtint(sPasswordAuthentication, o->password_authentication);
 	dump_cfg_fmtint(sKbdInteractiveAuthentication,

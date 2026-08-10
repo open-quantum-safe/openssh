@@ -66,12 +66,64 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_ECDSA_SK	(1<<4)
 #define KT_ED25519_SK	(1<<5)
 #define KT_MLDSA44_ED25519 (1<<6)
-
+///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_START
+#define KT_FALCON_512 ((uint64_t)1<<7)
+#define KT_RSA3072_FALCON_512 ((uint64_t)1<<8)
+#define KT_ECDSA_NISTP256_FALCON_512 ((uint64_t)1<<9)
+#define KT_FALCON_1024 ((uint64_t)1<<10)
+#define KT_ECDSA_NISTP521_FALCON_1024 ((uint64_t)1<<11)
+#define KT_SLH_DSA_PURE_SHA2_128F ((uint64_t)1<<12)
+#define KT_RSA3072_SLH_DSA_PURE_SHA2_128F ((uint64_t)1<<13)
+#define KT_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F ((uint64_t)1<<14)
+#define KT_SLH_DSA_PURE_SHA2_256F ((uint64_t)1<<15)
+#define KT_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F ((uint64_t)1<<16)
+#define KT_ML_DSA_44 ((uint64_t)1<<17)
+#define KT_RSA3072_ML_DSA_44 ((uint64_t)1<<18)
+#define KT_ECDSA_NISTP256_ML_DSA_44 ((uint64_t)1<<19)
+#define KT_ML_DSA_65 ((uint64_t)1<<20)
+#define KT_ECDSA_NISTP384_ML_DSA_65 ((uint64_t)1<<21)
+#define KT_ML_DSA_87 ((uint64_t)1<<22)
+#define KT_ECDSA_NISTP521_ML_DSA_87 ((uint64_t)1<<23)
+#define KT_MAYO_2 ((uint64_t)1<<24)
+#define KT_RSA3072_MAYO_2 ((uint64_t)1<<25)
+#define KT_ECDSA_NISTP256_MAYO_2 ((uint64_t)1<<26)
+#define KT_MAYO_3 ((uint64_t)1<<27)
+#define KT_ECDSA_NISTP384_MAYO_3 ((uint64_t)1<<28)
+#define KT_MAYO_5 ((uint64_t)1<<29)
+#define KT_ECDSA_NISTP521_MAYO_5 ((uint64_t)1<<30)
+#define KT_MAX ((uint64_t)1<<30)
+///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_END
 #define KT_MIN		KT_RSA
 #define KT_MAX		KT_MLDSA44_ED25519
 
 int get_cert = 0;
-int get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|KT_MLDSA44_ED25519;
+uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|KT_MLDSA44_ED25519|\
+///// OQS_TEMPLATE_FRAGMENT_ADD_KEYTYPES_START
+                        KT_FALCON_512 | \
+                        KT_RSA3072_FALCON_512 | \
+                        KT_ECDSA_NISTP256_FALCON_512 | \
+                        KT_FALCON_1024 | \
+                        KT_ECDSA_NISTP521_FALCON_1024 | \
+                        KT_SLH_DSA_PURE_SHA2_128F | \
+                        KT_RSA3072_SLH_DSA_PURE_SHA2_128F | \
+                        KT_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F | \
+                        KT_SLH_DSA_PURE_SHA2_256F | \
+                        KT_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F | \
+                        KT_ML_DSA_44 | \
+                        KT_RSA3072_ML_DSA_44 | \
+                        KT_ECDSA_NISTP256_ML_DSA_44 | \
+                        KT_ML_DSA_65 | \
+                        KT_ECDSA_NISTP384_ML_DSA_65 | \
+                        KT_ML_DSA_87 | \
+                        KT_ECDSA_NISTP521_ML_DSA_87 | \
+                        KT_MAYO_2 | \
+                        KT_RSA3072_MAYO_2 | \
+                        KT_ECDSA_NISTP256_MAYO_2 | \
+                        KT_MAYO_3 | \
+                        KT_ECDSA_NISTP384_MAYO_3 | \
+                        KT_MAYO_5 | \
+                        KT_ECDSA_NISTP521_MAYO_5;
+///// OQS_TEMPLATE_FRAGMENT_ADD_KEYTYPES_END
 
 int hash_hosts = 0;		/* Hash hostname on output */
 
@@ -897,6 +949,80 @@ main(int argc, char **argv)
 				case KEY_MLDSA44_ED25519:
 					get_keytypes |= KT_MLDSA44_ED25519;
 					break;
+///// OQS_TEMPLATE_FRAGMENT_ADD_TO_GET_KEYTYPES_START
+				case KEY_FALCON_512:
+					get_keytypes |= KT_FALCON_512;
+					break;
+				case KEY_RSA3072_FALCON_512:
+					get_keytypes |= KT_RSA3072_FALCON_512;
+					break;
+				case KEY_ECDSA_NISTP256_FALCON_512:
+					get_keytypes |= KT_ECDSA_NISTP256_FALCON_512;
+					break;
+				case KEY_FALCON_1024:
+					get_keytypes |= KT_FALCON_1024;
+					break;
+				case KEY_ECDSA_NISTP521_FALCON_1024:
+					get_keytypes |= KT_ECDSA_NISTP521_FALCON_1024;
+					break;
+				case KEY_SLH_DSA_PURE_SHA2_128F:
+					get_keytypes |= KT_SLH_DSA_PURE_SHA2_128F;
+					break;
+				case KEY_RSA3072_SLH_DSA_PURE_SHA2_128F:
+					get_keytypes |= KT_RSA3072_SLH_DSA_PURE_SHA2_128F;
+					break;
+				case KEY_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F:
+					get_keytypes |= KT_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F;
+					break;
+				case KEY_SLH_DSA_PURE_SHA2_256F:
+					get_keytypes |= KT_SLH_DSA_PURE_SHA2_256F;
+					break;
+				case KEY_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F:
+					get_keytypes |= KT_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F;
+					break;
+				case KEY_ML_DSA_44:
+					get_keytypes |= KT_ML_DSA_44;
+					break;
+				case KEY_RSA3072_ML_DSA_44:
+					get_keytypes |= KT_RSA3072_ML_DSA_44;
+					break;
+				case KEY_ECDSA_NISTP256_ML_DSA_44:
+					get_keytypes |= KT_ECDSA_NISTP256_ML_DSA_44;
+					break;
+				case KEY_ML_DSA_65:
+					get_keytypes |= KT_ML_DSA_65;
+					break;
+				case KEY_ECDSA_NISTP384_ML_DSA_65:
+					get_keytypes |= KT_ECDSA_NISTP384_ML_DSA_65;
+					break;
+				case KEY_ML_DSA_87:
+					get_keytypes |= KT_ML_DSA_87;
+					break;
+				case KEY_ECDSA_NISTP521_ML_DSA_87:
+					get_keytypes |= KT_ECDSA_NISTP521_ML_DSA_87;
+					break;
+				case KEY_MAYO_2:
+					get_keytypes |= KT_MAYO_2;
+					break;
+				case KEY_RSA3072_MAYO_2:
+					get_keytypes |= KT_RSA3072_MAYO_2;
+					break;
+				case KEY_ECDSA_NISTP256_MAYO_2:
+					get_keytypes |= KT_ECDSA_NISTP256_MAYO_2;
+					break;
+				case KEY_MAYO_3:
+					get_keytypes |= KT_MAYO_3;
+					break;
+				case KEY_ECDSA_NISTP384_MAYO_3:
+					get_keytypes |= KT_ECDSA_NISTP384_MAYO_3;
+					break;
+				case KEY_MAYO_5:
+					get_keytypes |= KT_MAYO_5;
+					break;
+				case KEY_ECDSA_NISTP521_MAYO_5:
+					get_keytypes |= KT_ECDSA_NISTP521_MAYO_5;
+					break;
+///// OQS_TEMPLATE_FRAGMENT_ADD_TO_GET_KEYTYPES_END
 				case KEY_UNSPEC:
 				default:
 					fatal("Unknown key type \"%s\"", tname);

@@ -333,6 +333,7 @@ sshkey_load_private_cert(int type, const char *filename, const char *passphrase,
 #endif /* WITH_OPENSSL */
 	case KEY_ED25519:
 	case KEY_MLDSA44_ED25519:
+	CASE_KEY_OQS:
 	case KEY_UNSPEC:
 		break;
 	default:

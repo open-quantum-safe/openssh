@@ -2056,6 +2056,9 @@
 /* use libcrypto for cryptography */
 #undef WITH_OPENSSL
 
+/* use LibOQS for post-quantum and hybrid key exchange and authentication */
+#undef WITH_OQS
+
 /* Define if you want SELinux support. */
 #undef WITH_SELINUX
 
