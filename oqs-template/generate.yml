@@ -329,10 +329,6 @@ kexs:
         name: 'nistp256'
         openssl_nid: 'NID_X9_62_prime256v1'
         pretty_name: 'mlkem768nistp256-sha256'
-      -
-        name: 'x25519'
-        x25519: true
-        pretty_name: 'mlkem768x25519-sha256'
   -
     family: 'ML-KEM'
     name: 'ml_kem_1024'
@@ -350,11 +346,7 @@ kexs:
     enable: true
     hash: 'sha512'
     pretty_name: 'sntrup761-sha512'
-    mix_with:
-      -
-        name: 'x25519'
-        x25519: true
-        pretty_name: 'sntrup761x25519-sha512@openssh.com'
+    mix_with: []
 
 sigs:
   -

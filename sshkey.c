@@ -3477,6 +3477,7 @@ sshkey_private_to_fileblob(struct sshkey *key, struct sshbuf *blob,
 	CASE_KEY_HYBRID:
 #endif /* WITH_OPENSSL */
 	case KEY_MLDSA44_ED25519:
+	CASE_KEY_OQS:
 		return sshkey_private_to_blob2(key, blob, passphrase,
 		    comment, openssh_format_cipher, openssh_format_rounds);
 	default:

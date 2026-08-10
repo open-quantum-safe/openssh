@@ -995,9 +995,11 @@ struct winsize {
  * so only enable if the compiler supports them.
  */
 #if defined(VARIABLE_LENGTH_ARRAYS) && defined(VARIABLE_DECLARATION_AFTER_CODE)
+// OQS Note: Prefer OpenSSH SNTRUP761X25519 support.
 # define USE_SNTRUP761X25519	1
-/* The ML-KEM768 and ML-DSA implementations also uses C89 features */
+// OQS Note: Prefer OpenSSH MLKEM768X25519 support.
 # define USE_MLKEM768X25519	1
+// OQS Note: Prefer OpenSSH MLDSA44x25519 support.
 # define USE_MLDSA		1
 #endif
 
