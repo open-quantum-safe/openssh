@@ -18,4 +18,4 @@ SKIPPED_DUE_TO_CERTIFIED_KEYS="agent \
                                cert-userkey \
                                cert-file \
                                sshsig"
-make tests -e SKIP_LTESTS="${INVESTIGATE_FURTHER} ${SKIPPED_DUE_TO_CERTIFIED_KEYS}"
+make tests -e SKIP_LTESTS="${SKIP_LTESTS} ${INVESTIGATE_FURTHER} ${SKIPPED_DUE_TO_CERTIFIED_KEYS}"
