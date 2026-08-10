@@ -8,4 +8,3 @@
     {%- endfor %}
 {%- endfor %}
 #define KT_MAX ((uint64_t)1<<{{ count.val }})
-

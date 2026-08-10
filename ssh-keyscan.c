@@ -94,7 +94,6 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_MAX ((uint64_t)1<<30)
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_END
 #define KT_MIN		KT_RSA
-#define KT_MAX		KT_MLDSA44_ED25519
 
 int get_cert = 0;
 uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|KT_MLDSA44_ED25519|\
