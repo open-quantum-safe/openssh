@@ -110,6 +110,7 @@ The following hybrid algorithms are supported; they combine a quantum-safe algor
 - if `<SIG>` has L1 security, then the fork provides the methods `rsa3072-<SIG>` and `ecdsa-nistp256-<SIG>`, which combine `<SIG>` with RSA3072 and with ECDSA using NIST's P256 curve respectively.
 - if `<SIG>` has L3 security, the fork provides the method `ecdsa-nistp384-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P384 curve.
 - if `<SIG>` has L5 security, the fork provides the method `ecdsa-nistp521-<SIG>`, which combines `<SIG>` with ECDSA using NIST's P521 curve.
+- NOTE: OpenSSH has added support for the `ssh-mldsa44-ed25519` hybrid signature algorithm in v10.4p1, which is supported in this fork alognside OQS digital signature algorithms.
 
 Algorithms which involve ML-DSA use a liboqs API name for the final ML-DSA implementation which is currently (August 13th, 2024) aliased to ML-DSA-IPD. When the final implementation for ML-DSA becomes available, the alias will also be updated to the standardized ML-DSA implementation.
 

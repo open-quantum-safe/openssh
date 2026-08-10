@@ -3,4 +3,4 @@
 #define SSH_VERSION	"OpenSSH_10.4-2026-08_"
 
 #define SSH_PORTABLE	"p1"
-#define SSH_RELEASE	SSH_VERSION SSH_PORTABLE ", Open Quantum Safe 2026-05"
+#define SSH_RELEASE	SSH_VERSION SSH_PORTABLE ", Open Quantum Safe 2026-08"
