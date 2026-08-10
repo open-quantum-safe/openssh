@@ -1,4 +1,4 @@
-/* $OpenBSD: ssh-keygen.c,v 1.490 2026/03/03 09:57:25 dtucker Exp $ */
+/* $OpenBSD: ssh-keygen.c,v 1.492 2026/06/30 23:55:32 djm Exp $ */
 /*
  * Author: Tatu Ylonen <ylo@cs.hut.fi>
  * Copyright (c) 1994 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
@@ -311,84 +311,10 @@ ask_filename(struct passwd *pw, const char *prompt)
 		case KEY_ED25519_SK_CERT:
 			name = _PATH_SSH_CLIENT_ID_ED25519_SK;
 			break;
-///// OQS_TEMPLATE_FRAGMENT_HANDLE_ID_FILES_START
-		  case KEY_FALCON_512:
-		    name = _PATH_SSH_CLIENT_ID_FALCON_512;
-		    break;
-		  case KEY_FALCON_1024:
-		    name = _PATH_SSH_CLIENT_ID_FALCON_1024;
-		    break;
-		  case KEY_SLH_DSA_PURE_SHA2_128F:
-		    name = _PATH_SSH_CLIENT_ID_SLH_DSA_PURE_SHA2_128F;
-		    break;
-		  case KEY_SLH_DSA_PURE_SHA2_256F:
-		    name = _PATH_SSH_CLIENT_ID_SLH_DSA_PURE_SHA2_256F;
-		    break;
-		  case KEY_ML_DSA_44:
-		    name = _PATH_SSH_CLIENT_ID_ML_DSA_44;
-		    break;
-		  case KEY_ML_DSA_65:
-		    name = _PATH_SSH_CLIENT_ID_ML_DSA_65;
-		    break;
-		  case KEY_ML_DSA_87:
-		    name = _PATH_SSH_CLIENT_ID_ML_DSA_87;
-		    break;
-		  case KEY_MAYO_2:
-		    name = _PATH_SSH_CLIENT_ID_MAYO_2;
-		    break;
-		  case KEY_MAYO_3:
-		    name = _PATH_SSH_CLIENT_ID_MAYO_3;
-		    break;
-		  case KEY_MAYO_5:
-		    name = _PATH_SSH_CLIENT_ID_MAYO_5;
-		    break;
-#ifdef WITH_OPENSSL
-		  case KEY_RSA3072_FALCON_512:
-		    name = _PATH_SSH_CLIENT_ID_RSA3072_FALCON_512;
-		    break;
-		  case KEY_RSA3072_SLH_DSA_PURE_SHA2_128F:
-		    name = _PATH_SSH_CLIENT_ID_RSA3072_SLH_DSA_PURE_SHA2_128F;
-		    break;
-		  case KEY_RSA3072_ML_DSA_44:
-		    name = _PATH_SSH_CLIENT_ID_RSA3072_ML_DSA_44;
-		    break;
-		  case KEY_RSA3072_MAYO_2:
-		    name = _PATH_SSH_CLIENT_ID_RSA3072_MAYO_2;
-		    break;
-#ifdef OPENSSL_HAS_ECC
-		  case KEY_ECDSA_NISTP256_FALCON_512:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_FALCON_512;
-		    break;
-		  case KEY_ECDSA_NISTP521_FALCON_1024:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_FALCON_1024;
-		    break;
-		  case KEY_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F;
-		    break;
-		  case KEY_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F;
-		    break;
-		  case KEY_ECDSA_NISTP256_ML_DSA_44:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_ML_DSA_44;
-		    break;
-		  case KEY_ECDSA_NISTP384_ML_DSA_65:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_ML_DSA_65;
-		    break;
-		  case KEY_ECDSA_NISTP521_ML_DSA_87:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_ML_DSA_87;
-		    break;
-		  case KEY_ECDSA_NISTP256_MAYO_2:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP256_MAYO_2;
-		    break;
-		  case KEY_ECDSA_NISTP384_MAYO_3:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP384_MAYO_3;
-		    break;
-		  case KEY_ECDSA_NISTP521_MAYO_5:
-		    name = _PATH_SSH_CLIENT_ID_ECDSA_NISTP521_MAYO_5;
-		    break;
-#endif /* OPENSSL_HAS_ECC */
-#endif /* WITH_OPENSSL */
-///// OQS_TEMPLATE_FRAGMENT_HANDLE_ID_FILES_END
+		case KEY_MLDSA44_ED25519:
+		case KEY_MLDSA44_ED25519_CERT:
+			name = _PATH_SSH_CLIENT_ID_MLDSA44_ED25519;
+			break;
 		default:
 			fatal("bad key type");
 		}
@@ -1131,36 +1057,10 @@ do_gen_all_hostkeys(struct passwd *pw)
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 		{ "ed25519", "ED25519",_PATH_HOST_ED25519_KEY_FILE },
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEY_TYPES_START
-		{ "falcon512", "FALCON_512", _PATH_HOST_FALCON_512_KEY_FILE },
-		{ "falcon1024", "FALCON_1024", _PATH_HOST_FALCON_1024_KEY_FILE },
-		{ "slhdsapuresha2128f", "SLH_DSA_PURE_SHA2_128F", _PATH_HOST_SLH_DSA_PURE_SHA2_128F_KEY_FILE },
-		{ "slhdsapuresha2256f", "SLH_DSA_PURE_SHA2_256F", _PATH_HOST_SLH_DSA_PURE_SHA2_256F_KEY_FILE },
-		{ "mldsa-44", "ML_DSA_44", _PATH_HOST_ML_DSA_44_KEY_FILE },
-		{ "mldsa-65", "ML_DSA_65", _PATH_HOST_ML_DSA_65_KEY_FILE },
-		{ "mldsa-87", "ML_DSA_87", _PATH_HOST_ML_DSA_87_KEY_FILE },
-		{ "mayo2", "MAYO_2", _PATH_HOST_MAYO_2_KEY_FILE },
-		{ "mayo3", "MAYO_3", _PATH_HOST_MAYO_3_KEY_FILE },
-		{ "mayo5", "MAYO_5", _PATH_HOST_MAYO_5_KEY_FILE },
-#ifdef WITH_OPENSSL
-		{ "rsa3072_falcon512", "RSA3072_FALCON_512", _PATH_HOST_RSA3072_FALCON_512_KEY_FILE },
-		{ "rsa3072_slhdsapuresha2128f", "RSA3072_SLH_DSA_PURE_SHA2_128F", _PATH_HOST_RSA3072_SLH_DSA_PURE_SHA2_128F_KEY_FILE },
-		{ "rsa3072_mldsa-44", "RSA3072_ML_DSA_44", _PATH_HOST_RSA3072_ML_DSA_44_KEY_FILE },
-		{ "rsa3072_mayo2", "RSA3072_MAYO_2", _PATH_HOST_RSA3072_MAYO_2_KEY_FILE },
-#ifdef OPENSSL_HAS_ECC
-		{ "ecdsa_nistp256_falcon512", "ECDSA_NISTP256_FALCON_512", _PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE },
-		{ "ecdsa_nistp521_falcon1024", "ECDSA_NISTP521_FALCON_1024", _PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE },
-		{ "ecdsa_nistp256_slhdsapuresha2128f", "ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F", _PATH_HOST_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F_KEY_FILE },
-		{ "ecdsa_nistp521_slhdsapuresha2256f", "ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F", _PATH_HOST_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F_KEY_FILE },
-		{ "ecdsa_nistp256_mldsa-44", "ECDSA_NISTP256_ML_DSA_44", _PATH_HOST_ECDSA_NISTP256_ML_DSA_44_KEY_FILE },
-		{ "ecdsa_nistp384_mldsa-65", "ECDSA_NISTP384_ML_DSA_65", _PATH_HOST_ECDSA_NISTP384_ML_DSA_65_KEY_FILE },
-		{ "ecdsa_nistp521_mldsa-87", "ECDSA_NISTP521_ML_DSA_87", _PATH_HOST_ECDSA_NISTP521_ML_DSA_87_KEY_FILE },
-		{ "ecdsa_nistp256_mayo2", "ECDSA_NISTP256_MAYO_2", _PATH_HOST_ECDSA_NISTP256_MAYO_2_KEY_FILE },
-		{ "ecdsa_nistp384_mayo3", "ECDSA_NISTP384_MAYO_3", _PATH_HOST_ECDSA_NISTP384_MAYO_3_KEY_FILE },
-		{ "ecdsa_nistp521_mayo5", "ECDSA_NISTP521_MAYO_5", _PATH_HOST_ECDSA_NISTP521_MAYO_5_KEY_FILE },
-#endif /* OPENSSL_HAS_ECC */
-#endif /* WITH_OPENSSL */
-///// OQS_TEMPLATE_FRAGMENT_DEFINE_KEY_TYPES_END
+#ifdef USE_MLDSA
+		{ "mldsa44-ed25519", "MLDSA44-ED25519",
+		     _PATH_HOST_MLDSA44_ED25519_KEY_FILE },
+#endif
 		{ NULL, NULL, NULL }
 	};
 
@@ -3416,9 +3316,7 @@ usage(void)
 	fprintf(stderr,
 	    "usage: ssh-keygen [-q] [-a rounds] [-b bits] [-C comment] [-f output_keyfile]\n"
 	    "                  [-m format] [-N new_passphrase] [-O option]\n"
-	    "                  [-t ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa"
-		" |\n                  OQS-fork added algorithms (see README.md)"
-		" ]\n"
+	    "                  [-t ecdsa|ecdsa-sk|ed25519|ed25519-sk|mldsa44-ed25519|rsa]\n"
 	    "                  [-w provider] [-Z cipher]\n"
 	    "       ssh-keygen -p [-a rounds] [-f keyfile] [-m format] [-N new_passphrase]\n"
 	    "                   [-P old_passphrase] [-Z cipher]\n"

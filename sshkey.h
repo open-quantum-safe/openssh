@@ -1,4 +1,4 @@
-/* $OpenBSD: sshkey.h,v 1.73 2026/03/03 09:57:26 dtucker Exp $ */
+/* $OpenBSD: sshkey.h,v 1.74 2026/06/14 03:59:34 djm Exp $ */
 
 /*
  * Copyright (c) 2000, 2001 Markus Friedl.  All rights reserved.
@@ -71,32 +71,8 @@ enum sshkey_types {
 	KEY_ECDSA_SK_CERT,
 	KEY_ED25519_SK,
 	KEY_ED25519_SK_CERT,
-///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_START
-	KEY_FALCON_512,
-	KEY_RSA3072_FALCON_512,
-	KEY_ECDSA_NISTP256_FALCON_512,
-	KEY_FALCON_1024,
-	KEY_ECDSA_NISTP521_FALCON_1024,
-	KEY_SLH_DSA_PURE_SHA2_128F,
-	KEY_RSA3072_SLH_DSA_PURE_SHA2_128F,
-	KEY_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F,
-	KEY_SLH_DSA_PURE_SHA2_256F,
-	KEY_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F,
-	KEY_ML_DSA_44,
-	KEY_RSA3072_ML_DSA_44,
-	KEY_ECDSA_NISTP256_ML_DSA_44,
-	KEY_ML_DSA_65,
-	KEY_ECDSA_NISTP384_ML_DSA_65,
-	KEY_ML_DSA_87,
-	KEY_ECDSA_NISTP521_ML_DSA_87,
-	KEY_MAYO_2,
-	KEY_RSA3072_MAYO_2,
-	KEY_ECDSA_NISTP256_MAYO_2,
-	KEY_MAYO_3,
-	KEY_ECDSA_NISTP384_MAYO_3,
-	KEY_MAYO_5,
-	KEY_ECDSA_NISTP521_MAYO_5,
-///// OQS_TEMPLATE_FRAGMENT_ENUMERATE_KEYTYPES_END
+	KEY_MLDSA44_ED25519,
+	KEY_MLDSA44_ED25519_CERT,
 	KEY_UNSPEC
 };
 
@@ -154,10 +130,9 @@ struct sshkey {
 	/* KEY_ED25519 and KEY_ED25519_SK */
 	u_char	*ed25519_sk;
 	u_char	*ed25519_pk;
-	u_char	*oqs_sk; /* post-quantum secret key */
-	size_t   oqs_sk_len; /* post-quantum secret length */
-	u_char	*oqs_pk; /* post-quantum public key */
-	size_t   oqs_pk_len; /* post-quantum public length */
+	/* KEY_MLDSA44_ED25519 */
+	u_char	*mldsa_ed25519_sk;
+	u_char	*mldsa_ed25519_pk;
 	/* KEY_ECDSA_SK and KEY_ED25519_SK */
 	char	*sk_application;
 	uint8_t	sk_flags;

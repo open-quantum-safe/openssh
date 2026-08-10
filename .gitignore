@@ -37,9 +37,3 @@ sshd-auth
 !regress/unittests/**/Makefile
 tags
 
-# Added by OQS
-oqs-test/tmp
-oqs-scripts/tmp
-oqs/
-*.dSYM
-__pycache__

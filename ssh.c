@@ -1,4 +1,4 @@
-/* $OpenBSD: ssh.c,v 1.630 2026/04/02 07:50:55 djm Exp $ */
+/* $OpenBSD: ssh.c,v 1.634 2026/07/06 07:49:58 djm Exp $ */
 /*
  * Author: Tatu Ylonen <ylo@cs.hut.fi>
  * Copyright (c) 1995 Tatu Ylonen <ylo@cs.hut.fi>, Espoo, Finland
@@ -399,6 +399,7 @@ check_follow_cname(int direct, char **namep, const char *cname)
 		    "\"%s\" => \"%s\"", *namep, cname);
 		free(*namep);
 		*namep = xstrdup(cname);
+		lowercase(*namep);
 		return 1;
 	}
 	return 0;
@@ -610,26 +611,6 @@ set_addrinfo_port(struct addrinfo *addrs, int port)
 			break;
 		}
 	}
-}
-
-static void
-ssh_conn_info_free(struct ssh_conn_info *cinfo)
-{
-	if (cinfo == NULL)
-		return;
-	free(cinfo->conn_hash_hex);
-	free(cinfo->shorthost);
-	free(cinfo->uidstr);
-	free(cinfo->keyalias);
-	free(cinfo->thishost);
-	free(cinfo->host_arg);
-	free(cinfo->portstr);
-	free(cinfo->remhost);
-	free(cinfo->remuser);
-	free(cinfo->homedir);
-	free(cinfo->locuser);
-	free(cinfo->jmphost);
-	free(cinfo);
 }
 
 /*
@@ -1650,7 +1631,8 @@ main(int ac, char **av)
 	if (options.control_path != NULL) {
 		int sock;
 		if ((sock = muxclient(options.control_path)) >= 0) {
-			ssh_packet_set_connection(ssh, sock, sock);
+			if (ssh_packet_set_connection(ssh, sock, sock) == NULL)
+				fatal("ssh_packet_set_connection failed");
 			ssh_packet_set_mux(ssh);
 			goto skip_connect;
 		}
@@ -1740,35 +1722,11 @@ main(int ac, char **av)
 			L_CERT(_PATH_HOST_ECDSA_KEY_FILE, 0);
 			L_CERT(_PATH_HOST_ED25519_KEY_FILE, 1);
 			L_CERT(_PATH_HOST_RSA_KEY_FILE, 2);
+			L_CERT(_PATH_HOST_MLDSA44_ED25519_KEY_FILE, 3);
 			L_PUBKEY(_PATH_HOST_ECDSA_KEY_FILE, 4);
 			L_PUBKEY(_PATH_HOST_ED25519_KEY_FILE, 5);
 			L_PUBKEY(_PATH_HOST_RSA_KEY_FILE, 6);
-///// OQS_TEMPLATE_FRAGMENT_LOAD_PUBKEYS_START
-			L_PUBKEY(_PATH_HOST_FALCON_512_KEY_FILE, 10);
-			L_PUBKEY(_PATH_HOST_RSA3072_FALCON_512_KEY_FILE, 11);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE, 12);
-			L_PUBKEY(_PATH_HOST_FALCON_1024_KEY_FILE, 13);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE, 14);
-			L_PUBKEY(_PATH_HOST_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 15);
-			L_PUBKEY(_PATH_HOST_RSA3072_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 16);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F_KEY_FILE, 17);
-			L_PUBKEY(_PATH_HOST_SLH_DSA_PURE_SHA2_256F_KEY_FILE, 18);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F_KEY_FILE, 19);
-			L_PUBKEY(_PATH_HOST_ML_DSA_44_KEY_FILE, 20);
-			L_PUBKEY(_PATH_HOST_RSA3072_ML_DSA_44_KEY_FILE, 21);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP256_ML_DSA_44_KEY_FILE, 22);
-			L_PUBKEY(_PATH_HOST_ML_DSA_65_KEY_FILE, 23);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP384_ML_DSA_65_KEY_FILE, 24);
-			L_PUBKEY(_PATH_HOST_ML_DSA_87_KEY_FILE, 25);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP521_ML_DSA_87_KEY_FILE, 26);
-			L_PUBKEY(_PATH_HOST_MAYO_2_KEY_FILE, 27);
-			L_PUBKEY(_PATH_HOST_RSA3072_MAYO_2_KEY_FILE, 28);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP256_MAYO_2_KEY_FILE, 29);
-			L_PUBKEY(_PATH_HOST_MAYO_3_KEY_FILE, 30);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP384_MAYO_3_KEY_FILE, 31);
-			L_PUBKEY(_PATH_HOST_MAYO_5_KEY_FILE, 32);
-			L_PUBKEY(_PATH_HOST_ECDSA_NISTP521_MAYO_5_KEY_FILE, 33);
-///// OQS_TEMPLATE_FRAGMENT_LOAD_PUBKEYS_END
+			L_PUBKEY(_PATH_HOST_MLDSA44_ED25519_KEY_FILE, 7);
 			if (loaded == 0)
 				debug("HostbasedAuthentication enabled but no "
 				   "local public host keys could be loaded.");
@@ -1826,8 +1784,8 @@ main(int ac, char **av)
 	ssh_signal(SIGCHLD, main_sigchld_handler);
 
 	/* Log into the remote system.  Never returns if the login fails. */
-	ssh_login(ssh, &sensitive_data, host, (struct sockaddr *)&hostaddr,
-	    options.port, pw, timeout_ms, cinfo);
+	ssh_login(ssh, &sensitive_data, host, &hostaddr, options.port,
+	    pw, timeout_ms, cinfo);
 
 	/* We no longer need the private host keys.  Clear them now. */
 	if (sensitive_data.nkeys != 0) {

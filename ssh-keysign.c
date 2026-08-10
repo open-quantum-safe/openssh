@@ -1,4 +1,4 @@
-/* $OpenBSD: ssh-keysign.c,v 1.80 2026/03/19 02:36:28 djm Exp $ */
+/* $OpenBSD: ssh-keysign.c,v 1.81 2026/06/14 03:59:34 djm Exp $ */
 /*
  * Copyright (c) 2002 Markus Friedl.  All rights reserved.
  *
@@ -205,32 +205,8 @@ main(int argc, char **argv)
 	key_fd[i++] = open(_PATH_HOST_ECDSA_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_ED25519_KEY_FILE, O_RDONLY);
 	key_fd[i++] = open(_PATH_HOST_RSA_KEY_FILE, O_RDONLY);
-///// OQS_TEMPLATE_FRAGMENT_OPEN_KEY_FILES_START
-	key_fd[i++] = open(_PATH_HOST_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_FALCON_512_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_FALCON_1024_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_FALCON_1024_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_SLH_DSA_PURE_SHA2_128F_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_SLH_DSA_PURE_SHA2_128F_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_SLH_DSA_PURE_SHA2_128F_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_SLH_DSA_PURE_SHA2_256F_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_SLH_DSA_PURE_SHA2_256F_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ML_DSA_44_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_ML_DSA_44_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_ML_DSA_44_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ML_DSA_65_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP384_ML_DSA_65_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ML_DSA_87_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_ML_DSA_87_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_MAYO_2_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_RSA3072_MAYO_2_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP256_MAYO_2_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_MAYO_3_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP384_MAYO_3_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_MAYO_5_KEY_FILE, O_RDONLY);
-	key_fd[i++] = open(_PATH_HOST_ECDSA_NISTP521_MAYO_5_KEY_FILE, O_RDONLY);
-///// OQS_TEMPLATE_FRAGMENT_OPEN_KEY_FILES_END
+	key_fd[i++] = open(_PATH_HOST_MLDSA44_ED25519_KEY_FILE, O_RDONLY);
+
 	if ((pw = getpwuid(getuid())) == NULL)
 		fatal("getpwuid failed");
 	pw = pwcopy(pw);
