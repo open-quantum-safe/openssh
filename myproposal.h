@@ -37,6 +37,9 @@
 	"diffie-hellman-group16-sha512," \
 	"diffie-hellman-group18-sha512," \
 	"diffie-hellman-group14-sha256," \
+	"mlkem768x25519-sha256," \
+	"sntrup761x25519-sha512," \
+	"sntrup761x25519-sha512@openssh.com," \
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_START */ \
 	"frodokem-640-aes-sha256," \
 	"ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org," \
@@ -93,11 +96,9 @@
 	"x25519-ml-kem-512-sha256@openquantumsafe.org," \
 	"mlkem768-sha256," \
 	"mlkem768nistp256-sha256," \
-	"mlkem768x25519-sha256," \
 	"mlkem1024-sha384," \
 	"mlkem1024nistp384-sha384," \
-	"sntrup761-sha512," \
-	"sntrup761x25519-sha512@openssh.com"
+	"sntrup761-sha512"
 /*/// OQS_TEMPLATE_FRAGMENT_ADD_SERVER_KEXS_END */
 
 #define KEX_CLIENT_KEX KEX_SERVER_KEX

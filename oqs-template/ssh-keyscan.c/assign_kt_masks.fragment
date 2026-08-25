@@ -7,4 +7,4 @@
 #define KT_{{ alg['name']|upper }}_{{ sig['name']|upper }} ((uint64_t)1<<{{ count.val }})
     {%- endfor %}
 {%- endfor %}
-#define KT_MAX ((uint64_t)1<<{{ count.val }})
+#define KT_MAX ((uint64_t)1<<{{ count.val }}){{ '\n' }}
