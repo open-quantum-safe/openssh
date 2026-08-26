@@ -1,4 +1,4 @@
-/* $OpenBSD: ssh-keyscan.c,v 1.167 2025/08/29 03:50:38 djm Exp $ */
+/* $OpenBSD: ssh-keyscan.c,v 1.168 2026/06/14 03:59:34 djm Exp $ */
 /*
  * Copyright 1995, 1996 by David Mazieres <dm@lcs.mit.edu>.
  *
@@ -65,6 +65,7 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_ED25519	(1<<2)
 #define KT_ECDSA_SK	(1<<4)
 #define KT_ED25519_SK	(1<<5)
+#define KT_MLDSA44_ED25519 (1<<6)
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KT_MASKS_START
 #define KT_FALCON_512 ((uint64_t)1<<7)
 #define KT_RSA3072_FALCON_512 ((uint64_t)1<<8)
@@ -95,7 +96,7 @@ int ssh_port = SSH_DEFAULT_PORT;
 #define KT_MIN		KT_RSA
 
 int get_cert = 0;
-uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|\
+uint64_t get_keytypes = KT_RSA|KT_ECDSA|KT_ED25519|KT_ECDSA_SK|KT_ED25519_SK|KT_MLDSA44_ED25519|\
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEYTYPES_START
                         KT_FALCON_512 | \
                         KT_RSA3072_FALCON_512 | \
@@ -309,6 +310,11 @@ keygrab_ssh2(con *c)
 		    "ecdsa-sha2-nistp384,"
 		    "ecdsa-sha2-nistp521";
 		break;
+	case KT_MLDSA44_ED25519:
+		myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = get_cert ?
+		    "ssh-mldsa44-ed25519-cert-v01@openssh.com" :
+		    "ssh-mldsa44-ed25519@openssh.com";
+		break;
 	case KT_ECDSA_SK:
 		myproposal[PROPOSAL_SERVER_HOST_KEY_ALGS] = get_cert ?
 		    "sk-ecdsa-sha2-nistp256-cert-v01@openssh.com" :
@@ -419,6 +425,8 @@ keygrab_ssh2(con *c)
 # endif
 #endif
 	c->c_ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
+	c->c_ssh->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_client;
 ///// OQS_TEMPLATE_FRAGMENT_ASSIGN_KEX_GEN_CLIENT_START
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_X25519_SHA256] = kex_gen_client;
@@ -451,10 +459,8 @@ keygrab_ssh2(con *c)
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_512_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_512_X25519_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
-	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_768_X25519_SHA256] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_client;
 	c->c_ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_SHA512] = kex_gen_client;
-	c->c_ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	c->c_ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -938,6 +944,9 @@ main(int argc, char **argv)
 					break;
 				case KEY_ECDSA_SK:
 					get_keytypes |= KT_ECDSA_SK;
+					break;
+				case KEY_MLDSA44_ED25519:
+					get_keytypes |= KT_MLDSA44_ED25519;
 					break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_TO_GET_KEYTYPES_START
 				case KEY_FALCON_512:

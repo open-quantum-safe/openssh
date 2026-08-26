@@ -118,6 +118,12 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_C25519_SHA256:
 		r = kex_c25519_keypair(kex);
 		break;
+	case KEX_KEM_SNTRUP761X25519_SHA512:
+		r = kex_kem_sntrup761x25519_keypair(kex);
+		break;
+	case KEX_KEM_MLKEM768X25519_SHA256:
+		r = kex_kem_mlkem768x25519_keypair(kex);
+		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_CLIENT_SWITCH_CASES_START
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_keypair(kex);
@@ -212,17 +218,11 @@ kex_gen_client(struct ssh *ssh)
 	case KEX_KEM_ML_KEM_768_SHA256:
 		r = kex_kem_ml_kem_768_keypair(kex);
 		break;
-	case KEX_KEM_ML_KEM_768_X25519_SHA256:
-		r = kex_kem_ml_kem_768_x25519_keypair(kex);
-		break;
 	case KEX_KEM_ML_KEM_1024_SHA384:
 		r = kex_kem_ml_kem_1024_keypair(kex);
 		break;
 	case KEX_KEM_NTRUPRIME_SNTRUP761_SHA512:
 		r = kex_kem_ntruprime_sntrup761_keypair(kex);
-		break;
-	case KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512:
-		r = kex_kem_ntruprime_sntrup761_x25519_keypair(kex);
 		break;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
@@ -372,6 +372,14 @@ input_kex_gen_reply(int type, uint32_t seq, struct ssh *ssh)
 	case KEX_C25519_SHA256:
 		r = kex_c25519_dec(kex, server_blob, &shared_secret);
 		break;
+	case KEX_KEM_SNTRUP761X25519_SHA512:
+		r = kex_kem_sntrup761x25519_dec(kex, server_blob,
+		    &shared_secret);
+		break;
+	case KEX_KEM_MLKEM768X25519_SHA256:
+		r = kex_kem_mlkem768x25519_dec(kex, server_blob,
+		    &shared_secret);
+		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_REPLY_SWITCH_CASES_START
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_dec(kex, server_blob, &shared_secret);
@@ -466,17 +474,11 @@ input_kex_gen_reply(int type, uint32_t seq, struct ssh *ssh)
 	case KEX_KEM_ML_KEM_768_SHA256:
 		r = kex_kem_ml_kem_768_dec(kex, server_blob, &shared_secret);
 		break;
-	case KEX_KEM_ML_KEM_768_X25519_SHA256:
-		r = kex_kem_ml_kem_768_x25519_dec(kex, server_blob, &shared_secret);
-		break;
 	case KEX_KEM_ML_KEM_1024_SHA384:
 		r = kex_kem_ml_kem_1024_dec(kex, server_blob, &shared_secret);
 		break;
 	case KEX_KEM_NTRUPRIME_SNTRUP761_SHA512:
 		r = kex_kem_ntruprime_sntrup761_dec(kex, server_blob, &shared_secret);
-		break;
-	case KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512:
-		r = kex_kem_ntruprime_sntrup761_x25519_dec(kex, server_blob, &shared_secret);
 		break;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
@@ -680,6 +682,14 @@ input_kex_gen_init(int type, uint32_t seq, struct ssh *ssh)
 		r = kex_c25519_enc(kex, client_pubkey, &server_pubkey,
 		    &shared_secret);
 		break;
+	case KEX_KEM_SNTRUP761X25519_SHA512:
+		r = kex_kem_sntrup761x25519_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
+	case KEX_KEM_MLKEM768X25519_SHA256:
+		r = kex_kem_mlkem768x25519_enc(kex, client_pubkey,
+		    &server_pubkey, &shared_secret);
+		break;
 ///// OQS_TEMPLATE_FRAGMENT_ADD_INIT_SWITCH_CASES_START
 	case KEX_KEM_FRODOKEM_640_AES_SHA256:
 		r = kex_kem_frodokem_640_aes_enc(kex, client_pubkey,
@@ -805,20 +815,12 @@ input_kex_gen_init(int type, uint32_t seq, struct ssh *ssh)
 		r = kex_kem_ml_kem_768_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
-	case KEX_KEM_ML_KEM_768_X25519_SHA256:
-		r = kex_kem_ml_kem_768_x25519_enc(kex, client_pubkey,
-		    &server_pubkey, &shared_secret);
-		break;
 	case KEX_KEM_ML_KEM_1024_SHA384:
 		r = kex_kem_ml_kem_1024_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
 	case KEX_KEM_NTRUPRIME_SNTRUP761_SHA512:
 		r = kex_kem_ntruprime_sntrup761_enc(kex, client_pubkey,
-		    &server_pubkey, &shared_secret);
-		break;
-	case KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512:
-		r = kex_kem_ntruprime_sntrup761_x25519_enc(kex, client_pubkey,
 		    &server_pubkey, &shared_secret);
 		break;
 #ifdef WITH_OPENSSL

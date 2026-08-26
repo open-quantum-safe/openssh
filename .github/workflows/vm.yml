@@ -2,11 +2,7 @@
 # Security -> Actions -> Variables) to restrict the tests that are run
 # The supported variables are:
 #
-# RUN_ONLY_TARGET_CONFIG: Run only the single matching target and config,
-#   separated by spaces, eg "ubuntu-latest default".  All other tests will
-#   fail immediately.
-#
-# LTESTS: Override the set of tests run.
+# RUN_ONLY_PLATFORM: run only tests on specified platform.
 
 name: CI VM
 on:
@@ -18,7 +14,7 @@ on:
 jobs:
   dragonflybsd:
     name: "dragonflybsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'dragonflybsd')
     strategy:
       fail-fast: false
       matrix:
@@ -27,10 +23,10 @@ jobs:
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start DragonFlyBSD ${{ matrix.target }} VM
-      uses: vmactions/dragonflybsd-vm@v1
+      uses: vmactions/dragonflybsd-vm@4ba8127bd95c94b66fc4b885e37c99955ba308ea # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
@@ -67,21 +63,21 @@ jobs:
 
   freebsd:
     name: "freebsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'freebsd')
     strategy:
       fail-fast: false
       matrix:
         target:
           - "13.5"
-          - "14.3"
-          # - "15.0" # "pkg" breaks with a libutil.so error...
+          - "14.4"
+          - "15.0"
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start FreeBSD ${{ matrix.target }} VM
-      uses: vmactions/freebsd-vm@v1
+      uses: vmactions/freebsd-vm@b84ab5559b5a1bb4b8ee2737d2506a16e1737636 # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
@@ -108,7 +104,7 @@ jobs:
         sudo -u builder env VMCI=true WITH_OPENSSL=true bash ./oqs-scripts/build_openssh.sh
     - name: Run tests documented to pass
       shell: freebsd {0}
-      run: cd $GITHUB_WORKSPACE && sudo -u builder bash ./oqs-test/run_tests.sh
+      run: cd $GITHUB_WORKSPACE && sudo -u builder env SKIP_LTESTS=scp3 bash ./oqs-test/run_tests.sh
     - name: Ensure we have the ssh and sshd syntax right once for each algorithm
       shell: freebsd {0}
       run: cd $GITHUB_WORKSPACE && sudo -u builder python3 oqs-test/try_connection.py doone
@@ -116,7 +112,7 @@ jobs:
 
   netbsd:
     name: "netbsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'netbsd')
     strategy:
       fail-fast: false
       matrix:
@@ -129,13 +125,15 @@ jobs:
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start NetBSD ${{ matrix.target }} VM
-      uses: vmactions/netbsd-vm@v1
+      uses: vmactions/netbsd-vm@99816dccf75edf233ed6cd00a159e3a5b85ea373 # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
+        sync: scp
+        copyback: false
         prepare: |
           /usr/sbin/pkg_add -U autoconf automake bash cmake git ninja-build pcre2 python311 sudo
           /usr/sbin/useradd -m builder
@@ -167,8 +165,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         /sbin/chown -R builder .
-        sed 's/SKIPPED_DUE_TO_CERTIFIED_KEYS}"/SKIPPED_DUE_TO_CERTIFIED_KEYS} ssh-tty"/' \
-          ./oqs-test/run_tests.sh | sudo -u builder bash
+        sudo -u builder env SKIP_LTESTS=ssh-tty bash ./oqs-test/run_tests.sh
     - name: Ensure we have the ssh and sshd syntax right once for each algorithm
       shell: netbsd {0}
       run: |
@@ -179,27 +176,27 @@ jobs:
 
   omnios:
     name: "omnios-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'omnios')
     strategy:
       fail-fast: false
       matrix:
         target:
-          - "r151054"
-          - "r151046"
+          - "r151056-build"
+          - "r151058-build"
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start OmniOS ${{ matrix.target }} VM
-      uses: vmactions/omnios-vm@v1
+      uses: vmactions/omnios-vm@7f2be0b927aad1a78498c8aeeac4c4ce1fabd322 # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
         prepare: |
           set -x
           pfexec pkg refresh
-          pfexec pkg install autoconf automake bash build-essential cmake git ninja runtime/python-311
+          pfexec pkg install autoconf automake bash build-essential cmake git ninja runtime/python-313
           useradd -m builder
           sed -e "s/^root.*ALL$/root ALL=(ALL) NOPASSWD: ALL/" /etc/sudoers >>/tmp/sudoers
           mv /tmp/sudoers /etc/sudoers
@@ -240,7 +237,7 @@ jobs:
 
   openbsd:
     name: "openbsd-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'openbsd')
     strategy:
       fail-fast: false
       matrix:
@@ -250,13 +247,14 @@ jobs:
           # - "7.6"
           - "7.7"
           - "7.8"
+          - "7.9"
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start OpenBSD ${{ matrix.target }} VM
-      uses: vmactions/openbsd-vm@v1
+      uses: vmactions/openbsd-vm@18edb32f4e48dae5865d7b8b3a9587bc01218a20 # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
@@ -299,8 +297,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         chown -R builder .
-        sed 's/SKIPPED_DUE_TO_CERTIFIED_KEYS}"/SKIPPED_DUE_TO_CERTIFIED_KEYS} ssh-tty"/' \
-          ./oqs-test/run_tests.sh | doas -u builder bash
+        doas -u builder env SKIP_LTESTS=ssh-tty bash ./oqs-test/run_tests.sh
     - name: Ensure we have the ssh and sshd syntax right once for each algorithm
       shell: openbsd {0}
       run: |
@@ -312,7 +309,7 @@ jobs:
   openbsd-current-upstream:
     # This job runs the OQS workflow against OpenBSD -current.
     name: "openbsd-current-upstream"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'openbsd')
     strategy:
       fail-fast: false
     runs-on: ubuntu-latest
@@ -320,7 +317,7 @@ jobs:
     - uses: actions/checkout@main
 
     - name: start OpenBSD VM
-      uses: vmactions/openbsd-vm@v1
+      uses: vmactions/openbsd-vm@18edb32f4e48dae5865d7b8b3a9587bc01218a20 # v1
       with:
         copyback: false
         nat: |
@@ -337,13 +334,13 @@ jobs:
           mkdir -p /var/empty /usr/local/etc
           cp $GITHUB_WORKSPACE/moduli /usr/local/etc/moduli
 
-    - name: Fetch sysupgrade version
+    - name: fetch sysupgrade version
       run: |
         ver=$(curl -s https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/BUILDINFO)
         echo "SNAPSHOT_VERSION=${ver}" >> $GITHUB_ENV
     - name: check for cached sysupgrade
       id: cache-sysupgrade
-      uses: actions/cache@v4
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       with:
         key: openbsd-sysupgrade ${{ env.SNAPSHOT_VERSION }}
         path: /tmp/_sysupgrade/
@@ -363,7 +360,7 @@ jobs:
         rsync -av openbsd:/home/_sysupgrade/ /tmp/_sysupgrade/
     - name: save sysupgrade to cache
       if: steps.cache-sysupgrade.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       with:
         key: openbsd-sysupgrade ${{ env.SNAPSHOT_VERSION }}
         path: /tmp/_sysupgrade/
@@ -396,8 +393,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         chown -R builder .
-        sed 's/SKIPPED_DUE_TO_CERTIFIED_KEYS}"/SKIPPED_DUE_TO_CERTIFIED_KEYS} ssh-tty"/' \
-          ./oqs-test/run_tests.sh | doas -u builder bash
+        doas -u builder env SKIP_LTESTS=ssh-tty bash ./oqs-test/run_tests.sh
     - name: Ensure we have the ssh and sshd syntax right once for each algorithm
       shell: openbsd {0}
       run: |
@@ -408,28 +404,45 @@ jobs:
 
   solaris:
     name: "solaris-${{ matrix.target }}"
-    if: github.repository != 'openssh/openssh-portable-selfhosted'
+    if: github.repository != 'openssh/openssh-portable-selfhosted' && (vars.RUN_ONLY_PLATFORM == '' || vars.RUN_ONLY_PLATFORM == 'solaris')
     strategy:
       fail-fast: false
       matrix:
         target:
           - "11.4-gcc"
+          - "11.4-clang-19"
         config: [default]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
+    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # main
 
     - name: start Solaris ${{ matrix.target }} VM
-      uses: vmactions/solaris-vm@v1
+      uses: vmactions/solaris-vm@d30dd6c228c8661ade859e36ead7660b9a62efcc # v1
       with:
         release: ${{ matrix.target }}
         usesh: true
         prepare: |
           set -x
+          packages=""
+          command -v autoconf >/dev/null 2>&1 || packages="$packages autoconf"
+          command -v automake >/dev/null 2>&1 || packages="$packages automake"
+          command -v git >/dev/null 2>&1 || packages="$packages git"
+          command -v ninja >/dev/null 2>&1 || packages="$packages ninja"
+          command -v python3.11 >/dev/null 2>&1 || packages="$packages runtime/python-311"
+          [ -z "$packages" ] || pkg install --no-backup-be --accept $packages
           id -u builder >/dev/null 2>&1 || useradd -m builder
+          openssl rand -base64 9 >$GITHUB_WORKSPACE/regress/password
+          chown builder $GITHUB_WORKSPACE/regress/password
+          pw=$(tr -d '\n' <$GITHUB_WORKSPACE/regress/password | openssl passwd -6 -stdin)
+          passwd -p "$pw" builder
           sed -e "s/^root.*ALL$/root ALL=(ALL) NOPASSWD: ALL/" /etc/sudoers >>/tmp/sudoers
           mv /tmp/sudoers /etc/sudoers
-          echo "builder ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+          echo "builder ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/builder
+          echo 'Testing sudo config for root->builder.'
+          sudo -u builder id
+          echo 'Testing sudo config for builder->root.'
+          sudo -u builder sudo id
+          echo Creating directories.
           mkdir -p /var/empty /usr/local/etc
           cp $GITHUB_WORKSPACE/moduli /usr/local/etc/moduli
 

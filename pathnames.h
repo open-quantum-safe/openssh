@@ -1,4 +1,4 @@
-/* $OpenBSD: pathnames.h,v 1.36 2025/08/29 03:50:38 djm Exp $ */
+/* $OpenBSD: pathnames.h,v 1.37 2026/06/14 03:59:34 djm Exp $ */
 
 /*
  * Author: Tatu Ylonen <ylo@cs.hut.fi>
@@ -39,7 +39,7 @@
 #define _PATH_HOST_ECDSA_KEY_FILE	SSHDIR "/ssh_host_ecdsa_key"
 #define _PATH_HOST_RSA_KEY_FILE		SSHDIR "/ssh_host_rsa_key"
 #define _PATH_HOST_ED25519_KEY_FILE	SSHDIR "/ssh_host_ed25519_key"
-#define _PATH_HOST_RSA_KEY_FILE		SSHDIR "/ssh_host_rsa_key"
+#define _PATH_HOST_MLDSA44_ED25519_KEY_FILE SSHDIR "/ssh_host_mldsa44_ed25519_key"
 ///// OQS_TEMPLATE_FRAGMENT_ADD_KEY_FILE_PATHS_START
 #define _PATH_HOST_FALCON_512_KEY_FILE SSHDIR "/ssh_host_falcon512_key"
 #define _PATH_HOST_RSA3072_FALCON_512_KEY_FILE SSHDIR "/ssh_host_rsa3072_falcon512_key"
@@ -117,6 +117,7 @@
 #define _PATH_SSH_CLIENT_ID_ED25519	_PATH_SSH_USER_DIR "/id_ed25519"
 #define _PATH_SSH_CLIENT_ID_ECDSA_SK	_PATH_SSH_USER_DIR "/id_ecdsa_sk"
 #define _PATH_SSH_CLIENT_ID_ED25519_SK	_PATH_SSH_USER_DIR "/id_ed25519_sk"
+#define _PATH_SSH_CLIENT_ID_MLDSA44_ED25519 _PATH_SSH_USER_DIR "/id_mldsa44_ed25519"
 ///// OQS_TEMPLATE_FRAGMENT_ADD_ID_FILE_PATHS_START
 #define _PATH_SSH_CLIENT_ID_FALCON_512 _PATH_SSH_USER_DIR "/id_falcon512"
 #define _PATH_SSH_CLIENT_ID_RSA3072_FALCON_512 _PATH_SSH_USER_DIR "/id_rsa3072_falcon512"

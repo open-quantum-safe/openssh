@@ -168,6 +168,8 @@ do_kex_with_key(char *kex, char *cipher, char *mac,
 #endif /* OPENSSL_HAS_ECC */
 #endif /* WITH_OPENSSL */
 	server2->kex->kex[KEX_C25519_SHA256] = kex_gen_server;
+	server2->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_server;
+	server2->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_server;
 	server2->kex->load_host_public_key = server->kex->load_host_public_key;
 	server2->kex->load_host_private_key = server->kex->load_host_private_key;
 	server2->kex->sign = server->kex->sign;
@@ -243,5 +245,11 @@ kex_tests(void)
 		do_kex("diffie-hellman-group16-sha512");
 		do_kex("diffie-hellman-group18-sha512");
 	}
+# ifdef USE_MLKEM768X25519
+	do_kex("mlkem768x25519-sha256");
+# endif /* USE_MLKEM768X25519 */
+# ifdef USE_SNTRUP761X25519
+	do_kex("sntrup761x25519-sha512");
+# endif /* USE_SNTRUP761X25519 */
 #endif /* WITH_OPENSSL */
 }
