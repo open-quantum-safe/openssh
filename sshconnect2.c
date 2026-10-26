@@ -1,4 +1,4 @@
-/* $OpenBSD: sshconnect2.c,v 1.385 2026/04/02 07:48:13 djm Exp $ */
+/* $OpenBSD: sshconnect2.c,v 1.388 2026/07/06 07:49:58 djm Exp $ */
 /*
  * Copyright (c) 2000 Markus Friedl.  All rights reserved.
  * Copyright (c) 2008 Damien Miller.  All rights reserved.
@@ -85,7 +85,7 @@ extern Options options;
  */
 
 static char *xxx_host;
-static struct sockaddr *xxx_hostaddr;
+static struct sockaddr_storage xxx_hostaddr;
 static const struct ssh_conn_info *xxx_conn_info;
 static int key_type_allowed(struct sshkey *, const char *);
 
@@ -101,7 +101,7 @@ verify_host_key_callback(struct sshkey *hostkey, struct ssh *ssh)
 		fatal("Server host key %s not in HostKeyAlgorithms",
 		    sshkey_ssh_name(hostkey));
 	}
-	if (verify_host_key(xxx_host, xxx_hostaddr, hostkey,
+	if (verify_host_key(xxx_host, (struct sockaddr *)&xxx_hostaddr, hostkey,
 	    xxx_conn_info) != 0)
 		fatal("Host key verification failed.");
 	return 0;
@@ -218,16 +218,16 @@ order_hostkeyalgs(char *host, struct sockaddr *hostaddr, u_short port,
 }
 
 void
-ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
-    const struct ssh_conn_info *cinfo)
+ssh_kex2(struct ssh *ssh, char *host, struct sockaddr_storage *hostaddr,
+    u_short port, const struct ssh_conn_info *cinfo)
 {
 	char *myproposal[PROPOSAL_MAX];
 	char *all_key, *hkalgs = NULL;
 	int r, use_known_hosts_order = 0;
 
-	xxx_host = host;
-	xxx_hostaddr = hostaddr;
-	xxx_conn_info = cinfo;
+	xxx_host = xstrdup(host);
+	xxx_hostaddr = *hostaddr;
+	xxx_conn_info = ssh_conn_info_dup(cinfo);
 
 	if (options.rekey_limit || options.rekey_interval)
 		ssh_packet_set_rekey_limits(ssh, options.rekey_limit,
@@ -250,8 +250,10 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 		fatal_fr(r, "kex_assemble_namelist");
 	free(all_key);
 
-	if (use_known_hosts_order)
-		hkalgs = order_hostkeyalgs(host, hostaddr, port, cinfo);
+	if (use_known_hosts_order) {
+		hkalgs = order_hostkeyalgs(host, (struct sockaddr *)hostaddr,
+		    port, cinfo);
+	}
 
 	kex_proposal_populate_entries(ssh, myproposal,
 	    options.kex_algorithms, options.ciphers, options.macs,
@@ -276,6 +278,8 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 # endif
 #endif
 	ssh->kex->kex[KEX_C25519_SHA256] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_SNTRUP761X25519_SHA512] = kex_gen_client;
+	ssh->kex->kex[KEX_KEM_MLKEM768X25519_SHA256] = kex_gen_client;
 ///// OQS_TEMPLATE_FRAGMENT_POINT_TO_KEX_GEN_START
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_X25519_SHA256] = kex_gen_client;
@@ -308,10 +312,8 @@ ssh_kex2(struct ssh *ssh, char *host, struct sockaddr *hostaddr, u_short port,
 	ssh->kex->kex[KEX_KEM_ML_KEM_512_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_512_X25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_768_SHA256] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_ML_KEM_768_X25519_SHA256] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_ML_KEM_1024_SHA384] = kex_gen_client;
 	ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_SHA512] = kex_gen_client;
-	ssh->kex->kex[KEX_KEM_NTRUPRIME_SNTRUP761_X25519_SHA512] = kex_gen_client;
 #ifdef WITH_OPENSSL
 #ifdef OPENSSL_HAS_ECC
 	ssh->kex->kex[KEX_KEM_FRODOKEM_640_AES_ECDH_NISTP256_SHA256] = kex_gen_client;
@@ -1345,7 +1347,7 @@ identity_sign(struct identity *id, u_char **sigp, size_t *lenp,
 		 * PKCS#11 tokens may not support all signature algorithms,
 		 * so check what we get back.
 		 */
-		if ((id->key->flags & SSHKEY_FLAG_EXT) != 0 &&
+		if (id->key != NULL && (id->key->flags & SSHKEY_FLAG_EXT) != 0 &&
 	    (r = sshkey_check_sigtype(*sigp, *lenp, alg)) != 0) {
 			debug_fr(r, "sshkey_check_sigtype");
 			goto out;
@@ -1511,7 +1513,8 @@ sign_and_send_pubkey(struct ssh *ssh, Identity *id)
 		    !fallback_sigtype) {
 			if (sign_id->agent_fd != -1)
 				loc = "agent ";
-			else if ((sign_id->key->flags & SSHKEY_FLAG_EXT) != 0)
+			else if (sign_id->key != NULL &&
+			    (sign_id->key->flags & SSHKEY_FLAG_EXT) != 0)
 				loc = "token ";
 			logit("%skey %s %s returned incorrect signature type",
 			    loc, sshkey_type(id->key), fp);

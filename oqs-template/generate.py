@@ -69,6 +69,7 @@ populate('monitor.c', config, '/////')
 populate('sshd-auth.c', config, '/////')
 populate('sshconnect2.c', config, '/////')
 populate('ssh_api.c', config, '/////')
+populate('regress/unittests/kex/test_kex.c', config, '/////')
 populate('kex.h', config, '/////')
 populate('myproposal.h', config, '/*///')
 
