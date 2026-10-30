@@ -2239,6 +2239,78 @@ sshkey_sigalg_by_name(const char *name)
 }
 
 /*
+ * OQS classical+PQ hybrids encode signatures as
+ *   string(classical_sig) || string(pq_sig)
+ * where each component is itself a normal SSH signature blob
+ * (string(type) || string(payload)). The outer blob therefore has no
+ * leading hybrid algorithm name, so the classic get_sigtype path fails.
+ *
+ * Meaningful check for the PKCS#11 / agent callers: the classical half's
+ * embedded type must match what the hybrid signer is supposed to produce
+ * (rsa-sha2-* for RSA hybrids; the hybrid alg name for ECDSA hybrids).
+ */
+static int
+sshkey_check_oqs_hybrid_sigtype(const u_char *sig, size_t siglen,
+    const char *requested_alg)
+{
+	struct sshbuf *b = NULL;
+	const u_char *classic_sig = NULL, *pq_sig = NULL;
+	size_t classic_len = 0, pq_len = 0;
+	char *classic_type = NULL, *pq_type = NULL;
+	const char *expected_classic = NULL;
+	int r, keytype, hash_alg;
+
+	if ((b = sshbuf_from(sig, siglen)) == NULL)
+		return SSH_ERR_ALLOC_FAIL;
+	if ((r = sshbuf_get_string_direct(b, &classic_sig, &classic_len)) != 0 ||
+	    (r = sshbuf_get_string_direct(b, &pq_sig, &pq_len)) != 0)
+		goto out;
+	if (sshbuf_len(b) != 0) {
+		r = SSH_ERR_INVALID_FORMAT;
+		goto out;
+	}
+	if ((r = sshkey_get_sigtype(classic_sig, classic_len,
+	    &classic_type)) != 0)
+		goto out;
+	/* Require the PQ half to also be a well-formed typed SSH signature. */
+	if ((r = sshkey_get_sigtype(pq_sig, pq_len, &pq_type)) != 0)
+		goto out;
+
+	keytype = sshkey_type_plain(sshkey_type_from_name(requested_alg));
+	if (oqs_utils_is_rsa_hybrid(keytype)) {
+		hash_alg = ssh_rsa_hash_id_from_keyname(requested_alg);
+		if (hash_alg == -1 ||
+		    (expected_classic = ssh_rsa_hash_alg_ident(hash_alg)) == NULL) {
+			r = SSH_ERR_INVALID_ARGUMENT;
+			goto out;
+		}
+	} else if (oqs_utils_is_ecdsa_hybrid(keytype)) {
+		/*
+		 * ssh-ecdsa.c labels the classical component with the hybrid
+		 * algorithm name (via sshkey_ssh_name_plain).
+		 */
+		expected_classic = sshkey_sigalg_by_name(requested_alg);
+		if (expected_classic == NULL) {
+			r = SSH_ERR_INVALID_ARGUMENT;
+			goto out;
+		}
+	} else {
+		r = SSH_ERR_INVALID_ARGUMENT;
+		goto out;
+	}
+	if (strcmp(expected_classic, classic_type) != 0) {
+		r = SSH_ERR_SIGN_ALG_UNSUPPORTED;
+		goto out;
+	}
+	r = 0;
+ out:
+	free(classic_type);
+	free(pq_type);
+	sshbuf_free(b);
+	return r;
+}
+
+/*
  * Verifies that the signature algorithm appearing inside the signature blob
  * matches that which was requested.
  */
@@ -2248,12 +2320,16 @@ sshkey_check_sigtype(const u_char *sig, size_t siglen,
 {
 	const char *expected_alg;
 	char *sigtype = NULL;
-	int r;
+	int r, keytype;
 
 	if (requested_alg == NULL)
 		return 0;
 	if ((expected_alg = sshkey_sigalg_by_name(requested_alg)) == NULL)
 		return SSH_ERR_INVALID_ARGUMENT;
+	keytype = sshkey_type_plain(sshkey_type_from_name(requested_alg));
+	if (oqs_utils_is_hybrid(keytype))
+		return sshkey_check_oqs_hybrid_sigtype(sig, siglen,
+		    requested_alg);
 	if ((r = sshkey_get_sigtype(sig, siglen, &sigtype)) != 0)
 		return r;
 	r = strcmp(expected_alg, sigtype) == 0;
