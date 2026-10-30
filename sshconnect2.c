@@ -70,8 +70,6 @@
 #include "utf8.h"
 #include "ssh-sk.h"
 #include "sk-api.h"
-#include "oqs/oqs.h"
-#include "oqs-utils.h"
 
 #ifdef GSSAPI
 #include "ssh-gss.h"
@@ -1340,18 +1338,15 @@ identity_sign(struct identity *id, u_char **sigp, size_t *lenp,
 		}
 		goto out;
 	}
-	// OQS-TODO: for now, our hybrid sig fail that test. Need to fix our formatting
-	// or update the test
-	if (!oqs_utils_is_hybrid(sign_key->type)) {
-		/*
-		 * PKCS#11 tokens may not support all signature algorithms,
-		 * so check what we get back.
-		 */
-		if (id->key != NULL && (id->key->flags & SSHKEY_FLAG_EXT) != 0 &&
+	/*
+	 * PKCS#11 tokens may not support all signature algorithms,
+	 * so check what we get back. sshkey_check_sigtype understands
+	 * OQS hybrid framing (classical||PQ components).
+	 */
+	if (id->key != NULL && (id->key->flags & SSHKEY_FLAG_EXT) != 0 &&
 	    (r = sshkey_check_sigtype(*sigp, *lenp, alg)) != 0) {
-			debug_fr(r, "sshkey_check_sigtype");
-			goto out;
-		}
+		debug_fr(r, "sshkey_check_sigtype");
+		goto out;
 	}
 
 	/* success */
