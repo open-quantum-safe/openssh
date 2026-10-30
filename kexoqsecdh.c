@@ -159,6 +159,7 @@ static int kex_kem_generic_with_ec_keypair(OQS_KEM *kem, struct kex *kex)
   kex->client_pub = buf;
   buf = NULL;
  out:
+  EC_KEY_free(ecdh_client_key); /* NULL after successful ownership transfer */
   sshbuf_free(buf);
   sshbuf_free(ecdh_buf);
   return r;
@@ -182,7 +183,7 @@ static int kex_kem_generic_with_ec_enc(OQS_KEM *kem,
   EC_KEY *ecdh_server_key = NULL;
   struct sshbuf *ecdh_client_blob = NULL;
   struct sshbuf *ecdh_server_blob = NULL;
-  struct sshbuf *ecdh_shared_secret;
+  struct sshbuf *ecdh_shared_secret = NULL;
   size_t client_blob_len = 0;
   size_t ecdh_part_len = 0;
   u_char hash[SSH_DIGEST_MAX_LENGTH];
@@ -295,6 +296,8 @@ static int kex_kem_generic_with_ec_enc(OQS_KEM *kem,
   EC_KEY_free(ecdh_server_key);
   sshbuf_free(server_blob);
   sshbuf_free(ecdh_client_blob);
+  sshbuf_free(ecdh_server_blob);
+  sshbuf_free(ecdh_shared_secret);
   sshbuf_free(buf);
   return r;
 }
@@ -310,7 +313,7 @@ static int kex_kem_generic_with_ec_dec(OQS_KEM *kem,
   const u_char *ciphertext;
 
   /* ecdh values */
-  struct sshbuf *ecdh_shared_secret;
+  struct sshbuf *ecdh_shared_secret = NULL;
   struct sshbuf *ecdh_server_blob = NULL;
   u_char hash[SSH_DIGEST_MAX_LENGTH];
   size_t server_blob_len = 0;
@@ -386,6 +389,7 @@ out:
     explicit_bzero(hash, sizeof(hash));
     sshbuf_free(buf);
     sshbuf_free(ecdh_server_blob);
+    sshbuf_free(ecdh_shared_secret);
     return r;
 }
 
