@@ -145,8 +145,14 @@ shadow_pw(struct passwd *pw)
 # endif
 
 #ifdef USE_LIBIAF
+	char *copy;
+
 	pw_password = get_iaf_password(pw);
-	return pw_password == NULL ? NULL : xstrdup(pw_password);
+	copy = pw_password == NULL ? NULL : xstrdup(pw_password);
+	/* Clean up the allocated IAF buffer after copying it for the caller. */
+	if (pw_password != NULL)
+		freezero(pw_password, strlen(pw_password));
+	return copy;
 #endif
 
 # if defined(HAVE_GETPWANAM) && !defined(DISABLE_SHADOW)
