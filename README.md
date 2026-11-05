@@ -68,7 +68,6 @@ The following quantum-safe algorithms from liboqs are supported (assuming they h
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_KEXS_START -->
 - **BIKE**: `bike-l1-sha512`\*, `bike-l3-sha512`\*, `bike-l5-sha512`\*
-- **ClassicMcEliece**: `classic-mceliece-348864-sha256`\*, `classic-mceliece-348864f-sha256`\*, `classic-mceliece-460896-sha512`\*, `classic-mceliece-460896f-sha512`\*, `classic-mceliece-6688128-sha512`\*, `classic-mceliece-6688128f-sha512`\*, `classic-mceliece-6960119-sha512`\*, `classic-mceliece-6960119f-sha512`\*, `classic-mceliece-8192128-sha512`\*, `classic-mceliece-8192128f-sha512`\*
 - **FrodoKEM**: `frodokem-640-aes-sha256`\*, `frodokem-976-aes-sha384`\*, `frodokem-1344-aes-sha512`\*, `frodokem-640-shake-sha256`\*, `frodokem-976-shake-sha384`\*, `frodokem-1344-shake-sha512`\*
 - **HQC**: `hqc-128-sha256`, `hqc-192-sha384`, `hqc-256-sha512`†
 - **Kyber**: `kyber-512-sha256`\*, `kyber-768-sha384`\*, `kyber-1024-sha512`\*
@@ -80,14 +79,13 @@ The following hybrid algorithms are made available via `liboqs` (dependent on th
 
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_HYBRID_KEXS_START -->
 - **BIKE**: `ecdh-nistp256-bike-l1r4-sha512@openquantumsafe.org` `x25519-bike-l1r4-sha512@openquantumsafe.org` `ecdh-nistp384-bike-l3r4-sha512@openquantumsafe.org` `ecdh-nistp521-bike-l5r4-sha512@openquantumsafe.org`
-- **ClassicMcEliece**: `ecdh-nistp256-classic-mceliece-348864r4-sha256@openquantumsafe.org` `x25519-classic-mceliece-348864r4-sha256@openquantumsafe.org` `ecdh-nistp256-classic-mceliece-348864fr4-sha256@openquantumsafe.org` `x25519-classic-mceliece-348864fr4-sha256@openquantumsafe.org` `ecdh-nistp384-classic-mceliece-460896r4-sha512@openquantumsafe.org` `ecdh-nistp384-classic-mceliece-460896fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6688128r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6688128fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6960119r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-6960119fr4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-8192128r4-sha512@openquantumsafe.org` `ecdh-nistp521-classic-mceliece-8192128fr4-sha512@openquantumsafe.org`
 - **FrodoKEM**: `ecdh-nistp256-frodokem-640-aesr2-sha256@openquantumsafe.org` `x25519-frodokem-640-aesr2-sha256@openquantumsafe.org` `ecdh-nistp384-frodokem-976-aesr2-sha384@openquantumsafe.org` `ecdh-nistp521-frodokem-1344-aesr2-sha512@openquantumsafe.org` `ecdh-nistp256-frodokem-640-shaker2-sha256@openquantumsafe.org` `x25519-frodokem-640-shaker2-sha256@openquantumsafe.org` `ecdh-nistp384-frodokem-976-shaker2-sha384@openquantumsafe.org` `ecdh-nistp521-frodokem-1344-shaker2-sha512@openquantumsafe.org`
 - **HQC**: `ecdh-nistp256-hqc-128r3-sha256@openquantumsafe.org` `x25519-hqc-128r3-sha256@openquantumsafe.org` `ecdh-nistp384-hqc-192r3-sha384@openquantumsafe.org` `ecdh-nistp521-hqc-256r3-sha512@openquantumsafe.org`
 - **Kyber**: `ecdh-nistp256-kyber-512r3-sha256-d00@openquantumsafe.org` `x25519-kyber-512r3-sha256-d00@amazon.com` `ecdh-nistp384-kyber-768r3-sha384-d00@openquantumsafe.org` `ecdh-nistp521-kyber-1024r3-sha512-d00@openquantumsafe.org`
 - **ML-KEM**: `ecdh-nistp256-ml-kem-512-sha256@openquantumsafe.org` `x25519-ml-kem-512-sha256@openquantumsafe.org` `mlkem768nistp256-sha256` `mlkem1024nistp384-sha384`
 <!--- OQS_TEMPLATE_FRAGMENT_LIST_ALL_HYBRID_KEXS_END -->
 
-Note that algorithms marked with a dagger (†) have large stack usage and may cause failures when run on threads or in constrained environments. For example, McEliece require building `oqs-openssh` with a large(r) stack provision than is default: Adding `LDFLAGS="-Wl,--stack,20000000"` to [the `./configure` command below](#step-2-build-the-fork) is required to allow cygwin-based testing to pass.
+Note that algorithms marked with a dagger (†) have large stack usage and may cause failures when run on threads or in constrained environments. For example, HQC may require building `oqs-openssh` with a large(r) stack provision than is default: Adding `LDFLAGS="-Wl,--stack,20000000"` to [the `./configure` command below](#step-2-build-the-fork) is required to allow cygwin-based testing to pass.
 
 Algorithms which involve ML-KEM are provided using the names as proposed in [draft-kampanakis-curdle-ssh-pq-ke](https://datatracker.ietf.org/doc/draft-kampanakis-curdle-ssh-pq-ke/). The underlying implementation uses a liboqs API name for the final ML-KEM implementation which is currently (August 13th, 2024) aliased to ML-KEM-IPD. When the final implementation for ML-KEM becomes available, the alias will also be updated to the standardized ML-KEM implementation.
 
