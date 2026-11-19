@@ -31,9 +31,20 @@ jobs:
         release: ${{ matrix.target }}
         usesh: true
         prepare: |
+          # Avalon moved security/openssl 3.0 -> 3.5 (libcrypto.so.12 -> .17).
+          # A floating pkg install upgrades openssl, so image binaries still
+          # linked to .12 (rsync) and newly installed sudo (.17) both break
+          # unless dependents are upgraded and /usr/local/lib is in the ELF
+          # path (open-quantum-safe/openssh#208).
+          pkg install -y openssl
+          pkg upgrade -y
           pkg install -y autoconf automake bash cmake git ninja python3 sudo
+          ldconfig -m /usr/local/lib
+          ldd "$(command -v sudo)"
+          ldd "$(command -v rsync)"
           pw useradd builder -m
           echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >>/usr/local/etc/sudoers
+          sudo -u builder id
           mkdir -p /var/empty /usr/local/etc
           chflags noschg /var/empty 2>/dev/null || true
           chmod 0755 /var/empty
